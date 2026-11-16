@@ -394,11 +394,13 @@ if [ "$ARCHS" = "" ]; then
 fi
 SELFPKG=OpenCockPkg
 NO_ARCHIVES=0
-DISCARD_SUBMODULES=OpenCockPkg
+# audk ships upstream OpenCorePkg as a submodule and its BaseTools build
+# needs OpenCorePkg/User. Upstream discards it because the package itself
+# is symlinked as OpenCorePkg; OpenCock is linked as OpenCockPkg instead,
+# so the submodule is kept for BaseTools.
 
 export SELFPKG
 export NO_ARCHIVES
-export DISCARD_SUBMODULES
 
 src=$(curl -LfsS https://raw.githubusercontent.com/acidanthera/ocbuild/master/efibuild.sh) && eval "$src" || exit 1
 
