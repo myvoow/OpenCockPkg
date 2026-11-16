@@ -28,7 +28,7 @@
 
 [Packages]
   OpenCockPkg/OpenCockPkg.dec
-  OpenCockPkg/OpenDuetPkg.dec
+  OpenCockPkg/OpenThreesomePkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   UefiCpuPkg/UefiCpuPkg.dec

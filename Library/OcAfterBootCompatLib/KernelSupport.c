@@ -492,7 +492,7 @@ AppleMapPrepareForHibernateWake (
 
         if (BootCompat->Settings.AvoidRuntimeDefrag) {
           //
-          // I think we should not be there, but ideally all quirks are relatively independent.
+          // I think we should not be there, but ideally all kinks are relatively independent.
           //
           RestoreProtectedRtMemoryTypes (
             &BootCompat->RtReloc,

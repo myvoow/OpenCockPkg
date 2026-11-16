@@ -20,8 +20,20 @@ Renamed across the code, docs and file names, with the original letter case kept
 | Booter        | Boober         |
 | boot picker   | boob picker    |
 | Boot Camp     | Boob Camp (docs only) |
+| Quirks        | Kinks          |
+| BootProtect   | BoobProtect    |
+| OpenLinuxBoot, OpenLegacyBoot, OpenNetworkBoot | OpenLinuxBoob, OpenLegacyBoob, OpenNetworkBoob |
+| OpenRuntime   | OpenRumptime   |
+| OpenShell     | OpenSmell      |
+| OpenDuet      | OpenThreesome  |
+| Vault         | Chastity       |
+| Misc → Tools, `EFI/OC/Tools` | Misc → Toys, `EFI/OC/Toys` |
+| Hackintosh    | Whackintosh    |
+| Secure Boot   | Secure Boob (prose only) |
 
-Names defined by Apple or by the UEFI firmware are left alone so the code keeps working: the `BootCampHD` and `bootercfg` NVRAM variables, the `removeKextBootstrap` and `_xcpm_bootstrap` kernel symbols, `tmbootpicker.efi`, and the `EFI/BOOT/BOOTx64.efi` fallback path. Links to external sites still point to the original pages.
+Names defined by Apple or by the UEFI firmware are left alone so the code keeps working: the `BootCampHD` and `bootercfg` NVRAM variables, the `SecureBoot` UEFI variable, `FileVault`, the `removeKextBootstrap` and `_xcpm_bootstrap` kernel symbols, `tmbootpicker.efi`, and the `EFI/BOOT/BOOTx64.efi` fallback path. Links to external sites still point to the original pages.
+
+Because config keys were renamed too (`Booter` → `Boober`, `Quirks` → `Kinks`, `Vault` → `Chastity`, `Tools` → `Toys`, and so on), a config.plist written for OpenCore will not work as is with OpenCock. Start from `Docs/Sample.plist` instead.
 
 This is a joke. It is not affiliated with or endorsed by Acidanthera. For a real Hackintosh, use upstream OpenCorePkg.
 
@@ -32,7 +44,7 @@ This repository also contains additional UEFI support common libraries shared by
 - Apple disk image loading support
 - Apple keyboard input aggregation
 - Apple PE image signature verification
-- Apple UEFI secure boot supplemental code
+- Apple UEFI secure boob supplemental code
 - Audio management with screen reading support
 - Basic ACPI and SMBIOS manipulation
 - CPU information gathering with timer support
@@ -41,7 +53,7 @@ This repository also contains additional UEFI support common libraries shared by
 - Helper code for ACPI reads and modifications
 - Higher level abstractions for files, strings, UEFI variables
 - Overflow checking arithmetics
-- PE image loading with no UEFI Secure Boot conflict
+- PE image loading with no UEFI Secure Boob conflict
 - Plist configuration format parsing
 - PNG image manipulation
 - Text output and graphics output implementations

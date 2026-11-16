@@ -106,13 +106,13 @@ typedef struct {
   //
   PATCHER_GENERIC_PATCH    Patch;
   //
-  // Apply Quirk instead of Patch.
+  // Apply Kink instead of Patch.
   //
-  BOOLEAN                  ApplyQuirk;
+  BOOLEAN                  ApplyKink;
   //
-  // Kernel quirk to apply.
+  // Kernel kink to apply.
   //
-  KERNEL_QUIRK_NAME        QuirkName;
+  KERNEL_KINK_NAME        KinkName;
 } KEXT_PATCH;
 
 //

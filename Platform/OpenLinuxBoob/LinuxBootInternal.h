@@ -132,7 +132,7 @@
 #define VAR_ERR_HAS_VARS  BIT1    // We do not support nested vars (in name or value), even though GRUB does
 
 /*
-  Global flags for this instance of OpenLinuxBoot.efi.
+  Global flags for this instance of OpenLinuxBoob.efi.
 */
 extern UINTN  gLinuxBootFlags;
 

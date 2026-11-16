@@ -32,7 +32,7 @@
   OpenCockUefiAudio.c
   OpenCockUefiInOut.c
   OpenCockUefiUnloadDrivers.c
-  OpenCockVault.c
+  OpenCockChastity.c
 
 [Packages]
   OpenCockPkg/OpenCockPkg.dec

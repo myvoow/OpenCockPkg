@@ -361,7 +361,7 @@ OcExitBootServicesHandler (
   // Only do that on error, which is not expected.
   //
 
-  if (Config->Uefi.Quirks.ReleaseUsbOwnership) {
+  if (Config->Uefi.Kinks.ReleaseUsbOwnership) {
     Status = ReleaseUsbOwnership ();
     if (EFI_ERROR (Status)) {
       DEBUG ((DEBUG_INFO, "OC: ReleaseUsbOwnership - %r\n", Status));
@@ -377,8 +377,8 @@ OcExitBootServicesHandler (
   // https://github.com/acidanthera/AptioFixPkg/blob/e54c185/Platform/AptioInputFix/Timer/AIT.c#L72-L73
   // Roughly 5 seconds is good enough.
   //
-  if (Config->Uefi.Quirks.ExitBootServicesDelay > 0) {
-    gBS->Stall (Config->Uefi.Quirks.ExitBootServicesDelay);
+  if (Config->Uefi.Kinks.ExitBootServicesDelay > 0) {
+    gBS->Stall (Config->Uefi.Kinks.ExitBootServicesDelay);
   }
 }
 
@@ -537,7 +537,7 @@ OcLoadAppleSecureBoot (
 
   //
   // We blindly trust DMG contents after signature verification
-  // essentially skipping secure boot in this case.
+  // essentially skipping secure boob in this case.
   // Do not allow enabling one but not the other.
   //
   if (SecureBootPolicy != AppleImg4SbModeDisabled) {
@@ -549,7 +549,7 @@ OcLoadAppleSecureBoot (
        && (AsciiStrCmp (DmgLoading, "Disabled") != 0)
        && (DmgLoading[0] != '\0'))
     {
-      DEBUG ((DEBUG_ERROR, "OC: Cannot use Secure Boot with Any DmgLoading!\n"));
+      DEBUG ((DEBUG_ERROR, "OC: Cannot use Secure Boob with Any DmgLoading!\n"));
       CpuDeadLoop ();
       return;
     }
@@ -557,7 +557,7 @@ OcLoadAppleSecureBoot (
 
   DEBUG ((
     DEBUG_INFO,
-    "OC: Loading Apple Secure Boot with %a (level %u)\n",
+    "OC: Loading Apple Secure Boob with %a (level %u)\n",
     SecureBootModel,
     SecureBootPolicy
     ));
@@ -580,11 +580,11 @@ OcLoadAppleSecureBoot (
     }
 
     //
-    // Forcibly disable single user mode in Apple Secure Boot mode.
+    // Forcibly disable single user mode in Apple Secure Boob mode.
     // Previously EfiBoot correctly removed the -s argument from command-line,
     // but for some reason it does not now.
     //
-    Config->Boober.Quirks.DisableSingleUser = TRUE;
+    Config->Boober.Kinks.DisableSingleUser = TRUE;
 
     Status = OcAppleImg4BoobstrapValues (RealSecureBootModel, Config->Misc.Security.ApECID);
     if (EFI_ERROR (Status)) {
@@ -617,7 +617,7 @@ OcLoadAppleSecureBoot (
                  FALSE
                  );
   if (SecureBoot == NULL) {
-    DEBUG ((DEBUG_ERROR, "OC: Failed to install secure boot protocol\n"));
+    DEBUG ((DEBUG_ERROR, "OC: Failed to install secure boob protocol\n"));
   }
 }
 
@@ -659,7 +659,7 @@ OcInstallPermissiveSecurityPolicy (
   EFI_SECURITY_ARCH_PROTOCOL   *Security;
   EFI_SECURITY2_ARCH_PROTOCOL  *Security2;
 
-  DEBUG ((DEBUG_INFO, "OC: Installing DISABLING secure boot policy overrides\n"));
+  DEBUG ((DEBUG_INFO, "OC: Installing DISABLING secure boob policy overrides\n"));
 
   Status = gBS->LocateProtocol (
                   &gEfiSecurityArchProtocolGuid,
@@ -701,29 +701,29 @@ OcLoadBooberUefiSupport (
 
   ZeroMem (&AbcSettings, sizeof (AbcSettings));
 
-  AbcSettings.AvoidRuntimeDefrag     = Config->Boober.Quirks.AvoidRuntimeDefrag;
-  AbcSettings.DevirtualiseMmio       = Config->Boober.Quirks.DevirtualiseMmio;
-  AbcSettings.DisableSingleUser      = Config->Boober.Quirks.DisableSingleUser;
-  AbcSettings.DisableVariableWrite   = Config->Boober.Quirks.DisableVariableWrite;
-  AbcSettings.ProtectSecureBoot      = Config->Boober.Quirks.ProtectSecureBoot;
-  AbcSettings.DiscardHibernateMap    = Config->Boober.Quirks.DiscardHibernateMap;
-  AbcSettings.AllowRelocationBlock   = Config->Boober.Quirks.AllowRelocationBlock;
-  AbcSettings.EnableSafeModeSlide    = Config->Boober.Quirks.EnableSafeModeSlide;
-  AbcSettings.EnableWriteUnprotector = Config->Boober.Quirks.EnableWriteUnprotector;
-  AbcSettings.ClearTaskSwitchBit     = Config->Boober.Quirks.ClearTaskSwitchBit;
-  AbcSettings.ForceExitBootServices  = Config->Boober.Quirks.ForceExitBootServices;
-  AbcSettings.ForceBooberSignature   = Config->Boober.Quirks.ForceBooberSignature;
+  AbcSettings.AvoidRuntimeDefrag     = Config->Boober.Kinks.AvoidRuntimeDefrag;
+  AbcSettings.DevirtualiseMmio       = Config->Boober.Kinks.DevirtualiseMmio;
+  AbcSettings.DisableSingleUser      = Config->Boober.Kinks.DisableSingleUser;
+  AbcSettings.DisableVariableWrite   = Config->Boober.Kinks.DisableVariableWrite;
+  AbcSettings.ProtectSecureBoot      = Config->Boober.Kinks.ProtectSecureBoot;
+  AbcSettings.DiscardHibernateMap    = Config->Boober.Kinks.DiscardHibernateMap;
+  AbcSettings.AllowRelocationBlock   = Config->Boober.Kinks.AllowRelocationBlock;
+  AbcSettings.EnableSafeModeSlide    = Config->Boober.Kinks.EnableSafeModeSlide;
+  AbcSettings.EnableWriteUnprotector = Config->Boober.Kinks.EnableWriteUnprotector;
+  AbcSettings.ClearTaskSwitchBit     = Config->Boober.Kinks.ClearTaskSwitchBit;
+  AbcSettings.ForceExitBootServices  = Config->Boober.Kinks.ForceExitBootServices;
+  AbcSettings.ForceBooberSignature   = Config->Boober.Kinks.ForceBooberSignature;
   CopyMem (AbcSettings.BooberSignature, Signature, sizeof (AbcSettings.BooberSignature));
-  AbcSettings.ProtectMemoryRegions   = Config->Boober.Quirks.ProtectMemoryRegions;
-  AbcSettings.ProvideCustomSlide     = Config->Boober.Quirks.ProvideCustomSlide;
-  AbcSettings.ProvideMaxSlide        = Config->Boober.Quirks.ProvideMaxSlide;
-  AbcSettings.ProtectUefiServices    = Config->Boober.Quirks.ProtectUefiServices;
-  AbcSettings.RebuildAppleMemoryMap  = Config->Boober.Quirks.RebuildAppleMemoryMap;
-  AbcSettings.ResizeUsePciRbIo       = Config->Uefi.Quirks.ResizeUsePciRbIo;
-  AbcSettings.ResizeAppleGpuBars     = Config->Boober.Quirks.ResizeAppleGpuBars;
-  AbcSettings.SetupVirtualMap        = Config->Boober.Quirks.SetupVirtualMap;
-  AbcSettings.SignalAppleOS          = Config->Boober.Quirks.SignalAppleOS;
-  AbcSettings.SyncRuntimePermissions = Config->Boober.Quirks.SyncRuntimePermissions;
+  AbcSettings.ProtectMemoryRegions   = Config->Boober.Kinks.ProtectMemoryRegions;
+  AbcSettings.ProvideCustomSlide     = Config->Boober.Kinks.ProvideCustomSlide;
+  AbcSettings.ProvideMaxSlide        = Config->Boober.Kinks.ProvideMaxSlide;
+  AbcSettings.ProtectUefiServices    = Config->Boober.Kinks.ProtectUefiServices;
+  AbcSettings.RebuildAppleMemoryMap  = Config->Boober.Kinks.RebuildAppleMemoryMap;
+  AbcSettings.ResizeUsePciRbIo       = Config->Uefi.Kinks.ResizeUsePciRbIo;
+  AbcSettings.ResizeAppleGpuBars     = Config->Boober.Kinks.ResizeAppleGpuBars;
+  AbcSettings.SetupVirtualMap        = Config->Boober.Kinks.SetupVirtualMap;
+  AbcSettings.SignalAppleOS          = Config->Boober.Kinks.SignalAppleOS;
+  AbcSettings.SyncRuntimePermissions = Config->Boober.Kinks.SyncRuntimePermissions;
 
   //
   // Handle MmioWhitelist patches.
@@ -915,7 +915,7 @@ OcLoadUefiSupport (
 
   OcReinstallProtocols (Config);
 
-  OcImageLoaderInit (Config->Boober.Quirks.ProtectUefiServices, Config->Boober.Quirks.FixupAppleEfiImages);
+  OcImageLoaderInit (Config->Boober.Kinks.ProtectUefiServices, Config->Boober.Kinks.FixupAppleEfiImages);
 
   OcLoadAppleSecureBoot (Config, CpuInfo);
 
@@ -926,27 +926,27 @@ OcLoadUefiSupport (
   //
   OcLoadBooberUefiSupport (Config, CpuInfo, Signature);
 
-  if (Config->Uefi.Quirks.ActivateHpetSupport) {
+  if (Config->Uefi.Kinks.ActivateHpetSupport) {
     ActivateHpetSupport ();
   }
 
-  if (Config->Uefi.Quirks.IgnoreInvalidFlexRatio) {
+  if (Config->Uefi.Kinks.IgnoreInvalidFlexRatio) {
     OcCpuCorrectFlexRatio (CpuInfo);
   }
 
-  if (Config->Uefi.Quirks.EnableVmx) {
+  if (Config->Uefi.Kinks.EnableVmx) {
     Status = OcCpuEnableVmx ();
     DEBUG ((EFI_ERROR (Status) ? DEBUG_WARN : DEBUG_INFO, "OC: Enable VMX - %r\n", Status));
   }
 
-  if (Config->Uefi.Quirks.TscSyncTimeout > 0) {
-    OcCpuCorrectTscSync (CpuInfo, Config->Uefi.Quirks.TscSyncTimeout);
+  if (Config->Uefi.Kinks.TscSyncTimeout > 0) {
+    OcCpuCorrectTscSync (CpuInfo, Config->Uefi.Kinks.TscSyncTimeout);
   }
 
   DEBUG ((
     DEBUG_INFO,
     "OC: RequestBootVarRouting %d\n",
-    Config->Uefi.Quirks.RequestBootVarRouting
+    Config->Uefi.Kinks.RequestBootVarRouting
     ));
 
   //
@@ -955,38 +955,38 @@ OcLoadUefiSupport (
   OcSetSystemVariable (
     OC_BOOT_REDIRECT_VARIABLE_NAME,
     OPEN_CORE_INT_NVRAM_ATTR,
-    sizeof (Config->Uefi.Quirks.RequestBootVarRouting),
-    &Config->Uefi.Quirks.RequestBootVarRouting,
+    sizeof (Config->Uefi.Kinks.RequestBootVarRouting),
+    &Config->Uefi.Kinks.RequestBootVarRouting,
     NULL
     );
 
-  if (Config->Uefi.Quirks.UnblockFsConnect) {
+  if (Config->Uefi.Kinks.UnblockFsConnect) {
     OcUnblockUnmountedPartitions ();
   }
 
-  if (Config->Uefi.Quirks.DisableSecurityPolicy) {
+  if (Config->Uefi.Kinks.DisableSecurityPolicy) {
     OcInstallPermissiveSecurityPolicy ();
   }
 
-  OcForgeUefiSupport (Config->Uefi.Quirks.ForgeUefiSupport, FALSE);
+  OcForgeUefiSupport (Config->Uefi.Kinks.ForgeUefiSupport, FALSE);
 
-  if (Config->Uefi.Quirks.ReloadOptionRoms) {
+  if (Config->Uefi.Kinks.ReloadOptionRoms) {
     OcReloadOptionRoms ();
   }
 
-  if (Config->Uefi.Quirks.EnableVectorAcceleration) {
+  if (Config->Uefi.Kinks.EnableVectorAcceleration) {
     AccelEnabled = TryEnableAccel ();
     DEBUG ((DEBUG_INFO, "OC: AVX enabled - %u\n", AccelEnabled));
   }
 
-  if (  (Config->Uefi.Quirks.ResizeGpuBars >= 0)
-     && (Config->Uefi.Quirks.ResizeGpuBars < PciBarTotal))
+  if (  (Config->Uefi.Kinks.ResizeGpuBars >= 0)
+     && (Config->Uefi.Kinks.ResizeGpuBars < PciBarTotal))
   {
-    DEBUG ((DEBUG_INFO, "OC: Setting GPU BARs to %d\n", Config->Uefi.Quirks.ResizeGpuBars));
-    ResizeGpuBars (Config->Uefi.Quirks.ResizeGpuBars, TRUE, Config->Uefi.Quirks.ResizeUsePciRbIo);
+    DEBUG ((DEBUG_INFO, "OC: Setting GPU BARs to %d\n", Config->Uefi.Kinks.ResizeGpuBars));
+    ResizeGpuBars (Config->Uefi.Kinks.ResizeGpuBars, TRUE, Config->Uefi.Kinks.ResizeUsePciRbIo);
   }
 
-  OcMiscUefiQuirksLoaded (Config);
+  OcMiscUefiKinksLoaded (Config);
 
   //
   // Reserve requested memory regions
@@ -1038,7 +1038,7 @@ OcLoadUefiSupport (
       Config->Uefi.Apfs.MinDate,
       Config->Misc.Security.ScanPolicy,
       Config->Uefi.Apfs.GlobalConnect,
-      Config->Uefi.Quirks.UnblockFsConnect,
+      Config->Uefi.Kinks.UnblockFsConnect,
       Config->Uefi.Apfs.HideVerbose
       );
 

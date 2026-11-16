@@ -29,12 +29,12 @@ typedef enum {
 } OC_INPUT_KEY_MODE;
 
 EFI_STATUS
-OcAppleGenericInputTimerQuirkInit (
+OcAppleGenericInputTimerKinkInit (
   IN UINT32  TimerResolution
   );
 
 EFI_STATUS
-OcAppleGenericInputTimerQuirkExit (
+OcAppleGenericInputTimerKinkExit (
   VOID
   );
 

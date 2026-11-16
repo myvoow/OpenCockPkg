@@ -269,7 +269,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #define EB_FEATURE_ALT_KERNEL  0x00000008U
 //
 // Single user mode, enabled with -s boot argument or Cmd+S hotkey.
-// Disallowed when Secure Boot is enabled.
+// Disallowed when Secure Boob is enabled.
 //
 #define EB_FEATURE_SINGLE_USER  0x00000010U
 //
@@ -312,13 +312,13 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 //
 #define EB_FEATURE_APFS_VOLUME_BOOT  0x00080000U
 //
-// Apple Secure Boot enabled configuration (detected via proto & policy).
+// Apple Secure Boob enabled configuration (detected via proto & policy).
 // 24B73556-2197-4702-82A8-3E1337DAFBF2 GUID.
 //
 #define EB_FEATURE_HAS_APPLE_SECURE_BOOT  0x00200000U
 //
 // Apple Trusted Boot enabled configuration (detected via proto & policy).
-// Some unfinished(?) variant of Secure Boot found in preview firmware.
+// Some unfinished(?) variant of Secure Boob found in preview firmware.
 // 24B73556-2197-4702-82A8-3E1337DAFBF3 GUID.
 //
 #define EB_FEATURE_HAS_APPLE_TRUSTED_BOOT  0x01000000U

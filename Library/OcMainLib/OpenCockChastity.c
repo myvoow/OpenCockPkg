@@ -21,20 +21,20 @@ typedef struct {
 
 typedef struct {
   CHAR8                     StartMagic[16];
-  OC_RSA_PUBLIC_KEY_2048    VaultKey;
+  OC_RSA_PUBLIC_KEY_2048    ChastityKey;
   CHAR8                     EndMagic[16];
-} OC_BUILTIN_VAULT_KEY;
+} OC_BUILTIN_CHASTITY_KEY;
 
 BASE_ALIGNAS (16)
 STATIC
-OC_BUILTIN_VAULT_KEY
-mOpenCockVaultKey = {
+OC_BUILTIN_CHASTITY_KEY
+mOpenCockChastityKey = {
   .StartMagic = { '=', 'B', 'E', 'G', 'I', 'N', ' ', 'O', 'C', ' ', 'V', 'A', 'U', 'L', 'T', '=' },
   .EndMagic   = { '=', '=', 'E', 'N', 'D', ' ', 'O', 'C', ' ', 'V', 'A', 'U', 'L', 'T', '=', '=' }
 };
 
 OC_RSA_PUBLIC_KEY *
-OcGetVaultKey (
+OcGetChastityKey (
   VOID
   )
 {
@@ -46,8 +46,8 @@ OcGetVaultKey (
     "sizeof(OC_RSA_PUBLIC_KEY_2048)"
     );
   STATIC_ASSERT (
-    sizeof (OC_BUILTIN_VAULT_KEY) == sizeof (OC_RSA_PUBLIC_KEY_2048) + 32,
-    "sizeof(OC_BUILTIN_VAULT_KEY)"
+    sizeof (OC_BUILTIN_CHASTITY_KEY) == sizeof (OC_RSA_PUBLIC_KEY_2048) + 32,
+    "sizeof(OC_BUILTIN_CHASTITY_KEY)"
     );
 
   //
@@ -56,14 +56,14 @@ OcGetVaultKey (
 
   AllZero = TRUE;
   for (Index = 0; Index < sizeof (OC_RSA_PUBLIC_KEY); ++Index) {
-    if (((UINT8 *)&mOpenCockVaultKey.VaultKey)[Index] != 0) {
+    if (((UINT8 *)&mOpenCockChastityKey.ChastityKey)[Index] != 0) {
       AllZero = FALSE;
       break;
     }
   }
 
   if (!AllZero) {
-    return (OC_RSA_PUBLIC_KEY *)&mOpenCockVaultKey.VaultKey;
+    return (OC_RSA_PUBLIC_KEY *)&mOpenCockChastityKey.ChastityKey;
   }
 
   return NULL;

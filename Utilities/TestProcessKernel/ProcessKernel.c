@@ -798,8 +798,8 @@ WrapMain (
   //
   // Disable ProvideCurrentCpuInfo patch, as there is no CpuInfo available on userspace.
   //
-  Config.Kernel.Quirks.ProvideCurrentCpuInfo = FALSE;
-  ASSERT (Config.Kernel.Quirks.ProvideCurrentCpuInfo == FALSE);
+  Config.Kernel.Kinks.ProvideCurrentCpuInfo = FALSE;
+  ASSERT (Config.Kernel.Kinks.ProvideCurrentCpuInfo == FALSE);
 
   ZeroMem (Config.Kernel.Emulate.Cpuid1Data, sizeof (Config.Kernel.Emulate.Cpuid1Data));
   Config.Kernel.Emulate.Cpuid1Data[0] = 0x000306A9;

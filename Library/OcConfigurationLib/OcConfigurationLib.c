@@ -20,14 +20,14 @@ OC_STRUCTORS (OC_ACPI_DELETE_ENTRY, ())
 OC_ARRAY_STRUCTORS (OC_ACPI_DELETE_ARRAY)
 OC_STRUCTORS (OC_ACPI_PATCH_ENTRY, ())
 OC_ARRAY_STRUCTORS (OC_ACPI_PATCH_ARRAY)
-OC_STRUCTORS (OC_ACPI_QUIRKS, ())
+OC_STRUCTORS (OC_ACPI_KINKS, ())
 OC_STRUCTORS (OC_ACPI_CONFIG, ())
 
 OC_STRUCTORS (OC_BOOBER_WL_ENTRY, ())
 OC_ARRAY_STRUCTORS (OC_BOOBER_WL_ARRAY)
 OC_STRUCTORS (OC_BOOBER_PATCH_ENTRY, ())
 OC_ARRAY_STRUCTORS (OC_BOOBER_PATCH_ARRAY)
-OC_STRUCTORS (OC_BOOBER_QUIRKS, ())
+OC_STRUCTORS (OC_BOOBER_KINKS, ())
 OC_STRUCTORS (OC_BOOBER_CONFIG, ())
 
 OC_MAP_STRUCTORS (OC_DEV_PROP_ADD_MAP)
@@ -43,7 +43,7 @@ OC_STRUCTORS (OC_KERNEL_EMULATE, ())
 OC_ARRAY_STRUCTORS (OC_KERNEL_FORCE_ARRAY)
 OC_STRUCTORS (OC_KERNEL_PATCH_ENTRY, ())
 OC_ARRAY_STRUCTORS (OC_KERNEL_PATCH_ARRAY)
-OC_STRUCTORS (OC_KERNEL_QUIRKS, ())
+OC_STRUCTORS (OC_KERNEL_KINKS, ())
 OC_STRUCTORS (OC_KERNEL_SCHEME, ())
 OC_STRUCTORS (OC_KERNEL_CONFIG, ())
 
@@ -53,8 +53,8 @@ OC_STRUCTORS (OC_MISC_DEBUG, ())
 OC_STRUCTORS (OC_MISC_SECURITY, ())
 OC_STRUCTORS (OC_MISC_SERIAL_CUSTOM, ())
 OC_STRUCTORS (OC_MISC_SERIAL, ())
-OC_STRUCTORS (OC_MISC_TOOLS_ENTRY, ())
-OC_ARRAY_STRUCTORS (OC_MISC_TOOLS_ARRAY)
+OC_STRUCTORS (OC_MISC_TOYS_ENTRY, ())
+OC_ARRAY_STRUCTORS (OC_MISC_TOYS_ARRAY)
 OC_STRUCTORS (OC_MISC_CONFIG, ())
 
 OC_MAP_STRUCTORS (OC_NVRAM_ADD_MAP)
@@ -84,7 +84,7 @@ OC_STRUCTORS (OC_UEFI_OUTPUT, ())
 OC_STRUCTORS (OC_UEFI_PROTOCOL_OVERRIDES, ())
 OC_STRUCTORS (OC_UEFI_RSVD_ENTRY, ())
 OC_ARRAY_STRUCTORS (OC_UEFI_RSVD_ARRAY)
-OC_STRUCTORS (OC_UEFI_QUIRKS, ())
+OC_STRUCTORS (OC_UEFI_KINKS, ())
 OC_STRUCTORS (OC_UEFI_CONFIG, ())
 
 OC_STRUCTORS (OC_GLOBAL_CONFIG, ())
@@ -145,13 +145,13 @@ OC_SCHEMA
 
 STATIC
 OC_SCHEMA
-  mAcpiQuirksSchema[] = {
-  OC_SCHEMA_BOOLEAN_IN ("FadtEnableReset",  OC_GLOBAL_CONFIG, Acpi.Quirks.FadtEnableReset),
-  OC_SCHEMA_BOOLEAN_IN ("NormalizeHeaders", OC_GLOBAL_CONFIG, Acpi.Quirks.NormalizeHeaders),
-  OC_SCHEMA_BOOLEAN_IN ("RebaseRegions",    OC_GLOBAL_CONFIG, Acpi.Quirks.RebaseRegions),
-  OC_SCHEMA_BOOLEAN_IN ("ResetHwSig",       OC_GLOBAL_CONFIG, Acpi.Quirks.ResetHwSig),
-  OC_SCHEMA_BOOLEAN_IN ("ResetLogoStatus",  OC_GLOBAL_CONFIG, Acpi.Quirks.ResetLogoStatus),
-  OC_SCHEMA_BOOLEAN_IN ("SyncTableIds",     OC_GLOBAL_CONFIG, Acpi.Quirks.SyncTableIds),
+  mAcpiKinksSchema[] = {
+  OC_SCHEMA_BOOLEAN_IN ("FadtEnableReset",  OC_GLOBAL_CONFIG, Acpi.Kinks.FadtEnableReset),
+  OC_SCHEMA_BOOLEAN_IN ("NormalizeHeaders", OC_GLOBAL_CONFIG, Acpi.Kinks.NormalizeHeaders),
+  OC_SCHEMA_BOOLEAN_IN ("RebaseRegions",    OC_GLOBAL_CONFIG, Acpi.Kinks.RebaseRegions),
+  OC_SCHEMA_BOOLEAN_IN ("ResetHwSig",       OC_GLOBAL_CONFIG, Acpi.Kinks.ResetHwSig),
+  OC_SCHEMA_BOOLEAN_IN ("ResetLogoStatus",  OC_GLOBAL_CONFIG, Acpi.Kinks.ResetLogoStatus),
+  OC_SCHEMA_BOOLEAN_IN ("SyncTableIds",     OC_GLOBAL_CONFIG, Acpi.Kinks.SyncTableIds),
 };
 
 STATIC
@@ -160,7 +160,7 @@ OC_SCHEMA
   OC_SCHEMA_ARRAY_IN ("Add",    OC_GLOBAL_CONFIG,   Acpi.Add,    &mAcpiAddSchema),
   OC_SCHEMA_ARRAY_IN ("Delete", OC_GLOBAL_CONFIG,   Acpi.Delete, &mAcpiDeleteSchema),
   OC_SCHEMA_ARRAY_IN ("Patch",  OC_GLOBAL_CONFIG,   Acpi.Patch,  &mAcpiPatchSchema),
-  OC_SCHEMA_DICT ("Quirks",     mAcpiQuirksSchema),
+  OC_SCHEMA_DICT ("Kinks",     mAcpiKinksSchema),
 };
 
 //
@@ -181,29 +181,29 @@ OC_SCHEMA
 
 STATIC
 OC_SCHEMA
-  mBooberQuirksSchema[] = {
-  OC_SCHEMA_BOOLEAN_IN ("AllowRelocationBlock",   OC_GLOBAL_CONFIG, Boober.Quirks.AllowRelocationBlock),
-  OC_SCHEMA_BOOLEAN_IN ("AvoidRuntimeDefrag",     OC_GLOBAL_CONFIG, Boober.Quirks.AvoidRuntimeDefrag),
-  OC_SCHEMA_BOOLEAN_IN ("ClearTaskSwitchBit",     OC_GLOBAL_CONFIG, Boober.Quirks.ClearTaskSwitchBit),
-  OC_SCHEMA_BOOLEAN_IN ("DevirtualiseMmio",       OC_GLOBAL_CONFIG, Boober.Quirks.DevirtualiseMmio),
-  OC_SCHEMA_BOOLEAN_IN ("DisableSingleUser",      OC_GLOBAL_CONFIG, Boober.Quirks.DisableSingleUser),
-  OC_SCHEMA_BOOLEAN_IN ("DisableVariableWrite",   OC_GLOBAL_CONFIG, Boober.Quirks.DisableVariableWrite),
-  OC_SCHEMA_BOOLEAN_IN ("DiscardHibernateMap",    OC_GLOBAL_CONFIG, Boober.Quirks.DiscardHibernateMap),
-  OC_SCHEMA_BOOLEAN_IN ("EnableSafeModeSlide",    OC_GLOBAL_CONFIG, Boober.Quirks.EnableSafeModeSlide),
-  OC_SCHEMA_BOOLEAN_IN ("EnableWriteUnprotector", OC_GLOBAL_CONFIG, Boober.Quirks.EnableWriteUnprotector),
-  OC_SCHEMA_BOOLEAN_IN ("FixupAppleEfiImages",    OC_GLOBAL_CONFIG, Boober.Quirks.FixupAppleEfiImages),
-  OC_SCHEMA_BOOLEAN_IN ("ForceBooberSignature",   OC_GLOBAL_CONFIG, Boober.Quirks.ForceBooberSignature),
-  OC_SCHEMA_BOOLEAN_IN ("ForceExitBootServices",  OC_GLOBAL_CONFIG, Boober.Quirks.ForceExitBootServices),
-  OC_SCHEMA_BOOLEAN_IN ("ProtectMemoryRegions",   OC_GLOBAL_CONFIG, Boober.Quirks.ProtectMemoryRegions),
-  OC_SCHEMA_BOOLEAN_IN ("ProtectSecureBoot",      OC_GLOBAL_CONFIG, Boober.Quirks.ProtectSecureBoot),
-  OC_SCHEMA_BOOLEAN_IN ("ProtectUefiServices",    OC_GLOBAL_CONFIG, Boober.Quirks.ProtectUefiServices),
-  OC_SCHEMA_BOOLEAN_IN ("ProvideCustomSlide",     OC_GLOBAL_CONFIG, Boober.Quirks.ProvideCustomSlide),
-  OC_SCHEMA_INTEGER_IN ("ProvideMaxSlide",        OC_GLOBAL_CONFIG, Boober.Quirks.ProvideMaxSlide),
-  OC_SCHEMA_BOOLEAN_IN ("RebuildAppleMemoryMap",  OC_GLOBAL_CONFIG, Boober.Quirks.RebuildAppleMemoryMap),
-  OC_SCHEMA_INTEGER_IN ("ResizeAppleGpuBars",     OC_GLOBAL_CONFIG, Boober.Quirks.ResizeAppleGpuBars),
-  OC_SCHEMA_BOOLEAN_IN ("SetupVirtualMap",        OC_GLOBAL_CONFIG, Boober.Quirks.SetupVirtualMap),
-  OC_SCHEMA_BOOLEAN_IN ("SignalAppleOS",          OC_GLOBAL_CONFIG, Boober.Quirks.SignalAppleOS),
-  OC_SCHEMA_BOOLEAN_IN ("SyncRuntimePermissions", OC_GLOBAL_CONFIG, Boober.Quirks.SyncRuntimePermissions),
+  mBooberKinksSchema[] = {
+  OC_SCHEMA_BOOLEAN_IN ("AllowRelocationBlock",   OC_GLOBAL_CONFIG, Boober.Kinks.AllowRelocationBlock),
+  OC_SCHEMA_BOOLEAN_IN ("AvoidRuntimeDefrag",     OC_GLOBAL_CONFIG, Boober.Kinks.AvoidRuntimeDefrag),
+  OC_SCHEMA_BOOLEAN_IN ("ClearTaskSwitchBit",     OC_GLOBAL_CONFIG, Boober.Kinks.ClearTaskSwitchBit),
+  OC_SCHEMA_BOOLEAN_IN ("DevirtualiseMmio",       OC_GLOBAL_CONFIG, Boober.Kinks.DevirtualiseMmio),
+  OC_SCHEMA_BOOLEAN_IN ("DisableSingleUser",      OC_GLOBAL_CONFIG, Boober.Kinks.DisableSingleUser),
+  OC_SCHEMA_BOOLEAN_IN ("DisableVariableWrite",   OC_GLOBAL_CONFIG, Boober.Kinks.DisableVariableWrite),
+  OC_SCHEMA_BOOLEAN_IN ("DiscardHibernateMap",    OC_GLOBAL_CONFIG, Boober.Kinks.DiscardHibernateMap),
+  OC_SCHEMA_BOOLEAN_IN ("EnableSafeModeSlide",    OC_GLOBAL_CONFIG, Boober.Kinks.EnableSafeModeSlide),
+  OC_SCHEMA_BOOLEAN_IN ("EnableWriteUnprotector", OC_GLOBAL_CONFIG, Boober.Kinks.EnableWriteUnprotector),
+  OC_SCHEMA_BOOLEAN_IN ("FixupAppleEfiImages",    OC_GLOBAL_CONFIG, Boober.Kinks.FixupAppleEfiImages),
+  OC_SCHEMA_BOOLEAN_IN ("ForceBooberSignature",   OC_GLOBAL_CONFIG, Boober.Kinks.ForceBooberSignature),
+  OC_SCHEMA_BOOLEAN_IN ("ForceExitBootServices",  OC_GLOBAL_CONFIG, Boober.Kinks.ForceExitBootServices),
+  OC_SCHEMA_BOOLEAN_IN ("ProtectMemoryRegions",   OC_GLOBAL_CONFIG, Boober.Kinks.ProtectMemoryRegions),
+  OC_SCHEMA_BOOLEAN_IN ("ProtectSecureBoot",      OC_GLOBAL_CONFIG, Boober.Kinks.ProtectSecureBoot),
+  OC_SCHEMA_BOOLEAN_IN ("ProtectUefiServices",    OC_GLOBAL_CONFIG, Boober.Kinks.ProtectUefiServices),
+  OC_SCHEMA_BOOLEAN_IN ("ProvideCustomSlide",     OC_GLOBAL_CONFIG, Boober.Kinks.ProvideCustomSlide),
+  OC_SCHEMA_INTEGER_IN ("ProvideMaxSlide",        OC_GLOBAL_CONFIG, Boober.Kinks.ProvideMaxSlide),
+  OC_SCHEMA_BOOLEAN_IN ("RebuildAppleMemoryMap",  OC_GLOBAL_CONFIG, Boober.Kinks.RebuildAppleMemoryMap),
+  OC_SCHEMA_INTEGER_IN ("ResizeAppleGpuBars",     OC_GLOBAL_CONFIG, Boober.Kinks.ResizeAppleGpuBars),
+  OC_SCHEMA_BOOLEAN_IN ("SetupVirtualMap",        OC_GLOBAL_CONFIG, Boober.Kinks.SetupVirtualMap),
+  OC_SCHEMA_BOOLEAN_IN ("SignalAppleOS",          OC_GLOBAL_CONFIG, Boober.Kinks.SignalAppleOS),
+  OC_SCHEMA_BOOLEAN_IN ("SyncRuntimePermissions", OC_GLOBAL_CONFIG, Boober.Kinks.SyncRuntimePermissions),
 };
 
 STATIC
@@ -231,7 +231,7 @@ OC_SCHEMA
   mBooberConfigurationSchema[] = {
   OC_SCHEMA_ARRAY_IN ("MmioWhitelist", OC_GLOBAL_CONFIG,     Boober.MmioWhitelist, &mBooberWhitelistSchema),
   OC_SCHEMA_ARRAY_IN ("Patch",         OC_GLOBAL_CONFIG,     Boober.Patch,         &mBooberPatchSchema),
-  OC_SCHEMA_DICT ("Quirks",            mBooberQuirksSchema),
+  OC_SCHEMA_DICT ("Kinks",            mBooberKinksSchema),
 };
 
 //
@@ -351,30 +351,30 @@ OC_SCHEMA
 
 STATIC
 OC_SCHEMA
-  mKernelQuirksSchema[] = {
-  OC_SCHEMA_BOOLEAN_IN ("AppleCpuPmCfgLock",       OC_GLOBAL_CONFIG, Kernel.Quirks.AppleCpuPmCfgLock),
-  OC_SCHEMA_BOOLEAN_IN ("AppleXcpmCfgLock",        OC_GLOBAL_CONFIG, Kernel.Quirks.AppleXcpmCfgLock),
-  OC_SCHEMA_BOOLEAN_IN ("AppleXcpmExtraMsrs",      OC_GLOBAL_CONFIG, Kernel.Quirks.AppleXcpmExtraMsrs),
-  OC_SCHEMA_BOOLEAN_IN ("AppleXcpmForceBoost",     OC_GLOBAL_CONFIG, Kernel.Quirks.AppleXcpmForceBoost),
-  OC_SCHEMA_BOOLEAN_IN ("CustomPciSerialDevice",   OC_GLOBAL_CONFIG, Kernel.Quirks.CustomPciSerialDevice),
-  OC_SCHEMA_BOOLEAN_IN ("CustomSMBIOSGuid",        OC_GLOBAL_CONFIG, Kernel.Quirks.CustomSmbiosGuid),
-  OC_SCHEMA_BOOLEAN_IN ("DisableIoMapper",         OC_GLOBAL_CONFIG, Kernel.Quirks.DisableIoMapper),
-  OC_SCHEMA_BOOLEAN_IN ("DisableIoMapperMapping",  OC_GLOBAL_CONFIG, Kernel.Quirks.DisableIoMapperMapping),
-  OC_SCHEMA_BOOLEAN_IN ("DisableLinkeditJettison", OC_GLOBAL_CONFIG, Kernel.Quirks.DisableLinkeditJettison),
-  OC_SCHEMA_BOOLEAN_IN ("DisableRtcChecksum",      OC_GLOBAL_CONFIG, Kernel.Quirks.DisableRtcChecksum),
-  OC_SCHEMA_BOOLEAN_IN ("ExtendBTFeatureFlags",    OC_GLOBAL_CONFIG, Kernel.Quirks.ExtendBTFeatureFlags),
-  OC_SCHEMA_BOOLEAN_IN ("ExternalDiskIcons",       OC_GLOBAL_CONFIG, Kernel.Quirks.ExternalDiskIcons),
-  OC_SCHEMA_BOOLEAN_IN ("ForceAquantiaEthernet",   OC_GLOBAL_CONFIG, Kernel.Quirks.ForceAquantiaEthernet),
-  OC_SCHEMA_BOOLEAN_IN ("ForceSecureBootScheme",   OC_GLOBAL_CONFIG, Kernel.Quirks.ForceSecureBootScheme),
-  OC_SCHEMA_BOOLEAN_IN ("IncreasePciBarSize",      OC_GLOBAL_CONFIG, Kernel.Quirks.IncreasePciBarSize),
-  OC_SCHEMA_BOOLEAN_IN ("LapicKernelPanic",        OC_GLOBAL_CONFIG, Kernel.Quirks.LapicKernelPanic),
-  OC_SCHEMA_BOOLEAN_IN ("LegacyCommpage",          OC_GLOBAL_CONFIG, Kernel.Quirks.LegacyCommpage),
-  OC_SCHEMA_BOOLEAN_IN ("PanicNoKextDump",         OC_GLOBAL_CONFIG, Kernel.Quirks.PanicNoKextDump),
-  OC_SCHEMA_BOOLEAN_IN ("PowerTimeoutKernelPanic", OC_GLOBAL_CONFIG, Kernel.Quirks.PowerTimeoutKernelPanic),
-  OC_SCHEMA_BOOLEAN_IN ("ProvideCurrentCpuInfo",   OC_GLOBAL_CONFIG, Kernel.Quirks.ProvideCurrentCpuInfo),
-  OC_SCHEMA_INTEGER_IN ("SetApfsTrimTimeout",      OC_GLOBAL_CONFIG, Kernel.Quirks.SetApfsTrimTimeout),
-  OC_SCHEMA_BOOLEAN_IN ("ThirdPartyDrives",        OC_GLOBAL_CONFIG, Kernel.Quirks.ThirdPartyDrives),
-  OC_SCHEMA_BOOLEAN_IN ("XhciPortLimit",           OC_GLOBAL_CONFIG, Kernel.Quirks.XhciPortLimit),
+  mKernelKinksSchema[] = {
+  OC_SCHEMA_BOOLEAN_IN ("AppleCpuPmCfgLock",       OC_GLOBAL_CONFIG, Kernel.Kinks.AppleCpuPmCfgLock),
+  OC_SCHEMA_BOOLEAN_IN ("AppleXcpmCfgLock",        OC_GLOBAL_CONFIG, Kernel.Kinks.AppleXcpmCfgLock),
+  OC_SCHEMA_BOOLEAN_IN ("AppleXcpmExtraMsrs",      OC_GLOBAL_CONFIG, Kernel.Kinks.AppleXcpmExtraMsrs),
+  OC_SCHEMA_BOOLEAN_IN ("AppleXcpmForceBoost",     OC_GLOBAL_CONFIG, Kernel.Kinks.AppleXcpmForceBoost),
+  OC_SCHEMA_BOOLEAN_IN ("CustomPciSerialDevice",   OC_GLOBAL_CONFIG, Kernel.Kinks.CustomPciSerialDevice),
+  OC_SCHEMA_BOOLEAN_IN ("CustomSMBIOSGuid",        OC_GLOBAL_CONFIG, Kernel.Kinks.CustomSmbiosGuid),
+  OC_SCHEMA_BOOLEAN_IN ("DisableIoMapper",         OC_GLOBAL_CONFIG, Kernel.Kinks.DisableIoMapper),
+  OC_SCHEMA_BOOLEAN_IN ("DisableIoMapperMapping",  OC_GLOBAL_CONFIG, Kernel.Kinks.DisableIoMapperMapping),
+  OC_SCHEMA_BOOLEAN_IN ("DisableLinkeditJettison", OC_GLOBAL_CONFIG, Kernel.Kinks.DisableLinkeditJettison),
+  OC_SCHEMA_BOOLEAN_IN ("DisableRtcChecksum",      OC_GLOBAL_CONFIG, Kernel.Kinks.DisableRtcChecksum),
+  OC_SCHEMA_BOOLEAN_IN ("ExtendBTFeatureFlags",    OC_GLOBAL_CONFIG, Kernel.Kinks.ExtendBTFeatureFlags),
+  OC_SCHEMA_BOOLEAN_IN ("ExternalDiskIcons",       OC_GLOBAL_CONFIG, Kernel.Kinks.ExternalDiskIcons),
+  OC_SCHEMA_BOOLEAN_IN ("ForceAquantiaEthernet",   OC_GLOBAL_CONFIG, Kernel.Kinks.ForceAquantiaEthernet),
+  OC_SCHEMA_BOOLEAN_IN ("ForceSecureBootScheme",   OC_GLOBAL_CONFIG, Kernel.Kinks.ForceSecureBootScheme),
+  OC_SCHEMA_BOOLEAN_IN ("IncreasePciBarSize",      OC_GLOBAL_CONFIG, Kernel.Kinks.IncreasePciBarSize),
+  OC_SCHEMA_BOOLEAN_IN ("LapicKernelPanic",        OC_GLOBAL_CONFIG, Kernel.Kinks.LapicKernelPanic),
+  OC_SCHEMA_BOOLEAN_IN ("LegacyCommpage",          OC_GLOBAL_CONFIG, Kernel.Kinks.LegacyCommpage),
+  OC_SCHEMA_BOOLEAN_IN ("PanicNoKextDump",         OC_GLOBAL_CONFIG, Kernel.Kinks.PanicNoKextDump),
+  OC_SCHEMA_BOOLEAN_IN ("PowerTimeoutKernelPanic", OC_GLOBAL_CONFIG, Kernel.Kinks.PowerTimeoutKernelPanic),
+  OC_SCHEMA_BOOLEAN_IN ("ProvideCurrentCpuInfo",   OC_GLOBAL_CONFIG, Kernel.Kinks.ProvideCurrentCpuInfo),
+  OC_SCHEMA_INTEGER_IN ("SetApfsTrimTimeout",      OC_GLOBAL_CONFIG, Kernel.Kinks.SetApfsTrimTimeout),
+  OC_SCHEMA_BOOLEAN_IN ("ThirdPartyDrives",        OC_GLOBAL_CONFIG, Kernel.Kinks.ThirdPartyDrives),
+  OC_SCHEMA_BOOLEAN_IN ("XhciPortLimit",           OC_GLOBAL_CONFIG, Kernel.Kinks.XhciPortLimit),
 };
 
 STATIC
@@ -394,7 +394,7 @@ OC_SCHEMA
   OC_SCHEMA_DICT ("Emulate",   mKernelEmulateSchema),
   OC_SCHEMA_ARRAY_IN ("Force", OC_GLOBAL_CONFIG,      Kernel.Force, &mKernelForceSchema),
   OC_SCHEMA_ARRAY_IN ("Patch", OC_GLOBAL_CONFIG,      Kernel.Patch, &mKernelPatchSchema),
-  OC_SCHEMA_DICT ("Quirks",    mKernelQuirksSchema),
+  OC_SCHEMA_DICT ("Kinks",    mKernelKinksSchema),
   OC_SCHEMA_DICT ("Scheme",    mKernelSchemeSchema),
 };
 
@@ -454,7 +454,7 @@ OC_SCHEMA
   OC_SCHEMA_DATA_IN ("PasswordSalt",            OC_GLOBAL_CONFIG, Misc.Security.PasswordSalt),
   OC_SCHEMA_INTEGER_IN ("ScanPolicy",           OC_GLOBAL_CONFIG, Misc.Security.ScanPolicy),
   OC_SCHEMA_STRING_IN ("SecureBootModel",       OC_GLOBAL_CONFIG, Misc.Security.SecureBootModel),
-  OC_SCHEMA_STRING_IN ("Vault",                 OC_GLOBAL_CONFIG, Misc.Security.Vault),
+  OC_SCHEMA_STRING_IN ("Chastity",                 OC_GLOBAL_CONFIG, Misc.Security.Chastity),
 };
 
 STATIC
@@ -485,14 +485,14 @@ OC_SCHEMA
 STATIC
 OC_SCHEMA
   mMiscEntriesSchemaEntry[] = {
-  OC_SCHEMA_STRING_IN ("Arguments",  OC_MISC_TOOLS_ENTRY, Arguments),
-  OC_SCHEMA_BOOLEAN_IN ("Auxiliary", OC_MISC_TOOLS_ENTRY, Auxiliary),
-  OC_SCHEMA_STRING_IN ("Comment",    OC_MISC_TOOLS_ENTRY, Comment),
-  OC_SCHEMA_BOOLEAN_IN ("Enabled",   OC_MISC_TOOLS_ENTRY, Enabled),
-  OC_SCHEMA_STRING_IN ("Flavour",    OC_MISC_TOOLS_ENTRY, Flavour),
-  OC_SCHEMA_STRING_IN ("Name",       OC_MISC_TOOLS_ENTRY, Name),
-  OC_SCHEMA_STRING_IN ("Path",       OC_MISC_TOOLS_ENTRY, Path),
-  OC_SCHEMA_BOOLEAN_IN ("TextMode",  OC_MISC_TOOLS_ENTRY, TextMode),
+  OC_SCHEMA_STRING_IN ("Arguments",  OC_MISC_TOYS_ENTRY, Arguments),
+  OC_SCHEMA_BOOLEAN_IN ("Auxiliary", OC_MISC_TOYS_ENTRY, Auxiliary),
+  OC_SCHEMA_STRING_IN ("Comment",    OC_MISC_TOYS_ENTRY, Comment),
+  OC_SCHEMA_BOOLEAN_IN ("Enabled",   OC_MISC_TOYS_ENTRY, Enabled),
+  OC_SCHEMA_STRING_IN ("Flavour",    OC_MISC_TOYS_ENTRY, Flavour),
+  OC_SCHEMA_STRING_IN ("Name",       OC_MISC_TOYS_ENTRY, Name),
+  OC_SCHEMA_STRING_IN ("Path",       OC_MISC_TOYS_ENTRY, Path),
+  OC_SCHEMA_BOOLEAN_IN ("TextMode",  OC_MISC_TOYS_ENTRY, TextMode),
 };
 
 STATIC
@@ -501,22 +501,22 @@ OC_SCHEMA
 
 STATIC
 OC_SCHEMA
-  mMiscToolsSchemaEntry[] = {
-  OC_SCHEMA_STRING_IN ("Arguments",        OC_MISC_TOOLS_ENTRY, Arguments),
-  OC_SCHEMA_BOOLEAN_IN ("Auxiliary",       OC_MISC_TOOLS_ENTRY, Auxiliary),
-  OC_SCHEMA_STRING_IN ("Comment",          OC_MISC_TOOLS_ENTRY, Comment),
-  OC_SCHEMA_BOOLEAN_IN ("Enabled",         OC_MISC_TOOLS_ENTRY, Enabled),
-  OC_SCHEMA_STRING_IN ("Flavour",          OC_MISC_TOOLS_ENTRY, Flavour),
-  OC_SCHEMA_BOOLEAN_IN ("FullNvramAccess", OC_MISC_TOOLS_ENTRY, FullNvramAccess),
-  OC_SCHEMA_STRING_IN ("Name",             OC_MISC_TOOLS_ENTRY, Name),
-  OC_SCHEMA_STRING_IN ("Path",             OC_MISC_TOOLS_ENTRY, Path),
-  OC_SCHEMA_BOOLEAN_IN ("RealPath",        OC_MISC_TOOLS_ENTRY, RealPath),
-  OC_SCHEMA_BOOLEAN_IN ("TextMode",        OC_MISC_TOOLS_ENTRY, TextMode),
+  mMiscToysSchemaEntry[] = {
+  OC_SCHEMA_STRING_IN ("Arguments",        OC_MISC_TOYS_ENTRY, Arguments),
+  OC_SCHEMA_BOOLEAN_IN ("Auxiliary",       OC_MISC_TOYS_ENTRY, Auxiliary),
+  OC_SCHEMA_STRING_IN ("Comment",          OC_MISC_TOYS_ENTRY, Comment),
+  OC_SCHEMA_BOOLEAN_IN ("Enabled",         OC_MISC_TOYS_ENTRY, Enabled),
+  OC_SCHEMA_STRING_IN ("Flavour",          OC_MISC_TOYS_ENTRY, Flavour),
+  OC_SCHEMA_BOOLEAN_IN ("FullNvramAccess", OC_MISC_TOYS_ENTRY, FullNvramAccess),
+  OC_SCHEMA_STRING_IN ("Name",             OC_MISC_TOYS_ENTRY, Name),
+  OC_SCHEMA_STRING_IN ("Path",             OC_MISC_TOYS_ENTRY, Path),
+  OC_SCHEMA_BOOLEAN_IN ("RealPath",        OC_MISC_TOYS_ENTRY, RealPath),
+  OC_SCHEMA_BOOLEAN_IN ("TextMode",        OC_MISC_TOYS_ENTRY, TextMode),
 };
 
 STATIC
 OC_SCHEMA
-  mMiscToolsSchema = OC_SCHEMA_DICT (NULL, mMiscToolsSchemaEntry);
+  mMiscToysSchema = OC_SCHEMA_DICT (NULL, mMiscToysSchemaEntry);
 
 STATIC
 OC_SCHEMA
@@ -527,7 +527,7 @@ OC_SCHEMA
   OC_SCHEMA_ARRAY_IN ("Entries",       OC_GLOBAL_CONFIG,                  Misc.Entries,       &mMiscEntriesSchema),
   OC_SCHEMA_DICT ("Security",          mMiscConfigurationSecuritySchema),
   OC_SCHEMA_DICT ("Serial",            mMiscConfigurationSerialSchema),
-  OC_SCHEMA_ARRAY_IN ("Tools",         OC_GLOBAL_CONFIG,                  Misc.Tools,         &mMiscToolsSchema),
+  OC_SCHEMA_ARRAY_IN ("Toys",         OC_GLOBAL_CONFIG,                  Misc.Toys,         &mMiscToysSchema),
 };
 
 //
@@ -717,23 +717,23 @@ OC_SCHEMA
 
 STATIC
 OC_SCHEMA
-  mUefiQuirksSchema[] = {
-  OC_SCHEMA_BOOLEAN_IN ("ActivateHpetSupport",      OC_GLOBAL_CONFIG, Uefi.Quirks.ActivateHpetSupport),
-  OC_SCHEMA_BOOLEAN_IN ("DisableSecurityPolicy",    OC_GLOBAL_CONFIG, Uefi.Quirks.DisableSecurityPolicy),
-  OC_SCHEMA_BOOLEAN_IN ("EnableVectorAcceleration", OC_GLOBAL_CONFIG, Uefi.Quirks.EnableVectorAcceleration),
-  OC_SCHEMA_BOOLEAN_IN ("EnableVmx",                OC_GLOBAL_CONFIG, Uefi.Quirks.EnableVmx),
-  OC_SCHEMA_INTEGER_IN ("ExitBootServicesDelay",    OC_GLOBAL_CONFIG, Uefi.Quirks.ExitBootServicesDelay),
-  OC_SCHEMA_BOOLEAN_IN ("ForceOcWriteFlash",        OC_GLOBAL_CONFIG, Uefi.Quirks.ForceOcWriteFlash),
-  OC_SCHEMA_BOOLEAN_IN ("ForgeUefiSupport",         OC_GLOBAL_CONFIG, Uefi.Quirks.ForgeUefiSupport),
-  OC_SCHEMA_BOOLEAN_IN ("IgnoreInvalidFlexRatio",   OC_GLOBAL_CONFIG, Uefi.Quirks.IgnoreInvalidFlexRatio),
-  OC_SCHEMA_BOOLEAN_IN ("ReleaseUsbOwnership",      OC_GLOBAL_CONFIG, Uefi.Quirks.ReleaseUsbOwnership),
-  OC_SCHEMA_BOOLEAN_IN ("ReloadOptionRoms",         OC_GLOBAL_CONFIG, Uefi.Quirks.ReloadOptionRoms),
-  OC_SCHEMA_BOOLEAN_IN ("RequestBootVarRouting",    OC_GLOBAL_CONFIG, Uefi.Quirks.RequestBootVarRouting),
-  OC_SCHEMA_INTEGER_IN ("ResizeGpuBars",            OC_GLOBAL_CONFIG, Uefi.Quirks.ResizeGpuBars),
-  OC_SCHEMA_BOOLEAN_IN ("ResizeUsePciRbIo",         OC_GLOBAL_CONFIG, Uefi.Quirks.ResizeUsePciRbIo),
-  OC_SCHEMA_BOOLEAN_IN ("ShimRetainProtocol",       OC_GLOBAL_CONFIG, Uefi.Quirks.ShimRetainProtocol),
-  OC_SCHEMA_INTEGER_IN ("TscSyncTimeout",           OC_GLOBAL_CONFIG, Uefi.Quirks.TscSyncTimeout),
-  OC_SCHEMA_BOOLEAN_IN ("UnblockFsConnect",         OC_GLOBAL_CONFIG, Uefi.Quirks.UnblockFsConnect)
+  mUefiKinksSchema[] = {
+  OC_SCHEMA_BOOLEAN_IN ("ActivateHpetSupport",      OC_GLOBAL_CONFIG, Uefi.Kinks.ActivateHpetSupport),
+  OC_SCHEMA_BOOLEAN_IN ("DisableSecurityPolicy",    OC_GLOBAL_CONFIG, Uefi.Kinks.DisableSecurityPolicy),
+  OC_SCHEMA_BOOLEAN_IN ("EnableVectorAcceleration", OC_GLOBAL_CONFIG, Uefi.Kinks.EnableVectorAcceleration),
+  OC_SCHEMA_BOOLEAN_IN ("EnableVmx",                OC_GLOBAL_CONFIG, Uefi.Kinks.EnableVmx),
+  OC_SCHEMA_INTEGER_IN ("ExitBootServicesDelay",    OC_GLOBAL_CONFIG, Uefi.Kinks.ExitBootServicesDelay),
+  OC_SCHEMA_BOOLEAN_IN ("ForceOcWriteFlash",        OC_GLOBAL_CONFIG, Uefi.Kinks.ForceOcWriteFlash),
+  OC_SCHEMA_BOOLEAN_IN ("ForgeUefiSupport",         OC_GLOBAL_CONFIG, Uefi.Kinks.ForgeUefiSupport),
+  OC_SCHEMA_BOOLEAN_IN ("IgnoreInvalidFlexRatio",   OC_GLOBAL_CONFIG, Uefi.Kinks.IgnoreInvalidFlexRatio),
+  OC_SCHEMA_BOOLEAN_IN ("ReleaseUsbOwnership",      OC_GLOBAL_CONFIG, Uefi.Kinks.ReleaseUsbOwnership),
+  OC_SCHEMA_BOOLEAN_IN ("ReloadOptionRoms",         OC_GLOBAL_CONFIG, Uefi.Kinks.ReloadOptionRoms),
+  OC_SCHEMA_BOOLEAN_IN ("RequestBootVarRouting",    OC_GLOBAL_CONFIG, Uefi.Kinks.RequestBootVarRouting),
+  OC_SCHEMA_INTEGER_IN ("ResizeGpuBars",            OC_GLOBAL_CONFIG, Uefi.Kinks.ResizeGpuBars),
+  OC_SCHEMA_BOOLEAN_IN ("ResizeUsePciRbIo",         OC_GLOBAL_CONFIG, Uefi.Kinks.ResizeUsePciRbIo),
+  OC_SCHEMA_BOOLEAN_IN ("ShimRetainProtocol",       OC_GLOBAL_CONFIG, Uefi.Kinks.ShimRetainProtocol),
+  OC_SCHEMA_INTEGER_IN ("TscSyncTimeout",           OC_GLOBAL_CONFIG, Uefi.Kinks.TscSyncTimeout),
+  OC_SCHEMA_BOOLEAN_IN ("UnblockFsConnect",         OC_GLOBAL_CONFIG, Uefi.Kinks.UnblockFsConnect)
 };
 
 STATIC
@@ -870,7 +870,7 @@ OC_SCHEMA
   OC_SCHEMA_DICT ("Input",                mUefiInputSchema),
   OC_SCHEMA_DICT ("Output",               mUefiOutputSchema),
   OC_SCHEMA_DICT ("ProtocolOverrides",    mUefiProtocolOverridesSchema),
-  OC_SCHEMA_DICT ("Quirks",               mUefiQuirksSchema),
+  OC_SCHEMA_DICT ("Kinks",               mUefiKinksSchema),
   OC_SCHEMA_ARRAY_IN ("ReservedMemory",   OC_GLOBAL_CONFIG,             Uefi.ReservedMemory, &mUefiReservedMemorySchema),
   OC_SCHEMA_ARRAY_IN ("Unload",           OC_GLOBAL_CONFIG,             Uefi.Unload,         &mUefiUnloadSchema),
 };

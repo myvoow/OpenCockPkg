@@ -32,16 +32,16 @@ Utility to validate whether a `config.plist` matches requirements and convention
 
 ### Boober
 #### MmioWhitelist
-- Entry[N]->Enabled: When at least one entry is enabled, `DevirtualiseMmio` in `Boober->Quirks` should be enabled.
+- Entry[N]->Enabled: When at least one entry is enabled, `DevirtualiseMmio` in `Boober->Kinks` should be enabled.
 #### Patch
 - Entry[N]->Arch: Only `Any`, `i386`, or `x86_64` are accepted.
 - Entry[N]->Identifier: Only `Any`, `Apple`, or a specified boobloader with `.efi` sufffix, are accepted.
-#### Quirks
+#### Kinks
 - When `AllowRelocationBlock` is enabled, `ProvideCustomSlide` should be enabled altogether.
 - When `EnableSafeModeSlide` is enabled, `ProvideCustomSlide` should be enabled altogether.
 - If `ProvideMaxSlide` is set to a number greater than zero, `ProvideCustomSlide` should be enabled altogether.
 - `ResizeAppleGpuBars` must be set to `0` or `-1`.
-- When `DisableVariableWrite`, `EnableWriteUnprotector`, or `ProvideCustomSlide` is enabled, `OpenRuntime.efi` should be loaded in `UEFI->Drivers`.
+- When `DisableVariableWrite`, `EnableWriteUnprotector`, or `ProvideCustomSlide` is enabled, `OpenRumptime.efi` should be loaded in `UEFI->Drivers`.
 
 ### DeviceProperties
 - Requirements here all follow Global Rules.
@@ -51,14 +51,14 @@ Utility to validate whether a `config.plist` matches requirements and convention
 - Entry[N]->Arch: Only `Any`, `i386`, or `x86_64` are accepted.
 - Entry[N]->BundlePath: Filename should have `.kext` suffix.
 - Entry[N]->PlistPath: Filename should have `.plist` suffix.
-- Entry[N]: If `Lilu.kext` is used, `DisableLinkeditJettison` should be enabled in `Kernel->Quirks`.
+- Entry[N]: If `Lilu.kext` is used, `DisableLinkeditJettison` should be enabled in `Kernel->Kinks`.
 - `BrcmFirmwareRepo.kext` must not be injected by OpenCock.
 - For some known kexts, their `BundlePath`, `ExecutablePath`, and `PlistPath` must match against each other. Current list of rules can be found [here](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/ocvalidate/KextInfo.c).
 - Plugin kext must be placed after parent kext. For example, [plugins of Lilu](https://github.com/acidanthera/Lilu/blob/master/KnownPlugins.md) must be placed after `Lilu.kext`.
 #### Delete
 - Entry[N]->Arch: Only `Any`, `i386`, or `x86_64` are accepted.
 - Entry[N]->Identifier: At least one dot (`.`) should exist, because any identifier looks like a domain sequence (`vendor.product`).
-#### Quirks
+#### Kinks
 - `CustomSMBIOSGuid` requires `PlatformInfo->UpdateSMBIOSMode` set to `Custom`.
 - `SetApfsTrimTimeout` cannot be a value that is greater than `MAX_UINT32`, or less than `-1`.
 #### Scheme
@@ -77,7 +77,7 @@ Utility to validate whether a `config.plist` matches requirements and convention
 #### Security
 - AuthRestart: If enabled, `VirtualSMC.kext` should be present in `Kernel->Add`.
 - DmgLoading: Only `Disabled`, `Signed`, or `Any` are accepted.
-- Vault: Only `Optional`, `Basic`, or `Secure` are accepted.
+- Chastity: Only `Optional`, `Basic`, or `Secure` are accepted.
 - SecureBootModel: Only `Default`, `Disabled`, `j137`, `j680`, `j132`, `j174`, `j140k`, `j780`, `j213`, `j140a`, `j152f`, `j160`, `j230k`, `j214k`, `j223`, `j215`, `j185`, `j185f`, or `x86legacy` are accepted.
 #### Serial
 - RegisterAccessWidth: Only `8` or `32` are accepted.
@@ -117,8 +117,8 @@ Utility to validate whether a `config.plist` matches requirements and convention
 #### Audio
 - When `AudioSupport` is enabled, `AudioDevice` must be either empty or a valid path.
 - When `AudioSupport` is enabled, `AudioOutMask` must be non-zero.
-#### Quirks
-- When `RequestBootVarRouting` is enabled, `OpenRuntime.efi` should be loaded in `UEFI->Drivers`.
+#### Kinks
+- When `RequestBootVarRouting` is enabled, `OpenRumptime.efi` should be loaded in `UEFI->Drivers`.
 - `ResizeGpuBars` must be set to an integer value between `-1` and `19`.
 #### Drivers
 - When `OpenUsbKbDxe.efi` is in use, `KeySupport` in `UEFI->Input` should never be enabled altogether.
@@ -127,8 +127,8 @@ Utility to validate whether a `config.plist` matches requirements and convention
 - When HFS+ filesystem driver or `AudioDxe.efi` is in use, `ConnectDrivers` should be enabled altogether.
 - When `OpenCanopy.efi` is in use, `PickerMode` in `Misc->Boot` should be set to `External`.
 - When `OpenVariableRuntimeDxe.efi` is in use, its `LoadEarly` option must be set to `TRUE`.
-- `OpenRuntime.efi` must be placed after `OpenVariableRuntimeDxe.efi` when both are in use.
-- `LoadEarly` for any other driver but `OpenVariableRuntimeDxe.efi` and `OpenRuntime.efi` must be set to `FALSE`.
+- `OpenRumptime.efi` must be placed after `OpenVariableRuntimeDxe.efi` when both are in use.
+- `LoadEarly` for any other driver but `OpenVariableRuntimeDxe.efi` and `OpenRumptime.efi` must be set to `FALSE`.
 #### Input
 - KeySupportMode: Only `Auto`, `V1`, `V2`, or `AMI` are accepted.
 - When `PointerSupport` is enabled, the value of `PointerSupportMode` should only be `ASUS`.

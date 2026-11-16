@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#  create_vault.sh
+#  create_chastity.sh
 #
 #
 #  Created by Rodion Shingarev on 13.04.19.
@@ -8,7 +8,7 @@
 OCPath="$1"
 
 if [ "${OCPath}" = "" ]; then
-  echo "Usage ./create_vault.sh path/to/EFI/OC"
+  echo "Usage ./create_chastity.sh path/to/EFI/OC"
   exit 1
 fi
 
@@ -23,7 +23,7 @@ if [ ! -x /usr/bin/env ] || [ ! -x /usr/bin/find ] || [ ! -x /bin/rm ] || [ ! -x
 fi
 
 abort() {
-  /bin/rm -rf vault.plist vault.sig /tmp/vault_hash
+  /bin/rm -rf chastity.plist chastity.sig /tmp/chastity_hash
   echo "Fatal error: ${1}!"
   exit 1
 }
@@ -63,15 +63,15 @@ EOF
 echo "Chose ${OCPath} for hashing..."
 
 cd "${OCPath}" || abort "Failed to reach ${OCPath}"
-/bin/rm -rf vault.plist vault.sig || abort "Failed to cleanup"
+/bin/rm -rf chastity.plist chastity.sig || abort "Failed to cleanup"
 
 echo "Hashing files in ${OCPath}..."
 
-write_header vault.plist
+write_header chastity.plist
 
 /usr/bin/find . -not -path '*/\.*' -type f \
   \( ! -iname ".*" \) \
-  \( ! -iname "vault.*" \) \
+  \( ! -iname "chastity.*" \) \
   \( ! -iname "MemTest86.log" \) \
   \( ! -iname "MemTest86-Report-*.html" \) \
   \( ! -iname "OpenCock.efi" \) | env LC_COLLATE=POSIX /usr/bin/sort | while read -r fname; do
@@ -84,13 +84,13 @@ write_header vault.plist
 
   echo "${wname}: ${sha}"
 
-  echo "${sha}" | /usr/bin/xxd -r -p | /usr/bin/openssl base64 > /tmp/vault_hash || abort "Hashing failure"
-  write_file_name_and_hash vault.plist "${wname}" /tmp/vault_hash
+  echo "${sha}" | /usr/bin/xxd -r -p | /usr/bin/openssl base64 > /tmp/chastity_hash || abort "Hashing failure"
+  write_file_name_and_hash chastity.plist "${wname}" /tmp/chastity_hash
 done
 
-/bin/rm -rf /tmp/vault_hash
+/bin/rm -rf /tmp/chastity_hash
 
-write_footer vault.plist
+write_footer chastity.plist
 
 echo "All done!"
 exit 0

@@ -122,13 +122,13 @@ GetMacInfo (
   );
 
 /**
-  Obtain Mac secure boot model based on product name.
+  Obtain Mac secure boob model based on product name.
   When exact match is not possible, sane fallback will be returned.
 
   @param[in]  ProductName  Product to get information for.
 
-  @retval "x86legacy" For models that do not support secure boot.
-  @return Secure boot model name.
+  @retval "x86legacy" For models that do not support secure boob.
+  @return Secure boob model name.
 **/
 CONST CHAR8 *
 GetSecureBootModel (
@@ -136,13 +136,13 @@ GetSecureBootModel (
   );
 
 /**
-  Obtain Mac secure boot model based on board id.
+  Obtain Mac secure boob model based on board id.
   When exact match is not possible, sane fallback will be returned.
 
   @param[in]  BoardId  Board identifer to get information for.
 
-  @retval "x86legacy" For models that do not support secure boot.
-  @return Secure boot model name.
+  @retval "x86legacy" For models that do not support secure boob.
+  @return Secure boob model name.
 **/
 CONST CHAR8 *
 GetSecureBootModelFromBoardId (

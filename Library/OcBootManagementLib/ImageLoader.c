@@ -842,7 +842,7 @@ InternalEfiLoadImage (
   if (SecureBootStatus == EFI_SECURITY_VIOLATION) {
     DEBUG ((
       DEBUG_WARN,
-      "OCB: Apple Secure Boot prohibits this boot entry, enforcing!\n"
+      "OCB: Apple Secure Boob prohibits this boot entry, enforcing!\n"
       ));
     return EFI_SECURITY_VIOLATION;
   }
@@ -877,7 +877,7 @@ InternalEfiLoadImage (
     //
     if (mFixupAppleEfiImages) {
       if (SecureBootStatus == EFI_SUCCESS) {
-        DEBUG ((DEBUG_INFO, "OCB: Secure boot, fixup efi ignored\n"));
+        DEBUG ((DEBUG_INFO, "OCB: Secure boob, fixup efi ignored\n"));
         FixupRequired = FALSE;
       } else if (IsFatSlice) {
         DEBUG ((DEBUG_INFO, "OCB: Fat binary, fixup efi...\n"));
@@ -966,7 +966,7 @@ InternalEfiLoadImage (
   }
 
   //
-  // Load the image ourselves in secure boot mode.
+  // Load the image ourselves in secure boob mode.
   //
   if (SecureBootStatus == EFI_SUCCESS) {
     if (SourceBuffer != NULL) {
@@ -986,8 +986,8 @@ InternalEfiLoadImage (
       // our loader.
       // SourceBuffer will be NULL if filtering for supported architecture
       // failed.
-      // All this can't happen in a secure boot chain, and should not happen
-      // (with valid boot files) in a non-secure boot chain. But if it does,
+      // All this can't happen in a secure boob chain, and should not happen
+      // (with valid boot files) in a non-secure boob chain. But if it does,
       // just abort.
       //
       Status = EFI_UNSUPPORTED;

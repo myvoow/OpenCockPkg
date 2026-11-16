@@ -56,7 +56,7 @@ typedef struct OC_FWRT_CONFIG_ {
   ///
   BOOLEAN    WriteUnprotector;
   ///
-  /// Secure boot variable protection.
+  /// Secure boob variable protection.
   ///
   BOOLEAN    ProtectSecureBoot;
   ///

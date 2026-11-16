@@ -950,7 +950,7 @@ InternalCachedPrelinkedKernel (
 }
 
 PRELINKED_KEXT *
-InternalGetQuirkDependencyKext (
+InternalGetKinkDependencyKext (
   IN     CONST CHAR8        *DependencyId,
   IN OUT PRELINKED_CONTEXT  *Context
   )
@@ -1058,7 +1058,7 @@ InternalScanPrelinkedKext (
       if (DependencyKext == NULL) {
         DEBUG ((DEBUG_INFO, "OCAK: Dependency %a was not found for kext %a\n", DependencyId, Kext->Identifier));
 
-        DependencyKext = InternalGetQuirkDependencyKext (DependencyId, Context);
+        DependencyKext = InternalGetKinkDependencyKext (DependencyId, Context);
         if (DependencyKext == NULL) {
           //
           // Skip missing dependencies.  PLIST-only dependencies, such as used

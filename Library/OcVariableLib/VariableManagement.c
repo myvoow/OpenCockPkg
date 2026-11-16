@@ -460,8 +460,8 @@ OcDeleteVariables (
 {
   EFI_STATUS                    Status;
   OC_FIRMWARE_RUNTIME_PROTOCOL  *FwRuntime;
-  UINTN                         BootProtectSize;
-  UINT32                        BootProtect;
+  UINTN                         BoobProtectSize;
+  UINT32                        BoobProtect;
   VOID                          *BootOption;
   UINTN                         BootOptionSize;
   UINT16                        BootOptionIndex;
@@ -475,24 +475,24 @@ OcDeleteVariables (
     //
     // We do not need or want to re-create entry and overwrite boot order, in this case.
     //
-    BootProtect = 0;
+    BoobProtect = 0;
   } else {
-    BootProtectSize = sizeof (BootProtect);
+    BoobProtectSize = sizeof (BoobProtect);
     Status          = gRT->GetVariable (
                              OC_BOOT_PROTECT_VARIABLE_NAME,
                              &gOcVendorVariableGuid,
                              NULL,
-                             &BootProtectSize,
-                             &BootProtect
+                             &BoobProtectSize,
+                             &BoobProtect
                              );
-    if (EFI_ERROR (Status) || (BootProtectSize != sizeof (BootProtect))) {
-      BootProtect = 0;
+    if (EFI_ERROR (Status) || (BoobProtectSize != sizeof (BoobProtect))) {
+      BoobProtect = 0;
     }
   }
 
   FwRuntime = OcDisableNvramProtection ();
 
-  if ((BootProtect & OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP) != 0) {
+  if ((BoobProtect & OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP) != 0) {
     BootOption = GetBoobstrapBootData (&BootOptionSize, &BootOptionIndex);
     if (BootOption != NULL) {
       DEBUG ((
@@ -503,13 +503,13 @@ OcDeleteVariables (
         (UINT32)BootOptionSize
         ));
     } else {
-      BootProtect = 0;
+      BoobProtect = 0;
     }
   }
 
   DeleteVariables (PreserveBoot);
 
-  if ((BootProtect & OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP) != 0) {
+  if ((BoobProtect & OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP) != 0) {
     BootOptionIndex = 1;
     Status          = gRT->SetVariable (
                              L"Boot0001",

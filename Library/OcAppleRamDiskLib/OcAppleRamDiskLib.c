@@ -494,7 +494,7 @@ OcAppleRamDiskLoadFile (
   //
   // We need a temporary buffer in lower addresses as several motherboards on APTIO IV,
   // e.g. GA-Z77P-D3 (rev. 1.1), GA-Z87X-UD4H, etc. fail to read directly to high addresses
-  // when using FAT filesystem. The original workaround to this was AvoidHighAlloc quirk.
+  // when using FAT filesystem. The original workaround to this was AvoidHighAlloc kink.
   // REF: https://github.com/acidanthera/bugtracker/issues/449
   //
   TmpBuffer = AllocatePool (BASE_4MB);

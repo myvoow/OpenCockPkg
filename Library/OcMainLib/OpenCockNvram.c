@@ -213,7 +213,7 @@ OcLoadNvramSupport (
     Storage,
     &Config->Nvram.Legacy,
     Config->Nvram.LegacyOverwrite,
-    Config->Uefi.Quirks.RequestBootVarRouting
+    Config->Uefi.Kinks.RequestBootVarRouting
     );
 
   OcDeleteNvram (Config);

@@ -12,7 +12,7 @@
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 **/
 
-#include "OpenRuntimePrivate.h"
+#include "OpenRumptimePrivate.h"
 
 #include <Guid/OcVariable.h>
 #include <Guid/GlobalVariable.h>
@@ -65,7 +65,7 @@ STATIC BOOLEAN  mInsideVarService;
 
 STATIC
 VOID
-Cr0QuirkPrologue (
+Cr0KinkPrologue (
   OUT BOOLEAN  *Ints,
   OUT BOOLEAN  *Wp,
   OUT BOOLEAN  *Ts
@@ -107,7 +107,7 @@ Cr0QuirkPrologue (
 
 STATIC
 VOID
-Cr0QuirkEpilogue (
+Cr0KinkEpilogue (
   IN BOOLEAN  Ints,
   IN BOOLEAN  Wp,
   IN BOOLEAN  Ts
@@ -255,7 +255,7 @@ WrapGetTime (
   BOOLEAN     Wp;
   BOOLEAN     Ts;
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   Status = mStoredGetTime (
              Time,
@@ -275,7 +275,7 @@ WrapGetTime (
     }
   }
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 
   return Status;
 }
@@ -292,13 +292,13 @@ WrapSetTime (
   BOOLEAN     Wp;
   BOOLEAN     Ts;
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   Status = mStoredSetTime (
              Time
              );
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 
   return Status;
 }
@@ -317,7 +317,7 @@ WrapGetWakeupTime (
   BOOLEAN     Wp;
   BOOLEAN     Ts;
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   Status = mStoredGetWakeupTime (
              Enabled,
@@ -325,7 +325,7 @@ WrapGetWakeupTime (
              Time
              );
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 
   return Status;
 }
@@ -343,14 +343,14 @@ WrapSetWakeupTime (
   BOOLEAN     Wp;
   BOOLEAN     Ts;
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   Status = mStoredSetWakeupTime (
              Enable,
              Time
              );
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 
   return Status;
 }
@@ -410,7 +410,7 @@ WrapGetVariable (
     VendorGuid   = &gOcVendorVariableGuid;
   }
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   Status = (mCustomGetVariable != NULL ? mCustomGetVariable : mStoredGetVariable)(
   VariableName,
@@ -420,7 +420,7 @@ WrapGetVariable (
   Data
   );
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 
   return Status;
 }
@@ -480,14 +480,14 @@ WrapGetNextVariableName (
     return EFI_INVALID_PARAMETER;
   }
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   //
   // In case we do not redirect, simply do nothing.
   //
   if (!gCurrentConfig->BootVariableRedirect) {
     Status = mStoredGetNextVariableName (VariableNameSize, VariableName, VendorGuid);
-    Cr0QuirkEpilogue (Ints, Wp, Ts);
+    Cr0KinkEpilogue (Ints, Wp, Ts);
     return Status;
   }
 
@@ -537,7 +537,7 @@ WrapGetNextVariableName (
             Status            = EFI_BUFFER_TOO_SMALL;
           }
 
-          Cr0QuirkEpilogue (Ints, Wp, Ts);
+          Cr0KinkEpilogue (Ints, Wp, Ts);
           return Status;
         } else {
           //
@@ -550,7 +550,7 @@ WrapGetNextVariableName (
         // At this step we cannot do anything, but let's replace error
         // with something sensible.
         //
-        Cr0QuirkEpilogue (Ints, Wp, Ts);
+        Cr0KinkEpilogue (Ints, Wp, Ts);
         return EFI_DEVICE_ERROR;
       } else if (Status == EFI_NOT_FOUND) {
         //
@@ -565,7 +565,7 @@ WrapGetNextVariableName (
         // We got EFI_UNSUPPORTED, EFI_DEVICE_ERROR or EFI_INVALID_PARAMETER.
         // Return as is.
         //
-        Cr0QuirkEpilogue (Ints, Wp, Ts);
+        Cr0KinkEpilogue (Ints, Wp, Ts);
         return Status;
       }
     }
@@ -623,7 +623,7 @@ WrapGetNextVariableName (
           Status            = EFI_BUFFER_TOO_SMALL;
         }
 
-        Cr0QuirkEpilogue (Ints, Wp, Ts);
+        Cr0KinkEpilogue (Ints, Wp, Ts);
         return Status;
       }
     } else {
@@ -637,7 +637,7 @@ WrapGetNextVariableName (
   //
   // Report this is the end.
   //
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
   return EFI_NOT_FOUND;
 }
 
@@ -720,7 +720,7 @@ WrapSetVariable (
     VendorGuid   = &gOcVendorVariableGuid;
   }
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   Status = mStoredSetVariable (
              VariableName,
@@ -730,7 +730,7 @@ WrapSetVariable (
              Data
              );
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 
   return Status;
 }
@@ -747,13 +747,13 @@ WrapGetNextHighMonotonicCount (
   BOOLEAN     Wp;
   BOOLEAN     Ts;
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   Status = mStoredGetNextHighMonotonicCount (
              Count
              );
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 
   return Status;
 }
@@ -772,7 +772,7 @@ WrapResetSystem (
   BOOLEAN  Wp;
   BOOLEAN  Ts;
 
-  Cr0QuirkPrologue (&Ints, &Wp, &Ts);
+  Cr0KinkPrologue (&Ints, &Wp, &Ts);
 
   mStoredResetSystem (
     ResetType,
@@ -781,7 +781,7 @@ WrapResetSystem (
     ResetData
     );
 
-  Cr0QuirkEpilogue (Ints, Wp, Ts);
+  Cr0KinkEpilogue (Ints, Wp, Ts);
 }
 
 STATIC

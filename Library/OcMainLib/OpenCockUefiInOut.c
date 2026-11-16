@@ -67,11 +67,11 @@ OcExitBootServicesInputHandler (
   //
 
   if (Config->Uefi.Input.TimerResolution != 0) {
-    Status = OcAppleGenericInputTimerQuirkExit ();
+    Status = OcAppleGenericInputTimerKinkExit ();
     if (EFI_ERROR (Status)) {
       DEBUG ((
         DEBUG_INFO,
-        "OC: OcAppleGenericInputTimerQuirkExit status - %r\n",
+        "OC: OcAppleGenericInputTimerKinkExit status - %r\n",
         Status
         ));
     }
@@ -117,9 +117,9 @@ OcLoadUefiInputSupport (
 
   TimerResolution = Config->Uefi.Input.TimerResolution;
   if (TimerResolution != 0) {
-    Status = OcAppleGenericInputTimerQuirkInit (TimerResolution);
+    Status = OcAppleGenericInputTimerKinkInit (TimerResolution);
     if (EFI_ERROR (Status)) {
-      DEBUG ((DEBUG_ERROR, "OC: Failed to initialize timer quirk\n"));
+      DEBUG ((DEBUG_ERROR, "OC: Failed to initialize timer kink\n"));
     } else {
       ExitBs = TRUE;
     }

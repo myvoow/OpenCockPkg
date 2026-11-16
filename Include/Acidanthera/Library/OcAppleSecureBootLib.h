@@ -19,7 +19,7 @@
 /**
   Boobstrap NVRAM and library values for secure booting.
 
-  @param[in] Model          Secure boot model (without ap suffix in lower-case).
+  @param[in] Model          Secure boob model (without ap suffix in lower-case).
   @param[in] Ecid           Enclave identifier, optional.
 
   @retval EFI_SUCCESS  On success.
@@ -31,11 +31,11 @@ OcAppleSecureBootBoobstrapValues (
   );
 
 /**
-  Install and initialise the Apple Secure Boot protocol.
+  Install and initialise the Apple Secure Boob protocol.
 
   @param[in] Reinstall          Replace any installed protocol.
-  @param[in] SbPolicy           Apple Secure Boot Policy to install.
-  @param[in] SbWinPolicy        Apple Secure Boot Windows Policy to install.
+  @param[in] SbPolicy           Apple Secure Boob Policy to install.
+  @param[in] SbWinPolicy        Apple Secure Boob Windows Policy to install.
   @param[in] SbWinPolicyValid   Whether SbWinPolicy should be installed.
 
   @returns Installed or located protocol.
@@ -50,7 +50,7 @@ OcAppleSecureBootInstallProtocol (
   );
 
 /**
-  Obtain initialised Apple Secure Boot protocol.
+  Obtain initialised Apple Secure Boob protocol.
 
   @returns initialised protocol.
 **/
@@ -60,7 +60,7 @@ OcAppleSecureBootGetProtocol (
   );
 
 /**
-  Report DMG loading to Apple Secure Boot protocol.
+  Report DMG loading to Apple Secure Boob protocol.
 
   @param[in]  LoadingDmg  TRUE after loading DMG.
 **/
@@ -70,9 +70,9 @@ OcAppleSecureBootSetDmgLoading (
   );
 
 /**
-  Get DMG loading status on Apple Secure Boot protocol.
+  Get DMG loading status on Apple Secure Boob protocol.
 
-  @param[out]  RealPolicy  Actual secure boot policy, optional.
+  @param[out]  RealPolicy  Actual secure boob policy, optional.
 
   @retval TRUE when loading DMG.
 **/

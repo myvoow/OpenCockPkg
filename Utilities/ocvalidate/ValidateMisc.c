@@ -38,17 +38,17 @@ MiscEntriesHasDuplication (
   )
 {
   //
-  // NOTE: Entries and Tools share the same constructor.
+  // NOTE: Entries and Toys share the same constructor.
   //
-  CONST OC_MISC_TOOLS_ENTRY  *MiscEntriesPrimaryEntry;
-  CONST OC_MISC_TOOLS_ENTRY  *MiscEntriesSecondaryEntry;
+  CONST OC_MISC_TOYS_ENTRY  *MiscEntriesPrimaryEntry;
+  CONST OC_MISC_TOYS_ENTRY  *MiscEntriesSecondaryEntry;
   CONST CHAR8                *MiscEntriesPrimaryArgumentsString;
   CONST CHAR8                *MiscEntriesSecondaryArgumentsString;
   CONST CHAR8                *MiscEntriesPrimaryPathString;
   CONST CHAR8                *MiscEntriesSecondaryPathString;
 
-  MiscEntriesPrimaryEntry             = *(CONST OC_MISC_TOOLS_ENTRY **)PrimaryEntry;
-  MiscEntriesSecondaryEntry           = *(CONST OC_MISC_TOOLS_ENTRY **)SecondaryEntry;
+  MiscEntriesPrimaryEntry             = *(CONST OC_MISC_TOYS_ENTRY **)PrimaryEntry;
+  MiscEntriesSecondaryEntry           = *(CONST OC_MISC_TOYS_ENTRY **)SecondaryEntry;
   MiscEntriesPrimaryArgumentsString   = OC_BLOB_GET (&MiscEntriesPrimaryEntry->Arguments);
   MiscEntriesSecondaryArgumentsString = OC_BLOB_GET (&MiscEntriesSecondaryEntry->Arguments);
   MiscEntriesPrimaryPathString        = OC_BLOB_GET (&MiscEntriesPrimaryEntry->Path);
@@ -69,7 +69,7 @@ MiscEntriesHasDuplication (
 }
 
 /**
-  Callback function to verify whether Arguments and Path are duplicated in Misc->Tools.
+  Callback function to verify whether Arguments and Path are duplicated in Misc->Toys.
 
   @param[in]  PrimaryEntry    Primary entry to be checked.
   @param[in]  SecondaryEntry  Secondary entry to be checked.
@@ -78,38 +78,38 @@ MiscEntriesHasDuplication (
 **/
 STATIC
 BOOLEAN
-MiscToolsHasDuplication (
+MiscToysHasDuplication (
   IN  CONST VOID  *PrimaryEntry,
   IN  CONST VOID  *SecondaryEntry
   )
 {
-  CONST OC_MISC_TOOLS_ENTRY  *MiscToolsPrimaryEntry;
-  CONST OC_MISC_TOOLS_ENTRY  *MiscToolsSecondaryEntry;
-  CONST CHAR8                *MiscToolsPrimaryArgumentsString;
-  CONST CHAR8                *MiscToolsSecondaryArgumentsString;
-  CONST CHAR8                *MiscToolsPrimaryPathString;
-  CONST CHAR8                *MiscToolsSecondaryPathString;
-  BOOLEAN                    MiscToolsPrimaryFullNvramAccess;
-  BOOLEAN                    MiscToolsSecondaryFullNvramAccess;
+  CONST OC_MISC_TOYS_ENTRY  *MiscToysPrimaryEntry;
+  CONST OC_MISC_TOYS_ENTRY  *MiscToysSecondaryEntry;
+  CONST CHAR8                *MiscToysPrimaryArgumentsString;
+  CONST CHAR8                *MiscToysSecondaryArgumentsString;
+  CONST CHAR8                *MiscToysPrimaryPathString;
+  CONST CHAR8                *MiscToysSecondaryPathString;
+  BOOLEAN                    MiscToysPrimaryFullNvramAccess;
+  BOOLEAN                    MiscToysSecondaryFullNvramAccess;
 
-  MiscToolsPrimaryEntry             = *(CONST OC_MISC_TOOLS_ENTRY **)PrimaryEntry;
-  MiscToolsSecondaryEntry           = *(CONST OC_MISC_TOOLS_ENTRY **)SecondaryEntry;
-  MiscToolsPrimaryArgumentsString   = OC_BLOB_GET (&MiscToolsPrimaryEntry->Arguments);
-  MiscToolsSecondaryArgumentsString = OC_BLOB_GET (&MiscToolsSecondaryEntry->Arguments);
-  MiscToolsPrimaryPathString        = OC_BLOB_GET (&MiscToolsPrimaryEntry->Path);
-  MiscToolsSecondaryPathString      = OC_BLOB_GET (&MiscToolsSecondaryEntry->Path);
-  MiscToolsPrimaryFullNvramAccess   = MiscToolsPrimaryEntry->FullNvramAccess;
-  MiscToolsSecondaryFullNvramAccess = MiscToolsSecondaryEntry->FullNvramAccess;
+  MiscToysPrimaryEntry             = *(CONST OC_MISC_TOYS_ENTRY **)PrimaryEntry;
+  MiscToysSecondaryEntry           = *(CONST OC_MISC_TOYS_ENTRY **)SecondaryEntry;
+  MiscToysPrimaryArgumentsString   = OC_BLOB_GET (&MiscToysPrimaryEntry->Arguments);
+  MiscToysSecondaryArgumentsString = OC_BLOB_GET (&MiscToysSecondaryEntry->Arguments);
+  MiscToysPrimaryPathString        = OC_BLOB_GET (&MiscToysPrimaryEntry->Path);
+  MiscToysSecondaryPathString      = OC_BLOB_GET (&MiscToysSecondaryEntry->Path);
+  MiscToysPrimaryFullNvramAccess   = MiscToysPrimaryEntry->FullNvramAccess;
+  MiscToysSecondaryFullNvramAccess = MiscToysSecondaryEntry->FullNvramAccess;
 
-  if (!MiscToolsPrimaryEntry->Enabled || !MiscToolsSecondaryEntry->Enabled) {
+  if (!MiscToysPrimaryEntry->Enabled || !MiscToysSecondaryEntry->Enabled) {
     return FALSE;
   }
 
-  if (  (AsciiStrCmp (MiscToolsPrimaryArgumentsString, MiscToolsSecondaryArgumentsString) == 0)
-     && (AsciiStrCmp (MiscToolsPrimaryPathString, MiscToolsSecondaryPathString) == 0)
-     && (MiscToolsPrimaryFullNvramAccess == MiscToolsSecondaryFullNvramAccess))
+  if (  (AsciiStrCmp (MiscToysPrimaryArgumentsString, MiscToysSecondaryArgumentsString) == 0)
+     && (AsciiStrCmp (MiscToysPrimaryPathString, MiscToysSecondaryPathString) == 0)
+     && (MiscToysPrimaryFullNvramAccess == MiscToysSecondaryFullNvramAccess))
   {
-    DEBUG ((DEBUG_WARN, "Misc->Tools->Path: %a is duplicated ", MiscToolsPrimaryPathString));
+    DEBUG ((DEBUG_WARN, "Misc->Toys->Path: %a is duplicated ", MiscToysPrimaryPathString));
     return TRUE;
   }
 
@@ -526,7 +526,7 @@ CheckMiscSecurity (
   BOOLEAN      HasVSMCKext;
   CONST CHAR8  *AsciiDmgLoading;
   UINT32       ExposeSensitiveData;
-  CONST CHAR8  *AsciiVault;
+  CONST CHAR8  *AsciiChastity;
   UINT32       ScanPolicy;
   UINT32       AllowedScanPolicy;
   CONST CHAR8  *SecureBootModel;
@@ -561,12 +561,12 @@ CheckMiscSecurity (
     ++ErrorCount;
   }
 
-  AsciiVault = OC_BLOB_GET (&Config->Misc.Security.Vault);
-  if (  (AsciiStrCmp (AsciiVault, "Optional") != 0)
-     && (AsciiStrCmp (AsciiVault, "Basic") != 0)
-     && (AsciiStrCmp (AsciiVault, "Secure") != 0))
+  AsciiChastity = OC_BLOB_GET (&Config->Misc.Security.Chastity);
+  if (  (AsciiStrCmp (AsciiChastity, "Optional") != 0)
+     && (AsciiStrCmp (AsciiChastity, "Basic") != 0)
+     && (AsciiStrCmp (AsciiChastity, "Secure") != 0))
   {
-    DEBUG ((DEBUG_WARN, "Misc->Security->Vault is borked (Can only be Optional, Basic, or Secure)!\n"));
+    DEBUG ((DEBUG_WARN, "Misc->Security->Chastity is borked (Can only be Optional, Basic, or Secure)!\n"));
     ++ErrorCount;
   }
 
@@ -710,7 +710,7 @@ CheckMiscSerial (
 
 STATIC
 UINT32
-CheckMiscTools (
+CheckMiscToys (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
@@ -725,12 +725,12 @@ CheckMiscTools (
 
   ErrorCount = 0;
 
-  for (Index = 0; Index < Config->Misc.Tools.Count; ++Index) {
-    Arguments = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Arguments);
-    Comment   = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Comment);
-    AsciiName = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Name);
-    Path      = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Path);
-    Flavour   = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Flavour);
+  for (Index = 0; Index < Config->Misc.Toys.Count; ++Index) {
+    Arguments = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Arguments);
+    Comment   = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Comment);
+    AsciiName = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Name);
+    Path      = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Path);
+    Flavour   = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Flavour);
 
     //
     // Sanitise strings.
@@ -739,12 +739,12 @@ CheckMiscTools (
     //       we use Comment sanitiser here.
     //
     if (!AsciiCommentIsLegal (Arguments)) {
-      DEBUG ((DEBUG_WARN, "Misc->Tools[%u]->Arguments contains illegal character!\n", Index));
+      DEBUG ((DEBUG_WARN, "Misc->Toys[%u]->Arguments contains illegal character!\n", Index));
       ++ErrorCount;
     }
 
     if (!AsciiCommentIsLegal (Comment)) {
-      DEBUG ((DEBUG_WARN, "Misc->Tools[%u]->Comment contains illegal character!\n", Index));
+      DEBUG ((DEBUG_WARN, "Misc->Toys[%u]->Comment contains illegal character!\n", Index));
       ++ErrorCount;
     }
 
@@ -752,14 +752,14 @@ CheckMiscTools (
     // Check the length of path relative to OC directory.
     //
     if (L_STR_LEN (OPEN_CORE_TOOL_PATH) + AsciiStrSize (Path) > OC_STORAGE_SAFE_PATH_MAX) {
-      DEBUG ((DEBUG_WARN, "Misc->Tools[%u]->Path is too long (should not exceed %u)!\n", Index, OC_STORAGE_SAFE_PATH_MAX));
+      DEBUG ((DEBUG_WARN, "Misc->Toys[%u]->Path is too long (should not exceed %u)!\n", Index, OC_STORAGE_SAFE_PATH_MAX));
       ++ErrorCount;
     }
 
     UnicodeName = AsciiStrCopyToUnicode (AsciiName, 0);
     if (UnicodeName != NULL) {
       if (!UnicodeIsFilteredString (UnicodeName, TRUE)) {
-        DEBUG ((DEBUG_WARN, "Misc->Tools[%u]->Name contains illegal character!\n", Index));
+        DEBUG ((DEBUG_WARN, "Misc->Toys[%u]->Name contains illegal character!\n", Index));
         ++ErrorCount;
       }
 
@@ -770,21 +770,21 @@ CheckMiscTools (
     // FIXME: Properly sanitise Path.
     //
     if (!AsciiCommentIsLegal (Path)) {
-      DEBUG ((DEBUG_WARN, "Misc->Tools[%u]->Path contains illegal character!\n", Index));
+      DEBUG ((DEBUG_WARN, "Misc->Toys[%u]->Path contains illegal character!\n", Index));
       ++ErrorCount;
     }
 
-    ErrorCount += ValidateFlavour ("Tools", Index, Flavour);
+    ErrorCount += ValidateFlavour ("Toys", Index, Flavour);
   }
 
   //
-  // Check duplicated entries in Tools.
+  // Check duplicated entries in Toys.
   //
   ErrorCount += FindArrayDuplication (
-                  Config->Misc.Tools.Values,
-                  Config->Misc.Tools.Count,
-                  sizeof (Config->Misc.Tools.Values[0]),
-                  MiscToolsHasDuplication
+                  Config->Misc.Toys.Values,
+                  Config->Misc.Toys.Count,
+                  sizeof (Config->Misc.Toys.Values[0]),
+                  MiscToysHasDuplication
                   );
 
   return ErrorCount;
@@ -804,7 +804,7 @@ CheckMisc (
     &CheckMiscEntries,
     &CheckMiscSecurity,
     &CheckMiscSerial,
-    &CheckMiscTools
+    &CheckMiscToys
   };
 
   DEBUG ((DEBUG_VERBOSE, "config loaded into %a!\n", __func__));

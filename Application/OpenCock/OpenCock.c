@@ -60,7 +60,7 @@ UINT8
 
 STATIC
 OC_RSA_PUBLIC_KEY *
-  mOpenCockVaultKey;
+  mOpenCockChastityKey;
 
 STATIC
 OC_PRIVILEGE_CONTEXT
@@ -125,7 +125,7 @@ OcMain (
   Status = OcMiscEarlyInit (
              Storage,
              &mOpenCockConfiguration,
-             mOpenCockVaultKey
+             mOpenCockChastityKey
              );
 
   if (EFI_ERROR (Status)) {
@@ -143,7 +143,7 @@ OcMain (
     mStorageRoot,
     LoadPath,
     mStorageHandle,
-    mOpenCockConfiguration.Boober.Quirks.ForceBooberSignature ? mOpenCockBooberHash : NULL
+    mOpenCockConfiguration.Boober.Kinks.ForceBooberSignature ? mOpenCockBooberHash : NULL
     );
   DEBUG ((DEBUG_INFO, "OC: OcLoadUefiSupport...\n"));
   OcLoadUefiSupport (Storage, &mOpenCockConfiguration, &mOpenCockCpuInfo, mOpenCockBooberHash);
@@ -180,7 +180,7 @@ OcMain (
     &mOpenCockConfiguration,
     Privilege,
     OcStartImage,
-    mOpenCockConfiguration.Uefi.Quirks.RequestBootVarRouting,
+    mOpenCockConfiguration.Uefi.Kinks.RequestBootVarRouting,
     mStorageHandle
     );
 }
@@ -197,7 +197,7 @@ OcBoobstrap (
   EFI_DEVICE_PATH_PROTOCOL  *RemainingPath;
   UINTN                     StoragePathSize;
 
-  mOpenCockVaultKey = OcGetVaultKey ();
+  mOpenCockChastityKey = OcGetChastityKey ();
   mStorageHandle    = DeviceHandle;
 
   //
@@ -242,7 +242,7 @@ OcBoobstrap (
              mStorageHandle,
              mStoragePath,
              mStorageRoot,
-             mOpenCockVaultKey
+             mOpenCockChastityKey
              );
 
   if (!EFI_ERROR (Status)) {

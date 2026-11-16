@@ -26,9 +26,9 @@
 #include <Library/OcStorageLib.h>
 #include <Library/UefiBootServicesTableLib.h>
 
-OC_STRUCTORS (OC_STORAGE_VAULT_HASH, ())
-OC_MAP_STRUCTORS (OC_STORAGE_VAULT_FILES)
-OC_STRUCTORS (OC_STORAGE_VAULT, ())
+OC_STRUCTORS (OC_STORAGE_CHASTITY_HASH, ())
+OC_MAP_STRUCTORS (OC_STORAGE_CHASTITY_FILES)
+OC_STRUCTORS (OC_STORAGE_CHASTITY, ())
 
 #pragma pack(push, 1)
 
@@ -101,73 +101,73 @@ DUMMY_BOOT_DEVICE_FILE_PATH
 
 STATIC
 OC_SCHEMA
-  mVaultFilesSchema = OC_SCHEMA_DATAF (NULL, UINT8[SHA256_DIGEST_SIZE]);
+  mChastityFilesSchema = OC_SCHEMA_DATAF (NULL, UINT8[SHA256_DIGEST_SIZE]);
 
 ///
 /// WARNING: Field list must be alpabetically ordered here!
 ///
 STATIC
 OC_SCHEMA
-  mVaultNodesSchema[] = {
-  OC_SCHEMA_MAP_IN ("Files",       OC_STORAGE_VAULT, Files,    &mVaultFilesSchema),
-  OC_SCHEMA_INTEGER_IN ("Version", OC_STORAGE_VAULT, Version),
+  mChastityNodesSchema[] = {
+  OC_SCHEMA_MAP_IN ("Files",       OC_STORAGE_CHASTITY, Files,    &mChastityFilesSchema),
+  OC_SCHEMA_INTEGER_IN ("Version", OC_STORAGE_CHASTITY, Version),
 };
 
 STATIC
 OC_SCHEMA_INFO
-  mVaultSchema = {
-  .Dict = { mVaultNodesSchema, ARRAY_SIZE (mVaultNodesSchema) }
+  mChastitySchema = {
+  .Dict = { mChastityNodesSchema, ARRAY_SIZE (mChastityNodesSchema) }
 };
 
 STATIC
 EFI_STATUS
-OcStorageInitializeVault (
+OcStorageInitializeChastity (
   IN OUT OC_STORAGE_CONTEXT  *Context,
-  IN     VOID                *Vault        OPTIONAL,
-  IN     UINT32              VaultSize,
+  IN     VOID                *Chastity        OPTIONAL,
+  IN     UINT32              ChastitySize,
   IN     OC_RSA_PUBLIC_KEY   *StorageKey   OPTIONAL,
   IN     VOID                *Signature    OPTIONAL,
   IN     UINT32              SignatureSize OPTIONAL
   )
 {
-  if ((Signature != NULL) && (Vault == NULL)) {
-    DEBUG ((DEBUG_ERROR, "OCST: Missing vault with signature\n"));
+  if ((Signature != NULL) && (Chastity == NULL)) {
+    DEBUG ((DEBUG_ERROR, "OCST: Missing chastity with signature\n"));
     return EFI_SECURITY_VIOLATION;
   }
 
-  if (Vault == NULL) {
-    DEBUG ((DEBUG_INFO, "OCST: Missing vault data, ignoring...\n"));
+  if (Chastity == NULL) {
+    DEBUG ((DEBUG_INFO, "OCST: Missing chastity data, ignoring...\n"));
     return EFI_SUCCESS;
   }
 
   if (Signature != NULL) {
     ASSERT (StorageKey != NULL);
 
-    if (!RsaVerifySigDataFromKeyDynalloc (StorageKey, Signature, SignatureSize, Vault, VaultSize, OcSigHashTypeSha256)) {
-      DEBUG ((DEBUG_ERROR, "OCST: Invalid vault signature\n"));
+    if (!RsaVerifySigDataFromKeyDynalloc (StorageKey, Signature, SignatureSize, Chastity, ChastitySize, OcSigHashTypeSha256)) {
+      DEBUG ((DEBUG_ERROR, "OCST: Invalid chastity signature\n"));
       return EFI_SECURITY_VIOLATION;
     }
   }
 
-  OC_STORAGE_VAULT_CONSTRUCT (&Context->Vault, sizeof (Context->Vault));
-  if (!ParseSerialized (&Context->Vault, &mVaultSchema, Vault, VaultSize, NULL)) {
-    OC_STORAGE_VAULT_DESTRUCT (&Context->Vault, sizeof (Context->Vault));
-    DEBUG ((DEBUG_ERROR, "OCST: Invalid vault data\n"));
+  OC_STORAGE_CHASTITY_CONSTRUCT (&Context->Chastity, sizeof (Context->Chastity));
+  if (!ParseSerialized (&Context->Chastity, &mChastitySchema, Chastity, ChastitySize, NULL)) {
+    OC_STORAGE_CHASTITY_DESTRUCT (&Context->Chastity, sizeof (Context->Chastity));
+    DEBUG ((DEBUG_ERROR, "OCST: Invalid chastity data\n"));
     return EFI_INVALID_PARAMETER;
   }
 
-  if (Context->Vault.Version != OC_STORAGE_VAULT_VERSION) {
-    OC_STORAGE_VAULT_DESTRUCT (&Context->Vault, sizeof (Context->Vault));
+  if (Context->Chastity.Version != OC_STORAGE_CHASTITY_VERSION) {
+    OC_STORAGE_CHASTITY_DESTRUCT (&Context->Chastity, sizeof (Context->Chastity));
     DEBUG ((
       DEBUG_ERROR,
-      "OCST: Unsupported vault data version %u vs %u\n",
-      Context->Vault.Version,
-      OC_STORAGE_VAULT_VERSION
+      "OCST: Unsupported chastity data version %u vs %u\n",
+      Context->Chastity.Version,
+      OC_STORAGE_CHASTITY_VERSION
       ));
     return EFI_UNSUPPORTED;
   }
 
-  Context->HasVault = TRUE;
+  Context->HasChastity = TRUE;
 
   return EFI_SUCCESS;
 }
@@ -181,30 +181,30 @@ OcStorageGetDigest (
 {
   UINT32  Index;
   UINTN   StrIndex;
-  CHAR8   *VaultFilePath;
+  CHAR8   *ChastityFilePath;
   UINTN   FilenameSize;
 
-  if (!Context->HasVault) {
+  if (!Context->HasChastity) {
     return NULL;
   }
 
   FilenameSize = StrLen (Filename) + 1;
 
-  for (Index = 0; Index < Context->Vault.Files.Count; ++Index) {
-    if (Context->Vault.Files.Keys[Index]->Size != (UINT32)FilenameSize) {
+  for (Index = 0; Index < Context->Chastity.Files.Count; ++Index) {
+    if (Context->Chastity.Files.Keys[Index]->Size != (UINT32)FilenameSize) {
       continue;
     }
 
-    VaultFilePath = OC_BLOB_GET (Context->Vault.Files.Keys[Index]);
+    ChastityFilePath = OC_BLOB_GET (Context->Chastity.Files.Keys[Index]);
 
     for (StrIndex = 0; StrIndex < FilenameSize; ++StrIndex) {
-      if (Filename[StrIndex] != VaultFilePath[StrIndex]) {
+      if (Filename[StrIndex] != ChastityFilePath[StrIndex]) {
         break;
       }
     }
 
     if (StrIndex == FilenameSize) {
-      return &Context->Vault.Files.Values[Index]->Hash[0];
+      return &Context->Chastity.Files.Values[Index]->Hash[0];
     }
   }
 
@@ -223,7 +223,7 @@ OcStorageInitFromFs (
 {
   EFI_STATUS         Status;
   EFI_FILE_PROTOCOL  *RootVolume;
-  VOID               *Vault;
+  VOID               *Chastity;
   VOID               *Signature;
   UINT32             DataSize;
   UINT32             SignatureSize;
@@ -262,12 +262,12 @@ OcStorageInitFromFs (
   if (StorageKey) {
     Signature = OcStorageReadFileUnicode (
                   Context,
-                  OC_STORAGE_VAULT_SIGNATURE_PATH,
+                  OC_STORAGE_CHASTITY_SIGNATURE_PATH,
                   &SignatureSize
                   );
 
     if (Signature == NULL) {
-      DEBUG ((DEBUG_ERROR, "OCS: Missing vault signature\n"));
+      DEBUG ((DEBUG_ERROR, "OCS: Missing chastity signature\n"));
       OcStorageFree (Context);
       return EFI_SECURITY_VIOLATION;
     }
@@ -276,16 +276,16 @@ OcStorageInitFromFs (
   }
 
   DataSize = 0;
-  Vault    = OcStorageReadFileUnicode (
+  Chastity    = OcStorageReadFileUnicode (
                Context,
-               OC_STORAGE_VAULT_PATH,
+               OC_STORAGE_CHASTITY_PATH,
                &DataSize
                );
 
-  Status = OcStorageInitializeVault (Context, Vault, DataSize, StorageKey, Signature, SignatureSize);
+  Status = OcStorageInitializeChastity (Context, Chastity, DataSize, StorageKey, Signature, SignatureSize);
 
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_INFO, "OCST: Vault init failure %p (%u) - %r\n", Vault, DataSize, Status));
+    DEBUG ((DEBUG_INFO, "OCST: Chastity init failure %p (%u) - %r\n", Chastity, DataSize, Status));
   }
 
   gBS->InstallProtocolInterface (
@@ -304,8 +304,8 @@ OcStorageInitFromFs (
     FreePool (Signature);
   }
 
-  if (Vault != NULL) {
-    FreePool (Vault);
+  if (Chastity != NULL) {
+    FreePool (Chastity);
   }
 
   return Status;
@@ -330,9 +330,9 @@ OcStorageFree (
     Context->Storage = NULL;
   }
 
-  if (Context->HasVault) {
-    OC_STORAGE_VAULT_DESTRUCT (&Context->Vault, sizeof (Context->Vault));
-    Context->HasVault = FALSE;
+  if (Context->HasChastity) {
+    OC_STORAGE_CHASTITY_DESTRUCT (&Context->Chastity, sizeof (Context->Chastity));
+    Context->HasChastity = FALSE;
   }
 }
 
@@ -344,7 +344,7 @@ OcStorageExistsFileUnicode (
 {
   EFI_STATUS         Status;
   EFI_FILE_PROTOCOL  *File;
-  UINT8              *VaultDigest;
+  UINT8              *ChastityDigest;
 
   //
   // Using this API with empty filename is also not allowed.
@@ -353,9 +353,9 @@ OcStorageExistsFileUnicode (
   ASSERT (FilePath != NULL);
   ASSERT (StrLen (FilePath) > 0);
 
-  VaultDigest = OcStorageGetDigest (Context, FilePath);
+  ChastityDigest = OcStorageGetDigest (Context, FilePath);
 
-  if (VaultDigest != NULL) {
+  if (ChastityDigest != NULL) {
     return TRUE;
   }
 
@@ -390,7 +390,7 @@ OcStorageReadFileUnicode (
   EFI_FILE_PROTOCOL  *File;
   UINT32             Size;
   UINT8              *FileBuffer;
-  UINT8              *VaultDigest;
+  UINT8              *ChastityDigest;
   UINT8              FileDigest[SHA256_DIGEST_SIZE];
 
   //
@@ -400,10 +400,10 @@ OcStorageReadFileUnicode (
   ASSERT (FilePath != NULL);
   ASSERT (StrLen (FilePath) > 0);
 
-  VaultDigest = OcStorageGetDigest (Context, FilePath);
+  ChastityDigest = OcStorageGetDigest (Context, FilePath);
 
-  if (Context->HasVault && (VaultDigest == NULL)) {
-    DEBUG ((DEBUG_ERROR, "OCST: Aborting %s file access not present in vault\n", FilePath));
+  if (Context->HasChastity && (ChastityDigest == NULL)) {
+    DEBUG ((DEBUG_ERROR, "OCST: Aborting %s file access not present in chastity\n", FilePath));
     return NULL;
   }
 
@@ -445,9 +445,9 @@ OcStorageReadFileUnicode (
     return NULL;
   }
 
-  if (VaultDigest != 0) {
+  if (ChastityDigest != 0) {
     Sha256 (FileDigest, FileBuffer, Size);
-    if (CompareMem (FileDigest, VaultDigest, SHA256_DIGEST_SIZE) != 0) {
+    if (CompareMem (FileDigest, ChastityDigest, SHA256_DIGEST_SIZE) != 0) {
       DEBUG ((DEBUG_ERROR, "OCST: Aborting corrupted %s file access\n", FilePath));
       FreePool (FileBuffer);
       return NULL;

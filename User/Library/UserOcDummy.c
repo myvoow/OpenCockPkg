@@ -50,9 +50,9 @@ CachelessContextAddPatch (
 }
 
 EFI_STATUS
-CachelessContextAddQuirk (
+CachelessContextAddKink (
   IN OUT CACHELESS_CONTEXT  *Context,
-  IN     KERNEL_QUIRK_NAME  Quirk
+  IN     KERNEL_KINK_NAME  Kink
   )
 {
   ASSERT (FALSE);

@@ -286,140 +286,140 @@ ApplyKextPatches (
     FailedToProcess = TRUE;
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkAppleCpuPmCfgLock, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkAppleCpuPmCfgLock, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkAppleCpuPmCfgLock - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkAppleCpuPmCfgLock - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkAppleCpuPmCfgLock\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkAppleCpuPmCfgLock\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkCustomSmbiosGuid1, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkCustomSmbiosGuid1, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkCustomSmbiosGuid1 - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkCustomSmbiosGuid1 - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkCustomSmbiosGuid1\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkCustomSmbiosGuid1\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkCustomSmbiosGuid2, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkCustomSmbiosGuid2, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkCustomSmbiosGuid2 - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkCustomSmbiosGuid2 - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkCustomSmbiosGuid2\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkCustomSmbiosGuid2\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkDisableIoMapper, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkDisableIoMapper, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkDisableIoMapper - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkDisableIoMapper - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkDisableIoMapper\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkDisableIoMapper\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkDisableIoMapperMapping, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkDisableIoMapperMapping, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkDisableIoMapperMapping - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkDisableIoMapperMapping - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkDisableIoMapperMapping\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkDisableIoMapperMapping\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkDisableRtcChecksum, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkDisableRtcChecksum, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkDisableRtcChecksum - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkDisableRtcChecksum - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkDisableRtcChecksum\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkDisableRtcChecksum\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkDummyPowerManagement, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkDummyPowerManagement, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkDummyPowerManagement - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkDummyPowerManagement - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkDummyPowerManagement\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkDummyPowerManagement\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkExtendBTFeatureFlags, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkExtendBTFeatureFlags, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkExtendBTFeatureFlags - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkExtendBTFeatureFlags - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkExtendBTFeatureFlags\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkExtendBTFeatureFlags\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkExternalDiskIcons, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkExternalDiskIcons, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkExternalDiskIcons - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkExternalDiskIcons - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkExternalDiskIcons\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkExternalDiskIcons\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkForceAquantiaEthernet, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkForceAquantiaEthernet, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkForceAquantiaEthernet - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkForceAquantiaEthernet - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkForceAquantiaEthernet\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkForceAquantiaEthernet\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkForceSecureBootScheme, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkForceSecureBootScheme, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkForceSecureBootScheme - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkForceSecureBootScheme - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkForceSecureBootScheme\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkForceSecureBootScheme\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkIncreasePciBarSize, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkIncreasePciBarSize, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkIncreasePciBarSize - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkIncreasePciBarSize - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkIncreasePciBarSize\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkIncreasePciBarSize\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkSetApfsTrimTimeout, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkSetApfsTrimTimeout, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkSetApfsTrimTimeout - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkSetApfsTrimTimeout - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkSetApfsTrimTimeout\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkSetApfsTrimTimeout\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkThirdPartyDrives, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkThirdPartyDrives, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkThirdPartyDrives - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkThirdPartyDrives - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkThirdPartyDrives\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkThirdPartyDrives\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkXhciPortLimit1, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkXhciPortLimit1, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkXhciPortLimit1 - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkXhciPortLimit1 - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkXhciPortLimit1\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkXhciPortLimit1\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkXhciPortLimit2, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkXhciPortLimit2, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkXhciPortLimit2 - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkXhciPortLimit2 - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkXhciPortLimit2\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkXhciPortLimit2\n"));
   }
 
-  Status = PrelinkedContextApplyQuirk (Context, KernelQuirkXhciPortLimit3, KernelVersion);
+  Status = PrelinkedContextApplyKink (Context, KernelKinkXhciPortLimit3, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelQuirkXhciPortLimit3 - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] Failed to apply KernelKinkXhciPortLimit3 - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] Success KernelQuirkXhciPortLimit3\n"));
+    DEBUG ((DEBUG_WARN, "[OK] Success KernelKinkXhciPortLimit3\n"));
   }
 }
 
@@ -471,35 +471,35 @@ ApplyKernelPatches (
     DEBUG ((DEBUG_WARN, "[OK] CPUID kernel patch\n"));
   }
 
-  Status = KernelApplyQuirk (KernelQuirkAppleXcpmCfgLock, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkAppleXcpmCfgLock, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkAppleXcpmCfgLock - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkAppleXcpmCfgLock - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] KernelQuirkAppleXcpmCfgLock patch\n"));
+    DEBUG ((DEBUG_WARN, "[OK] KernelKinkAppleXcpmCfgLock patch\n"));
   }
 
-  Status = KernelApplyQuirk (KernelQuirkAppleXcpmExtraMsrs, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkAppleXcpmExtraMsrs, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkAppleXcpmExtraMsrs - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkAppleXcpmExtraMsrs - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] KernelQuirkAppleXcpmExtraMsrs patch\n"));
+    DEBUG ((DEBUG_WARN, "[OK] KernelKinkAppleXcpmExtraMsrs patch\n"));
   }
 
-  Status = KernelApplyQuirk (KernelQuirkAppleXcpmForceBoost, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkAppleXcpmForceBoost, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkAppleXcpmForceBoost - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkAppleXcpmForceBoost - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] KernelQuirkAppleXcpmForceBoost patch\n"));
+    DEBUG ((DEBUG_WARN, "[OK] KernelKinkAppleXcpmForceBoost patch\n"));
   }
 
   UINTN   RegisterBasePmio = 0x2008;
   UINT32  RegisterStride   = 4;
 
   PatchSetPciSerialDevice (RegisterBasePmio, RegisterStride);
-  Status = KernelApplyQuirk (KernelQuirkCustomPciSerialDevice, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkCustomPciSerialDevice, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
     DEBUG ((DEBUG_WARN, "[FAIL] CustomPciSerialDevice - %r\n", Status));
     FailedToProcess = TRUE;
@@ -507,48 +507,48 @@ ApplyKernelPatches (
     DEBUG ((DEBUG_WARN, "[OK] CustomPciSerialDevice patch\n"));
   }
 
-  Status = KernelApplyQuirk (KernelQuirkSegmentJettison, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkSegmentJettison, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkSegmentJettison - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkSegmentJettison - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] KernelQuirkSegmentJettison patch\n"));
+    DEBUG ((DEBUG_WARN, "[OK] KernelKinkSegmentJettison patch\n"));
   }
 
-  Status = KernelApplyQuirk (KernelQuirkLapicKernelPanic, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkLapicKernelPanic, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkLapicKernelPanic - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkLapicKernelPanic - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] KernelQuirkLapicKernelPanic patch\n"));
+    DEBUG ((DEBUG_WARN, "[OK] KernelKinkLapicKernelPanic patch\n"));
   }
 
   //
   // This is not for modern systems. Commenting out.
   //
   //
-  // Status = KernelApplyQuirk (KernelQuirkLegacyCommpage, &Patcher, KernelVersion);
+  // Status = KernelApplyKink (KernelKinkLegacyCommpage, &Patcher, KernelVersion);
   // if (EFI_ERROR (Status)) {
-  //   DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkLegacyCommpage - %r\n", Status));
+  //   DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkLegacyCommpage - %r\n", Status));
   //   FailedToProcess = TRUE;
   // } else {
-  //   DEBUG ((DEBUG_WARN, "[OK] KernelQuirkLegacyCommpage patch\n"));
+  //   DEBUG ((DEBUG_WARN, "[OK] KernelKinkLegacyCommpage patch\n"));
   // }
 
-  Status = KernelApplyQuirk (KernelQuirkPanicNoKextDump, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkPanicNoKextDump, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkPanicNoKextDump - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkPanicNoKextDump - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] KernelQuirkPanicNoKextDump patch\n"));
+    DEBUG ((DEBUG_WARN, "[OK] KernelKinkPanicNoKextDump patch\n"));
   }
 
-  Status = KernelApplyQuirk (KernelQuirkPowerTimeoutKernelPanic, &Patcher, KernelVersion);
+  Status = KernelApplyKink (KernelKinkPowerTimeoutKernelPanic, &Patcher, KernelVersion);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "[FAIL] KernelQuirkPowerTimeoutKernelPanic - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "[FAIL] KernelKinkPowerTimeoutKernelPanic - %r\n", Status));
     FailedToProcess = TRUE;
   } else {
-    DEBUG ((DEBUG_WARN, "[OK] KernelQuirkPowerTimeoutKernelPanic patch\n"));
+    DEBUG ((DEBUG_WARN, "[OK] KernelKinkPowerTimeoutKernelPanic patch\n"));
   }
 }
 

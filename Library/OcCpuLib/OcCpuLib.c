@@ -346,7 +346,7 @@ ScanIntelFSBFrequency (
   SetMaxBusRatioAndMaxBusRatioDiv (CpuInfo, &MaxBusRatio, &MaxBusRatioDiv);
 
   //
-  // There may be some quirks with virtual CPUs (VMware is fine).
+  // There may be some kinks with virtual CPUs (VMware is fine).
   // Formerly we checked Cpu->MinBusRatio > 0, and MaxBusRatio falls back to 1 if it is 0.
   //
   if (CpuInfo->CPUFrequency > 0) {

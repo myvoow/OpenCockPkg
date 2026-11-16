@@ -439,15 +439,15 @@ EFI_STATUS
 OcMiscEarlyInit (
   IN  OC_STORAGE_CONTEXT  *Storage,
   OUT OC_GLOBAL_CONFIG    *Config,
-  IN  OC_RSA_PUBLIC_KEY   *VaultKey  OPTIONAL
+  IN  OC_RSA_PUBLIC_KEY   *ChastityKey  OPTIONAL
   )
 {
   EFI_STATUS      Status;
   CHAR8           *ConfigData;
   UINT32          ConfigDataSize;
   EFI_TIME        BootTime;
-  CONST CHAR8     *AsciiVault;
-  OCS_VAULT_MODE  Vault;
+  CONST CHAR8     *AsciiChastity;
+  OCS_CHASTITY_MODE  Chastity;
   UINTN           PciDeviceInfoSize;
 
   ConfigData = OcStorageReadFileUnicode (
@@ -473,24 +473,24 @@ OcMiscEarlyInit (
     return EFI_UNSUPPORTED; ///< Should be unreachable.
   }
 
-  Status = OcShimRetainProtocol (Config->Uefi.Quirks.ShimRetainProtocol);
+  Status = OcShimRetainProtocol (Config->Uefi.Kinks.ShimRetainProtocol);
   if (EFI_ERROR (Status)) {
     DEBUG ((DEBUG_WARN, "OC: Failed to set %g:%s\n", &gShimLockGuid, SHIM_RETAIN_PROTOCOL));
   }
 
   OcLoadDrivers (Storage, Config, NULL, TRUE);
 
-  OcVariableInit (Config->Uefi.Quirks.ForceOcWriteFlash);
+  OcVariableInit (Config->Uefi.Kinks.ForceOcWriteFlash);
 
-  AsciiVault = OC_BLOB_GET (&Config->Misc.Security.Vault);
-  if (AsciiStrCmp (AsciiVault, "Secure") == 0) {
-    Vault = OcsVaultSecure;
-  } else if (AsciiStrCmp (AsciiVault, "Optional") == 0) {
-    Vault = OcsVaultOptional;
-  } else if (AsciiStrCmp (AsciiVault, "Basic") == 0) {
-    Vault = OcsVaultBasic;
+  AsciiChastity = OC_BLOB_GET (&Config->Misc.Security.Chastity);
+  if (AsciiStrCmp (AsciiChastity, "Secure") == 0) {
+    Chastity = OcsChastitySecure;
+  } else if (AsciiStrCmp (AsciiChastity, "Optional") == 0) {
+    Chastity = OcsChastityOptional;
+  } else if (AsciiStrCmp (AsciiChastity, "Basic") == 0) {
+    Chastity = OcsChastityBasic;
   } else {
-    DEBUG ((DEBUG_ERROR, "OC: Invalid Vault mode: %a\n", AsciiVault));
+    DEBUG ((DEBUG_ERROR, "OC: Invalid Chastity mode: %a\n", AsciiChastity));
     CpuDeadLoop ();
     return EFI_UNSUPPORTED; ///< Should be unreachable.
   }
@@ -498,14 +498,14 @@ OcMiscEarlyInit (
   //
   // Sanity check that the configuration is adequate.
   //
-  if (!Storage->HasVault && (Vault >= OcsVaultBasic)) {
-    DEBUG ((DEBUG_ERROR, "OC: Configuration requires vault but no vault provided!\n"));
+  if (!Storage->HasChastity && (Chastity >= OcsChastityBasic)) {
+    DEBUG ((DEBUG_ERROR, "OC: Configuration requires chastity but no chastity provided!\n"));
     CpuDeadLoop ();
     return EFI_SECURITY_VIOLATION; ///< Should be unreachable.
   }
 
-  if ((VaultKey == NULL) && (Vault >= OcsVaultSecure)) {
-    DEBUG ((DEBUG_ERROR, "OC: Configuration requires signed vault but no public key provided!\n"));
+  if ((ChastityKey == NULL) && (Chastity >= OcsChastitySecure)) {
+    DEBUG ((DEBUG_ERROR, "OC: Configuration requires signed chastity but no public key provided!\n"));
     CpuDeadLoop ();
     return EFI_SECURITY_VIOLATION; ///< Should be unreachable.
   }
@@ -560,9 +560,9 @@ OcMiscEarlyInit (
     DEBUG_INFO,
     "OC: OpenCock %a is loading in %a mode (%d/%d)...\n",
     OcMiscGetVersionString (),
-    AsciiVault,
-    Storage->HasVault,
-    VaultKey != NULL
+    AsciiChastity,
+    Storage->HasChastity,
+    ChastityKey != NULL
     ));
 
   Status = gRT->GetTime (&BootTime, NULL);
@@ -589,13 +589,13 @@ OcMiscEarlyInit (
 }
 
 /**
-  Generates boobstrap path according to the BootProtect mode.
+  Generates boobstrap path according to the BoobProtect mode.
 
   @param[in]  RootPath      Root load path.
   @param[in]  LauncherPath  Launcher path to write, optional.
   @param[out] MatchSuffix   Match suffix to optimise lookup.
 
-  @returns  BootProtect bitmask.
+  @returns  BoobProtect bitmask.
 **/
 STATIC
 CHAR16 *
@@ -653,7 +653,7 @@ OcMiscMiddleInit (
   CONST CHAR16                     *MatchSuffix;
   VOID                             *LauncherData;
   UINT32                           LauncherSize;
-  UINT32                           BootProtectFlag;
+  UINT32                           BoobProtectFlag;
   BOOLEAN                          HasFullLauncher;
   BOOLEAN                          HasShortLauncher;
   BOOLEAN                          HasSystemLauncher;
@@ -662,7 +662,7 @@ OcMiscMiddleInit (
     OcStoreLoadPath (LoadPath);
   }
 
-  BootProtectFlag = 0;
+  BoobProtectFlag = 0;
   LauncherOption  = OC_BLOB_GET (&Config->Misc.Boot.LauncherOption);
   LauncherPath    = OC_BLOB_GET (&Config->Misc.Boot.LauncherPath);
   DEBUG ((
@@ -694,11 +694,11 @@ OcMiscMiddleInit (
         MatchSuffix,
         StrLen (MatchSuffix)
         );
-      BootProtectFlag = OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP;
+      BoobProtectFlag = OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP;
     }
 
     //
-    // Note: This technically is a TOCTOU, but no Macs support Secure Boot with OC anyway.
+    // Note: This technically is a TOCTOU, but no Macs support Secure Boob with OC anyway.
     //
     if (Signature != NULL) {
       Status = gBS->HandleProtocol (
@@ -733,8 +733,8 @@ OcMiscMiddleInit (
   OcSetSystemVariable (
     OC_BOOT_PROTECT_VARIABLE_NAME,
     OPEN_CORE_INT_NVRAM_ATTR,
-    sizeof (BootProtectFlag),
-    &BootProtectFlag,
+    sizeof (BoobProtectFlag),
+    &BoobProtectFlag,
     NULL
     );
 }
@@ -883,7 +883,7 @@ OcMiscBoot (
   //
   if (!BaseOverflowMulAddUN (
          sizeof (OC_PICKER_ENTRY),
-         Config->Misc.Entries.Count + Config->Misc.Tools.Count,
+         Config->Misc.Entries.Count + Config->Misc.Toys.Count,
          sizeof (OC_PICKER_CONTEXT),
          &ContextSize
          ))
@@ -1007,17 +1007,17 @@ OcMiscBoot (
   // Due to the file size and sanity guarantees OcXmlLib makes,
   // EntryIndex cannot overflow.
   //
-  for (Index = 0; Index < Config->Misc.Tools.Count; ++Index) {
-    if (Config->Misc.Tools.Values[Index]->Enabled) {
-      Context->CustomEntries[EntryIndex].Name            = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Name);
-      Context->CustomEntries[EntryIndex].Path            = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Path);
-      Context->CustomEntries[EntryIndex].Arguments       = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Arguments);
-      Context->CustomEntries[EntryIndex].Flavour         = OC_BLOB_GET (&Config->Misc.Tools.Values[Index]->Flavour);
-      Context->CustomEntries[EntryIndex].Auxiliary       = Config->Misc.Tools.Values[Index]->Auxiliary;
+  for (Index = 0; Index < Config->Misc.Toys.Count; ++Index) {
+    if (Config->Misc.Toys.Values[Index]->Enabled) {
+      Context->CustomEntries[EntryIndex].Name            = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Name);
+      Context->CustomEntries[EntryIndex].Path            = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Path);
+      Context->CustomEntries[EntryIndex].Arguments       = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Arguments);
+      Context->CustomEntries[EntryIndex].Flavour         = OC_BLOB_GET (&Config->Misc.Toys.Values[Index]->Flavour);
+      Context->CustomEntries[EntryIndex].Auxiliary       = Config->Misc.Toys.Values[Index]->Auxiliary;
       Context->CustomEntries[EntryIndex].Tool            = TRUE;
-      Context->CustomEntries[EntryIndex].TextMode        = Config->Misc.Tools.Values[Index]->TextMode;
-      Context->CustomEntries[EntryIndex].RealPath        = Config->Misc.Tools.Values[Index]->RealPath;
-      Context->CustomEntries[EntryIndex].FullNvramAccess = Config->Misc.Tools.Values[Index]->FullNvramAccess;
+      Context->CustomEntries[EntryIndex].TextMode        = Config->Misc.Toys.Values[Index]->TextMode;
+      Context->CustomEntries[EntryIndex].RealPath        = Config->Misc.Toys.Values[Index]->RealPath;
+      Context->CustomEntries[EntryIndex].FullNvramAccess = Config->Misc.Toys.Values[Index]->FullNvramAccess;
       ++EntryIndex;
     }
   }
@@ -1050,7 +1050,7 @@ OcMiscBoot (
 }
 
 VOID
-OcMiscUefiQuirksLoaded (
+OcMiscUefiKinksLoaded (
   IN OC_GLOBAL_CONFIG  *Config
   )
 {

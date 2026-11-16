@@ -125,7 +125,7 @@ package() {
     "EFI/OC/ACPI"
     "EFI/OC/Drivers"
     "EFI/OC/Kexts"
-    "EFI/OC/Tools"
+    "EFI/OC/Toys"
     "EFI/OC/Resources/Audio"
     "EFI/OC/Resources/Font"
     "EFI/OC/Resources/Image"
@@ -172,11 +172,11 @@ package() {
       "ControlMsrE2.efi"
       )
     for efiTool in "${efiTools[@]}"; do
-      cp "${arch}/${efiTool}" "${dstdir}/${arch}/EFI/OC/Tools"/ || exit 1
+      cp "${arch}/${efiTool}" "${dstdir}/${arch}/EFI/OC/Toys"/ || exit 1
     done
 
-    # Special case: OpenShell.efi
-    cp "${arch}/Shell.efi" "${dstdir}/${arch}/EFI/OC/Tools/OpenShell.efi" || exit 1
+    # Special case: OpenSmell.efi
+    cp "${arch}/Shell.efi" "${dstdir}/${arch}/EFI/OC/Toys/OpenSmell.efi" || exit 1
 
     efiDrivers=(
       "ArpDxe.efi"
@@ -202,12 +202,12 @@ package() {
       "NvmExpressDxe.efi"
       "OpenCanopy.efi"
       "OpenHfsPlus.efi"
-      "OpenLegacyBoot.efi"
-      "OpenLinuxBoot.efi"
-      "OpenNetworkBoot.efi"
+      "OpenLegacyBoob.efi"
+      "OpenLinuxBoob.efi"
+      "OpenNetworkBoob.efi"
       "OpenNtfsDxe.efi"
       "OpenPartitionDxe.efi"
-      "OpenRuntime.efi"
+      "OpenRumptime.efi"
       "OpenUsbKbDxe.efi"
       "OpenVariableRuntimeDxe.efi"
       "Ps2KeyboardDxe.efi"
@@ -259,7 +259,7 @@ package() {
 
   utilScpts=(
     "LegacyBoot"
-    "CreateVault"
+    "CreateChastity"
     "FindSerialPort"
     "macrecovery"
     "kpdescribe"
@@ -283,26 +283,26 @@ package() {
     cp "${selfdir}/Utilities/LogoutHook/${file}" "${dstdir}/Utilities/LogoutHook"/ || exit 1
   done
 
-  # Copy OpenDuetPkg boober.
+  # Copy OpenThreesomePkg boober.
   for arch in "${ARCHS[@]}"; do
     local tgt
     local boober
     local boober_blockio
     tgt="$(basename "$(pwd)")"
-    boober="$(pwd)/../../OpenDuetPkg/${tgt}/${arch}/boot"
-    boober_blockio="$(pwd)/../../OpenDuetPkg/${tgt}/${arch}/boot-blockio"
+    boober="$(pwd)/../../OpenThreesomePkg/${tgt}/${arch}/boot"
+    boober_blockio="$(pwd)/../../OpenThreesomePkg/${tgt}/${arch}/boot-blockio"
 
     if [ -f "${boober}" ]; then
-      echo "Copying OpenDuetPkg boot file from ${boober}..."
+      echo "Copying OpenThreesomePkg boot file from ${boober}..."
       cp "${boober}" "${dstdir}/Utilities/LegacyBoot/boot${arch}" || exit 1
     else
-      echo "Failed to find OpenDuetPkg at ${boober}!"
+      echo "Failed to find OpenThreesomePkg at ${boober}!"
     fi
     if [ -f "${boober_blockio}" ]; then
-      echo "Copying OpenDuetPkg BlockIO boot file from ${boober_blockio}..."
+      echo "Copying OpenThreesomePkg BlockIO boot file from ${boober_blockio}..."
       cp "${boober_blockio}" "${dstdir}/Utilities/LegacyBoot/boot${arch}-blockio" || exit 1
     else
-      echo "Failed to find OpenDuetPkg BlockIO at ${boober_blockio}!"
+      echo "Failed to find OpenThreesomePkg BlockIO at ${boober_blockio}!"
     fi
   done
 

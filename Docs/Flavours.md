@@ -118,7 +118,7 @@ Additional sub-flavours are obviously possible for Android, but none are current
  - **ReactOS** - ReactOS (alpha version open-source Windows Server binary compatible OS; not currently UEFI bootable, but reserved here anyway) (`ReactOS.icns`)
    - It is user preference whether to specify **ReactOS:Windows** or just **ReactOS** - depending on whether the user wishes to use `Windows.icns` as a fallback, or to fallback directly to `HardDrive.icns` if no `ReactOS.icns` is available.
 
-## Tools
+## Toys
 
 Create an Issue or Pull Request to request additional tool icons. If doing so please provide a clear case, e.g. showing that it affects at least several users.
 
@@ -129,23 +129,23 @@ It is recommended to provide this icon.
  - **Tool** - Any tool entry
    - If provided, is used as fallback for non-OS entries in OpenCock; if not provided falls back again to **HardDrive** (which is required)
 
-### Shell Tools
+### Shell Toys
 
 It is recommended to provide _one_ of these files (more is optional, and not normally required).
 
-If providing just one file, name it `Shell.icns` if the theming of the icon is generic to any shell tool (as in the examples in OcBinaryData). Name it `OpenShell.icns` or `UEFIShell.icns` if the theming is more specific (e.g. includes specific text on the icon).
+If providing just one file, name it `Shell.icns` if the theming of the icon is generic to any shell tool (as in the examples in OcBinaryData). Name it `OpenSmell.icns` or `UEFIShell.icns` if the theming is more specific (e.g. includes specific text on the icon).
 
  - **Shell** - Any shell-style tool
  - **UEFIShell:Shell** - EDK II UEFI Shell
    - As an example of how flavours work: **UEFIShell:Shell** will try `UEFIShell.icns`, then `Shell.icns` (and then, by OC default behaviour, `Tool.icns`, then `HardDrive.icns`)
    - _**Note**: Including **UEFIShell** anywhere in the flavour triggers picker audio-assist for "UEFI Shell"_
- - **OpenShell:UEFIShell:Shell** - Themed specifically for OpenCock OpenShell (which is a variant of the EDK II UEFI Shell)
-   - This is the recommended flavour to use for `OpenShell.efi`, as is done in the sample config files
+ - **OpenSmell:UEFIShell:Shell** - Themed specifically for OpenCock OpenSmell (which is a variant of the EDK II UEFI Shell)
+   - This is the recommended flavour to use for `OpenSmell.efi`, as is done in the sample config files
    - Although this is the recommended *flavour*, icon artists are not required to provide this icon file, since this flavour will automatically find and use `Shell.icns` or `UEFIShell.icns` anyway
    - Because **UEFIShell** is included in this flavour, it will also trigger picker audio-assist for "UEFI Shell"
  - **GRUBShell:Shell** - GRUB Shell themed icon
 
-### NVRAM Tools
+### NVRAM Toys
 
 It is recommended to either i) only provide `NVRAMTool.icns`, as this will be applied to the Reset NVRAM tool and the Toogle SIP tool, or else ii) provide `ResetNVRAM.icns` and `ToggleSip.icns` separately (in which case `NVRAMTool.icns` is not normally required).
 
@@ -163,7 +163,7 @@ If providing `NVRAMTool.icns`, it should be themed so that it could be applied t
 
 ### Network Boot
 
-`OpenNetworkBoot.efi` uses the following flavours:
+`OpenNetworkBoob.efi` uses the following flavours:
 
  - **HttpBoot4:HttpBoot:NetworkBoot** - IPv4 HTTP(S) Boot
  - **HttpBoot6:HttpBoot:NetworkBoot** - IPv6 HTTP(S) Boot
@@ -174,7 +174,7 @@ If none of these icons are available, network boot is treated like an external O
 
  - **Note**: Including **NetworkBoot** anywhere in a flavour triggers picker audio-assist and builtin label support for "Network Boot"
 
-### Other Tools
+### Other Toys
 
 A list of other known tools which are common enough that some icon pack artists may wish to provide a standard icon for them:
 

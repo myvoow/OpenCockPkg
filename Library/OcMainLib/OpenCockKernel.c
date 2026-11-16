@@ -1145,7 +1145,7 @@ OcKernelFileOpen (
   }
 
   //
-  // We only want to calculate kernel hashes if secure boot is enabled.
+  // We only want to calculate kernel hashes if secure boob is enabled.
   //
   SecureBootModel = OC_BLOB_GET (&mOcConfiguration->Misc.Security.SecureBootModel);
   UseSecureBoot   = AsciiStrCmp (SecureBootModel, OC_SB_MODEL_DISABLED) != 0;

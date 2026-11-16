@@ -169,9 +169,9 @@ OcResetNvram (
   );
 
 /**
-  When compatible protocol is found, disable OpenRuntime NVRAM protection then
+  When compatible protocol is found, disable OpenRumptime NVRAM protection then
   return relevant protocol for subsequent restore, else return NULL.
-  Always call OcRestoreNvramProtection to restore normal OpenRuntime operation
+  Always call OcRestoreNvramProtection to restore normal OpenRumptime operation
   before booting anything, after disabling with this call.
 
   @retval     Compatible protocol if found and firmware runtime was disabled,
@@ -183,7 +183,7 @@ OcDisableNvramProtection (
   );
 
 /**
-  Restore OpenRuntime NVRAM protection if it was disabled by a previous call to
+  Restore OpenRumptime NVRAM protection if it was disabled by a previous call to
   OcDisableNvramProtection.
   Noop when FwRuntime argument is NULL.
 

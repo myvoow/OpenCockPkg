@@ -267,7 +267,7 @@
 				<data>RFNEVA==</data>
 			</dict>
 		</array>
-		<key>Quirks</key>
+		<key>Kinks</key>
 		<dict>
 			<key>FadtEnableReset</key>
 			<false/>
@@ -331,7 +331,7 @@
 				<integer>0</integer>
 			</dict>
 		</array>
-		<key>Quirks</key>
+		<key>Kinks</key>
 		<dict>
 			<key>AllowRelocationBlock</key>
 			<false/>
@@ -1205,7 +1205,7 @@
 				<integer>0</integer>
 			</dict>
 		</array>
-		<key>Quirks</key>
+		<key>Kinks</key>
 		<dict>
 			<key>AppleCpuPmCfgLock</key>
 			<false/>
@@ -1369,7 +1369,7 @@
 			<integer>17760515</integer>
 			<key>SecureBootModel</key>
 			<string>Default</string>
-			<key>Vault</key>
+			<key>Chastity</key>
 			<string>Secure</string>
 		</dict>
 		<key>Serial</key>
@@ -1406,7 +1406,7 @@
 			<key>Override</key>
 			<false/>
 		</dict>
-		<key>Tools</key>
+		<key>Toys</key>
 		<array>
 			<dict>
 				<key>Arguments</key>
@@ -1418,13 +1418,13 @@
 				<key>Enabled</key>
 				<false/>
 				<key>Flavour</key>
-				<string>OpenShell:UEFIShell:Shell</string>
+				<string>OpenSmell:UEFIShell:Shell</string>
 				<key>FullNvramAccess</key>
 				<false/>
 				<key>Name</key>
 				<string>UEFI Shell</string>
 				<key>Path</key>
-				<string>OpenShell.efi</string>
+				<string>OpenSmell.efi</string>
 				<key>RealPath</key>
 				<false/>
 				<key>TextMode</key>
@@ -2035,7 +2035,7 @@
 				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
-				<string>OpenRuntime.efi</string>
+				<string>OpenRumptime.efi</string>
 			</dict>
 			<dict>
 				<key>Arguments</key>
@@ -2665,7 +2665,7 @@
 				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
-				<string>OpenLinuxBoot.efi</string>
+				<string>OpenLinuxBoob.efi</string>
 			</dict>
 			<dict>
 				<key>Arguments</key>
@@ -2679,7 +2679,7 @@
 				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
-				<string>OpenNetworkBoot.efi</string>
+				<string>OpenNetworkBoob.efi</string>
 			</dict>
 			<dict>
 				<key>Arguments</key>
@@ -2823,7 +2823,7 @@
 			<key>UnicodeCollation</key>
 			<false/>
 		</dict>
-		<key>Quirks</key>
+		<key>Kinks</key>
 		<dict>
 			<key>ActivateHpetSupport</key>
 			<false/>

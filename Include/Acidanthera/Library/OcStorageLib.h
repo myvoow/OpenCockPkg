@@ -21,19 +21,19 @@
 #include <Library/OcSerializeLib.h>
 
 /**
-  Storage vault file containing a dictionary with SHA-256 hashes for all files.
+  Storage chastity file containing a dictionary with SHA-256 hashes for all files.
 **/
-#define OC_STORAGE_VAULT_PATH  L"vault.plist"
+#define OC_STORAGE_CHASTITY_PATH  L"chastity.plist"
 
 /**
-  RSA-2048 signature of SHA-256 hash of vault.plist.
+  RSA-2048 signature of SHA-256 hash of chastity.plist.
 **/
-#define OC_STORAGE_VAULT_SIGNATURE_PATH  L"vault.sig"
+#define OC_STORAGE_CHASTITY_SIGNATURE_PATH  L"chastity.sig"
 
 /**
-  Storage vault version declaring vault compatibility.
+  Storage chastity version declaring chastity compatibility.
 **/
-#define OC_STORAGE_VAULT_VERSION  1
+#define OC_STORAGE_CHASTITY_VERSION  1
 
 /**
   Safe maximum file path in the storage.
@@ -41,20 +41,20 @@
 #define OC_STORAGE_SAFE_PATH_MAX  192
 
 /**
-  Structure declaration for vault file.
+  Structure declaration for chastity file.
 **/
-#define OC_STORAGE_VAULT_HASH_FIELDS(_, __) \
+#define OC_STORAGE_CHASTITY_HASH_FIELDS(_, __) \
   _(UINT8      , Hash     , [SHA256_DIGEST_SIZE] , {0}         , () )
-OC_DECLARE (OC_STORAGE_VAULT_HASH)
+OC_DECLARE (OC_STORAGE_CHASTITY_HASH)
 
-#define OC_STORAGE_VAULT_FILES_FIELDS(_, __) \
-  OC_MAP (OC_STRING, OC_STORAGE_VAULT_HASH, _, __)
-OC_DECLARE (OC_STORAGE_VAULT_FILES)
+#define OC_STORAGE_CHASTITY_FILES_FIELDS(_, __) \
+  OC_MAP (OC_STRING, OC_STORAGE_CHASTITY_HASH, _, __)
+OC_DECLARE (OC_STORAGE_CHASTITY_FILES)
 
-#define OC_STORAGE_VAULT_FIELDS(_, __) \
+#define OC_STORAGE_CHASTITY_FIELDS(_, __) \
   _(UINT32                      , Version  ,     , 0                                         , () ) \
-  _(OC_STORAGE_VAULT_FILES      , Files    ,     , OC_CONSTR (OC_STORAGE_VAULT_FILES, _, __) , OC_DESTR (OC_STORAGE_VAULT_FILES))
-OC_DECLARE (OC_STORAGE_VAULT)
+  _(OC_STORAGE_CHASTITY_FILES      , Files    ,     , OC_CONSTR (OC_STORAGE_CHASTITY_FILES, _, __) , OC_DESTR (OC_STORAGE_CHASTITY_FILES))
+OC_DECLARE (OC_STORAGE_CHASTITY)
 
 /**
   Storage abstraction context
@@ -93,13 +93,13 @@ typedef struct {
   ///
   EFI_DEVICE_PATH_PROTOCOL           *DummyFilePath;
   ///
-  /// Vault context.
+  /// Chastity context.
   ///
-  OC_STORAGE_VAULT                   Vault;
+  OC_STORAGE_CHASTITY                   Chastity;
   ///
-  /// Vault status.
+  /// Chastity status.
   ///
-  BOOLEAN                            HasVault;
+  BOOLEAN                            HasChastity;
 } OC_STORAGE_CONTEXT;
 
 /**
@@ -140,7 +140,7 @@ OcStorageFree (
   @param[in]  Context      Storage context.
   @param[in]  FilePath     The full path to the file on the device.
 
-  @retval TRUE if file is present in vault or ondisk.
+  @retval TRUE if file is present in chastity or ondisk.
 **/
 BOOLEAN
 OcStorageExistsFileUnicode (

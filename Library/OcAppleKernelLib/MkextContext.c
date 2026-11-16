@@ -1594,31 +1594,31 @@ MkextContextApplyPatch (
 }
 
 EFI_STATUS
-MkextContextApplyQuirk (
+MkextContextApplyKink (
   IN OUT MKEXT_CONTEXT      *Context,
-  IN     KERNEL_QUIRK_NAME  Quirk,
+  IN     KERNEL_KINK_NAME  Kink,
   IN     UINT32             KernelVersion
   )
 {
   EFI_STATUS       Status;
-  KERNEL_QUIRK     *KernelQuirk;
+  KERNEL_KINK     *KernelKink;
   PATCHER_CONTEXT  Patcher;
 
   ASSERT (Context != NULL);
 
-  KernelQuirk = &gKernelQuirks[Quirk];
-  ASSERT (KernelQuirk->Identifier != NULL);
+  KernelKink = &gKernelKinks[Kink];
+  ASSERT (KernelKink->Identifier != NULL);
 
-  Status = PatcherInitContextFromMkext (&Patcher, Context, KernelQuirk->Identifier);
+  Status = PatcherInitContextFromMkext (&Patcher, Context, KernelKink->Identifier);
   if (!EFI_ERROR (Status)) {
-    return KernelQuirk->PatchFunction (&Patcher, KernelVersion);
+    return KernelKink->PatchFunction (&Patcher, KernelVersion);
   }
 
   //
   // It is up to the function to decide whether this is critical or not.
   //
-  DEBUG ((DEBUG_INFO, "OCAK: Failed to mkext find %a - %r\n", KernelQuirk->Identifier, Status));
-  return KernelQuirk->PatchFunction (NULL, KernelVersion);
+  DEBUG ((DEBUG_INFO, "OCAK: Failed to mkext find %a - %r\n", KernelKink->Identifier, Status));
+  return KernelKink->PatchFunction (NULL, KernelVersion);
 }
 
 EFI_STATUS

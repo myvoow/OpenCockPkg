@@ -529,111 +529,111 @@ typedef struct {
 } MKEXT_CONTEXT;
 
 //
-// Kernel quirk names.
+// Kernel kink names.
 //
 typedef enum {
   //
   // Apply MSR E2 patches to AppleIntelCPUPowerManagement kext.
   //
-  KernelQuirkAppleCpuPmCfgLock,
+  KernelKinkAppleCpuPmCfgLock,
   //
   // Apply MSR E2 patches to XNU kernel (XCPM).
   //
-  KernelQuirkAppleXcpmCfgLock,
+  KernelKinkAppleXcpmCfgLock,
   //
   // Apply extra MSR patches to XNU kernel (XCPM).
   //
-  KernelQuirkAppleXcpmExtraMsrs,
+  KernelKinkAppleXcpmExtraMsrs,
   //
   // Apply max MSR_IA32_PERF_CONTROL patches to XNU kernel (XCPM).
   //
-  KernelQuirkAppleXcpmForceBoost,
+  KernelKinkAppleXcpmForceBoost,
   //
   // Apply regiser base change patch for customised PCI serial device to XNU.
   //
-  KernelQuirkCustomPciSerialDevice,
+  KernelKinkCustomPciSerialDevice,
   //
   // Apply custom AppleSMBIOS kext GUID patch for Custom UpdateSMBIOSMode.
   //
-  KernelQuirkCustomSmbiosGuid1,
-  KernelQuirkCustomSmbiosGuid2,
+  KernelKinkCustomSmbiosGuid1,
+  KernelKinkCustomSmbiosGuid2,
   //
   // Apply VT-d disabling patches to IOPCIFamily kext to disable IOMapper in macOS.
   //
-  KernelQuirkDisableIoMapper,
+  KernelKinkDisableIoMapper,
   //
   // Disable mapping PCI bridge device memory in IOMMU (VT-d) to resolve compatibility issues.
   //
-  KernelQuirkDisableIoMapperMapping,
+  KernelKinkDisableIoMapperMapping,
   //
   // Disable AppleRTC checksum writing.
   //
-  KernelQuirkDisableRtcChecksum,
+  KernelKinkDisableRtcChecksum,
   //
   // Apply dummy power management patches to AppleIntelCPUPowerManagement in macOS.
   //
-  KernelQuirkDummyPowerManagement,
+  KernelKinkDummyPowerManagement,
   //
   // Apply feature flags patches to IOBluetoothFamily kext to ensure full Bluetooth functionality.
   //
-  KernelQuirkExtendBTFeatureFlags,
+  KernelKinkExtendBTFeatureFlags,
   //
   // Apply icon type patches to IOAHCIPort kext to force internal disk icons.
   //
-  KernelQuirkExternalDiskIcons,
+  KernelKinkExternalDiskIcons,
   //
   // Enable Aquantia AQtion AQC-107s support.
   //
-  KernelQuirkForceAquantiaEthernet,
+  KernelKinkForceAquantiaEthernet,
   //
   // Force SecureBoot support for all CPUs.
   //
-  KernelQuirkForceSecureBootScheme,
+  KernelKinkForceSecureBootScheme,
   //
   // Apply PCI bar size patches to IOPCIFamily kext for compatibility with select configuration.
   //
-  KernelQuirkIncreasePciBarSize,
+  KernelKinkIncreasePciBarSize,
   //
   // Disable LAPIC interrupt kernel panic on AP cores.
   //
-  KernelQuirkLapicKernelPanic,
+  KernelKinkLapicKernelPanic,
   //
   // Replace the 64-bit commpage bcopy implementation with one that does not use SSSE3.
   //
-  KernelQuirkLegacyCommpage,
+  KernelKinkLegacyCommpage,
   //
   // Apply kernel patches to remove kext dumping in the panic log.
   //
-  KernelQuirkPanicNoKextDump,
+  KernelKinkPanicNoKextDump,
   //
   // Disable power state change timeout kernel panic (10.15+).
   //
-  KernelQuirkPowerTimeoutKernelPanic,
+  KernelKinkPowerTimeoutKernelPanic,
   //
   // Remove kernel __LINKEDIT jetisson.
   //
-  KernelQuirkSegmentJettison,
+  KernelKinkSegmentJettison,
   //
   // Set custom APFS trim timeout.
   //
-  KernelQuirkSetApfsTrimTimeout,
+  KernelKinkSetApfsTrimTimeout,
   //
   // Apply vendor patches to IOAHCIFamily kext to enable native features for third-party drives,
   // such as TRIM on SSDs or hibernation support on 10.15.
   //
-  KernelQuirkThirdPartyDrives,
+  KernelKinkThirdPartyDrives,
   //
   // Apply port limit patches to AppleUSBXHCI and AppleUSBXHCIPCI kexts.
   //
-  KernelQuirkXhciPortLimit1,
-  KernelQuirkXhciPortLimit2,
-  KernelQuirkXhciPortLimit3,
+  KernelKinkXhciPortLimit1,
+  KernelKinkXhciPortLimit2,
+  KernelKinkXhciPortLimit3,
 
-  KernelQuirkMax
-} KERNEL_QUIRK_NAME;
+  KernelKinkMax
+} KERNEL_KINK_NAME;
 
 /**
-  Kernel quirk patch function.
+  Kernel kink patch function.
 
   @param[in,out]  Patcher        A pointer to the patcher context. Only optional for kext patching.
   @param[in]      KernelVersion  Kernel version to be matched.
@@ -642,13 +642,13 @@ typedef enum {
 **/
 typedef
 EFI_STATUS
-(KERNEL_QUIRK_PATCH_FUNCTION) (
+(KERNEL_KINK_PATCH_FUNCTION) (
   IN OUT PATCHER_CONTEXT  *Patcher OPTIONAL,
   IN     UINT32           KernelVersion
   );
 
 //
-// Kernel quirk.
+// Kernel kink.
 //
 typedef struct {
   //
@@ -656,23 +656,23 @@ typedef struct {
   //
   CONST CHAR8                    *Identifier;
   //
-  // Quirk patch function.
+  // Kink patch function.
   //
-  KERNEL_QUIRK_PATCH_FUNCTION    *PatchFunction;
-} KERNEL_QUIRK;
+  KERNEL_KINK_PATCH_FUNCTION    *PatchFunction;
+} KERNEL_KINK;
 
 /**
-  Applies the specified quirk.
+  Applies the specified kink.
 
-  @param[in]     Name           KERNEL_QUIRK_NAME specifying the quirk name.
+  @param[in]     Name           KERNEL_KINK_NAME specifying the kink name.
   @param[in,out] Patcher        PATCHER_CONTEXT instance. Only optional for kext patching.
   @param[in]     KernelVersion  Current kernel version.
 
   @returns EFI_SUCCESS on success.
 **/
 EFI_STATUS
-KernelApplyQuirk (
-  IN     KERNEL_QUIRK_NAME  Name,
+KernelApplyKink (
+  IN     KERNEL_KINK_NAME  Name,
   IN OUT PATCHER_CONTEXT    *Patcher OPTIONAL,
   IN     UINT32             KernelVersion
   );
@@ -919,18 +919,18 @@ PrelinkedContextApplyPatch (
   );
 
 /**
-  Apply kext quirk to prelinked.
+  Apply kext kink to prelinked.
 
   @param[in,out] Context         Prelinked context.
-  @param[in]     Quirk           Kext quirk to apply.
+  @param[in]     Kink           Kext kink to apply.
   @param[in]     KernelVersion   Current kernel version.
 
   @retval EFI_SUCCESS on success.
 **/
 EFI_STATUS
-PrelinkedContextApplyQuirk (
+PrelinkedContextApplyKink (
   IN OUT PRELINKED_CONTEXT  *Context,
-  IN     KERNEL_QUIRK_NAME  Quirk,
+  IN     KERNEL_KINK_NAME  Kink,
   IN     UINT32             KernelVersion
   );
 
@@ -1327,7 +1327,7 @@ KextFindKmodAddress (
   );
 
 /**
-  Set timeout value in microseconds for KernelQuirkSetApfsTrimTimeout quirk.
+  Set timeout value in microseconds for KernelKinkSetApfsTrimTimeout kink.
 
   @param[in]  Timeout   Timeout in microseconds.
 **/
@@ -1337,7 +1337,7 @@ PatchSetApfsTimeout (
   );
 
 /**
-  Set PCI serial device properties for KernelQuirkCustomPciSerialDevice quirk.
+  Set PCI serial device properties for KernelKinkCustomPciSerialDevice kink.
 
   @param[in]  RegisterBase   PCI serial device regiser base.
   @param[in]  RegisterStride PCI serial device regiser stride.
@@ -1470,17 +1470,17 @@ CachelessContextAddPatch (
   );
 
 /**
-  Add kernel quirk to cacheless context to be applied later on.
+  Add kernel kink to cacheless context to be applied later on.
 
   @param[in,out] Context         Cacheless context.
-  @param[in]     Quirk           Quirk to apply.
+  @param[in]     Kink           Kink to apply.
 
   @return  EFI_SUCCESS on success.
 **/
 EFI_STATUS
-CachelessContextAddQuirk (
+CachelessContextAddKink (
   IN OUT CACHELESS_CONTEXT  *Context,
-  IN     KERNEL_QUIRK_NAME  Quirk
+  IN     KERNEL_KINK_NAME  Kink
   );
 
 /**
@@ -1687,18 +1687,18 @@ MkextContextApplyPatch (
   );
 
 /**
-  Apply kext quirk to mkext.
+  Apply kext kink to mkext.
 
   @param[in,out] Context         Mkext context.
-  @param[in]     Quirk           Kext quirk to apply.
+  @param[in]     Kink           Kext kink to apply.
   @param[in]     KernelVersion   Current kernel version.
 
   @return  EFI_SUCCESS on success.
 **/
 EFI_STATUS
-MkextContextApplyQuirk (
+MkextContextApplyKink (
   IN OUT MKEXT_CONTEXT      *Context,
-  IN     KERNEL_QUIRK_NAME  Quirk,
+  IN     KERNEL_KINK_NAME  Kink,
   IN     UINT32             KernelVersion
   );
 

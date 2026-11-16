@@ -300,9 +300,9 @@ CheckUefiDrivers (
   CONST CHAR8           *Comment;
   CONST CHAR8           *Driver;
   UINTN                 DriverSumSize;
-  BOOLEAN               HasOpenRuntimeEfiDriver;
-  BOOLEAN               IsOpenRuntimeLoadEarly;
-  UINT32                IndexOpenRuntimeEfiDriver;
+  BOOLEAN               HasOpenRumptimeEfiDriver;
+  BOOLEAN               IsOpenRumptimeLoadEarly;
+  UINT32                IndexOpenRumptimeEfiDriver;
   BOOLEAN               HasOpenUsbKbDxeEfiDriver;
   UINT32                IndexOpenUsbKbDxeEfiDriver;
   BOOLEAN               HasPs2KeyboardDxeEfiDriver;
@@ -320,8 +320,8 @@ CheckUefiDrivers (
 
   ErrorCount = 0;
 
-  HasOpenRuntimeEfiDriver              = FALSE;
-  IndexOpenRuntimeEfiDriver            = 0;
+  HasOpenRumptimeEfiDriver              = FALSE;
+  IndexOpenRumptimeEfiDriver            = 0;
   HasOpenUsbKbDxeEfiDriver             = FALSE;
   IndexOpenUsbKbDxeEfiDriver           = 0;
   HasPs2KeyboardDxeEfiDriver           = FALSE;
@@ -332,7 +332,7 @@ CheckUefiDrivers (
   IndexAudioDxeEfiDriver               = 0;
   HasOpenVariableRuntimeDxeEfiDriver   = FALSE;
   IndexOpenVariableRuntimeDxeEfiDriver = 0;
-  IsOpenRuntimeLoadEarly               = FALSE;
+  IsOpenRumptimeLoadEarly               = FALSE;
   HasFirmwareSettingsEntryEfiDriver    = FALSE;
   for (Index = 0; Index < Config->Uefi.Drivers.Count; ++Index) {
     DriverEntry = Config->Uefi.Drivers.Values[Index];
@@ -382,17 +382,17 @@ CheckUefiDrivers (
     }
 
     //
-    // For all drivers but OpenVariableRuntimeDxe.efi and OpenRuntime.efi, LoadEarly must be FALSE.
+    // For all drivers but OpenVariableRuntimeDxe.efi and OpenRumptime.efi, LoadEarly must be FALSE.
     //
-    if ((AsciiStrCmp (Driver, "OpenVariableRuntimeDxe.efi") != 0) && (AsciiStrCmp (Driver, "OpenRuntime.efi") != 0) && DriverEntry->LoadEarly) {
+    if ((AsciiStrCmp (Driver, "OpenVariableRuntimeDxe.efi") != 0) && (AsciiStrCmp (Driver, "OpenRumptime.efi") != 0) && DriverEntry->LoadEarly) {
       DEBUG ((DEBUG_WARN, "%a at UEFI->Drivers[%u] must have LoadEarly set to FALSE!\n", Driver, Index));
       ++ErrorCount;
     }
 
-    if (AsciiStrCmp (Driver, "OpenRuntime.efi") == 0) {
-      HasOpenRuntimeEfiDriver   = TRUE;
-      IndexOpenRuntimeEfiDriver = Index;
-      IsOpenRuntimeLoadEarly    = DriverEntry->LoadEarly;
+    if (AsciiStrCmp (Driver, "OpenRumptime.efi") == 0) {
+      HasOpenRumptimeEfiDriver   = TRUE;
+      IndexOpenRumptimeEfiDriver = Index;
+      IsOpenRumptimeLoadEarly    = DriverEntry->LoadEarly;
     }
 
     if (AsciiStrCmp (Driver, "OpenUsbKbDxe.efi") == 0) {
@@ -434,33 +434,33 @@ CheckUefiDrivers (
                   UefiDriverHasDuplication
                   );
 
-  if (HasOpenRuntimeEfiDriver) {
+  if (HasOpenRumptimeEfiDriver) {
     if (HasOpenVariableRuntimeDxeEfiDriver) {
-      if (!IsOpenRuntimeLoadEarly) {
+      if (!IsOpenRumptimeLoadEarly) {
         DEBUG ((
           DEBUG_WARN,
-          "OpenRuntime.efi at UEFI->Drivers[%u] should have its LoadEarly set to TRUE when OpenVariableRuntimeDxe.efi at UEFI->Drivers[%u] is in use!\n",
-          IndexOpenRuntimeEfiDriver,
+          "OpenRumptime.efi at UEFI->Drivers[%u] should have its LoadEarly set to TRUE when OpenVariableRuntimeDxe.efi at UEFI->Drivers[%u] is in use!\n",
+          IndexOpenRumptimeEfiDriver,
           IndexOpenVariableRuntimeDxeEfiDriver
           ));
         ++ErrorCount;
       }
 
-      if (IndexOpenVariableRuntimeDxeEfiDriver >= IndexOpenRuntimeEfiDriver) {
+      if (IndexOpenVariableRuntimeDxeEfiDriver >= IndexOpenRumptimeEfiDriver) {
         DEBUG ((
           DEBUG_WARN,
-          "OpenRuntime.efi (currently at UEFI->Drivers[%u]) should be placed after OpenVariableRuntimeDxe.efi (currently at UEFI->Drivers[%u])!\n",
-          IndexOpenRuntimeEfiDriver,
+          "OpenRumptime.efi (currently at UEFI->Drivers[%u]) should be placed after OpenVariableRuntimeDxe.efi (currently at UEFI->Drivers[%u])!\n",
+          IndexOpenRumptimeEfiDriver,
           IndexOpenVariableRuntimeDxeEfiDriver
           ));
         ++ErrorCount;
       }
     } else {
-      if (IsOpenRuntimeLoadEarly) {
+      if (IsOpenRumptimeLoadEarly) {
         DEBUG ((
           DEBUG_WARN,
-          "OpenRuntime.efi at UEFI->Drivers[%u] should have its LoadEarly set to FALSE unless OpenVariableRuntimeDxe.efi is in use!\n",
-          IndexOpenRuntimeEfiDriver
+          "OpenRumptime.efi at UEFI->Drivers[%u] should have its LoadEarly set to FALSE unless OpenVariableRuntimeDxe.efi is in use!\n",
+          IndexOpenRumptimeEfiDriver
           ));
         ++ErrorCount;
       }
@@ -472,10 +472,10 @@ CheckUefiDrivers (
     ++ErrorCount;
   }
 
-  IsRequestBootVarRoutingEnabled = Config->Uefi.Quirks.RequestBootVarRouting;
+  IsRequestBootVarRoutingEnabled = Config->Uefi.Kinks.RequestBootVarRouting;
   if (IsRequestBootVarRoutingEnabled) {
-    if (!HasOpenRuntimeEfiDriver) {
-      DEBUG ((DEBUG_WARN, "UEFI->Quirks->RequestBootVarRouting is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+    if (!HasOpenRumptimeEfiDriver) {
+      DEBUG ((DEBUG_WARN, "UEFI->Kinks->RequestBootVarRouting is enabled, but OpenRumptime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
   }
@@ -712,7 +712,7 @@ CheckUefiOutput (
 //
 STATIC
 UINT32
-CheckUefiQuirks (
+CheckUefiKinks (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
@@ -720,10 +720,10 @@ CheckUefiQuirks (
   INT8    ResizeGpuBars;
 
   ErrorCount    = 0;
-  ResizeGpuBars = Config->Uefi.Quirks.ResizeGpuBars;
+  ResizeGpuBars = Config->Uefi.Kinks.ResizeGpuBars;
 
   if ((ResizeGpuBars < -1) || (ResizeGpuBars > 19)) {
-    DEBUG ((DEBUG_WARN, "UEFI->Quirks->ResizeGpuBars is borked (Can only be between -1 and 19)!\n"));
+    DEBUG ((DEBUG_WARN, "UEFI->Kinks->ResizeGpuBars is borked (Can only be between -1 and 19)!\n"));
     ++ErrorCount;
   }
 
@@ -798,7 +798,7 @@ CheckUefi (
     &CheckUefiDrivers,
     &CheckUefiInput,
     &CheckUefiOutput,
-    &CheckUefiQuirks,
+    &CheckUefiKinks,
     &CheckUefiReservedMemory
   };
 

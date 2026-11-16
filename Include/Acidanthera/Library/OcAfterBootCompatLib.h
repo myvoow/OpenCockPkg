@@ -140,7 +140,7 @@ typedef struct OC_ABC_SETTINGS_ {
   ///
   BOOLEAN    DisableVariableWrite;
   ///
-  /// Protect secure boot variables.
+  /// Protect secure boob variables.
   ///
   BOOLEAN    ProtectSecureBoot;
   ///
@@ -181,7 +181,7 @@ typedef struct OC_ABC_SETTINGS_ {
   ///
   BOOLEAN                 ProtectUefiServices;
   ///
-  /// Fix OpenRuntime permissions in the memory map and memory attributes.
+  /// Fix OpenRumptime permissions in the memory map and memory attributes.
   ///
   BOOLEAN                 SyncRuntimePermissions;
   ///

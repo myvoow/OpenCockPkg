@@ -17,15 +17,15 @@
 ##
 
 [Defines]
-  PLATFORM_NAME                  = OpenDuetPkg
+  PLATFORM_NAME                  = OpenThreesomePkg
   PLATFORM_GUID                  = 199E24E0-0989-42AA-87F2-611A8C397E72
   PLATFORM_VERSION               = 0.92
   DSC_SPECIFICATION              = 0x0001001C
-  OUTPUT_DIRECTORY               = Build/OpenDuetPkg
+  OUTPUT_DIRECTORY               = Build/OpenThreesomePkg
   SUPPORTED_ARCHITECTURES        = X64|IA32
   BUILD_TARGETS                  = RELEASE|DEBUG|NOOPT
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = OpenCockPkg/OpenDuetPkg.fdf
+  FLASH_DEFINITION               = OpenCockPkg/OpenThreesomePkg.fdf
 
 !include MdePkg/MdeLibs.dsc.inc
 

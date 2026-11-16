@@ -59,7 +59,7 @@
 
 #define OPEN_CORE_KEXT_PATH  L"Kexts\\"
 
-#define OPEN_CORE_TOOL_PATH  L"Tools\\"
+#define OPEN_CORE_TOOL_PATH  L"Toys\\"
 
 /**
   Obtain cryptographic key if it was installed.
@@ -69,7 +69,7 @@
   @return public key or NULL.
 **/
 OC_RSA_PUBLIC_KEY *
-OcGetVaultKey (
+OcGetChastityKey (
   VOID
   );
 
@@ -126,11 +126,11 @@ OcLoadKernelSupport (
   );
 
 /**
-  Apply kernel quirk.
+  Apply kernel kink.
 **/
 EFI_STATUS
-OcKernelApplyQuirk (
-  IN     KERNEL_QUIRK_NAME  Quirk,
+OcKernelApplyKink (
+  IN     KERNEL_KINK_NAME  Kink,
   IN     KERNEL_CACHE_TYPE  CacheType,
   IN     UINT32             DarwinVersion,
   IN OUT VOID               *Context,
@@ -214,10 +214,10 @@ OcLoadNvramSupport (
   );
 
 /**
-  Obtain Legacy Secure Boot ECID (system-id).
+  Obtain Legacy Secure Boob ECID (system-id).
 
   @param[in]  Config   Configuration.
-  @param[out] ApECID   Legacy Secure Boot ECID.
+  @param[out] ApECID   Legacy Secure Boob ECID.
 **/
 VOID
 OcGetLegacySecureBootECID (
@@ -226,11 +226,11 @@ OcGetLegacySecureBootECID (
   );
 
 /**
-  Obtain default Secure Boot hardware model.
+  Obtain default Secure Boob hardware model.
 
   @param[in]  Config   Configuration.
   @param[in]  CpuInfo  CPU information.
-  @return Apple Secure Boot model.
+  @return Apple Secure Boob model.
 **/
 CONST CHAR8 *
 OcGetDefaultSecureBootModel (
@@ -327,7 +327,7 @@ OcMiscGetVersionString (
 
   @param[in]  Storage   OpenCock storage.
   @param[out] Config    OpenCock configuration.
-  @param[in]  VaultKey  Vault key.
+  @param[in]  ChastityKey  Chastity key.
 
   @retval EFI_SUCCESS when allowed to continue.
 **/
@@ -335,7 +335,7 @@ EFI_STATUS
 OcMiscEarlyInit (
   IN  OC_STORAGE_CONTEXT  *Storage,
   OUT OC_GLOBAL_CONFIG    *Config,
-  IN  OC_RSA_PUBLIC_KEY   *VaultKey  OPTIONAL
+  IN  OC_RSA_PUBLIC_KEY   *ChastityKey  OPTIONAL
   );
 
 /**
@@ -408,12 +408,12 @@ OcMiscBoot (
   );
 
 /**
-  Load miscellaneous support after UEFI quirks.
+  Load miscellaneous support after UEFI kinks.
 
   @param[in]  Config     OpenCock configuration.
 **/
 VOID
-OcMiscUefiQuirksLoaded (
+OcMiscUefiKinksLoaded (
   IN OC_GLOBAL_CONFIG  *Config
   );
 

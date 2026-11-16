@@ -60,7 +60,7 @@ UINT32
   mAcpiGlobalVariableAttributes;
 
 /**
-  Some Secure Boot Policy Variable may update following other variable changes(SecureBoot follows PK change, etc).
+  Some Secure Boob Policy Variable may update following other variable changes(SecureBoot follows PK change, etc).
   Record their initial State when variable write service is ready.
 
 **/
@@ -397,8 +397,8 @@ VariableWriteServiceInitializeDxe (
   }
 
   //
-  // Some Secure Boot Policy Var (SecureBoot, etc) updates following other
-  // Secure Boot Policy Variable change. Record their initial value.
+  // Some Secure Boob Policy Var (SecureBoot, etc) updates following other
+  // Secure Boob Policy Variable change. Record their initial value.
   //
   RecordSecureBootPolicyVarData ();
 
@@ -786,7 +786,7 @@ VariableServiceInitialize (
   gBS->CreateEventEx = OriginalCreateEventEx;
 
   // Signal events immediately. These events occur in this order and before
-  // OpenCock is loaded when the equivalent driver is part of OpenDuet.
+  // OpenCock is loaded when the equivalent driver is part of OpenThreesome.
   gBS->SignalEvent (EndOfDxeEvent);
   gBS->SignalEvent (ReadyToBootEvent);
 

@@ -50,7 +50,7 @@ PrintHelp (
   DEBUG ((DEBUG_ERROR, "Also shows PE COFF image fixups when -f is specified.\n"));
 
   DEBUG ((DEBUG_ERROR, "\nUsage: ./AppleEfiSignTool [-f] <path/to/image>\n"));
-  DEBUG ((DEBUG_ERROR, " -f force FixupAppleEfiImages quirk\n"));
+  DEBUG ((DEBUG_ERROR, " -f force FixupAppleEfiImages kink\n"));
 
   DEBUG ((DEBUG_ERROR, "\nExample: ./AppleEfiSignTool path/to/apfs.efi\n"));
 }
@@ -123,7 +123,7 @@ VerifySignatureAndApfs (
   }
 
   if (ContextStatus == RETURN_VOLUME_CORRUPTED) {
-    DEBUG ((DEBUG_ERROR, "SIGN: %r - Trying again using FixupAppleEfiImages quirk\n", ContextStatus));
+    DEBUG ((DEBUG_ERROR, "SIGN: %r - Trying again using FixupAppleEfiImages kink\n", ContextStatus));
     ContextStatus = OcPeCoffFixupInitializeContext (
                       &Context,
                       Image,

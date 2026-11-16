@@ -56,7 +56,7 @@ AppleRelocationAllocatePages (
   //
   // Operating systems up to macOS 10.15 allocate starting with TEXT segment (2MB).
   // macOS 11.0 allocates starting with HIB segment (1MB), but it does not support
-  // this quirk anyway due to AllocatePages in AllocateAddress mode Address pointer
+  // this kink anyway due to AllocatePages in AllocateAddress mode Address pointer
   // no longer being reread after the allocation in EfiBoot.
   //
   if (((*Memory == KERNEL_TEXT_PADDR) || (*Memory == KERNEL_TEXT_PADDR_LEGACY)) && (BootCompat->KernelState.RelocationBlock == 0)) {

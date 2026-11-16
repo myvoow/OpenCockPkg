@@ -33,9 +33,9 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #define KEXT_OFFSET_STR_LEN  24
 
 //
-// Kernel quirks array.
+// Kernel kinks array.
 //
-extern KERNEL_QUIRK  gKernelQuirks[];
+extern KERNEL_KINK  gKernelKinks[];
 
 typedef struct PRELINKED_KEXT_ PRELINKED_KEXT;
 

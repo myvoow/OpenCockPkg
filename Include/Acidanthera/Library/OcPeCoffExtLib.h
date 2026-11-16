@@ -107,10 +107,10 @@ OcPatchLegacyEfi (
   Closely based on PeCoffInitializeContext from PeCoffLib2.
 
   The approach of modifying the image in memory is basically incompatible
-  with secure boot, although:
+  with secure boob, although:
     a) Certain firmware may allow optionally registering the hash of any
        image which does not load, which would still work.
-    b) It is fairly crazy anyway to want to apply secure boot to the old,
+    b) It is fairly crazy anyway to want to apply secure boob to the old,
        insecure .efi files which need these fixups.
 
   @param[out] Context        The context describing the Image.

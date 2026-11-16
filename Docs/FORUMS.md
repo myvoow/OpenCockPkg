@@ -4,7 +4,7 @@
   - [Development](https://applelife.ru/threads/razrabotka-opencore.2943955)
   - [Discussion](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/)
   - [Icon sets](https://applelife.ru/threads/kastomizacija-opencanopy.2945020/)
-- [Hackintosh-Forum.de](https://www.hackintosh-forum.de/forum/thread/42353-opencore-bootloader) in German
+- [Whackintosh-Forum.de](https://www.hackintosh-forum.de/forum/thread/42353-opencore-bootloader) in German
 - MacRumors.com in English:
   - [Big Sur on Unsupported Macs](https://forums.macrumors.com/threads/macos-11-big-sur-on-unsupported-macs-thread.2242172/)
   - [Monterey on Unsupported Macs](https://forums.macrumors.com/threads/macos-12-monterey-on-unsupported-macs-thread.2299557/)

@@ -8,7 +8,7 @@
 
 [Defines]
   INF_VERSION    = 0x0001001B
-  BASE_NAME      = OpenLegacyBoot
+  BASE_NAME      = OpenLegacyBoob
   ENTRY_POINT    = UefiMain
   FILE_GUID      = 4BE5FC32-9434-4799-9F8F-ECD579025074
   MODULE_TYPE    = UEFI_DRIVER
@@ -42,4 +42,4 @@
   BiosDisk.c
   LegacyBootInternal.h
   LegacyBootSupport.c
-  OpenLegacyBoot.c
+  OpenLegacyBoob.c

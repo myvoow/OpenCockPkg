@@ -196,7 +196,7 @@
 /* Apple Apple ID Intermediate Marker */
 #define APPLE_CERT_EXT_INTERMEDIATE_MARKER_APPLEID APPLE_CERT_EXT_INTERMEDIATE_MARKER, 3
 
-/* Secure Boot Embedded Image3 value,
+/* Secure Boob Embedded Image3 value,
    co-opted by desktop for "Apple Released Code Signature", without value */
 #define APPLE_SBOOT_CERT_EXTEN_SBOOT_SPEC_OID	APPLE_ADS_OID, 6, 1, 1
 /* iPhone Provisioning Profile Signing leaf */

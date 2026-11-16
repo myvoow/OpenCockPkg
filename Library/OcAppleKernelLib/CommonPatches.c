@@ -1544,7 +1544,7 @@ PatchSetPciSerialDevice (
   )
 {
   //
-  // FIXME: This is really ugly, make quirks take a context param.
+  // FIXME: This is really ugly, make kinks take a context param.
   //
   if (RegisterBase <= MAX_UINT16) {
     DEBUG ((DEBUG_INFO, "OCAK: Registering PCI serial device PMIO port 0x%04X\n", RegisterBase));
@@ -2893,7 +2893,7 @@ PatchSetApfsTimeout (
   )
 {
   //
-  // FIXME: This is really ugly, make quirks take a context param.
+  // FIXME: This is really ugly, make kinks take a context param.
   //
   DEBUG ((DEBUG_INFO, "OCAK: Registering %u APFS timeout\n", Timeout));
   CopyMem (&mApfsTimeoutReplace[2], &Timeout, sizeof (Timeout));
@@ -2974,40 +2974,40 @@ PatchSetApfsTrimTimeout (
 }
 
 //
-// Quirks table.
+// Kinks table.
 //
-KERNEL_QUIRK  gKernelQuirks[] = {
-  [KernelQuirkAppleCpuPmCfgLock]       = { "com.apple.driver.AppleIntelCPUPowerManagement", PatchAppleCpuPmCfgLock      },
-  [KernelQuirkAppleXcpmCfgLock]        = { NULL,                                            PatchAppleXcpmCfgLock       },
-  [KernelQuirkAppleXcpmExtraMsrs]      = { NULL,                                            PatchAppleXcpmExtraMsrs     },
-  [KernelQuirkAppleXcpmForceBoost]     = { NULL,                                            PatchAppleXcpmForceBoost    },
-  [KernelQuirkCustomPciSerialDevice]   = { NULL,                                            PatchCustomPciSerialDevice  },
-  [KernelQuirkCustomSmbiosGuid1]       = { "com.apple.driver.AppleSMBIOS",                  PatchCustomSmbiosGuid       },
-  [KernelQuirkCustomSmbiosGuid2]       = { "com.apple.driver.AppleACPIPlatform",            PatchCustomSmbiosGuid       },
-  [KernelQuirkDisableIoMapper]         = { "com.apple.iokit.IOPCIFamily",                   PatchAppleIoMapperSupport   },
-  [KernelQuirkDisableIoMapperMapping]  = { "com.apple.iokit.IOPCIFamily",                   PatchAppleIoMapperMapping   },
-  [KernelQuirkDisableRtcChecksum]      = { "com.apple.driver.AppleRTC",                     PatchAppleRtcChecksum       },
-  [KernelQuirkDummyPowerManagement]    = { "com.apple.driver.AppleIntelCPUPowerManagement", PatchDummyPowerManagement   },
-  [KernelQuirkExtendBTFeatureFlags]    = { "com.apple.iokit.IOBluetoothFamily",             PatchBTFeatureFlags         },
-  [KernelQuirkExternalDiskIcons]       = { "com.apple.driver.AppleAHCIPort",                PatchForceInternalDiskIcons },
-  [KernelQuirkForceAquantiaEthernet]   = { "com.apple.driver.AppleEthernetAquantiaAqtion",  PatchAquantiaEthernet       },
-  [KernelQuirkForceSecureBootScheme]   = { "com.apple.security.AppleImage4",                PatchForceSecureBootScheme  },
-  [KernelQuirkIncreasePciBarSize]      = { "com.apple.iokit.IOPCIFamily",                   PatchIncreasePciBarSize     },
-  [KernelQuirkLapicKernelPanic]        = { NULL,                                            PatchLapicKernelPanic       },
-  [KernelQuirkLegacyCommpage]          = { NULL,                                            PatchLegacyCommpage         },
-  [KernelQuirkPanicNoKextDump]         = { NULL,                                            PatchPanicKextDump          },
-  [KernelQuirkPowerTimeoutKernelPanic] = { NULL,                                            PatchPowerStateTimeout      },
-  [KernelQuirkSegmentJettison]         = { NULL,                                            PatchSegmentJettison        },
-  [KernelQuirkSetApfsTrimTimeout]      = { "com.apple.filesystems.apfs",                    PatchSetApfsTrimTimeout     },
-  [KernelQuirkThirdPartyDrives]        = { "com.apple.iokit.IOAHCIBlockStorage",            PatchThirdPartyDriveSupport },
-  [KernelQuirkXhciPortLimit1]          = { "com.apple.iokit.IOUSBHostFamily",               PatchUsbXhciPortLimit1      },
-  [KernelQuirkXhciPortLimit2]          = { "com.apple.driver.usb.AppleUSBXHCI",             PatchUsbXhciPortLimit2      },
-  [KernelQuirkXhciPortLimit3]          = { "com.apple.driver.usb.AppleUSBXHCIPCI",          PatchUsbXhciPortLimit3      },
+KERNEL_KINK  gKernelKinks[] = {
+  [KernelKinkAppleCpuPmCfgLock]       = { "com.apple.driver.AppleIntelCPUPowerManagement", PatchAppleCpuPmCfgLock      },
+  [KernelKinkAppleXcpmCfgLock]        = { NULL,                                            PatchAppleXcpmCfgLock       },
+  [KernelKinkAppleXcpmExtraMsrs]      = { NULL,                                            PatchAppleXcpmExtraMsrs     },
+  [KernelKinkAppleXcpmForceBoost]     = { NULL,                                            PatchAppleXcpmForceBoost    },
+  [KernelKinkCustomPciSerialDevice]   = { NULL,                                            PatchCustomPciSerialDevice  },
+  [KernelKinkCustomSmbiosGuid1]       = { "com.apple.driver.AppleSMBIOS",                  PatchCustomSmbiosGuid       },
+  [KernelKinkCustomSmbiosGuid2]       = { "com.apple.driver.AppleACPIPlatform",            PatchCustomSmbiosGuid       },
+  [KernelKinkDisableIoMapper]         = { "com.apple.iokit.IOPCIFamily",                   PatchAppleIoMapperSupport   },
+  [KernelKinkDisableIoMapperMapping]  = { "com.apple.iokit.IOPCIFamily",                   PatchAppleIoMapperMapping   },
+  [KernelKinkDisableRtcChecksum]      = { "com.apple.driver.AppleRTC",                     PatchAppleRtcChecksum       },
+  [KernelKinkDummyPowerManagement]    = { "com.apple.driver.AppleIntelCPUPowerManagement", PatchDummyPowerManagement   },
+  [KernelKinkExtendBTFeatureFlags]    = { "com.apple.iokit.IOBluetoothFamily",             PatchBTFeatureFlags         },
+  [KernelKinkExternalDiskIcons]       = { "com.apple.driver.AppleAHCIPort",                PatchForceInternalDiskIcons },
+  [KernelKinkForceAquantiaEthernet]   = { "com.apple.driver.AppleEthernetAquantiaAqtion",  PatchAquantiaEthernet       },
+  [KernelKinkForceSecureBootScheme]   = { "com.apple.security.AppleImage4",                PatchForceSecureBootScheme  },
+  [KernelKinkIncreasePciBarSize]      = { "com.apple.iokit.IOPCIFamily",                   PatchIncreasePciBarSize     },
+  [KernelKinkLapicKernelPanic]        = { NULL,                                            PatchLapicKernelPanic       },
+  [KernelKinkLegacyCommpage]          = { NULL,                                            PatchLegacyCommpage         },
+  [KernelKinkPanicNoKextDump]         = { NULL,                                            PatchPanicKextDump          },
+  [KernelKinkPowerTimeoutKernelPanic] = { NULL,                                            PatchPowerStateTimeout      },
+  [KernelKinkSegmentJettison]         = { NULL,                                            PatchSegmentJettison        },
+  [KernelKinkSetApfsTrimTimeout]      = { "com.apple.filesystems.apfs",                    PatchSetApfsTrimTimeout     },
+  [KernelKinkThirdPartyDrives]        = { "com.apple.iokit.IOAHCIBlockStorage",            PatchThirdPartyDriveSupport },
+  [KernelKinkXhciPortLimit1]          = { "com.apple.iokit.IOUSBHostFamily",               PatchUsbXhciPortLimit1      },
+  [KernelKinkXhciPortLimit2]          = { "com.apple.driver.usb.AppleUSBXHCI",             PatchUsbXhciPortLimit2      },
+  [KernelKinkXhciPortLimit3]          = { "com.apple.driver.usb.AppleUSBXHCIPCI",          PatchUsbXhciPortLimit3      },
 };
 
 EFI_STATUS
-KernelApplyQuirk (
-  IN     KERNEL_QUIRK_NAME  Name,
+KernelApplyKink (
+  IN     KERNEL_KINK_NAME  Name,
   IN OUT PATCHER_CONTEXT    *Patcher OPTIONAL,
   IN     UINT32             KernelVersion
   )
@@ -3015,9 +3015,9 @@ KernelApplyQuirk (
   //
   // Patcher cannot be NULL for kernel patches, whose Identifier are NULL.
   //
-  if (gKernelQuirks[Name].Identifier == NULL) {
+  if (gKernelKinks[Name].Identifier == NULL) {
     ASSERT (Patcher != NULL);
   }
 
-  return gKernelQuirks[Name].PatchFunction (Patcher, KernelVersion);
+  return gKernelKinks[Name].PatchFunction (Patcher, KernelVersion);
 }

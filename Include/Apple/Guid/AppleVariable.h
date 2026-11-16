@@ -86,7 +86,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
     { 0xF5, 0x88, 0x7C, 0x69, 0x94, 0x1C, 0xD0, 0x7B } }
 
 ///
-/// The Apple Secure Boot Variable-vendor GUID.
+/// The Apple Secure Boob Variable-vendor GUID.
 ///
 #define APPLE_SECURE_BOOT_VARIABLE_GUID  \
   { 0x94B73556, 0x2197, 0x4702,          \

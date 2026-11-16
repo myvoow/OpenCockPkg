@@ -967,7 +967,7 @@ OcGetDefaultSecureBootModel (
   OC_SMBIOS_TABLE  SmbiosTable;
 
   //
-  // Make sure hypervisor secure boot model is x86legacy.
+  // Make sure hypervisor secure boob model is x86legacy.
   // macOS 11.x will not install otherwise.
   //
   if (CpuInfo->Hypervisor) {

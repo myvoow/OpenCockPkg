@@ -77,22 +77,22 @@ OC_DECLARE (OC_ACPI_PATCH_ENTRY)
 OC_DECLARE (OC_ACPI_PATCH_ARRAY)
 
 ///
-/// ACPI quirks.
+/// ACPI kinks.
 ///
-#define OC_ACPI_QUIRKS_FIELDS(_, __) \
+#define OC_ACPI_KINKS_FIELDS(_, __) \
   _(BOOLEAN                     , FadtEnableReset     ,     , FALSE  , ()) \
   _(BOOLEAN                     , NormalizeHeaders    ,     , FALSE  , ()) \
   _(BOOLEAN                     , RebaseRegions       ,     , FALSE  , ()) \
   _(BOOLEAN                     , ResetHwSig          ,     , FALSE  , ()) \
   _(BOOLEAN                     , ResetLogoStatus     ,     , FALSE  , ()) \
   _(BOOLEAN                     , SyncTableIds        ,     , FALSE  , ())
-OC_DECLARE (OC_ACPI_QUIRKS)
+OC_DECLARE (OC_ACPI_KINKS)
 
 #define OC_ACPI_CONFIG_FIELDS(_, __) \
   _(OC_ACPI_ADD_ARRAY         , Add              ,     , OC_CONSTR2 (OC_ACPI_ADD_ARRAY, _, __)     , OC_DESTR (OC_ACPI_ADD_ARRAY)) \
   _(OC_ACPI_DELETE_ARRAY      , Delete           ,     , OC_CONSTR2 (OC_ACPI_DELETE_ARRAY, _, __)  , OC_DESTR (OC_ACPI_DELETE_ARRAY)) \
   _(OC_ACPI_PATCH_ARRAY       , Patch            ,     , OC_CONSTR2 (OC_ACPI_PATCH_ARRAY, _, __)   , OC_DESTR (OC_ACPI_PATCH_ARRAY)) \
-  _(OC_ACPI_QUIRKS            , Quirks           ,     , OC_CONSTR2 (OC_ACPI_QUIRKS, _, __)        , OC_DESTR (OC_ACPI_QUIRKS))
+  _(OC_ACPI_KINKS            , Kinks           ,     , OC_CONSTR2 (OC_ACPI_KINKS, _, __)        , OC_DESTR (OC_ACPI_KINKS))
 OC_DECLARE (OC_ACPI_CONFIG)
 
 /**
@@ -131,9 +131,9 @@ OC_DECLARE (OC_BOOBER_PATCH_ENTRY)
 OC_DECLARE (OC_BOOBER_PATCH_ARRAY)
 
 ///
-/// Apple boobloader quirks.
+/// Apple boobloader kinks.
 ///
-#define OC_BOOBER_QUIRKS_FIELDS(_, __) \
+#define OC_BOOBER_KINKS_FIELDS(_, __) \
   _(BOOLEAN                     , AllowRelocationBlock      ,     , FALSE  , ()) \
   _(BOOLEAN                     , AvoidRuntimeDefrag        ,     , FALSE  , ()) \
   _(BOOLEAN                     , ClearTaskSwitchBit        ,     , FALSE  , ()) \
@@ -156,7 +156,7 @@ OC_DECLARE (OC_BOOBER_PATCH_ARRAY)
   _(BOOLEAN                     , SetupVirtualMap           ,     , FALSE  , ()) \
   _(BOOLEAN                     , SignalAppleOS             ,     , FALSE  , ()) \
   _(BOOLEAN                     , SyncRuntimePermissions    ,     , FALSE  , ())
-OC_DECLARE (OC_BOOBER_QUIRKS)
+OC_DECLARE (OC_BOOBER_KINKS)
 
 ///
 /// Apple boobloader section.
@@ -164,7 +164,7 @@ OC_DECLARE (OC_BOOBER_QUIRKS)
 #define OC_BOOBER_CONFIG_FIELDS(_, __) \
   _(OC_BOOBER_WL_ARRAY          , MmioWhitelist    ,     , OC_CONSTR2 (OC_BOOBER_WL_ARRAY, _, __)      , OC_DESTR (OC_BOOBER_WL_ARRAY)) \
   _(OC_BOOBER_PATCH_ARRAY       , Patch            ,     , OC_CONSTR2 (OC_BOOBER_PATCH_ARRAY, _, __)   , OC_DESTR (OC_BOOBER_PATCH_ARRAY)) \
-  _(OC_BOOBER_QUIRKS            , Quirks           ,     , OC_CONSTR2 (OC_BOOBER_QUIRKS, _, __)        , OC_DESTR (OC_BOOBER_QUIRKS))
+  _(OC_BOOBER_KINKS            , Kinks           ,     , OC_CONSTR2 (OC_BOOBER_KINKS, _, __)        , OC_DESTR (OC_BOOBER_KINKS))
 OC_DECLARE (OC_BOOBER_CONFIG)
 
 /**
@@ -278,9 +278,9 @@ OC_DECLARE (OC_KERNEL_PATCH_ENTRY)
 OC_DECLARE (OC_KERNEL_PATCH_ARRAY)
 
 ///
-/// KernelSpace quirks.
+/// KernelSpace kinks.
 ///
-#define OC_KERNEL_QUIRKS_FIELDS(_, __) \
+#define OC_KERNEL_KINKS_FIELDS(_, __) \
   _(INT64                       , SetApfsTrimTimeout          ,     , -1     , ()) \
   _(BOOLEAN                     , AppleCpuPmCfgLock           ,     , FALSE  , ()) \
   _(BOOLEAN                     , AppleXcpmCfgLock            ,     , FALSE  , ()) \
@@ -304,7 +304,7 @@ OC_DECLARE (OC_KERNEL_PATCH_ARRAY)
   _(BOOLEAN                     , ProvideCurrentCpuInfo       ,     , FALSE  , ()) \
   _(BOOLEAN                     , ThirdPartyDrives            ,     , FALSE  , ()) \
   _(BOOLEAN                     , XhciPortLimit               ,     , FALSE  , ())
-OC_DECLARE (OC_KERNEL_QUIRKS)
+OC_DECLARE (OC_KERNEL_KINKS)
 
 ///
 /// KernelSpace operation scheme.
@@ -322,7 +322,7 @@ OC_DECLARE (OC_KERNEL_SCHEME)
   _(OC_KERNEL_EMULATE           , Emulate          ,     , OC_CONSTR2 (OC_KERNEL_EMULATE, _, __)       , OC_DESTR (OC_KERNEL_EMULATE)) \
   _(OC_KERNEL_FORCE_ARRAY       , Force            ,     , OC_CONSTR2 (OC_KERNEL_FORCE_ARRAY, _, __)   , OC_DESTR (OC_KERNEL_FORCE_ARRAY)) \
   _(OC_KERNEL_PATCH_ARRAY       , Patch            ,     , OC_CONSTR2 (OC_KERNEL_PATCH_ARRAY, _, __)   , OC_DESTR (OC_KERNEL_PATCH_ARRAY)) \
-  _(OC_KERNEL_QUIRKS            , Quirks           ,     , OC_CONSTR2 (OC_KERNEL_QUIRKS, _, __)        , OC_DESTR (OC_KERNEL_QUIRKS)) \
+  _(OC_KERNEL_KINKS            , Kinks           ,     , OC_CONSTR2 (OC_KERNEL_KINKS, _, __)        , OC_DESTR (OC_KERNEL_KINKS)) \
   _(OC_KERNEL_SCHEME            , Scheme           ,     , OC_CONSTR2 (OC_KERNEL_SCHEME, _, __)        , OC_DESTR (OC_KERNEL_SCHEME))
 OC_DECLARE (OC_KERNEL_CONFIG)
 
@@ -373,13 +373,13 @@ OC_DECLARE (OC_MISC_DEBUG)
   OCS_EXPOSE_VERSION_UI | OCS_EXPOSE_OEM_INFO)
 
 typedef enum {
-  OcsVaultOptional = 0,
-  OcsVaultBasic    = 1,
-  OcsVaultSecure   = 2,
-} OCS_VAULT_MODE;
+  OcsChastityOptional = 0,
+  OcsChastityBasic    = 1,
+  OcsChastitySecure   = 2,
+} OCS_CHASTITY_MODE;
 
 #define OC_MISC_SECURITY_FIELDS(_, __) \
-  _(OC_STRING                   , Vault                       ,      , OC_STRING_CONSTR ("Secure", _, __), OC_DESTR (OC_STRING) ) \
+  _(OC_STRING                   , Chastity                       ,      , OC_STRING_CONSTR ("Secure", _, __), OC_DESTR (OC_STRING) ) \
   _(OC_STRING                   , DmgLoading                  ,      , OC_STRING_CONSTR ("Signed", _, __), OC_DESTR (OC_STRING) ) \
   _(UINT32                      , ScanPolicy                  ,      , OC_SCAN_DEFAULT_POLICY  , ()) \
   _(UINT32                      , ExposeSensitiveData         ,      , OCS_EXPOSE_VERSION      , ()) \
@@ -394,7 +394,7 @@ typedef enum {
   _(UINT64                      , HaltLevel                   ,      , 0x80000000              , ())
 OC_DECLARE (OC_MISC_SECURITY)
 
-#define OC_MISC_TOOLS_ENTRY_FIELDS(_, __) \
+#define OC_MISC_TOYS_ENTRY_FIELDS(_, __) \
   _(OC_STRING                   , Arguments       ,     , OC_STRING_CONSTR ("", _, __), OC_DESTR (OC_STRING) ) \
   _(OC_STRING                   , Comment         ,     , OC_STRING_CONSTR ("", _, __), OC_DESTR (OC_STRING) ) \
   _(OC_STRING                   , Flavour         ,     , OC_STRING_CONSTR ("Auto", _, __), OC_DESTR (OC_STRING) ) \
@@ -405,11 +405,11 @@ OC_DECLARE (OC_MISC_SECURITY)
   _(BOOLEAN                     , TextMode        ,     , FALSE                       , ()                   ) \
   _(OC_STRING                   , Name            ,     , OC_STRING_CONSTR ("", _, __), OC_DESTR (OC_STRING) ) \
   _(OC_STRING                   , Path            ,     , OC_STRING_CONSTR ("", _, __), OC_DESTR (OC_STRING) )
-OC_DECLARE (OC_MISC_TOOLS_ENTRY)
+OC_DECLARE (OC_MISC_TOYS_ENTRY)
 
-#define OC_MISC_TOOLS_ARRAY_FIELDS(_, __) \
-  OC_ARRAY (OC_MISC_TOOLS_ENTRY, _, __)
-OC_DECLARE (OC_MISC_TOOLS_ARRAY)
+#define OC_MISC_TOYS_ARRAY_FIELDS(_, __) \
+  OC_ARRAY (OC_MISC_TOYS_ENTRY, _, __)
+OC_DECLARE (OC_MISC_TOYS_ARRAY)
 
 ///
 /// Reference:
@@ -449,8 +449,8 @@ OC_DECLARE (OC_MISC_SERIAL)
   _(OC_MISC_DEBUG              , Debug           ,     , OC_CONSTR2 (OC_MISC_DEBUG, _, __)        , OC_DESTR (OC_MISC_DEBUG)) \
   _(OC_MISC_SECURITY           , Security        ,     , OC_CONSTR2 (OC_MISC_SECURITY, _, __)     , OC_DESTR (OC_MISC_SECURITY)) \
   _(OC_MISC_SERIAL             , Serial          ,     , OC_CONSTR2 (OC_MISC_SERIAL, _, __)       , OC_DESTR (OC_MISC_SERIAL)) \
-  _(OC_MISC_TOOLS_ARRAY        , Entries         ,     , OC_CONSTR2 (OC_MISC_TOOLS_ARRAY, _, __)  , OC_DESTR (OC_MISC_TOOLS_ARRAY)) \
-  _(OC_MISC_TOOLS_ARRAY        , Tools           ,     , OC_CONSTR2 (OC_MISC_TOOLS_ARRAY, _, __)  , OC_DESTR (OC_MISC_TOOLS_ARRAY))
+  _(OC_MISC_TOYS_ARRAY        , Entries         ,     , OC_CONSTR2 (OC_MISC_TOYS_ARRAY, _, __)  , OC_DESTR (OC_MISC_TOYS_ARRAY)) \
+  _(OC_MISC_TOYS_ARRAY        , Toys           ,     , OC_CONSTR2 (OC_MISC_TOYS_ARRAY, _, __)  , OC_DESTR (OC_MISC_TOYS_ARRAY))
 OC_DECLARE (OC_MISC_CONFIG)
 
 /**
@@ -742,9 +742,9 @@ OC_DECLARE (OC_UEFI_OUTPUT)
 OC_DECLARE (OC_UEFI_PROTOCOL_OVERRIDES)
 
 ///
-/// Quirks is a set of hacks for different types of firmware.
+/// Kinks is a set of hacks for different types of firmware.
 ///
-#define OC_UEFI_QUIRKS_FIELDS(_, __) \
+#define OC_UEFI_KINKS_FIELDS(_, __) \
   _(UINT32                      , ExitBootServicesDelay       ,     , 0      , ()) \
   _(UINT32                      , TscSyncTimeout              ,     , 0      , ()) \
   _(BOOLEAN                     , ActivateHpetSupport         ,     , FALSE  , ()) \
@@ -761,7 +761,7 @@ OC_DECLARE (OC_UEFI_PROTOCOL_OVERRIDES)
   _(BOOLEAN                     , ShimRetainProtocol          ,     , FALSE  , ()) \
   _(BOOLEAN                     , UnblockFsConnect            ,     , FALSE  , ()) \
   _(BOOLEAN                     , ForceOcWriteFlash           ,     , FALSE  , ())
-OC_DECLARE (OC_UEFI_QUIRKS)
+OC_DECLARE (OC_UEFI_KINKS)
 
 ///
 /// Reserved memory entries adds.
@@ -790,7 +790,7 @@ OC_DECLARE (OC_UEFI_RSVD_ARRAY)
   _(OC_UEFI_INPUT               , Input             ,     , OC_CONSTR2 (OC_UEFI_INPUT, _, __)              , OC_DESTR (OC_UEFI_INPUT)) \
   _(OC_UEFI_OUTPUT              , Output            ,     , OC_CONSTR2 (OC_UEFI_OUTPUT, _, __)             , OC_DESTR (OC_UEFI_OUTPUT)) \
   _(OC_UEFI_PROTOCOL_OVERRIDES  , ProtocolOverrides ,     , OC_CONSTR2 (OC_UEFI_PROTOCOL_OVERRIDES, _, __) , OC_DESTR (OC_UEFI_PROTOCOL_OVERRIDES)) \
-  _(OC_UEFI_QUIRKS              , Quirks            ,     , OC_CONSTR2 (OC_UEFI_QUIRKS, _, __)             , OC_DESTR (OC_UEFI_QUIRKS)) \
+  _(OC_UEFI_KINKS              , Kinks            ,     , OC_CONSTR2 (OC_UEFI_KINKS, _, __)             , OC_DESTR (OC_UEFI_KINKS)) \
   _(OC_UEFI_RSVD_ARRAY          , ReservedMemory    ,     , OC_CONSTR2 (OC_UEFI_RSVD_ARRAY, _, __)         , OC_DESTR (OC_UEFI_RSVD_ARRAY)) \
   _(OC_UEFI_UNLOAD_ARRAY        , Unload            ,     , OC_CONSTR2 (OC_UEFI_UNLOAD_ARRAY, _, __)       , OC_DESTR (OC_UEFI_UNLOAD_ARRAY))
 OC_DECLARE (OC_UEFI_CONFIG)

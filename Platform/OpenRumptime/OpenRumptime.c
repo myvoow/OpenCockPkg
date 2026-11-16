@@ -12,7 +12,7 @@
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 **/
 
-#include "OpenRuntimePrivate.h"
+#include "OpenRumptimePrivate.h"
 
 #include <Library/BaseMemoryLib.h>
 #include <Library/DebugLib.h>

@@ -37,7 +37,7 @@ enum {
   @param[in]  ObjType         The IMG4 object type to validate against.
   @param[in]  ImageBuffer     The buffer to validate.
   @param[in]  ImageSize       The size, in bytes, of ImageBuffer.
-  @param[in]  SbMode          The requested IMG4 Secure Boot mode.
+  @param[in]  SbMode          The requested IMG4 Secure Boob mode.
   @param[in]  ManifestBuffer  The buffer of the IMG4 Manifest.
   @param[in]  ManifestSize    The size, in bytes, of ManifestBuffer.
   @param[out] HashDigest      On output, a pointer to ImageBuffer's digest.

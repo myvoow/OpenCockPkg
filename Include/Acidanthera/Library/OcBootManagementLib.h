@@ -492,7 +492,7 @@ struct OC_BOOT_ENTRY_ {
   //
   BOOLEAN                           ExposeDevicePath;
   //
-  // Should disable OpenRuntime NVRAM protection around invocation of tool.
+  // Should disable OpenRumptime NVRAM protection around invocation of tool.
   //
   BOOLEAN                           FullNvramAccess;
   //
@@ -661,7 +661,7 @@ typedef struct {
   //
   BOOLEAN                           RealPath;
   //
-  // Should disable OpenRuntime NVRAM protection around invocation of tool.
+  // Should disable OpenRumptime NVRAM protection around invocation of tool.
   //
   BOOLEAN                           FullNvramAccess;
   //
@@ -1581,7 +1581,7 @@ typedef struct OC_BOOT_ARGUMENTS_ {
 
 //
 // Sanity check max. size for LoadOptions. We need to pass PEM certificates
-// to some drivers (e.g. OpenNetworkBoot), so this has to be quite large.
+// to some drivers (e.g. OpenNetworkBoob), so this has to be quite large.
 //
 #define MAX_LOAD_OPTIONS_SIZE  SIZE_16KB
 
@@ -1868,7 +1868,7 @@ OcImageLoaderInit (
   );
 
 /**
-  Make DirectImageLoader the default for Apple Secure Boot.
+  Make DirectImageLoader the default for Apple Secure Boob.
 **/
 VOID
 OcImageLoaderActivate (

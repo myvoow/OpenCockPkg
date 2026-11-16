@@ -8,7 +8,7 @@
 
 [Defines]
   INF_VERSION    = 0x0001001B
-  BASE_NAME      = OpenLinuxBoot
+  BASE_NAME      = OpenLinuxBoob
   ENTRY_POINT    = UefiMain
   FILE_GUID      = B2EC4DF3-FC2C-4D24-B1D6-B2D2DE8D8172
   MODULE_TYPE    = UEFI_DRIVER
@@ -42,5 +42,5 @@
   GrubVars.c
   LinuxBootInternal.h
   LoaderEntry.c
-  OpenLinuxBoot.c
+  OpenLinuxBoob.c
   VersionCompare.c

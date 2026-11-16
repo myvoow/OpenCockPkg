@@ -20,7 +20,7 @@ STATIC BOOLEAN                 mUriValidated;
 
 //
 // Abort if we are loading a .dmg and these are banned, or if underlying drivers have
-// allowed http:// in URL but user setting for OpenNetworkBoot does not allow it.
+// allowed http:// in URL but user setting for OpenNetworkBoob does not allow it.
 // If PcdAllowHttpConnections was not set (via NETWORK_ALLOW_HTTP_CONNECTIONS compilation
 // flag) then both HttpDxe and HttpBootDxe will enforce https:// before we get to here.
 //
@@ -79,7 +79,7 @@ ValidateDmgAndHttps (
 STATIC
 EFI_STATUS
 EFIAPI
-OpenNetworkBootHttpBootCallback (
+OpenNetworkBoobHttpBootCallback (
   IN EFI_HTTP_BOOT_CALLBACK_PROTOCOL   *This,
   IN EFI_HTTP_BOOT_CALLBACK_DATA_TYPE  DataType,
   IN BOOLEAN                           Received,
@@ -229,7 +229,7 @@ NotifyInstallHttpBootCallback (
     // then consumer A again, will use the original callback for B.)
     //
     mOriginalHttpBootCallback  = HttpBootCallback->Callback;
-    HttpBootCallback->Callback = OpenNetworkBootHttpBootCallback;
+    HttpBootCallback->Callback = OpenNetworkBoobHttpBootCallback;
   }
 }
 

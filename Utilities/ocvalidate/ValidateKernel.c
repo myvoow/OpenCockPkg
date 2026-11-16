@@ -282,13 +282,13 @@ CheckKernelAdd (
            && (AsciiStrCmp (PlistPath, mKextInfo[IndexKextInfo].KextPlistPath) == 0))
         {
           //
-          // Special check for Lilu and Quirks->DisableLinkeditJettison.
+          // Special check for Lilu and Kinks->DisableLinkeditJettison.
           //
           if (IndexKextInfo == INDEX_KEXT_LILU) {
             IsLiluUsed                       = Config->Kernel.Add.Values[Index]->Enabled;
-            IsDisableLinkeditJettisonEnabled = Config->Kernel.Quirks.DisableLinkeditJettison;
+            IsDisableLinkeditJettisonEnabled = Config->Kernel.Kinks.DisableLinkeditJettison;
             if (IsLiluUsed && !IsDisableLinkeditJettisonEnabled) {
-              DEBUG ((DEBUG_WARN, "Lilu.kext is loaded at Kernel->Add[%u], but DisableLinkeditJettison is not enabled at Kernel->Quirks!\n", Index));
+              DEBUG ((DEBUG_WARN, "Lilu.kext is loaded at Kernel->Add[%u], but DisableLinkeditJettison is not enabled at Kernel->Kinks!\n", Index));
               ++ErrorCount;
             }
           }
@@ -711,7 +711,7 @@ CheckKernelPatch (
 
 STATIC
 UINT32
-CheckKernelQuirks (
+CheckKernelKinks (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
@@ -723,20 +723,20 @@ CheckKernelQuirks (
   ErrorCount = 0;
 
   //
-  // CustomSMBIOSGuid quirk requires UpdateSMBIOSMode at PlatformInfo set to Custom.
+  // CustomSMBIOSGuid kink requires UpdateSMBIOSMode at PlatformInfo set to Custom.
   //
-  IsCustomSMBIOSGuidEnabled = Config->Kernel.Quirks.CustomSmbiosGuid;
+  IsCustomSMBIOSGuidEnabled = Config->Kernel.Kinks.CustomSmbiosGuid;
   UpdateSMBIOSMode          = OC_BLOB_GET (&Config->PlatformInfo.UpdateSmbiosMode);
   if (IsCustomSMBIOSGuidEnabled && (AsciiStrCmp (UpdateSMBIOSMode, "Custom") != 0)) {
-    DEBUG ((DEBUG_WARN, "Kernel->Quirks->CustomSMBIOSGuid is enabled, but PlatformInfo->UpdateSMBIOSMode is not set to Custom!\n"));
+    DEBUG ((DEBUG_WARN, "Kernel->Kinks->CustomSMBIOSGuid is enabled, but PlatformInfo->UpdateSMBIOSMode is not set to Custom!\n"));
     ++ErrorCount;
   }
 
-  SetApfsTrimTimeout = Config->Kernel.Quirks.SetApfsTrimTimeout;
+  SetApfsTrimTimeout = Config->Kernel.Kinks.SetApfsTrimTimeout;
   if (  (SetApfsTrimTimeout  > MAX_UINT32)
      || (SetApfsTrimTimeout < -1))
   {
-    DEBUG ((DEBUG_WARN, "Kernel->Quirks->SetApfsTrimTimeout is invalid value %d!\n", SetApfsTrimTimeout));
+    DEBUG ((DEBUG_WARN, "Kernel->Kinks->SetApfsTrimTimeout is invalid value %d!\n", SetApfsTrimTimeout));
     ++ErrorCount;
   }
 
@@ -790,7 +790,7 @@ CheckKernel (
     &CheckKernelEmulate,
     &CheckKernelForce,
     &CheckKernelPatch,
-    &CheckKernelQuirks,
+    &CheckKernelKinks,
     &CheckKernelScheme
   };
 

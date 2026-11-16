@@ -173,7 +173,7 @@ HdaControllerInitRingBuffer (
     return Status;
   }
 
-  if (HdaRingBuffer->HdaDev->Quirks & HDA_CONTROLLER_QUIRK_QEMU_1) {
+  if (HdaRingBuffer->HdaDev->Kinks & HDA_CONTROLLER_KINK_QEMU_1) {
     RintCnt = 0x1;
     Status  = PciIo->Mem.Write (PciIo, EfiPciIoWidthUint16, PCI_HDA_BAR, HDA_REG_RINTCNT, 1, &RintCnt);
     if (EFI_ERROR (Status)) {
@@ -266,7 +266,7 @@ HdaControllerSetRingBufferState (
   }
 
   CtlFlags = HDA_OFFSET_RING_CTL_RUN;
-  if (HdaRingBuffer->HdaDev->Quirks & HDA_CONTROLLER_QUIRK_QEMU_1) {
+  if (HdaRingBuffer->HdaDev->Kinks & HDA_CONTROLLER_KINK_QEMU_1) {
     CtlFlags |= HDA_REG_RIRBCTL_RINTCTL;
   }
 
@@ -335,7 +335,7 @@ HdaControllerResetRingBuffer (
       return Status;
     }
 
-    if (!(HdaRingBuffer->HdaDev->Quirks & HDA_CONTROLLER_QUIRK_CORB_NO_POLL_RESET)) {
+    if (!(HdaRingBuffer->HdaDev->Kinks & HDA_CONTROLLER_KINK_CORB_NO_POLL_RESET)) {
       Status = PciIo->PollMem (PciIo, EfiPciIoWidthUint16, PCI_HDA_BAR, HDA_REG_CORBRP, HDA_REG_CORBRP_RST, HDA_REG_CORBRP_RST, MS_TO_NANOSECONDS (50), &HdaRingPointerPollResult);
       if (EFI_ERROR (Status)) {
         return Status;
@@ -623,7 +623,7 @@ HdaControllerResetStream (
     return FALSE;
   }
 
-  if (!(HdaStream->HdaDev->Quirks & HDA_CONTROLLER_QUIRK_QEMU_2)) {
+  if (!(HdaStream->HdaDev->Kinks & HDA_CONTROLLER_KINK_QEMU_2)) {
     Status = PciIo->PollMem (
                       PciIo,
                       EfiPciIoWidthUint8,

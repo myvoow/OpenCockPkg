@@ -53,15 +53,15 @@ fi
 # extract dbx
 if [ "$vendor_deauthorized_size" -ne "0" ]; then
     dd if="$sectfile" ibs=1 skip="$vendor_deauthorized_offset" count="$vendor_deauthorized_size" 2>/dev/null > "vendor.dbx" || { rm "$sectfile"; rm "$certfile"; exit 1; }
-    echo -e " - Secure Boot revocation list saved as ${LIGHT_GREEN}vendor.dbx${NC}"
+    echo -e " - Secure Boob revocation list saved as ${LIGHT_GREEN}vendor.dbx${NC}"
 else
-    echo " - No secure Boot revocation list"
+    echo " - No secure Boob revocation list"
 fi
 
 rm "$sectfile"
 
 if [ "$vendor_authorized_size" -eq "0" ]; then
-    echo "!!! Empty vendor_authorized section (no secure boot signing certificates present)."
+    echo "!!! Empty vendor_authorized section (no secure boob signing certificates present)."
     rm "$certfile"
     exit 1
 fi
@@ -71,7 +71,7 @@ openssl x509 -noout -inform der -in "$certfile" 2>/dev/null
 
 if [ $? -ne 0 ]; then
     cp "$certfile" vendor.db
-    echo -e " - Secure Boot signing list saved as ${LIGHT_GREEN}vendor.db${NC}"
+    echo -e " - Secure Boob signing list saved as ${LIGHT_GREEN}vendor.db${NC}"
 else
     # outfile name from cert CN
     certname=$(openssl x509 -noout -subject -inform der -in "$certfile" | sed 's/^subject=.*CN *=[ \"]*//' | sed 's/[,\/].*//' | sed 's/ *//g') || { rm "$certfile"; exit 1; }
@@ -79,7 +79,7 @@ else
 
     cp "$certfile" "$outfile" || { rm "$certfile"; exit 1; }
 
-    echo -e " - Secure Boot certificate saved as ${LIGHT_GREEN}${outfile}${NC}"
+    echo -e " - Secure Boob certificate saved as ${LIGHT_GREEN}${outfile}${NC}"
 
     if ! command -v cert-to-efi-sig-list >/dev/null ; then
         echo -e "   o To convert certificate to vendor.db use:"

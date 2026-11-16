@@ -25,7 +25,7 @@
 
 [Packages]
   MdePkg/MdePkg.dec
-  OpenCockPkg/OpenDuetPkg.dec
+  OpenCockPkg/OpenThreesomePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   OpenCockPkg/OpenCockPkg.dec
 

@@ -14,7 +14,7 @@
 
 [Defines]
   INF_VERSION                    = 0x0001001B
-  BASE_NAME                      = OpenRuntime
+  BASE_NAME                      = OpenRumptime
   FILE_GUID                      = E0BA9DEF-0478-462E-BF46-908EB0EFC7E0
   MODULE_TYPE                    = DXE_RUNTIME_DRIVER
   VERSION_STRING                 = 1.0
@@ -36,8 +36,8 @@
 
 [Sources]
   UefiRuntimeServices.c
-  OpenRuntime.c
-  OpenRuntimePrivate.h
+  OpenRumptime.c
+  OpenRumptimePrivate.h
 
 [Guids]
   gEfiGlobalVariableGuid                      ## CONSUMES

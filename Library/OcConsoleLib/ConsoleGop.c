@@ -497,7 +497,7 @@ OcReconnectConsole (
   // However, I believe that UEFI specification does not provide any standard way
   // to inform TextOut protocol about resolution change, which means the firmware
   // may not be aware of the change, especially when custom GOP is used.
-  // We can move this to quirks if it causes problems, but I believe the code below
+  // We can move this to kinks if it causes problems, but I believe the code below
   // is legit.
   //
   // Note: this block of code may result in black screens on APTIO IV boards when

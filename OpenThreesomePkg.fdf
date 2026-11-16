@@ -24,7 +24,7 @@
   [FV.DuetEfiMainFvIA32]
 !endif
 
-  !include OpenDuetPkgDefines.fdf.inc
+  !include OpenThreesomePkgDefines.fdf.inc
 
   # IDE/AHCI
   INF  MdeModulePkg/Bus/Pci/SataControllerDxe/SataControllerDxe.inf
@@ -48,7 +48,7 @@
   [FV.DuetEfiMainFvBlockIoIA32]
 !endif
 
-  !include OpenDuetPkgDefines.fdf.inc
+  !include OpenThreesomePkgDefines.fdf.inc
 
   # BIOS Block I/O
   INF OpenCockPkg/Legacy/BootPlatform/BlockIoDxe/BlockIoDxe.inf

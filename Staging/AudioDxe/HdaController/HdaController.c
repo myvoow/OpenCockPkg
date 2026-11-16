@@ -274,7 +274,7 @@ HdaControllerInitPciHw (
       return Status;
     }
   } else if (GET_PCI_VENDOR_ID (HdaControllerDev->VendorId) == VEN_VMWARE_ID) {
-    HdaControllerDev->Quirks |= HDA_CONTROLLER_QUIRK_CORB_NO_POLL_RESET;
+    HdaControllerDev->Kinks |= HDA_CONTROLLER_KINK_CORB_NO_POLL_RESET;
   }
 
   //
@@ -578,7 +578,7 @@ HdaControllerScanCodecs (
 
       if (PreScan) {
         if (GET_CODEC_VENDOR_ID (VendorResponse) == VEN_QEMU_ID) {
-          HdaControllerDev->Quirks |= HDA_CONTROLLER_QUIRK_QEMU_2;
+          HdaControllerDev->Kinks |= HDA_CONTROLLER_KINK_QEMU_2;
         }
       } else {
         HdaIoPrivateData = AllocateZeroPool (sizeof (HDA_IO_PRIVATE_DATA));
@@ -763,7 +763,7 @@ START:
 
       // If the read and write pointers differ, there are responses waiting.
       while (HdaDev->Rirb.Pointer != HdaRirbWritePointer) {
-        if (HdaDev->Quirks & HDA_CONTROLLER_QUIRK_QEMU_1) {
+        if (HdaDev->Kinks & HDA_CONTROLLER_KINK_QEMU_1) {
           // Clear response interrupt flags if set, in order to allow next response through in interrupt mode.
           RirbSts = 0;
           Status  = PciIo->Mem.Write (PciIo, EfiPciIoWidthUint8, PCI_HDA_BAR, HDA_REG_RIRBSTS, 1, &RirbSts);
@@ -1083,7 +1083,7 @@ HdaControllerDriverBindingStart (
 
   //
   // Open PCI I/O protocol.
-  // Access Denied typically means OpenCock DisconnectHda quirk is required
+  // Access Denied typically means OpenCock DisconnectHda kink is required
   // to free up the controller, e.g. on Apple hardware or VMware Fusion.
   //
   do {
@@ -1119,7 +1119,7 @@ HdaControllerDriverBindingStart (
         continue;
       }
 
-      DEBUG ((DEBUG_WARN, "HDA: %a%a - %r\n", "Open PCI I/O protocol", " (try DisconnectHda quirk?)", Status));
+      DEBUG ((DEBUG_WARN, "HDA: %a%a - %r\n", "Open PCI I/O protocol", " (try DisconnectHda kink?)", Status));
       return Status;
     }
   } while (EFI_ERROR (Status));
@@ -1158,7 +1158,7 @@ HdaControllerDriverBindingStart (
   HdaControllerDev->DriverBinding    = This;
   HdaControllerDev->ControllerHandle = ControllerHandle;
   HdaControllerDev->OpenMode         = OpenMode;
-  HdaControllerDev->Quirks           = HDA_CONTROLLER_QUIRK_INITIAL;
+  HdaControllerDev->Kinks           = HDA_CONTROLLER_KINK_INITIAL;
   InitializeSpinLock (&HdaControllerDev->SpinLock);
 
   //

@@ -312,7 +312,7 @@ SecureBootHook (
 }
 
 /**
-  Some Secure Boot Policy Variable may update following other variable changes(SecureBoot follows PK change, etc).
+  Some Secure Boob Policy Variable may update following other variable changes(SecureBoot follows PK change, etc).
   Record their initial State when variable write service is ready.
 
 **/

@@ -651,19 +651,19 @@ InternalAddKextPatch (
   IN OUT CACHELESS_CONTEXT      *Context,
   IN     CONST CHAR8            *Identifier,
   IN     PATCHER_GENERIC_PATCH  *Patch OPTIONAL,
-  IN     KERNEL_QUIRK_NAME      QuirkName
+  IN     KERNEL_KINK_NAME      KinkName
   )
 {
   EFI_STATUS    Status;
   PATCHED_KEXT  *PatchedKext;
   KEXT_PATCH    *KextPatch;
-  KERNEL_QUIRK  *KernelQuirk;
+  KERNEL_KINK  *KernelKink;
 
   if (Patch == NULL) {
-    KernelQuirk = &gKernelQuirks[QuirkName];
-    ASSERT (KernelQuirk->Identifier != NULL);
+    KernelKink = &gKernelKinks[KinkName];
+    ASSERT (KernelKink->Identifier != NULL);
 
-    Identifier = KernelQuirk->Identifier;
+    Identifier = KernelKink->Identifier;
   }
 
   //
@@ -691,10 +691,10 @@ InternalAddKextPatch (
     CopyMem (&KextPatch->Patch, Patch, sizeof (KextPatch->Patch));
   } else {
     //
-    // Apply quirk if no Patch.
+    // Apply kink if no Patch.
     //
-    KextPatch->ApplyQuirk = TRUE;
-    KextPatch->QuirkName  = QuirkName;
+    KextPatch->ApplyKink = TRUE;
+    KextPatch->KinkName  = KinkName;
   }
 
   InsertTailList (&PatchedKext->Patches, &KextPatch->Link);
@@ -1088,14 +1088,14 @@ CachelessContextAddPatch (
 }
 
 EFI_STATUS
-CachelessContextAddQuirk (
+CachelessContextAddKink (
   IN OUT CACHELESS_CONTEXT  *Context,
-  IN     KERNEL_QUIRK_NAME  Quirk
+  IN     KERNEL_KINK_NAME  Kink
   )
 {
   ASSERT (Context != NULL);
 
-  return InternalAddKextPatch (Context, NULL, NULL, Quirk);
+  return InternalAddKextPatch (Context, NULL, NULL, Kink);
 }
 
 EFI_STATUS
@@ -1595,13 +1595,13 @@ CachelessContextHookBuiltin (
       while (!IsNull (&PatchedKext->Patches, KextLink)) {
         KextPatch = GET_KEXT_PATCH_FROM_LINK (KextLink);
 
-        if (KextPatch->ApplyQuirk) {
-          Status = KernelApplyQuirk (KextPatch->QuirkName, &Patcher, Context->KernelVersion);
+        if (KextPatch->ApplyKink) {
+          Status = KernelApplyKink (KextPatch->KinkName, &Patcher, Context->KernelVersion);
           DEBUG ((
             EFI_ERROR (Status) ? DEBUG_WARN : DEBUG_INFO,
-            "OCAK: Cacheless kernel quirk result for %a (%u) - %r\n",
+            "OCAK: Cacheless kernel kink result for %a (%u) - %r\n",
             PatchedKext->Identifier,
-            KextPatch->QuirkName,
+            KextPatch->KinkName,
             Status
             ));
         } else {

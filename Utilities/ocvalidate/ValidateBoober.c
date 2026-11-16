@@ -30,7 +30,7 @@ CheckBooberMmioWhitelist (
   BOOLEAN      IsDevirtualiseMmioEnabled;
 
   ErrorCount                = 0;
-  IsDevirtualiseMmioEnabled = Config->Boober.Quirks.DevirtualiseMmio;
+  IsDevirtualiseMmioEnabled = Config->Boober.Kinks.DevirtualiseMmio;
 
   IsMmioWhitelistEnabled       = FALSE;
   ShouldEnableDevirtualiseMmio = FALSE;
@@ -134,7 +134,7 @@ CheckBooberPatch (
 
 STATIC
 UINT32
-CheckBooberQuirks (
+CheckBooberKinks (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
@@ -149,19 +149,19 @@ CheckBooberQuirks (
   BOOLEAN               IsDisableVariableWriteEnabled;
   BOOLEAN               IsEnableWriteUnprotectorEnabled;
   BOOLEAN               IsClearTaskSwitchBitEnabled;
-  BOOLEAN               HasOpenRuntimeEfiDriver;
+  BOOLEAN               HasOpenRumptimeEfiDriver;
   INT8                  ResizeAppleGpuBars;
 
   ErrorCount                      = 0;
-  IsAllowRelocationBlockEnabled   = Config->Boober.Quirks.AllowRelocationBlock;
-  IsProvideCustomSlideEnabled     = Config->Boober.Quirks.ProvideCustomSlide;
-  IsEnableSafeModeSlideEnabled    = Config->Boober.Quirks.EnableSafeModeSlide;
-  IsDisableVariableWriteEnabled   = Config->Boober.Quirks.DisableVariableWrite;
-  IsEnableWriteUnprotectorEnabled = Config->Boober.Quirks.EnableWriteUnprotector;
-  IsClearTaskSwitchBitEnabled     = Config->Boober.Quirks.ClearTaskSwitchBit;
-  HasOpenRuntimeEfiDriver         = FALSE;
-  MaxSlide                        = Config->Boober.Quirks.ProvideMaxSlide;
-  ResizeAppleGpuBars              = Config->Boober.Quirks.ResizeAppleGpuBars;
+  IsAllowRelocationBlockEnabled   = Config->Boober.Kinks.AllowRelocationBlock;
+  IsProvideCustomSlideEnabled     = Config->Boober.Kinks.ProvideCustomSlide;
+  IsEnableSafeModeSlideEnabled    = Config->Boober.Kinks.EnableSafeModeSlide;
+  IsDisableVariableWriteEnabled   = Config->Boober.Kinks.DisableVariableWrite;
+  IsEnableWriteUnprotectorEnabled = Config->Boober.Kinks.EnableWriteUnprotector;
+  IsClearTaskSwitchBitEnabled     = Config->Boober.Kinks.ClearTaskSwitchBit;
+  HasOpenRumptimeEfiDriver         = FALSE;
+  MaxSlide                        = Config->Boober.Kinks.ProvideMaxSlide;
+  ResizeAppleGpuBars              = Config->Boober.Kinks.ResizeAppleGpuBars;
 
   for (Index = 0; Index < Config->Uefi.Drivers.Count; ++Index) {
     DriverEntry = Config->Uefi.Drivers.Values[Index];
@@ -170,58 +170,58 @@ CheckBooberQuirks (
     //
     // Skip sanitising UEFI->Drivers as it will be performed when checking UEFI section.
     //
-    if (DriverEntry->Enabled && (AsciiStrCmp (Driver, "OpenRuntime.efi") == 0)) {
-      HasOpenRuntimeEfiDriver = TRUE;
+    if (DriverEntry->Enabled && (AsciiStrCmp (Driver, "OpenRumptime.efi") == 0)) {
+      HasOpenRumptimeEfiDriver = TRUE;
     }
   }
 
-  if (!HasOpenRuntimeEfiDriver) {
+  if (!HasOpenRumptimeEfiDriver) {
     if (IsProvideCustomSlideEnabled) {
-      DEBUG ((DEBUG_WARN, "Boober->Quirks->ProvideCustomSlide is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Kinks->ProvideCustomSlide is enabled, but OpenRumptime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
 
     if (IsDisableVariableWriteEnabled) {
-      DEBUG ((DEBUG_WARN, "Boober->Quirks->DisableVariableWrite is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Kinks->DisableVariableWrite is enabled, but OpenRumptime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
 
     if (IsEnableWriteUnprotectorEnabled) {
-      DEBUG ((DEBUG_WARN, "Boober->Quirks->EnableWriteUnprotector is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Kinks->EnableWriteUnprotector is enabled, but OpenRumptime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
 
     if (IsClearTaskSwitchBitEnabled) {
-      DEBUG ((DEBUG_WARN, "Boober->Quirks->ClearTaskSwitchBit is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Kinks->ClearTaskSwitchBit is enabled, but OpenRumptime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
   }
 
   if (!IsProvideCustomSlideEnabled) {
     if (IsAllowRelocationBlockEnabled) {
-      DEBUG ((DEBUG_WARN, "Boober->Quirks->AllowRelocationBlock is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Kinks->AllowRelocationBlock is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
       ++ErrorCount;
     }
 
     if (IsEnableSafeModeSlideEnabled) {
-      DEBUG ((DEBUG_WARN, "Boober->Quirks->EnableSafeModeSlide is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Kinks->EnableSafeModeSlide is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
       ++ErrorCount;
     }
 
     if (MaxSlide > 0) {
-      DEBUG ((DEBUG_WARN, "Boober->Quirks->ProvideMaxSlide is set to %u, but ProvideCustomSlide is not enabled altogether!\n", MaxSlide));
+      DEBUG ((DEBUG_WARN, "Boober->Kinks->ProvideMaxSlide is set to %u, but ProvideCustomSlide is not enabled altogether!\n", MaxSlide));
       ++ErrorCount;
     }
   }
 
   if (ResizeAppleGpuBars > 10) {
-    DEBUG ((DEBUG_WARN, "Boober->Quirks->ResizeAppleGpuBars is set to %d, which is unsupported by macOS!\n", Config->Boober.Quirks.ResizeAppleGpuBars));
+    DEBUG ((DEBUG_WARN, "Boober->Kinks->ResizeAppleGpuBars is set to %d, which is unsupported by macOS!\n", Config->Boober.Kinks.ResizeAppleGpuBars));
     ++ErrorCount;
   } else if (ResizeAppleGpuBars > 8) {
-    DEBUG ((DEBUG_WARN, "Boober->Quirks->ResizeAppleGpuBars is set to %d, which is unstable with macOS sleep-wake!\n", Config->Boober.Quirks.ResizeAppleGpuBars));
+    DEBUG ((DEBUG_WARN, "Boober->Kinks->ResizeAppleGpuBars is set to %d, which is unstable with macOS sleep-wake!\n", Config->Boober.Kinks.ResizeAppleGpuBars));
     ++ErrorCount;
   } else if (ResizeAppleGpuBars > 0) {
-    DEBUG ((DEBUG_WARN, "Boober->Quirks->ResizeAppleGpuBars is set to %d, which is not useful for macOS!\n", Config->Boober.Quirks.ResizeAppleGpuBars));
+    DEBUG ((DEBUG_WARN, "Boober->Kinks->ResizeAppleGpuBars is set to %d, which is not useful for macOS!\n", Config->Boober.Kinks.ResizeAppleGpuBars));
     ++ErrorCount;
   }
 
@@ -238,7 +238,7 @@ CheckBoober (
   STATIC CONFIG_CHECK  BooberCheckers[] = {
     &CheckBooberMmioWhitelist,
     &CheckBooberPatch,
-    &CheckBooberQuirks
+    &CheckBooberKinks
   };
 
   DEBUG ((DEBUG_VERBOSE, "config loaded into %a!\n", __func__));

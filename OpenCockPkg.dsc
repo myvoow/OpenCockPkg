@@ -314,12 +314,12 @@
   OpenCockPkg/Legacy/BootPlatform/BiosVideo/BiosVideo.inf
   OpenCockPkg/Platform/CrScreenshotDxe/CrScreenshotDxe.inf
   OpenCockPkg/Platform/OpenCanopy/OpenCanopy.inf
-  OpenCockPkg/Platform/OpenLegacyBoot/OpenLegacyBoot.inf
-  OpenCockPkg/Platform/OpenLinuxBoot/OpenLinuxBoot.inf
-  OpenCockPkg/Platform/OpenNetworkBoot/OpenNetworkBoot.inf
+  OpenCockPkg/Platform/OpenLegacyBoob/OpenLegacyBoob.inf
+  OpenCockPkg/Platform/OpenLinuxBoob/OpenLinuxBoob.inf
+  OpenCockPkg/Platform/OpenNetworkBoob/OpenNetworkBoob.inf
   OpenCockPkg/Platform/OpenNtfsDxe/OpenNtfsDxe.inf
   OpenCockPkg/Platform/OpenPartitionDxe/PartitionDxe.inf
-  OpenCockPkg/Platform/OpenRuntime/OpenRuntime.inf
+  OpenCockPkg/Platform/OpenRumptime/OpenRumptime.inf
   OpenCockPkg/Platform/OpenUsbKbDxe/UsbKbDxe.inf
   OpenCockPkg/Platform/OpenVariableRuntimeDxe/VariableRuntimeDxe.inf {
     <PcdsFixedAtBuild>

@@ -1,5 +1,5 @@
 /** @file
-  OC Apple Secure Boot library.
+  OC Apple Secure Boob library.
 
 Copyright (C) 2019, Download-Fritz.  All rights reserved.<BR>
 This program and the accompanying materials are licensed and made available
@@ -140,10 +140,10 @@ OcAppleSecureBootBoobstrapValues (
 }
 
 /**
-  Sets the Secure Boot availability state.
+  Sets the Secure Boob availability state.
 
   @param[in] This       A pointer to the current protocol instance.
-  @param[in] Available  The new availability status for Secure Boot.
+  @param[in] Available  The new availability status for Secure Boob.
 
 **/
 STATIC
@@ -158,10 +158,10 @@ AppleSbSetAvailability (
 }
 
 /**
-  Retrieves the current Secure Boot Windows policy.
+  Retrieves the current Secure Boob Windows policy.
 
   @param[in]  This    A pointer to the current protocol instance.
-  @param[out] Policy  On output, the current Secure Boot Windows policy.
+  @param[out] Policy  On output, the current Secure Boob Windows policy.
 
   @retval EFI_SUCCESS            The current policy has been returned.
   @retval EFI_INVALID_PARAMETER  One or more required parameters are NULL.
@@ -194,7 +194,7 @@ AppleSbGetWindowsPolicy (
 }
 
 /**
-  Retrieves the current Secure Boot Windows failure reason.
+  Retrieves the current Secure Boob Windows failure reason.
 
   @param[in]  This    A pointer to the current protocol instance.
   @param[out] Reason  On output, the current Windows failure reason.
@@ -234,13 +234,13 @@ AppleSbGetWindowsFailureReason (
 }
 
 /**
-  Sets the Secure Boot Windows failure reason.
+  Sets the Secure Boob Windows failure reason.
 
   @param[in] This    A pointer to the current protocol instance.
   @param[in] Reason  The Windows failure reason to set.
 
   @retval EFI_SUCCESS      The failure reason has been set successfully.
-  @retval EFI_UNSUPPORTED  Secure Boot is currently unavailable.
+  @retval EFI_UNSUPPORTED  Secure Boob is currently unavailable.
 
 **/
 STATIC
@@ -318,7 +318,7 @@ InternalReadFile (
 }
 
 /**
-  Retrieves the current Secure Boot failure reason.
+  Retrieves the current Secure Boob failure reason.
 
   @param[in]  This    A pointer to the current protocol instance.
   @param[out] Reason  On output, the current failure reason.
@@ -358,13 +358,13 @@ AppleSbGetFailureReason (
 }
 
 /**
-  Sets the Secure Boot failure reason.
+  Sets the Secure Boob failure reason.
 
   @param[in] This    A pointer to the current protocol instance.
   @param[in] Reason  The failure reason to set.
 
   @retval EFI_SUCCESS      The failure reason has been set successfully.
-  @retval EFI_UNSUPPORTED  Secure Boot is currently unavailable.
+  @retval EFI_UNSUPPORTED  Secure Boob is currently unavailable.
 
 **/
 STATIC
@@ -389,7 +389,7 @@ AppleSbSetFailureReason (
 }
 
 /**
-  Retrieves the current Secure Boot Kernel failure reason.
+  Retrieves the current Secure Boob Kernel failure reason.
 
   @param[in]  This    A pointer to the current protocol instance.
   @param[out] Reason  On output, the current Kernel failure reason.
@@ -429,13 +429,13 @@ AppleSbGetKernelFailureReason (
 }
 
 /**
-  Sets the Secure Boot Kernel failure reason.
+  Sets the Secure Boob Kernel failure reason.
 
   @param[in] This    A pointer to the current protocol instance.
   @param[in] Reason  The Kernel failure reason to set.
 
   @retval EFI_SUCCESS      The failure reason has been set successfully.
-  @retval EFI_UNSUPPORTED  Secure Boot is currently unavailable.
+  @retval EFI_UNSUPPORTED  Secure Boob is currently unavailable.
 
 **/
 STATIC
@@ -460,10 +460,10 @@ AppleSbSetKernelFailureReason (
 }
 
 /**
-  Retrieves the current Secure Boot policy.
+  Retrieves the current Secure Boob policy.
 
   @param[in]  This    A pointer to the current protocol instance.
-  @param[out] Policy  On output, the current Secure Boot policy.
+  @param[out] Policy  On output, the current Secure Boob policy.
 
   @retval EFI_SUCCESS            The current policy has been returned.
   @retval EFI_INVALID_PARAMETER  One or more required parameters are NULL.
@@ -525,7 +525,7 @@ InternalVerifyImg4Worker (
   }
 
   //
-  // Apple Secure Boot Policy matches SB Mode so far.
+  // Apple Secure Boob Policy matches SB Mode so far.
   //
   if ((SbPolicy != AppleImg4SbModeMedium) && (SbPolicy != AppleImg4SbModeFull)) {
     return EFI_LOAD_ERROR;
@@ -687,7 +687,7 @@ InternalGetImg4ByPath (
   @retval EFI_SUCCESS             The file at DevicePath is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_OUT_OF_RESOURCES    Not enough resources are available.
   @retval EFI_NO_MEDIA            The file at DevicePath could not be read.
@@ -727,7 +727,7 @@ AppleSbVerifyImg4ByPath (
   @retval EFI_SUCCESS             ImageBuffer is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_OUT_OF_RESOURCES    Not enough resources are available.
   @retval EFI_SECURITY_VIOLATION  ImageBuffer's signature is invalid.
@@ -799,7 +799,7 @@ AppleSbVerifyImg4 (
   @retval EFI_SUCCESS             The file at DevicePath is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_OUT_OF_RESOURCES    Not enough resources are available.
   @retval EFI_NO_MEDIA            The file at DevicePath could not be read.
@@ -835,7 +835,7 @@ AppleSbVerifyWindowsByPath (
   @retval EFI_SUCCESS             ImageBuffer is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_ACCESS DENIED       A suiting certificate could not be found.
   @retval EFI_SECURITY_VIOLATION  TargetBuffer's signature is invalid.
@@ -870,7 +870,7 @@ AppleSbVerifyWindows (
     AppleSbGetWindowsPolicy (This, &WinPolicy);
     if (WinPolicy == 1) {
       //
-      // We rely on UEFI Secure Boot to perform the verification.
+      // We rely on UEFI Secure Boob to perform the verification.
       //
       Status = EFI_SUCCESS;
     } else if (WinPolicy != 0) {
@@ -998,10 +998,10 @@ OcAppleSecureBootSetDmgLoading (
   }
 
   if (LoadingDmg) {
-    DEBUG ((DEBUG_INFO, "OCSB: Disabling secure boot for Apple images\n"));
+    DEBUG ((DEBUG_INFO, "OCSB: Disabling secure boob for Apple images\n"));
     mSecureBoot->SetAvailability (mSecureBoot, FALSE);
   } else {
-    DEBUG ((DEBUG_INFO, "OCSB: Reenabling secure boot after Apple images\n"));
+    DEBUG ((DEBUG_INFO, "OCSB: Reenabling secure boob after Apple images\n"));
     mSecureBoot->SetAvailability (mSecureBoot, TRUE);
   }
 }
@@ -1043,7 +1043,7 @@ OcAppleSecureBootVerify (
                          &Policy
                          );
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_WARN, "OCSB: No secure boot policy - %r\n", Status));
+    DEBUG ((DEBUG_WARN, "OCSB: No secure boob policy - %r\n", Status));
     return EFI_SECURITY_VIOLATION;
   }
 
@@ -1063,7 +1063,7 @@ OcAppleSecureBootVerify (
   // For everything else it is unsupported, meaning let the system decide.
   //
   if (Policy == AppleImg4SbModeDisabled) {
-    DEBUG ((DEBUG_INFO, "OCSB: Secure boot is disabled, skipping\n"));
+    DEBUG ((DEBUG_INFO, "OCSB: Secure boob is disabled, skipping\n"));
     return EFI_UNSUPPORTED;
   }
 

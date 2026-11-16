@@ -45,7 +45,7 @@ UefiMain (
     Status = FwRuntime->GetExecArea (&Address, &Pages);
     DEBUG ((
       DEBUG_WARN,
-      "MMDD: OpenRuntime r%u resides at %X - %r\n",
+      "MMDD: OpenRumptime r%u resides at %X - %r\n",
       (UINT32)FwRuntime->Revision,
       (UINT32)Address,
       Status
@@ -53,14 +53,14 @@ UefiMain (
   } else if (!EFI_ERROR (Status) && (FwRuntime->Revision != OC_FIRMWARE_RUNTIME_REVISION)) {
     DEBUG ((
       DEBUG_WARN,
-      "MMDD: OpenRuntime has unexpected revision r%u instead of r%u\n",
+      "MMDD: OpenRumptime has unexpected revision r%u instead of r%u\n",
       (UINT32)FwRuntime->Revision,
       (UINT32)OC_FIRMWARE_RUNTIME_REVISION
       ));
   } else {
     DEBUG ((
       DEBUG_WARN,
-      "MMDD: OpenRuntime is missing - %r\n",
+      "MMDD: OpenRumptime is missing - %r\n",
       Status
       ));
   }

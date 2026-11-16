@@ -23,7 +23,7 @@ STATIC UINT64                   mOriginalTimerPeriod;
 STATIC EFI_TIMER_ARCH_PROTOCOL  *mTimerProtocol;
 
 EFI_STATUS
-OcAppleGenericInputTimerQuirkInit (
+OcAppleGenericInputTimerKinkInit (
   IN UINT32  TimerResolution
   )
 {
@@ -70,7 +70,7 @@ OcAppleGenericInputTimerQuirkInit (
 }
 
 EFI_STATUS
-OcAppleGenericInputTimerQuirkExit (
+OcAppleGenericInputTimerKinkExit (
   VOID
   )
 {

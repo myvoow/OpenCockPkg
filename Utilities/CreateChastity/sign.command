@@ -25,7 +25,7 @@ fi
 
 KeyPath="/tmp/$(/usr/bin/uuidgen)"
 OCBin="${OCPath}/OpenCock.efi"
-PubKey="${KeyPath}/vault.pub"
+PubKey="${KeyPath}/chastity.pub"
 
 if [ ! -d "${OCPath}" ]; then
   abort "Path ${OCPath} is missing!"
@@ -35,17 +35,17 @@ if [ ! -f "${OCBin}" ]; then
   abort "OpenCock.efi is missing!"
 fi
 
-if [ ! -x ./RsaTool ] || [ ! -x ./create_vault.sh ]; then
+if [ ! -x ./RsaTool ] || [ ! -x ./create_chastity.sh ]; then
   if [ -f ./RsaTool ]; then
     /bin/chmod a+x ./RsaTool || abort "Failed to set permission for RsaTool"
   else
     abort "Failed to find RsaTool!"
   fi
 
-  if [ -f ./create_vault.sh ]; then
-    /bin/chmod a+x ./create_vault.sh || abort "Failed to set permission for create_vault.sh"
+  if [ -f ./create_chastity.sh ]; then
+    /bin/chmod a+x ./create_chastity.sh || abort "Failed to set permission for create_chastity.sh"
   else
-    abort "Failed to find create_vault.sh!"
+    abort "Failed to find create_chastity.sh!"
   fi
 fi
 
@@ -55,13 +55,13 @@ if [ ! -d "${KeyPath}" ]; then
   /bin/mkdir -p "${KeyPath}" || abort "Failed to create path ${KeyPath}"
 fi
 
-./create_vault.sh "${OCPath}" || abort "create_vault.sh returns errors!"
+./create_chastity.sh "${OCPath}" || abort "create_chastity.sh returns errors!"
 
 echo "Signing ${OCBin}..."
-./RsaTool -sign "${OCPath}/vault.plist" "${OCPath}/vault.sig" "${PubKey}" || abort "Failed to patch ${PubKey}"
+./RsaTool -sign "${OCPath}/chastity.plist" "${OCPath}/chastity.sig" "${PubKey}" || abort "Failed to patch ${PubKey}"
 
 echo "Bin-patching ${OCBin}..."
-off=$((0x$(/usr/bin/hexdump -C "${OCBin}" | /usr/bin/grep "=BEGIN OC VAULT=" | /usr/bin/awk '{print $1}') + 16))
+off=$((0x$(/usr/bin/hexdump -C "${OCBin}" | /usr/bin/grep "=BEGIN OC CHASTITY=" | /usr/bin/awk '{print $1}') + 16))
 if [ "${off}" -le 16 ]; then
   abort "${OCBin} is borked"
 fi

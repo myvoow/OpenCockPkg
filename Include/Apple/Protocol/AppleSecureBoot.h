@@ -1,5 +1,5 @@
 /** @file
-  The Apple Secure Boot protocol provides services to verify a trusted image's
+  The Apple Secure Boob protocol provides services to verify a trusted image's
   integrity.
 
 Copyright (C) 2019, Download-Fritz.  All rights reserved.<BR>
@@ -56,10 +56,10 @@ typedef struct APPLE_SECURE_BOOT_PROTOCOL_ APPLE_SECURE_BOOT_PROTOCOL;
 #define APPLE_SB_OBJ_KERNEL_DEBUG  APPLE_SB_OBJ_TYPE ('m', 'k', 'r', 'd')
 
 /**
-  Sets the Secure Boot availability state.
+  Sets the Secure Boob availability state.
 
   @param[in] This       A pointer to the current protocol instance.
-  @param[in] Available  The new availability status for Secure Boot.
+  @param[in] Available  The new availability status for Secure Boob.
 
 **/
 typedef
@@ -81,7 +81,7 @@ VOID
   @retval EFI_SUCCESS             The file at DevicePath is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_OUT_OF_RESOURCES    Not enough resources are available.
   @retval EFI_NO_MEDIA            The file at DevicePath could not be read.
@@ -112,7 +112,7 @@ EFI_STATUS
   @retval EFI_SUCCESS             ImageBuffer is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_OUT_OF_RESOURCES    Not enough resources are available.
   @retval EFI_SECURITY_VIOLATION  ImageBuffer's signature is invalid.
@@ -131,10 +131,10 @@ EFI_STATUS
   );
 
 /**
-  Retrieves the current Secure Boot policy.
+  Retrieves the current Secure Boob policy.
 
   @param[in]  This    A pointer to the current protocol instance.
-  @param[out] Policy  On output, the current Secure Boot policy.
+  @param[out] Policy  On output, the current Secure Boob policy.
 
   @retval EFI_SUCCESS            The current policy has been returned.
   @retval EFI_INVALID_PARAMETER  One or more required parameters are NULL.
@@ -149,7 +149,7 @@ EFI_STATUS
   );
 
 /**
-  Retrieves the current Secure Boot failure reason.
+  Retrieves the current Secure Boob failure reason.
 
   @param[in]  This    A pointer to the current protocol instance.
   @param[out] Reason  On output, the current failure reason.
@@ -166,13 +166,13 @@ EFI_STATUS
   );
 
 /**
-  Sets the Secure Boot failure reason.
+  Sets the Secure Boob failure reason.
 
   @param[in] This    A pointer to the current protocol instance.
   @param[in] Reason  The failure reason to set.
 
   @retval EFI_SUCCESS      The failure reason has been set successfully.
-  @retval EFI_UNSUPPORTED  Secure Boot is currently unavailable.
+  @retval EFI_UNSUPPORTED  Secure Boob is currently unavailable.
 
 **/
 typedef
@@ -183,7 +183,7 @@ EFI_STATUS
   );
 
 /**
-  Retrieves the current Secure Boot Kernel failure reason.
+  Retrieves the current Secure Boob Kernel failure reason.
 
   @param[in]  This    A pointer to the current protocol instance.
   @param[out] Reason  On output, the current Kernel failure reason.
@@ -200,13 +200,13 @@ EFI_STATUS
   );
 
 /**
-  Sets the Secure Boot Kernel failure reason.
+  Sets the Secure Boob Kernel failure reason.
 
   @param[in] This    A pointer to the current protocol instance.
   @param[in] Reason  The Kernel failure reason to set.
 
   @retval EFI_SUCCESS      The failure reason has been set successfully.
-  @retval EFI_UNSUPPORTED  Secure Boot is currently unavailable.
+  @retval EFI_UNSUPPORTED  Secure Boob is currently unavailable.
 
 **/
 typedef
@@ -227,7 +227,7 @@ EFI_STATUS
   @retval EFI_SUCCESS             The file at DevicePath is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_OUT_OF_RESOURCES    Not enough resources are available.
   @retval EFI_NO_MEDIA            The file at DevicePath could not be read.
@@ -254,7 +254,7 @@ EFI_STATUS
   @retval EFI_SUCCESS             ImageBuffer is correctly signed.
   @retval EFI_LOAD_ERROR          The current policy is invalid.
   @retval EFI_INVALID_PARAMETER   One or more required parameters are NULL.
-  @retval EFI_UNSUPPORTED         Secure Boot is currently unavailable or
+  @retval EFI_UNSUPPORTED         Secure Boob is currently unavailable or
                                   disabled.
   @retval EFI_ACCESS DENIED       A suiting certificate could not be found.
   @retval EFI_SECURITY_VIOLATION  ImageBuffer's signature is invalid.
@@ -270,10 +270,10 @@ EFI_STATUS
   );
 
 /**
-  Retrieves the current Secure Boot Windows policy.
+  Retrieves the current Secure Boob Windows policy.
 
   @param[in]  This    A pointer to the current protocol instance.
-  @param[out] Policy  On output, the current Secure Boot Windows policy.
+  @param[out] Policy  On output, the current Secure Boob Windows policy.
 
   @retval EFI_SUCCESS            The current policy has been returned.
   @retval EFI_INVALID_PARAMETER  One or more required parameters are NULL.
@@ -288,7 +288,7 @@ EFI_STATUS
   );
 
 /**
-  Retrieves the current Secure Boot Windows failure reason.
+  Retrieves the current Secure Boob Windows failure reason.
 
   @param[in]  This    A pointer to the current protocol instance.
   @param[out] Reason  On output, the current Windows failure reason.
@@ -305,13 +305,13 @@ EFI_STATUS
   );
 
 /**
-  Sets the Secure Boot Windows failure reason.
+  Sets the Secure Boob Windows failure reason.
 
   @param[in] This    A pointer to the current protocol instance.
   @param[in] Reason  The Windows failure reason to set.
 
   @retval EFI_SUCCESS      The failure reason has been set successfully.
-  @retval EFI_UNSUPPORTED  Secure Boot is currently unavailable.
+  @retval EFI_UNSUPPORTED  Secure Boob is currently unavailable.
 
 **/
 typedef

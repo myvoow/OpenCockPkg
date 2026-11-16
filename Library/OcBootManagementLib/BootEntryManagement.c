@@ -805,7 +805,7 @@ InternalAddBootEntryFromCustomEntry (
     //
     // NOTE: It is not currently necessary/useful to apply .contentDetails around here because:
     //  a) Entries have user-specified names already.
-    //  b) OpenLinuxBoot needs to read the label file early, when allowed by picker attributes,
+    //  b) OpenLinuxBoob needs to read the label file early, when allowed by picker attributes,
     //     so it can be used for pretty name with kernel version appended when required.
     // If any future boot entry protocol drivers do want .contentDetails applied for them, we will need
     // to pass back an entry flag indicating whether .contentDetails has already been applied or not.
@@ -2110,7 +2110,7 @@ OcScanForBootEntries (
   OC_BOOT_FILESYSTEM         *FileSystem;
   OC_BOOT_FILESYSTEM         *CustomFileSystem;
   OC_BOOT_FILESYSTEM         *CustomFileSystemDefault;
-  UINT32                     DefaultCustomIndex;    ///< Index if Tools or Entries item is pre-created
+  UINT32                     DefaultCustomIndex;    ///< Index if Toys or Entries item is pre-created
   CHAR16                     *DefaultEntryId;       ///< ID if boot entry protocol item is pre-created
   EFI_GUID                   DefaultEntryPartuuid;  ///< PARTUUID for pre-created boot entry protocol item
   BOOLEAN                    IsDefaultEntryProtocolPartition;

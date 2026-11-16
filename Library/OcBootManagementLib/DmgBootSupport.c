@@ -503,7 +503,7 @@ InternalLoadDmg (
 
   if (DevPath != NULL) {
     //
-    // If we succeeded, we need to disable Apple Secure Boot, as DMG images
+    // If we succeeded, we need to disable Apple Secure Boob, as DMG images
     // are currently only verified with the chunklist.
     //
     OcAppleSecureBootSetDmgLoading (TRUE);
@@ -536,7 +536,7 @@ InternalUnloadDmg (
     FreePool (DmgLoadContext->DmgContext);
     DmgLoadContext->DevicePath = NULL;
     //
-    // This code should never execute, as with Apple Secure Boot
+    // This code should never execute, as with Apple Secure Boob
     // it should always reboot on failure, but just in case.
     //
     OcAppleSecureBootSetDmgLoading (FALSE);

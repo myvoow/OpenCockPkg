@@ -226,24 +226,24 @@ OcLoadAcpiSupport (
 
   OcAcpiDeleteTables (Config, &Context);
 
-  if (Config->Acpi.Quirks.RebaseRegions) {
+  if (Config->Acpi.Kinks.RebaseRegions) {
     AcpiLoadRegions (&Context);
   }
 
-  if (Config->Acpi.Quirks.FadtEnableReset) {
+  if (Config->Acpi.Kinks.FadtEnableReset) {
     AcpiFadtEnableReset (&Context);
   }
 
-  if (Config->Acpi.Quirks.ResetLogoStatus) {
+  if (Config->Acpi.Kinks.ResetLogoStatus) {
     AcpiResetLogoStatus (&Context);
   }
 
   //
   // Log hardware signature.
   //
-  AcpiHandleHardwareSignature (&Context, Config->Acpi.Quirks.ResetHwSig);
+  AcpiHandleHardwareSignature (&Context, Config->Acpi.Kinks.ResetHwSig);
 
-  if (Config->Acpi.Quirks.NormalizeHeaders) {
+  if (Config->Acpi.Kinks.NormalizeHeaders) {
     AcpiNormalizeHeaders (&Context);
   }
 
@@ -251,11 +251,11 @@ OcLoadAcpiSupport (
 
   OcAcpiAddTables (Config, Storage, &Context);
 
-  if (Config->Acpi.Quirks.RebaseRegions) {
+  if (Config->Acpi.Kinks.RebaseRegions) {
     AcpiRelocateRegions (&Context);
   }
 
-  if (Config->Acpi.Quirks.SyncTableIds) {
+  if (Config->Acpi.Kinks.SyncTableIds) {
     AcpiSyncTableIds (&Context);
   }
 

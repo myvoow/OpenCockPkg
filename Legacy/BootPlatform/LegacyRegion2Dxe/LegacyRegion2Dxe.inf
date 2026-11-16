@@ -41,7 +41,7 @@
   LegacyRegion2.h
 
 [Packages]
-  OpenCockPkg/OpenDuetPkg.dec
+  OpenCockPkg/OpenThreesomePkg.dec
   OpenCockPkg/OpenCockPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec

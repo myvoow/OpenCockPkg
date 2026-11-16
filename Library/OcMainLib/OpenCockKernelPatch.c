@@ -30,8 +30,8 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #include <Library/UefiBootServicesTableLib.h>
 
 EFI_STATUS
-OcKernelApplyQuirk (
-  IN     KERNEL_QUIRK_NAME  Quirk,
+OcKernelApplyKink (
+  IN     KERNEL_KINK_NAME  Kink,
   IN     KERNEL_CACHE_TYPE  CacheType,
   IN     UINT32             DarwinVersion,
   IN OUT VOID               *Context,
@@ -39,23 +39,23 @@ OcKernelApplyQuirk (
   )
 {
   //
-  // Apply kernel quirks to kernel, kext patches to context.
+  // Apply kernel kinks to kernel, kext patches to context.
   //
   if (Context == NULL) {
     ASSERT (KernelPatcher != NULL);
-    return KernelApplyQuirk (Quirk, KernelPatcher, DarwinVersion);
+    return KernelApplyKink (Kink, KernelPatcher, DarwinVersion);
   }
 
   if (CacheType == CacheTypeCacheless) {
-    return CachelessContextAddQuirk (Context, Quirk);
+    return CachelessContextAddKink (Context, Kink);
   }
 
   if (CacheType == CacheTypeMkext) {
-    return MkextContextApplyQuirk (Context, Quirk, DarwinVersion);
+    return MkextContextApplyKink (Context, Kink, DarwinVersion);
   }
 
   if (CacheType == CacheTypePrelinked) {
-    return PrelinkedContextApplyQuirk (Context, Quirk, DarwinVersion);
+    return PrelinkedContextApplyKink (Context, Kink, DarwinVersion);
   }
 
   return EFI_UNSUPPORTED;
@@ -117,65 +117,65 @@ OcKernelApplyPatches (
   }
 
   //
-  // Handle Quirks/Emulate here...
+  // Handle Kinks/Emulate here...
   //
   if (!IsKernelPatch) {
-    if (Config->Kernel.Quirks.AppleCpuPmCfgLock) {
-      OcKernelApplyQuirk (KernelQuirkAppleCpuPmCfgLock, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.AppleCpuPmCfgLock) {
+      OcKernelApplyKink (KernelKinkAppleCpuPmCfgLock, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.ExternalDiskIcons) {
-      OcKernelApplyQuirk (KernelQuirkExternalDiskIcons, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.ExternalDiskIcons) {
+      OcKernelApplyKink (KernelKinkExternalDiskIcons, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.ThirdPartyDrives) {
-      OcKernelApplyQuirk (KernelQuirkThirdPartyDrives, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.ThirdPartyDrives) {
+      OcKernelApplyKink (KernelKinkThirdPartyDrives, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.XhciPortLimit) {
-      OcKernelApplyQuirk (KernelQuirkXhciPortLimit1, CacheType, DarwinVersion, Context, NULL);
-      OcKernelApplyQuirk (KernelQuirkXhciPortLimit2, CacheType, DarwinVersion, Context, NULL);
-      OcKernelApplyQuirk (KernelQuirkXhciPortLimit3, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.XhciPortLimit) {
+      OcKernelApplyKink (KernelKinkXhciPortLimit1, CacheType, DarwinVersion, Context, NULL);
+      OcKernelApplyKink (KernelKinkXhciPortLimit2, CacheType, DarwinVersion, Context, NULL);
+      OcKernelApplyKink (KernelKinkXhciPortLimit3, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.DisableIoMapper) {
-      OcKernelApplyQuirk (KernelQuirkDisableIoMapper, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.DisableIoMapper) {
+      OcKernelApplyKink (KernelKinkDisableIoMapper, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.DisableIoMapperMapping) {
-      OcKernelApplyQuirk (KernelQuirkDisableIoMapperMapping, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.DisableIoMapperMapping) {
+      OcKernelApplyKink (KernelKinkDisableIoMapperMapping, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.DisableRtcChecksum) {
-      OcKernelApplyQuirk (KernelQuirkDisableRtcChecksum, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.DisableRtcChecksum) {
+      OcKernelApplyKink (KernelKinkDisableRtcChecksum, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.IncreasePciBarSize) {
-      OcKernelApplyQuirk (KernelQuirkIncreasePciBarSize, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.IncreasePciBarSize) {
+      OcKernelApplyKink (KernelKinkIncreasePciBarSize, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.CustomSmbiosGuid) {
-      OcKernelApplyQuirk (KernelQuirkCustomSmbiosGuid1, CacheType, DarwinVersion, Context, NULL);
-      OcKernelApplyQuirk (KernelQuirkCustomSmbiosGuid2, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.CustomSmbiosGuid) {
+      OcKernelApplyKink (KernelKinkCustomSmbiosGuid1, CacheType, DarwinVersion, Context, NULL);
+      OcKernelApplyKink (KernelKinkCustomSmbiosGuid2, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.ExtendBTFeatureFlags) {
-      OcKernelApplyQuirk (KernelQuirkExtendBTFeatureFlags, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.ExtendBTFeatureFlags) {
+      OcKernelApplyKink (KernelKinkExtendBTFeatureFlags, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.ForceAquantiaEthernet) {
-      OcKernelApplyQuirk (KernelQuirkForceAquantiaEthernet, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.ForceAquantiaEthernet) {
+      OcKernelApplyKink (KernelKinkForceAquantiaEthernet, CacheType, DarwinVersion, Context, NULL);
     }
 
-    if (Config->Kernel.Quirks.ForceSecureBootScheme) {
-      OcKernelApplyQuirk (KernelQuirkForceSecureBootScheme, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.ForceSecureBootScheme) {
+      OcKernelApplyKink (KernelKinkForceSecureBootScheme, CacheType, DarwinVersion, Context, NULL);
     }
 
     if (Config->Kernel.Emulate.DummyPowerManagement) {
       MaxKernel = OcParseDarwinVersion (OC_BLOB_GET (&Config->Kernel.Emulate.MaxKernel));
       MinKernel = OcParseDarwinVersion (OC_BLOB_GET (&Config->Kernel.Emulate.MinKernel));
       if (OcMatchDarwinVersion (DarwinVersion, MinKernel, MaxKernel)) {
-        OcKernelApplyQuirk (KernelQuirkDummyPowerManagement, CacheType, DarwinVersion, Context, NULL);
+        OcKernelApplyKink (KernelKinkDummyPowerManagement, CacheType, DarwinVersion, Context, NULL);
       } else {
         DEBUG ((
           DEBUG_INFO,
@@ -191,41 +191,41 @@ OcKernelApplyPatches (
     //
     // Ignore timeout -1.
     //
-    if (Config->Kernel.Quirks.SetApfsTrimTimeout >= 0) {
-      PatchSetApfsTimeout ((UINT32)Config->Kernel.Quirks.SetApfsTrimTimeout);
-      OcKernelApplyQuirk (KernelQuirkSetApfsTrimTimeout, CacheType, DarwinVersion, Context, NULL);
+    if (Config->Kernel.Kinks.SetApfsTrimTimeout >= 0) {
+      PatchSetApfsTimeout ((UINT32)Config->Kernel.Kinks.SetApfsTrimTimeout);
+      OcKernelApplyKink (KernelKinkSetApfsTrimTimeout, CacheType, DarwinVersion, Context, NULL);
     }
   } else {
-    if (Config->Kernel.Quirks.AppleXcpmCfgLock) {
-      OcKernelApplyQuirk (KernelQuirkAppleXcpmCfgLock, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.AppleXcpmCfgLock) {
+      OcKernelApplyKink (KernelKinkAppleXcpmCfgLock, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
-    if (Config->Kernel.Quirks.AppleXcpmExtraMsrs) {
-      OcKernelApplyQuirk (KernelQuirkAppleXcpmExtraMsrs, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.AppleXcpmExtraMsrs) {
+      OcKernelApplyKink (KernelKinkAppleXcpmExtraMsrs, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
-    if (Config->Kernel.Quirks.AppleXcpmForceBoost) {
-      OcKernelApplyQuirk (KernelQuirkAppleXcpmForceBoost, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.AppleXcpmForceBoost) {
+      OcKernelApplyKink (KernelKinkAppleXcpmForceBoost, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
     //
     // Only apply the patch when Misc->Serial->Custom is set (i.e. Override).
     //
-    if (Config->Misc.Serial.Override && Config->Kernel.Quirks.CustomPciSerialDevice) {
+    if (Config->Misc.Serial.Override && Config->Kernel.Kinks.CustomPciSerialDevice) {
       RegisterBase   = GetSerialRegisterBase ();
       RegisterStride = PatchPcdGet32 (PcdSerialRegisterStride);
       if (  (((RegisterBase != 0) && (RegisterStride != 0)))
          && ((RegisterBase != 0x3F8U) || (RegisterStride != 1)))
       {
         PatchSetPciSerialDevice (RegisterBase, RegisterStride);
-        OcKernelApplyQuirk (KernelQuirkCustomPciSerialDevice, CacheType, DarwinVersion, NULL, &KernelPatcher);
+        OcKernelApplyKink (KernelKinkCustomPciSerialDevice, CacheType, DarwinVersion, NULL, &KernelPatcher);
       } else {
         DEBUG ((DEBUG_INFO, "OC: Aborting patching PciSerialDevice because RegisterBase is zero/default value!\n"));
       }
     }
 
-    if (Config->Kernel.Quirks.PanicNoKextDump) {
-      OcKernelApplyQuirk (KernelQuirkPanicNoKextDump, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.PanicNoKextDump) {
+      OcKernelApplyKink (KernelKinkPanicNoKextDump, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
     if (  (Config->Kernel.Emulate.Cpuid1Data[0] != 0)
@@ -255,23 +255,23 @@ OcKernelApplyPatches (
       }
     }
 
-    if (Config->Kernel.Quirks.LapicKernelPanic) {
-      OcKernelApplyQuirk (KernelQuirkLapicKernelPanic, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.LapicKernelPanic) {
+      OcKernelApplyKink (KernelKinkLapicKernelPanic, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
-    if (Config->Kernel.Quirks.PowerTimeoutKernelPanic) {
-      OcKernelApplyQuirk (KernelQuirkPowerTimeoutKernelPanic, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.PowerTimeoutKernelPanic) {
+      OcKernelApplyKink (KernelKinkPowerTimeoutKernelPanic, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
-    if (Config->Kernel.Quirks.DisableLinkeditJettison) {
-      OcKernelApplyQuirk (KernelQuirkSegmentJettison, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.DisableLinkeditJettison) {
+      OcKernelApplyKink (KernelKinkSegmentJettison, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
-    if (Config->Kernel.Quirks.LegacyCommpage) {
-      OcKernelApplyQuirk (KernelQuirkLegacyCommpage, CacheType, DarwinVersion, NULL, &KernelPatcher);
+    if (Config->Kernel.Kinks.LegacyCommpage) {
+      OcKernelApplyKink (KernelKinkLegacyCommpage, CacheType, DarwinVersion, NULL, &KernelPatcher);
     }
 
-    if (Config->Kernel.Quirks.ProvideCurrentCpuInfo) {
+    if (Config->Kernel.Kinks.ProvideCurrentCpuInfo) {
       PatchProvideCurrentCpuInfo (&KernelPatcher, CpuInfo, DarwinVersion);
     }
   }

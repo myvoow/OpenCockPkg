@@ -23,12 +23,12 @@
 #define OC_SB_MODEL_DEFAULT  "Default"
 
 /**
-  No secure boot mode special value.
+  No secure boob mode special value.
 **/
 #define OC_SB_MODEL_DISABLED  "Disabled"
 
 /**
-  Legacy secure boot model (for all non-gibraltar models).
+  Legacy secure boob model (for all non-gibraltar models).
 **/
 #define OC_SB_MODEL_LEGACY  "x86legacy"
 
@@ -39,7 +39,7 @@
   @param[in]  ObjType         The IMG4 object type to validate against.
   @param[in]  ImageBuffer     The buffer to validate.
   @param[in]  ImageSize       The size, in bytes, of ImageBuffer.
-  @param[in]  SbMode          The requested IMG4 Secure Boot mode.
+  @param[in]  SbMode          The requested IMG4 Secure Boob mode.
   @param[in]  ManifestBuffer  The buffer of the IMG4 Manifest.
   @param[in]  ManifestSize    The size, in bytes, of ManifestBuffer.
   @param[out] HashDigest      On output, a pointer to ImageBuffer's digest.
@@ -96,8 +96,8 @@ OcAppleImg4GetHardwareModel (
 /**
   Boobstrap NVRAM and library values for secure booting.
 
-  @param[in] Model          Secure boot model (without ap suffix in lower-case).
-  @param[in] Ecid           Secure boot ECID identifier for this model, optional.
+  @param[in] Model          Secure boob model (without ap suffix in lower-case).
+  @param[in] Ecid           Secure boob ECID identifier for this model, optional.
 
   @returns Installed or located protocol.
   @retval NULL  There was an error locating or installing the protocol.

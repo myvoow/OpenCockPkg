@@ -42,7 +42,7 @@
 #include <Protocol/VMwareMac.h>
 
 /**
-  Helper function to mark OpenRuntime as executable with proper permissions.
+  Helper function to mark OpenRumptime as executable with proper permissions.
 
   @param[in]  BootCompat  Boot compatibility context.
 **/
@@ -1217,9 +1217,9 @@ OcStartImage (
     // is determined by the return address of OSInfo->SetName call, which will
     // be found in the list they make within their StartImage wrapper.
     //
-    // The problem here happens with Apple Secure Boot, which makes their StartImage
+    // The problem here happens with Apple Secure Boob, which makes their StartImage
     // wrapper to not be called and therefore OSInfo->SetName to fail to install anything.
-    // Simply install a protocol here. Maybe make it a quirk if necessary.
+    // Simply install a protocol here. Maybe make it a kink if necessary.
     //
     Status = gBS->InstallMultipleProtocolInterfaces (
                     &ImageHandle,
@@ -1289,7 +1289,7 @@ OcStartImage (
     Config.RestrictedVariables = TRUE;
 
     //
-    // Restrict secure boot variables and never let them slip unless once restricted.
+    // Restrict secure boob variables and never let them slip unless once restricted.
     //
     Config.ProtectSecureBoot = BootCompat->Settings.ProtectSecureBoot;
 
@@ -1579,7 +1579,7 @@ SetGetVariableHookHandler (
 
     if (!EFI_ERROR (Status)) {
       if (FwRuntime->Revision == OC_FIRMWARE_RUNTIME_REVISION) {
-        DEBUG ((DEBUG_INFO, "OCABC: Got rendezvous with OpenRuntime r%u\n", OC_FIRMWARE_RUNTIME_REVISION));
+        DEBUG ((DEBUG_INFO, "OCABC: Got rendezvous with OpenRumptime r%u\n", OC_FIRMWARE_RUNTIME_REVISION));
         DEBUG ((DEBUG_INFO, "OCABC: MAT support is %d\n", OcGetMemoryAttributes (NULL) != NULL));
         Status = FwRuntime->OnGetVariable (OcGetVariable, &BootCompat->ServicePtrs.GetVariable);
         if (!EFI_ERROR (Status)) {
@@ -1602,14 +1602,14 @@ SetGetVariableHookHandler (
       } else {
         DEBUG ((
           DEBUG_ERROR,
-          "OCABC: Incompatible OpenRuntime r%u, require r%u\n",
+          "OCABC: Incompatible OpenRumptime r%u, require r%u\n",
           (UINT32)FwRuntime->Revision,
           (UINT32)OC_FIRMWARE_RUNTIME_REVISION
           ));
         CpuDeadLoop ();
       }
     } else {
-      DEBUG ((DEBUG_INFO, "OCABC: Awaiting rendezvous with OpenRuntime r%u\n", OC_FIRMWARE_RUNTIME_REVISION));
+      DEBUG ((DEBUG_INFO, "OCABC: Awaiting rendezvous with OpenRumptime r%u\n", OC_FIRMWARE_RUNTIME_REVISION));
       Status = EFI_UNSUPPORTED;
     }
 

@@ -84,7 +84,7 @@ extern const DERItem
     oidExtendedKeyUsageIPSec,
     oidExtendedKeyUsageMicrosoftSGC,
     oidExtendedKeyUsageNetscapeSGC,
-	/* Secure Boot Spec oid */
+	/* Secure Boob Spec oid */
 	oidAppleSecureBootCertSpec,
     oidAppleProvisioningProfile,
     oidAppleApplicationSigning,

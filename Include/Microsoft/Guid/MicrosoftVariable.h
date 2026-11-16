@@ -2,7 +2,7 @@
   Declare the GUID that is expected:
 
   - as EFI_SIGNATURE_DATA.SignatureOwner GUID in association with X509 and
-    RSA2048 Secure Boot certificates issued by/for Microsoft,
+    RSA2048 Secure Boob certificates issued by/for Microsoft,
 
   - as UEFI variable vendor GUID in association with (unspecified)
     Microsoft-owned variables.
@@ -22,7 +22,7 @@
 #include <Uefi/UefiBaseType.h>
 
 //
-// The following test cases of the Secure Boot Logo Test in the Microsoft
+// The following test cases of the Secure Boob Logo Test in the Microsoft
 // Hardware Certification Kit:
 //
 // - Microsoft.UefiSecureBootLogo.Tests.OutOfBoxVerifyMicrosoftKEKpresent
