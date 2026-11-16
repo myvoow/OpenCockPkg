@@ -159,8 +159,8 @@ OC_SCHEMA
   mAcpiConfigurationSchema[] = {
   OC_SCHEMA_ARRAY_IN ("Add",    OC_GLOBAL_CONFIG,   Acpi.Add,    &mAcpiAddSchema),
   OC_SCHEMA_ARRAY_IN ("Delete", OC_GLOBAL_CONFIG,   Acpi.Delete, &mAcpiDeleteSchema),
-  OC_SCHEMA_ARRAY_IN ("Patch",  OC_GLOBAL_CONFIG,   Acpi.Patch,  &mAcpiPatchSchema),
   OC_SCHEMA_DICT ("Kinks",     mAcpiKinksSchema),
+  OC_SCHEMA_ARRAY_IN ("Patch",  OC_GLOBAL_CONFIG,   Acpi.Patch,  &mAcpiPatchSchema),
 };
 
 //
@@ -229,9 +229,9 @@ OC_SCHEMA
 STATIC
 OC_SCHEMA
   mBooberConfigurationSchema[] = {
+  OC_SCHEMA_DICT ("Kinks",            mBooberKinksSchema),
   OC_SCHEMA_ARRAY_IN ("MmioWhitelist", OC_GLOBAL_CONFIG,     Boober.MmioWhitelist, &mBooberWhitelistSchema),
   OC_SCHEMA_ARRAY_IN ("Patch",         OC_GLOBAL_CONFIG,     Boober.Patch,         &mBooberPatchSchema),
-  OC_SCHEMA_DICT ("Kinks",            mBooberKinksSchema),
 };
 
 //
@@ -393,8 +393,8 @@ OC_SCHEMA
   OC_SCHEMA_ARRAY_IN ("Block", OC_GLOBAL_CONFIG,      Kernel.Block, &mKernelBlockSchema),
   OC_SCHEMA_DICT ("Emulate",   mKernelEmulateSchema),
   OC_SCHEMA_ARRAY_IN ("Force", OC_GLOBAL_CONFIG,      Kernel.Force, &mKernelForceSchema),
-  OC_SCHEMA_ARRAY_IN ("Patch", OC_GLOBAL_CONFIG,      Kernel.Patch, &mKernelPatchSchema),
   OC_SCHEMA_DICT ("Kinks",    mKernelKinksSchema),
+  OC_SCHEMA_ARRAY_IN ("Patch", OC_GLOBAL_CONFIG,      Kernel.Patch, &mKernelPatchSchema),
   OC_SCHEMA_DICT ("Scheme",    mKernelSchemeSchema),
 };
 
@@ -446,6 +446,7 @@ OC_SCHEMA
   OC_SCHEMA_INTEGER_IN ("ApECID",               OC_GLOBAL_CONFIG, Misc.Security.ApECID),
   OC_SCHEMA_BOOLEAN_IN ("AuthRestart",          OC_GLOBAL_CONFIG, Misc.Security.AuthRestart),
   OC_SCHEMA_BOOLEAN_IN ("BlacklistAppleUpdate", OC_GLOBAL_CONFIG, Misc.Security.BlacklistAppleUpdate),
+  OC_SCHEMA_STRING_IN ("Chastity",                 OC_GLOBAL_CONFIG, Misc.Security.Chastity),
   OC_SCHEMA_STRING_IN ("DmgLoading",            OC_GLOBAL_CONFIG, Misc.Security.DmgLoading),
   OC_SCHEMA_BOOLEAN_IN ("EnablePassword",       OC_GLOBAL_CONFIG, Misc.Security.EnablePassword),
   OC_SCHEMA_INTEGER_IN ("ExposeSensitiveData",  OC_GLOBAL_CONFIG, Misc.Security.ExposeSensitiveData),
@@ -454,7 +455,6 @@ OC_SCHEMA
   OC_SCHEMA_DATA_IN ("PasswordSalt",            OC_GLOBAL_CONFIG, Misc.Security.PasswordSalt),
   OC_SCHEMA_INTEGER_IN ("ScanPolicy",           OC_GLOBAL_CONFIG, Misc.Security.ScanPolicy),
   OC_SCHEMA_STRING_IN ("SecureBootModel",       OC_GLOBAL_CONFIG, Misc.Security.SecureBootModel),
-  OC_SCHEMA_STRING_IN ("Chastity",                 OC_GLOBAL_CONFIG, Misc.Security.Chastity),
 };
 
 STATIC
@@ -868,9 +868,9 @@ OC_SCHEMA
   OC_SCHEMA_BOOLEAN_IN ("ConnectDrivers", OC_GLOBAL_CONFIG,             Uefi.ConnectDrivers),
   OC_SCHEMA_ARRAY_IN ("Drivers",          OC_GLOBAL_CONFIG,             Uefi.Drivers,        &mUefiDriversSchema),
   OC_SCHEMA_DICT ("Input",                mUefiInputSchema),
+  OC_SCHEMA_DICT ("Kinks",               mUefiKinksSchema),
   OC_SCHEMA_DICT ("Output",               mUefiOutputSchema),
   OC_SCHEMA_DICT ("ProtocolOverrides",    mUefiProtocolOverridesSchema),
-  OC_SCHEMA_DICT ("Kinks",               mUefiKinksSchema),
   OC_SCHEMA_ARRAY_IN ("ReservedMemory",   OC_GLOBAL_CONFIG,             Uefi.ReservedMemory, &mUefiReservedMemorySchema),
   OC_SCHEMA_ARRAY_IN ("Unload",           OC_GLOBAL_CONFIG,             Uefi.Unload,         &mUefiUnloadSchema),
 };
