@@ -169,7 +169,7 @@ int main(int argc, const char * argv[]) {
     kern_return_t       result;
     mach_port_t         masterPort;
 
-    result = IOMasterPort(boobstrap_port, &masterPort);
+    result = IOMasterPort(bootstrap_port, &masterPort);
     if (result != KERN_SUCCESS) {
         errx(1, "Error getting the IOMaster port: %s",
              mach_error_string(result));
