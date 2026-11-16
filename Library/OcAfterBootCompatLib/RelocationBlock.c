@@ -261,7 +261,7 @@ AppleRelocationRebase (
   DTMemMapEntry             *PropValue;
   OpaqueDTPropertyIterator  OPropIter;
   DTPropertyIterator        PropIter;
-  DTBooterKextFileInfo      *BooterKextFileInfo;
+  DTBooberKextFileInfo      *BooberKextFileInfo;
   DTBootxDriverInfo         *BootxDriverInfo;
   UINT32                    MemoryMapSize;
   UINT32                    DescriptorSize;
@@ -308,15 +308,15 @@ AppleRelocationRebase (
         //
         // Fix Driver-* entries for kexts used during a cacheless boot.
         //
-        if (AsciiStrnCmp (PropName, DT_BOOTER_KEXT_PREFIX, L_STR_LEN (DT_BOOTER_KEXT_PREFIX)) == 0) {
+        if (AsciiStrnCmp (PropName, DT_BOOBER_KEXT_PREFIX, L_STR_LEN (DT_BOOBER_KEXT_PREFIX)) == 0) {
           //
           // 10.6 and newer use a different format from 10.4 and 10.5.
           //
           if (!BootCompat->KernelState.RelocationBlockLegacy) {
-            BooterKextFileInfo                      = (DTBooterKextFileInfo *)((UINTN)PropValue->Address);
-            BooterKextFileInfo->InfoDictPhysAddr   -= RelocDiff;
-            BooterKextFileInfo->ExecutablePhysAddr -= RelocDiff;
-            BooterKextFileInfo->BundlePathPhysAddr -= RelocDiff;
+            BooberKextFileInfo                      = (DTBooberKextFileInfo *)((UINTN)PropValue->Address);
+            BooberKextFileInfo->InfoDictPhysAddr   -= RelocDiff;
+            BooberKextFileInfo->ExecutablePhysAddr -= RelocDiff;
+            BooberKextFileInfo->BundlePathPhysAddr -= RelocDiff;
           } else {
             BootxDriverInfo                 = (DTBootxDriverInfo *)((UINTN)PropValue->Address);
             BootxDriverInfo->PlistPhysAddr -= RelocDiff;

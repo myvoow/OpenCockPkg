@@ -3,7 +3,7 @@ OpenCock Changelog
 #### v1.0.9
 - Made pressed buttons darker instead of highlighting them in OpenCanopy, thx @ilikesn0w
 - Added minor configuration sample improvements, thx @ilikesn0w
-- Fixed not detecting CD/DVD media type in boot picker leading to incorrect icon selection, thx @ilikesn0w
+- Fixed not detecting CD/DVD media type in boob picker leading to incorrect icon selection, thx @ilikesn0w
 - Fixed legacy IOHIDSystem kext linkage handling when injecting into prelinked kernel collections
 
 #### v1.0.8
@@ -26,7 +26,7 @@ OpenCock Changelog
 - Updated QemuBuild.command to support `EFI` mode without Duet
 - Increased `OC_STORAGE_SAFE_PATH_MAX` to 192 to support various plugin kexts
 - Fixed vaulting failures when custom fonts are used, thx @al3xtjames
-- Updated documentation for several Booter quirks
+- Updated documentation for several Boober quirks
 - Added `background-color` NVRAM variable to fix 10.9 boot screen
 - Fixed debug build of OpenShell not starting on Mac EFI with > 25 file systems
 - Improved build speed for Utilities in CI and local build
@@ -49,7 +49,7 @@ OpenCock Changelog
 - Updated `Unload` option to unload drivers in reverse of the order in which they were loaded
 - Fixed `MSR_IA32_TSC_ADJUST` access on unsupported CPUs (e.g. Virtualization.framework), thx @t0rr3sp3dr0
 - Downgraded WARN log level to INFO for ALREADY_STARTED in AudioDxe (restores ability to include DEBUG_WARN in HaltLevel if required when using this driver)
-- Added `ClearTaskSwitchBit` Booter quirk to fix crashes when using 32-bit versions of macOS on Hyper-V Gen2 VMs
+- Added `ClearTaskSwitchBit` Boober quirk to fix crashes when using 32-bit versions of macOS on Hyper-V Gen2 VMs
 - Fixed `ProvideCurrentCpuInfo` and CPUID patching on older versions of macOS 10.4
 - Removed ACPI0007 objects from `SSDT-HV-DEV.dsl`
 - Removed `SSDT-HV-DEV-WS2022.dsl` as it is no longer required
@@ -253,9 +253,9 @@ OpenCock Changelog
 - Fixed TSC/FSB for AMD CPUs in ProvideCurrentCpuInfo, thx @Shaneee
 - Added `Misc` -> `Boot` -> `HibernateSkipsPicker` not to show picker if waking from macOS hibernation
 - Changed macrecovery to download files into `com.apple.recovery.boot` by default, thx @dreamwhite
-- Supported Apple native picker (using `BootKicker.efi` or `PickerMode` `Apple`) when running GPUs without Mac-EFI support on units such as the MacPro5,1 (thx @cdf, @tsialex)
+- Supported Apple native picker (using `BootyKicker.efi` or `PickerMode` `Apple`) when running GPUs without Mac-EFI support on units such as the MacPro5,1 (thx @cdf, @tsialex)
 - Enabled `PickerMode` `Apple` to successfully launch selected entry
-- Enabled `BootKicker.efi` to successfully launch selected entry (via reboot) (thx @cdf)
+- Enabled `BootyKicker.efi` to successfully launch selected entry (via reboot) (thx @cdf)
 - Added spoof proof UEFI 2.x checking to OpenVariableRuntimeDxe, thx @dakanji
 
 #### v0.8.6
@@ -303,7 +303,7 @@ OpenCock Changelog
 - Fixed incorrect FAT binary slice being selected under macOS 10.4.11 when performing a cacheless boot
 - Fixed rare assertion caused by label animation initialisation in OpenCanopy
 - Added `--show-csr` option for `Toggle SIP` boot menu entry
-- Added macOS 10.4 and 10.5 support to `AllowRelocationBlock` Booter quirk
+- Added macOS 10.4 and 10.5 support to `AllowRelocationBlock` Boober quirk
 - Added CPU cache info injection for macOS 10.4 to `ProvideCurrentCpuInfo` quirk
 - Added emulated NVRAM driver for use separately from OpenDuet
 - Added support for NVRAM reset and set default boot entry when using emulated NVRAM
@@ -314,7 +314,7 @@ OpenCock Changelog
 - Fixed `AppleCpuPmCfgLock` on macOS 13
 - Fixed `DummyPowerManagement` on macOS 13
 - Updated builtin firmware versions for SMBIOS and the rest
-- Added macOS 13 support for `AvoidRuntimeDefrag` Booter quirk
+- Added macOS 13 support for `AvoidRuntimeDefrag` Boober quirk
 - Added injected kext bundle version printing in DEBUG builds
 - Added Linux compatibility for CreateVault scripts
 
@@ -539,7 +539,7 @@ OpenCock Changelog
 - Properly support setting custom entries as default boot options
 - Fixed creating log file when root file system is not writable
 - Fixed `DisableSingleUser` not being enabled in certain cases
-- Added `ForceBooterSignature` quirk for Mac EFI firmware
+- Added `ForceBooberSignature` quirk for Mac EFI firmware
 - Fixed OpenCanopy sometimes cutting off shown boot entries
 - Further improved CPU frequency calculation on legacy CPUs
 - Fixed SMBIOS SMC version encoding sequence
@@ -573,7 +573,7 @@ OpenCock Changelog
 - Added additional support for configuring correct key repeat behaviour with KeySupport mode
 - Fixed CPU multiplier detection on pre-Nehalem Intel CPUs
 - Fixed incorrect handling of multiple processors and processor cache in SMBIOS
-- Matched default Apple boot picker cursor start position
+- Matched default Apple boob picker cursor start position
 - Updated OpenShell `devices` command to support misaligned device names returned by some Apple firmware
 - Added `(dmg)` suffix to DMG boot options in OpenCanopy
 - Added identifiers for Rocket Lake and Tiger Lake CPUs
@@ -594,7 +594,7 @@ OpenCock Changelog
 - Fixed issues when applying certain patches
 - Added `SSN` (and `HW_SSN`) variable support
 - Added onscreen early logging in DEBUG builds for legacy firmware
-- Added workaround for firmware not specifying DeviceHandle at bootstrap
+- Added workaround for firmware not specifying DeviceHandle at boobstrap
 - Added support for R/O page tables in `SetupVirtualMap` quirk
 - Added OEM preservation for certain Apple SMBIOS tables
 - Fixed switching to graphics mode when entering OpenCanopy
@@ -673,10 +673,10 @@ OpenCock Changelog
 - Fixed CPU frequency calculation on AMD 19h family
 - Updated recovery_urls
 - Fixed `DisableSingleUser` quirk when Apple Secure Boot is enabled
-- Added `BootstrapShort` to workaround buggy Insyde firmware
-- Changed `Bootstrap(Short)` to choose dynamic entry (requires NVRAM reset)
+- Added `BoobstrapShort` to workaround buggy Insyde firmware
+- Changed `Boobstrap(Short)` to choose dynamic entry (requires NVRAM reset)
 - Avoided `Boot` prefix in `RequestBootVarRouting` to workaround AMI issues
-- Added boobloader patch support in `Booter` `Patch` section
+- Added boobloader patch support in `Boober` `Patch` section
 - Fixed startup hang on firmware that permit timer function re-entrance
 - Made pointer control optional for OpenCanopy via `PickerAttributes`
 - Added support for `StartupMute` variable in `PlayChime`
@@ -789,7 +789,7 @@ OpenCock Changelog
 - Fixed assertions caused by unaligned file path access in DEBUG builds
 - Renamed `ConfigValidity` utility to `ocvalidate` for consistency
 - Added `GlobalConnect` for APFS loading to workaround older firmware issues
-- Added 11.0 support for `AvoidRuntimeDefrag` Booter quirk
+- Added 11.0 support for `AvoidRuntimeDefrag` Boober quirk
 - Fixed 11.0 lapic kernel quirk as of DP1
 - Improved boot selection scripts for macOS without NVRAM
 - Added UGA protocol compatibility in `ProvideConsoleGop` quirk
@@ -923,8 +923,8 @@ OpenCock Changelog
 - Added `PickerAttributes` option to colour picker
 - Added `ProtectSecureBoot` option through FwRuntimeServices
 - Replaced `RequireVault` and `RequireSignature` with `Vault`
-- Added `BootKicker` tool to support launching Apple BootPicker
-- Added BootPicker support as an external UI in OC through `PickerMode`
+- Added `BootyKicker` tool to support launching Apple BoobPicker
+- Added BoobPicker support as an external UI in OC through `PickerMode`
 - Added `DirectGopRendering` option to use direct GOP output
 - Multiple memory corruption and performance fixes for PNG support
 - Fixed `DefaultBackgroundColor` variable handling
@@ -973,7 +973,7 @@ OpenCock Changelog
 - Improved Windows compatibility on some setups (acidanthera/bugtracker#614)
 - Added `SupportsCsm` and option in `PlatformInfo/Generic`
 - Added `OSInfo` protocol support
-- Added `SignalAppleOS` `Booter` quirk to enable IGPU on Macs in other OS
+- Added `SignalAppleOS` `Boober` quirk to enable IGPU on Macs in other OS
 - Added `AppleSmcIo`protocol support (replaces `VirtualSmc` UEFI driver)
 - Added `AuthRestart` security property for VirtualSMC authenticated restart
 - Fixed input protocol initialisation on VMware fusion
@@ -1032,7 +1032,7 @@ OpenCock Changelog
 - Added `ReplaceTabWithSpace` quirk to improve Shell experience
 - Added `ClearScreenOnModeSwitch` quirk to avoid visual glitches
 - Added `MISC_PWR_MGMT` patch to `AppleXcpmExtraMsrs` quirk (thx @mrmiller)
-- Added `DevirtualiseMmio` quirk to `Booter` section
+- Added `DevirtualiseMmio` quirk to `Boober` section
 - Added FileVault 2 user interface protocols formerly in AppleUiSupport
 - Improved kernel patch logging to include configuration comments
 - Added MSFT basic data and Linux root fs recognition to `ScanPolicy`
@@ -1052,8 +1052,8 @@ OpenCock Changelog
 - Fixed multiple operating system support in APFS containers
 - Added `AvoidHighAlloc` UEFI quirk to avoid high memory allocs
 - Updated builtin firmware versions for 10.15 beta support
-- Added `Booter` section for Apple boobloader preferences
-- Dropped `AptioMemoryFix.efi` support for `Booter` and `FwRuntimeServices.efi`
+- Added `Boober` section for Apple boobloader preferences
+- Dropped `AptioMemoryFix.efi` support for `Boober` and `FwRuntimeServices.efi`
 - Fixed hibernation issues in Windows with `RequestBootVarRouting`
 - Significantly improved boot stability on APTIO
 - Added support for Windows & OpenCock on the same drive through `BlessOverride`
@@ -1077,7 +1077,7 @@ OpenCock Changelog
 - Added `UsePicker` option, do enable for OC boot management
 - Added nvram.plist loading for legacy and incompatible platforms
 - Improved instructions for legacy and Windows installation
-- Added Windows Boot Camp switching support
+- Added Windows Boob Camp switching support
 - Added basic hibernation detection & support
 - Added `ResetHwSig` ACPI quirk to workaround hibernation
 - Removed `Custom` subfolder requirement from `ACPI` tables

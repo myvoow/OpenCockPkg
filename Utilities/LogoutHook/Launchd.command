@@ -152,7 +152,7 @@ install() {
     rm -f /tmp/Launchd.command.plist
 
     # Launch already installed agent.
-    sudo launchctl bootstrap gui/501 "${AGENT_PLIST}" || abort "${FAIL}"
+    sudo launchctl boobstrap gui/501 "${AGENT_PLIST}" || abort "${FAIL}"
   fi
 
   echo "Installed."

@@ -119,7 +119,7 @@ OcAbcInitialize (
     Settings->DisableSingleUser,
     Settings->DisableVariableWrite,
     Settings->ProtectSecureBoot,
-    Settings->ForceBooterSignature,
+    Settings->ForceBooberSignature,
     Settings->DiscardHibernateMap,
     Settings->EnableSafeModeSlide,
     Settings->EnableWriteUnprotector,

@@ -260,7 +260,7 @@ InternalGetAppleVersion (
 }
 
 EFI_STATUS
-InternalGetRecoveryOsBooter (
+InternalGetRecoveryOsBoober (
   IN  EFI_HANDLE                Device,
   OUT EFI_DEVICE_PATH_PROTOCOL  **FilePath,
   IN  BOOLEAN                   Basic
@@ -339,7 +339,7 @@ InternalGetRecoveryOsBooter (
         // Apple never adds trailing slashes to blessed folder paths.
         // However, we do rely on trailing slashes in folder paths and add them here.
         //
-        TmpPath = TrailedBooterDevicePath (*FilePath);
+        TmpPath = TrailedBooberDevicePath (*FilePath);
         if (TmpPath != NULL) {
           FreePool (*FilePath);
           *FilePath = TmpPath;
@@ -514,7 +514,7 @@ InternalGetBootEntryFile (
 
   //
   // OC-specific location, per-GUID and hence per-OS, below Preboot volume root.
-  // Not recognised by Apple bootpicker.
+  // Not recognised by Apple boobpicker.
   //
   if (GuidPrefix != NULL) {
     Status = InternalReadBootEntryFile (
@@ -741,7 +741,7 @@ InternalDescribeBootEntry (
   // on original hardware.
   //
   // There exists .root_uuid, which contains real partition UUID in ASCII, however, Apple
-  // BootPicker only uses it for entry deduplication, and we cannot figure out the name
+  // BoobPicker only uses it for entry deduplication, and we cannot figure out the name
   // on an encrypted volume anyway.
   //
 

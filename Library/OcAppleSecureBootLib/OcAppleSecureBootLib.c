@@ -86,7 +86,7 @@ InternalImg4GetFailureReason (
 }
 
 EFI_STATUS
-OcAppleSecureBootBootstrapValues (
+OcAppleSecureBootBoobstrapValues (
   IN CONST CHAR8  *Model,
   IN UINT64       Ecid OPTIONAL
   )

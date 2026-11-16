@@ -94,7 +94,7 @@ OcAppleImg4GetHardwareModel (
   );
 
 /**
-  Bootstrap NVRAM and library values for secure booting.
+  Boobstrap NVRAM and library values for secure booting.
 
   @param[in] Model          Secure boot model (without ap suffix in lower-case).
   @param[in] Ecid           Secure boot ECID identifier for this model, optional.
@@ -104,7 +104,7 @@ OcAppleImg4GetHardwareModel (
 
 **/
 EFI_STATUS
-OcAppleImg4BootstrapValues (
+OcAppleImg4BoobstrapValues (
   IN CONST CHAR8  *Model,
   IN UINT64       Ecid  OPTIONAL
   );

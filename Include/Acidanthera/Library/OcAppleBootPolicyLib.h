@@ -30,7 +30,7 @@ OcAppleBootPolicyInstallProtocol (
   );
 
 EFI_STATUS
-OcGetBooterFromPredefinedPathList (
+OcGetBooberFromPredefinedPathList (
   IN  EFI_HANDLE                Device,
   IN  EFI_FILE_PROTOCOL         *Root,
   IN  CONST CHAR16              **PredefinedPaths,
@@ -196,12 +196,12 @@ OcBootPolicyGetAllApfsRecoveryFilePath (
 extern CONST CHAR16  *gAppleBootPolicyPredefinedPaths[];
 
 ///
-/// All Apple Boot Policy predefined booter paths.
+/// All Apple Boot Policy predefined boober paths.
 ///
 extern CONST UINTN  gAppleBootPolicyNumPredefinedPaths;
 
 ///
-/// Core Apple Boot Policy predefined booter paths.
+/// Core Apple Boot Policy predefined boober paths.
 ///
 extern CONST UINTN  gAppleBootPolicyCoreNumPredefinedPaths;
 

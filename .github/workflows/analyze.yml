@@ -28,7 +28,7 @@ jobs:
           source ~/pyenv/bin/activate
           python3 -m pip install pyyaml
 
-      - name: CI Bootstrap
+      - name: CI Boobstrap
         run: |
           src=$(/usr/bin/curl -LfsS https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
 
@@ -116,7 +116,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install curl nasm uuid-dev libssl-dev iasl
 
-      - name: CI Bootstrap
+      - name: CI Boobstrap
         run: |
           src=$(/usr/bin/curl -LfsS https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
 

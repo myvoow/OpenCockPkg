@@ -99,20 +99,20 @@ OC_DECLARE (OC_ACPI_CONFIG)
   Apple boobloader section
 **/
 
-#define OC_BOOTER_WL_ENTRY_FIELDS(_, __) \
+#define OC_BOOBER_WL_ENTRY_FIELDS(_, __) \
   _(UINT64                      , Address          ,     , 0       , () ) \
   _(BOOLEAN                     , Enabled          ,     , FALSE   , () ) \
   _(OC_STRING                   , Comment          ,     , OC_STRING_CONSTR ("", _, __), OC_DESTR (OC_STRING) )
-OC_DECLARE (OC_BOOTER_WL_ENTRY)
+OC_DECLARE (OC_BOOBER_WL_ENTRY)
 
-#define OC_BOOTER_WL_ARRAY_FIELDS(_, __) \
-  OC_ARRAY (OC_BOOTER_WL_ENTRY, _, __)
-OC_DECLARE (OC_BOOTER_WL_ARRAY)
+#define OC_BOOBER_WL_ARRAY_FIELDS(_, __) \
+  OC_ARRAY (OC_BOOBER_WL_ENTRY, _, __)
+OC_DECLARE (OC_BOOBER_WL_ARRAY)
 
 ///
 /// Boobloader patches.
 ///
-#define OC_BOOTER_PATCH_ENTRY_FIELDS(_, __) \
+#define OC_BOOBER_PATCH_ENTRY_FIELDS(_, __) \
   _(OC_STRING                   , Arch             ,     , OC_STRING_CONSTR ("Any", _, __), OC_DESTR (OC_STRING) ) \
   _(OC_STRING                   , Comment          ,     , OC_STRING_CONSTR ("", _, __), OC_DESTR (OC_STRING) ) \
   _(UINT32                      , Count            ,     , 0                           , ()                   ) \
@@ -124,16 +124,16 @@ OC_DECLARE (OC_BOOTER_WL_ARRAY)
   _(OC_DATA                     , ReplaceMask      ,     , OC_EDATA_CONSTR (_, __)     , OC_DESTR (OC_DATA)   ) \
   _(UINT32                      , Limit            ,     , 0                           , ()                   ) \
   _(UINT32                      , Skip             ,     , 0                           , ()                   )
-OC_DECLARE (OC_BOOTER_PATCH_ENTRY)
+OC_DECLARE (OC_BOOBER_PATCH_ENTRY)
 
-#define OC_BOOTER_PATCH_ARRAY_FIELDS(_, __) \
-  OC_ARRAY (OC_BOOTER_PATCH_ENTRY, _, __)
-OC_DECLARE (OC_BOOTER_PATCH_ARRAY)
+#define OC_BOOBER_PATCH_ARRAY_FIELDS(_, __) \
+  OC_ARRAY (OC_BOOBER_PATCH_ENTRY, _, __)
+OC_DECLARE (OC_BOOBER_PATCH_ARRAY)
 
 ///
 /// Apple boobloader quirks.
 ///
-#define OC_BOOTER_QUIRKS_FIELDS(_, __) \
+#define OC_BOOBER_QUIRKS_FIELDS(_, __) \
   _(BOOLEAN                     , AllowRelocationBlock      ,     , FALSE  , ()) \
   _(BOOLEAN                     , AvoidRuntimeDefrag        ,     , FALSE  , ()) \
   _(BOOLEAN                     , ClearTaskSwitchBit        ,     , FALSE  , ()) \
@@ -144,7 +144,7 @@ OC_DECLARE (OC_BOOTER_PATCH_ARRAY)
   _(BOOLEAN                     , EnableSafeModeSlide       ,     , FALSE  , ()) \
   _(BOOLEAN                     , EnableWriteUnprotector    ,     , FALSE  , ()) \
   _(BOOLEAN                     , FixupAppleEfiImages       ,     , FALSE  , ()) \
-  _(BOOLEAN                     , ForceBooterSignature      ,     , FALSE  , ()) \
+  _(BOOLEAN                     , ForceBooberSignature      ,     , FALSE  , ()) \
   _(BOOLEAN                     , ForceExitBootServices     ,     , FALSE  , ()) \
   _(BOOLEAN                     , ProtectMemoryRegions      ,     , FALSE  , ()) \
   _(BOOLEAN                     , ProtectSecureBoot         ,     , FALSE  , ()) \
@@ -156,16 +156,16 @@ OC_DECLARE (OC_BOOTER_PATCH_ARRAY)
   _(BOOLEAN                     , SetupVirtualMap           ,     , FALSE  , ()) \
   _(BOOLEAN                     , SignalAppleOS             ,     , FALSE  , ()) \
   _(BOOLEAN                     , SyncRuntimePermissions    ,     , FALSE  , ())
-OC_DECLARE (OC_BOOTER_QUIRKS)
+OC_DECLARE (OC_BOOBER_QUIRKS)
 
 ///
 /// Apple boobloader section.
 ///
-#define OC_BOOTER_CONFIG_FIELDS(_, __) \
-  _(OC_BOOTER_WL_ARRAY          , MmioWhitelist    ,     , OC_CONSTR2 (OC_BOOTER_WL_ARRAY, _, __)      , OC_DESTR (OC_BOOTER_WL_ARRAY)) \
-  _(OC_BOOTER_PATCH_ARRAY       , Patch            ,     , OC_CONSTR2 (OC_BOOTER_PATCH_ARRAY, _, __)   , OC_DESTR (OC_BOOTER_PATCH_ARRAY)) \
-  _(OC_BOOTER_QUIRKS            , Quirks           ,     , OC_CONSTR2 (OC_BOOTER_QUIRKS, _, __)        , OC_DESTR (OC_BOOTER_QUIRKS))
-OC_DECLARE (OC_BOOTER_CONFIG)
+#define OC_BOOBER_CONFIG_FIELDS(_, __) \
+  _(OC_BOOBER_WL_ARRAY          , MmioWhitelist    ,     , OC_CONSTR2 (OC_BOOBER_WL_ARRAY, _, __)      , OC_DESTR (OC_BOOBER_WL_ARRAY)) \
+  _(OC_BOOBER_PATCH_ARRAY       , Patch            ,     , OC_CONSTR2 (OC_BOOBER_PATCH_ARRAY, _, __)   , OC_DESTR (OC_BOOBER_PATCH_ARRAY)) \
+  _(OC_BOOBER_QUIRKS            , Quirks           ,     , OC_CONSTR2 (OC_BOOBER_QUIRKS, _, __)        , OC_DESTR (OC_BOOBER_QUIRKS))
+OC_DECLARE (OC_BOOBER_CONFIG)
 
 /**
   DeviceProperties section
@@ -801,7 +801,7 @@ OC_DECLARE (OC_UEFI_CONFIG)
 
 #define OC_GLOBAL_CONFIG_FIELDS(_, __) \
   _(OC_ACPI_CONFIG              , Acpi              ,     , OC_CONSTR1 (OC_ACPI_CONFIG, _, __)      , OC_DESTR (OC_ACPI_CONFIG)) \
-  _(OC_BOOTER_CONFIG            , Booter            ,     , OC_CONSTR1 (OC_BOOTER_CONFIG, _, __)    , OC_DESTR (OC_BOOTER_CONFIG)) \
+  _(OC_BOOBER_CONFIG            , Boober            ,     , OC_CONSTR1 (OC_BOOBER_CONFIG, _, __)    , OC_DESTR (OC_BOOBER_CONFIG)) \
   _(OC_DEV_PROP_CONFIG          , DeviceProperties  ,     , OC_CONSTR1 (OC_DEV_PROP_CONFIG, _, __)  , OC_DESTR (OC_DEV_PROP_CONFIG)) \
   _(OC_KERNEL_CONFIG            , Kernel            ,     , OC_CONSTR1 (OC_KERNEL_CONFIG, _, __)    , OC_DESTR (OC_KERNEL_CONFIG)) \
   _(OC_MISC_CONFIG              , Misc              ,     , OC_CONSTR1 (OC_MISC_CONFIG, _, __)      , OC_DESTR (OC_MISC_CONFIG)) \

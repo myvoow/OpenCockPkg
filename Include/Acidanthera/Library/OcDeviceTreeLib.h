@@ -18,8 +18,8 @@
 //
 // Device tree property name prefixes for loaded kexts or mkext.
 //
-#define DT_BOOTER_KEXT_PREFIX   "Driver-"
-#define DT_BOOTER_MKEXT_PREFIX  "DriversPackage-"
+#define DT_BOOBER_KEXT_PREFIX   "Driver-"
+#define DT_BOOBER_MKEXT_PREFIX  "DriversPackage-"
 
 //
 // Struct at the beginning of every loaded kext (10.4 and 10.5).
@@ -38,14 +38,14 @@ typedef struct DTBootxDriverInfo_ {
 // Pointers to every loaded kext (to this struct) are
 // properties Driver-<hex addr of DriverInfo> in DevTree /chosen/memory-map.
 //
-typedef struct DTBooterKextFileInfo_ {
+typedef struct DTBooberKextFileInfo_ {
   UINT32    InfoDictPhysAddr;
   UINT32    InfoDictLength;
   UINT32    ExecutablePhysAddr;
   UINT32    ExecutableLength;
   UINT32    BundlePathPhysAddr;
   UINT32    BundlePathLength;
-} DTBooterKextFileInfo;
+} DTBooberKextFileInfo;
 
 //
 // DeviceTree MemoryMap entry structure.

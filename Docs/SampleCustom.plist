@@ -283,7 +283,7 @@
 			<false/>
 		</dict>
 	</dict>
-	<key>Booter</key>
+	<key>Boober</key>
 	<dict>
 		<key>MmioWhitelist</key>
 		<array>
@@ -353,7 +353,7 @@
 			<true/>
 			<key>FixupAppleEfiImages</key>
 			<true/>
-			<key>ForceBooterSignature</key>
+			<key>ForceBooberSignature</key>
 			<false/>
 			<key>ForceExitBootServices</key>
 			<false/>

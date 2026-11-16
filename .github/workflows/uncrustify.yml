@@ -23,7 +23,7 @@ jobs:
           sudo apt-get install curl git
           sudo python3 -m pip install gitpython requests pyyaml
 
-      - name: CI Bootstrap
+      - name: CI Boobstrap
         run: |
           src=$(/usr/bin/curl -LfsS https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
 

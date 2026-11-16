@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install booter on physical disk.
+# Install boober on physical disk.
 
 cd "$(dirname "$0")" || exit 1
 

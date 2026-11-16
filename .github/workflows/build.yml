@@ -35,7 +35,7 @@ jobs:
       - name: Install Dependencies
         run: brew install mingw-w64
 
-      - name: CI Bootstrap
+      - name: CI Boobstrap
         run: |
           src=$(/usr/bin/curl -LfsS https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
 
@@ -171,7 +171,7 @@ jobs:
         run: |
           choco install make nasm zip iasl --no-progress
 
-      - name: CI Bootstrap
+      - name: CI Boobstrap
         run: |
           src=$(curl -LfsS https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
 

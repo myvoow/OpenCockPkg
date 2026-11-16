@@ -17,7 +17,7 @@
 #include <Protocol/AppleImg4Verification.h>
 
 /**
-  Bootstrap NVRAM and library values for secure booting.
+  Boobstrap NVRAM and library values for secure booting.
 
   @param[in] Model          Secure boot model (without ap suffix in lower-case).
   @param[in] Ecid           Enclave identifier, optional.
@@ -25,7 +25,7 @@
   @retval EFI_SUCCESS  On success.
 **/
 EFI_STATUS
-OcAppleSecureBootBootstrapValues (
+OcAppleSecureBootBoobstrapValues (
   IN CONST CHAR8  *Model,
   IN UINT64       Ecid  OPTIONAL
   );

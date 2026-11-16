@@ -423,7 +423,7 @@ OcFindWritableFileSystem (
   );
 
 /**
-  Find writable filesystem from Bootstrap.
+  Find writable filesystem from Boobstrap.
 
   @param[out]  FileSystem   Pointer to first found writeable file system.
 

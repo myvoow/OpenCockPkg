@@ -451,7 +451,7 @@ DumpDeviceTreeNodeRecusively (
   DTEntryIterator       EntryIterator;
   DTPropertyIterator    PropIter;
   DTMemMapEntry         *MemMap;
-  DTBooterKextFileInfo  *Kext;
+  DTBooberKextFileInfo  *Kext;
   UINT8                 *Address;
 
   CHAR8  *PropertyParent = NULL;
@@ -494,7 +494,7 @@ DumpDeviceTreeNodeRecusively (
         MemMap = (DTMemMapEntry *)PropertyValue;
 
         if (AsciiStrnCmp (PropertyName, "Driver-", 7) == 0) {
-          Kext = (DTBooterKextFileInfo *)(UINTN)MemMap->Address;
+          Kext = (DTBooberKextFileInfo *)(UINTN)MemMap->Address;
 
           if ((Kext != NULL) && (Kext->ExecutablePhysAddr != 0)) {
             DEBUG ((

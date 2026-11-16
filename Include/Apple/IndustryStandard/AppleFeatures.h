@@ -77,7 +77,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 //
 // Supports target disk mode, normally invoked by pressing T key at start.
 // Note, AppleTamperResistantBootProtocol+6 may prohibit this.
-// See: BootPicker.
+// See: BoobPicker.
 //
 #define FW_FEATURE_SUPPORTS_TARGET_DISK_MODE  0x00000004U         // 2
 #define FW_FEATURE_UNKNOWN_BIT3               0x00000008U         // 3

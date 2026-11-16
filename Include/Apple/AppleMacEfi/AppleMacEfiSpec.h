@@ -30,14 +30,14 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #define APPLE_EFI_FIRMWARE_GEN3_ID_MAGIC  \
   { 0xC6, 0x8A, 0x85, 0x99, 0xF5, 0xE2, 0x15, 0x4E }
 
-// APPLE_BOOTER_FILE_NAME
-#define APPLE_BOOTER_FILE_NAME  L"boot.efi"
+// APPLE_BOOBER_FILE_NAME
+#define APPLE_BOOBER_FILE_NAME  L"boot.efi"
 
 // APPLE_BOOBLOADER_FILE_PATH
-#define APPLE_BOOTER_DEFAULT_FILE_NAME  L"\\System\\Library\\CoreServices\\boot.efi"
+#define APPLE_BOOBER_DEFAULT_FILE_NAME  L"\\System\\Library\\CoreServices\\boot.efi"
 
 // BOOT_EFI_FILE_NAME
-#define APPLE_BOOTER_ROOT_FILE_NAME  L"\\boot.efi"
+#define APPLE_BOOBER_ROOT_FILE_NAME  L"\\boot.efi"
 
 // Apple EFI File location to boot from on removable media devices
 

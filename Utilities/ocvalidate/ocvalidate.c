@@ -30,7 +30,7 @@ CheckConfig (
   UINTN                Index;
   STATIC CONFIG_CHECK  ConfigCheckers[] = {
     &CheckACPI,
-    &CheckBooter,
+    &CheckBoober,
     &CheckDeviceProperties,
     &CheckKernel,
     &CheckMisc,

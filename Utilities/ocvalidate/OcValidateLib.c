@@ -107,7 +107,7 @@ AsciiIdentifierIsLegal (
     }
   } else {
     //
-    // Any and Apple are two fixed values accepted by Booter->Patch.
+    // Any and Apple are two fixed values accepted by Boober->Patch.
     // TODO: Drop empty string support in OC.
     //
     if (  (AsciiStrCmp (Identifier, "Any") == 0)

@@ -351,7 +351,7 @@ DeleteVariables (
 
 STATIC
 VOID *
-GetBootstrapBootData (
+GetBoobstrapBootData (
   OUT UINTN   *OptionSize,
   OUT UINT16  *Option
   )
@@ -401,7 +401,7 @@ GetBootstrapBootData (
   }
 
   //
-  // OpenCock moved Bootstrap to BootOrder[0] on initialisation.
+  // OpenCock moved Boobstrap to BootOrder[0] on initialisation.
   //
   OptionData = OcGetBootOptionData (
                  OptionSize,
@@ -492,8 +492,8 @@ OcDeleteVariables (
 
   FwRuntime = OcDisableNvramProtection ();
 
-  if ((BootProtect & OC_BOOT_PROTECT_VARIABLE_BOOTSTRAP) != 0) {
-    BootOption = GetBootstrapBootData (&BootOptionSize, &BootOptionIndex);
+  if ((BootProtect & OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP) != 0) {
+    BootOption = GetBoobstrapBootData (&BootOptionSize, &BootOptionIndex);
     if (BootOption != NULL) {
       DEBUG ((
         DEBUG_INFO,
@@ -509,7 +509,7 @@ OcDeleteVariables (
 
   DeleteVariables (PreserveBoot);
 
-  if ((BootProtect & OC_BOOT_PROTECT_VARIABLE_BOOTSTRAP) != 0) {
+  if ((BootProtect & OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP) != 0) {
     BootOptionIndex = 1;
     Status          = gRT->SetVariable (
                              L"Boot0001",
@@ -528,7 +528,7 @@ OcDeleteVariables (
                       );
     }
 
-    DEBUG ((DEBUG_INFO, "OCVAR: Set bootstrap option to Boot%04x - %r\n", BootOptionIndex, Status));
+    DEBUG ((DEBUG_INFO, "OCVAR: Set boobstrap option to Boot%04x - %r\n", BootOptionIndex, Status));
     FreePool (BootOption);
   }
 

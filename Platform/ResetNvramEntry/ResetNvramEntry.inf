@@ -1,5 +1,5 @@
 ## @file
-#  Boot entry protocol implementation of Reset NVRAM boot picker entry.
+#  Boot entry protocol implementation of Reset NVRAM boob picker entry.
 #
 #  Copyright (C) 2022, Mike Beaton. All rights reserved.<BR>
 #  SPDX-License-Identifier: BSD-3-Clause

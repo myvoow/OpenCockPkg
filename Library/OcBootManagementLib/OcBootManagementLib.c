@@ -255,7 +255,7 @@ InternalRunRequestPrivilege (
 }
 
 EFI_STATUS
-OcRunBootPicker (
+OcRunBoobPicker (
   IN OC_PICKER_CONTEXT  *Context
   )
 {
@@ -291,7 +291,7 @@ OcRunBootPicker (
   }
 
   //
-  // This one is handled as is for Apple BootPicker for now.
+  // This one is handled as is for Apple BoobPicker for now.
   //
   if (Context->PickerCommand != OcPickerDefault) {
     Status = InternalRunRequestPrivilege (Context, OcPrivilegeAuthorized);
@@ -308,9 +308,9 @@ OcRunBootPicker (
   IsApplePickerSelection = FALSE;
 
   if ((Context->PickerCommand == OcPickerShowPicker) && (Context->PickerMode == OcPickerModeApple)) {
-    Status = OcLaunchAppleBootPicker ();
+    Status = OcLaunchAppleBoobPicker ();
     if (EFI_ERROR (Status)) {
-      DEBUG ((DEBUG_WARN, "OCB: Apple BootPicker failed - %r, fallback to builtin\n", Status));
+      DEBUG ((DEBUG_WARN, "OCB: Apple BoobPicker failed - %r, fallback to builtin\n", Status));
       Context->ApplePickerUnsupported = TRUE;
     } else {
       IsApplePickerSelection = TRUE;
@@ -760,7 +760,7 @@ OcUnlockAppleFirmwareUI (
 }
 
 EFI_STATUS
-OcLaunchAppleBootPicker (
+OcLaunchAppleBoobPicker (
   VOID
   )
 {
@@ -768,7 +768,7 @@ OcLaunchAppleBootPicker (
 
   OcUnlockAppleFirmwareUI ();
 
-  Status = OcRunFirmwareApplication (&gAppleBootPickerFileGuid, TRUE);
+  Status = OcRunFirmwareApplication (&gAppleBoobPickerFileGuid, TRUE);
 
   return Status;
 }

@@ -1267,7 +1267,7 @@ isAlreadyReported(struct CSourceLocation *pLocation)
 {
 	/*
 	 * This code is shared between libc, kernel and standalone usage.
-	 * It shall work in early bootstrap phase of both of them.
+	 * It shall work in early boobstrap phase of both of them.
 	 */
 
 	uint32_t siOldValue;

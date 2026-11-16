@@ -1,5 +1,5 @@
 ## @file
-#  Run Apple Boot Picker.
+#  OpenCock boobstrap image.
 #
 #  Copyright (c) 2018, vit9696. All rights reserved.<BR>
 #
@@ -14,8 +14,8 @@
 
 [Defines]
   INF_VERSION                    = 0x0001001B
-  BASE_NAME                      = BootKicker
-  FILE_GUID                      = 3099A880-582F-44BA-8DA3-F4A875F3E34D
+  BASE_NAME                      = Boobstrap
+  FILE_GUID                      = 1E55CC26-6036-43AB-867C-213FFB426812
   MODULE_TYPE                    = UEFI_APPLICATION
   VERSION_STRING                 = 1.0
   ENTRY_POINT                    = UefiMain
@@ -27,24 +27,27 @@
 #
 
 [Sources]
-  BootKicker.c
-
-[Guids]
-  gAppleBootPickerFileGuid
-
-[Protocols]
-  gEfiDevicePathProtocolGuid
-  gEfiFirmwareVolumeProtocolGuid
-  gEfiGraphicsOutputProtocolGuid
+  Boobstrap.c
 
 [Packages]
-  MdePkg/MdePkg.dec
   OpenCockPkg/OpenCockPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+
+[Protocols]
+  gEfiDevicePathProtocolGuid          ## CONSUMES
+  gEfiLoadedImageProtocolGuid         ## CONSUMES
+  gEfiSimpleFileSystemProtocolGuid    ## CONSUMES
 
 [LibraryClasses]
-  OcBootManagementLib
-  OcConsoleLib
-  OcFileLib
   UefiApplicationEntryPoint
-  UefiBootServicesTableLib
   UefiLib
+  PrintLib
+  DebugLib
+  DevicePathLib
+  MemoryAllocationLib
+  OcDevicePathLib
+  OcFileLib
+  OcMiscLib
+  OcStringLib

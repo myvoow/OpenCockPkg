@@ -24,7 +24,7 @@
 #include <Library/OcStringLib.h>
 #include <Library/OcStorageLib.h>
 
-#include <Protocol/OcBootstrap.h>
+#include <Protocol/OcBoobstrap.h>
 
 /**
   OpenCock version reported to log and NVRAM.
@@ -64,7 +64,7 @@
 /**
   Obtain cryptographic key if it was installed.
 
-  @param[in]  Bootstrap  bootstrap protocol.
+  @param[in]  Boobstrap  boobstrap protocol.
 
   @return public key or NULL.
 **/
@@ -256,7 +256,7 @@ OcLoadPlatformSupport (
   @param[in]  Storage   OpenCock storage.
   @param[in]  Config    OpenCock configuration.
   @param[in]  CpuInfo   CPU information.
-  @param[out] Signature OpenCock SHA-1 booter signature, all zero when unavailable.
+  @param[out] Signature OpenCock SHA-1 boober signature, all zero when unavailable.
 **/
 VOID
 OcLoadUefiSupport (
@@ -346,7 +346,7 @@ OcMiscEarlyInit (
   @param[in]  RootPath       Root load path (e.g. path to OC directory).
   @param[in]  LoadPath       OpenCock loading device path (absolute).
   @param[in]  StorageHandle  OpenCock storage loading handle (e.g. FS handle).
-  @param[out] Signature      OpenCock SHA-1 booter signature, optional.
+  @param[out] Signature      OpenCock SHA-1 boober signature, optional.
 
   @retval EFI_SUCCESS on success, informational.
 **/

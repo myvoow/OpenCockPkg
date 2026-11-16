@@ -590,7 +590,7 @@ error_str       db      'error', NULL
 ; Pad the rest of the 512 byte sized sector with zeroes. The last
 ; two bytes is the mandatory boot sector signature.
 ;
-; If the booter code becomes too large, then nasm will complain
+; If the boober code becomes too large, then nasm will complain
 ; that the 'times' argument is negative.
 
 pad_table_and_sig:

@@ -46,7 +46,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 //
 // Boot protection guids.
 //
-#define OC_BOOT_PROTECT_VARIABLE_BOOTSTRAP  BIT0
+#define OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP  BIT0
 
 //
 // Variable used to report OpenCock version in the following format:

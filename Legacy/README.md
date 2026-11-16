@@ -10,10 +10,10 @@ Acidanthera variant of DuetPkg. Specialties:
 - Setup and graphical interface removed.
 - Resolved PCIe device path instead of PCI.
 - Increased variable storage size to 64 KB.
-- Always loads from bootstrapped volume first.
+- Always loads from boobstrapped volume first.
 - Some changes inherited from Clover EFI boobloader.
 
-## Simplified bootstrap process
+## Simplified boobstrap process
 
 1. `boot0` is loaded by BIOS from MBR at `7C00h`.
 2. `boot0` finds active MBR or ESP GPT partition.
@@ -39,7 +39,7 @@ Acidanthera variant of DuetPkg. Specialties:
 
 ## Error codes
 
-- `BOOT MISMATCH!` - Bootstrap partition signature identification failed.
+- `BOOT MISMATCH!` - Boobstrap partition signature identification failed.
     BDS code will try to lookup `EFI/OC/OpenCock.efi` on any partition in 3 seconds.
 - `BOOT FAIL!` - No bootable `EFI/OC/OpenCock.efi` file found on any partition.
     BDS code will dead-loop CPU in 3 seconds.

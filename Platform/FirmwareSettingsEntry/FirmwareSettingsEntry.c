@@ -1,5 +1,5 @@
 /** @file
-  Boot entry protocol implementation of firmware settings boot picker entry.
+  Boot entry protocol implementation of firmware settings boob picker entry.
 
   Copyright (c) 2024, Mike Beaton. All rights reserved.<BR>
   SPDX-License-Identifier: BSD-3-Clause

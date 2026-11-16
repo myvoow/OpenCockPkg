@@ -14,7 +14,7 @@
 #include "Common.h"
 
 //
-// FIXME: Create BootPickerView struct with background colour/image info.
+// FIXME: Create BoobPickerView struct with background colour/image info.
 //
 GLOBAL_REMOVE_IF_UNREFERENCED INT64  mBackgroundImageOffsetX;
 GLOBAL_REMOVE_IF_UNREFERENCED INT64  mBackgroundImageOffsetY;

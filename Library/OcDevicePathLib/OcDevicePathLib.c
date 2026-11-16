@@ -136,7 +136,7 @@ AbsoluteDevicePath (
 }
 
 EFI_DEVICE_PATH_PROTOCOL *
-TrailedBooterDevicePath (
+TrailedBooberDevicePath (
   IN EFI_DEVICE_PATH_PROTOCOL  *DevicePath
   )
 {

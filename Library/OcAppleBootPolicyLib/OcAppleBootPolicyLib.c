@@ -50,17 +50,17 @@ typedef struct {
 ///
 /// An array of file paths to search for in case no file is blessed.
 /// On Apple Macs this list includes:
-/// 1. APPLE_BOOTER_DEFAULT_FILE_NAME  -- \System\Library\CoreServices\boot.efi
+/// 1. APPLE_BOOBER_DEFAULT_FILE_NAME  -- \System\Library\CoreServices\boot.efi
 /// 2. APPLE_REMOVABLE_MEDIA_FILE_NAME -- \EFI\APPLE\X64\BOOT.EFI
 /// 3. EFI_REMOVABLE_MEDIA_FILE_NAME   -- \EFI\BOOT\BOOTX64.EFI
-/// 4. APPLE_BOOTER_ROOT_FILE_NAME     -- \boot.efi
+/// 4. APPLE_BOOBER_ROOT_FILE_NAME     -- \boot.efi
 ///
 /// Since in real world only 1st and 3rd entries are used, we do not include
 /// 2nd and 4th until further notice. However, we do include a custom entry
 /// for Windows, for the reason OpenCock, unlike Apple EFI, may override
 /// BOOTx64.efi, and this is not the case for Apple EFI. So we end up with:
-/// 1. APPLE_BOOTER_DEFAULT_FILE_NAME  -- \System\Library\CoreServices\boot.efi
-/// 2. MS_BOOTER_DEFAULT_FILE_NAME     -- \EFI\Microsoft\Boot\bootmgfw.efi
+/// 1. APPLE_BOOBER_DEFAULT_FILE_NAME  -- \System\Library\CoreServices\boot.efi
+/// 2. MS_BOOBER_DEFAULT_FILE_NAME     -- \EFI\Microsoft\Boot\bootmgfw.efi
 /// 3. EFI_REMOVABLE_MEDIA_FILE_NAME   -- \EFI\BOOT\BOOTX64.EFI
 ///
 /// This resolves a problem when Windows installer does not replace our BOOTx64.efi
@@ -72,8 +72,8 @@ typedef struct {
 /// software for boot management and do not use BOOTx64.efi in the first place.
 ///
 GLOBAL_REMOVE_IF_UNREFERENCED CONST CHAR16  *gAppleBootPolicyPredefinedPaths[] = {
-  APPLE_BOOTER_DEFAULT_FILE_NAME,
-  MS_BOOTER_DEFAULT_FILE_NAME,
+  APPLE_BOOBER_DEFAULT_FILE_NAME,
+  MS_BOOBER_DEFAULT_FILE_NAME,
   EFI_REMOVABLE_MEDIA_FILE_NAME
 };
 
@@ -238,7 +238,7 @@ InternalGetApfsSpecialFileInfo (
 
 STATIC
 EFI_STATUS
-InternalGetBooterFromBlessedSystemFilePath (
+InternalGetBooberFromBlessedSystemFilePath (
   IN  EFI_FILE_PROTOCOL         *Root,
   OUT EFI_DEVICE_PATH_PROTOCOL  **FilePath
   )
@@ -275,7 +275,7 @@ InternalGetBooterFromBlessedSystemFilePath (
 
 STATIC
 EFI_STATUS
-InternalGetBooterFromBlessedSystemFolderPath (
+InternalGetBooberFromBlessedSystemFolderPath (
   IN  EFI_HANDLE                Device,
   IN  EFI_FILE_PROTOCOL         *Root,
   OUT EFI_DEVICE_PATH_PROTOCOL  **FilePath
@@ -287,9 +287,9 @@ InternalGetBooterFromBlessedSystemFolderPath (
   EFI_DEVICE_PATH_PROTOCOL  *DevicePathWalker;
   FILEPATH_DEVICE_PATH      *FolderDevicePath;
   UINTN                     DevicePathSize;
-  UINTN                     BooterDirPathSize;
-  UINTN                     BooterPathSize;
-  CHAR16                    *BooterPath;
+  UINTN                     BooberDirPathSize;
+  UINTN                     BooberPathSize;
+  CHAR16                    *BooberPath;
 
   Status = EFI_NOT_FOUND;
 
@@ -322,16 +322,16 @@ InternalGetBooterFromBlessedSystemFolderPath (
        && (DevicePathSubType (DevicePathWalker) == MEDIA_FILEPATH_DP))
     {
       FolderDevicePath  = (FILEPATH_DEVICE_PATH *)DevicePathWalker;
-      BooterDirPathSize = OcFileDevicePathNameSize (FolderDevicePath);
-      BooterPathSize    = BooterDirPathSize + L_STR_SIZE (APPLE_BOOTER_ROOT_FILE_NAME) - sizeof (CHAR16);
-      BooterPath        = AllocateZeroPool (BooterPathSize);
+      BooberDirPathSize = OcFileDevicePathNameSize (FolderDevicePath);
+      BooberPathSize    = BooberDirPathSize + L_STR_SIZE (APPLE_BOOBER_ROOT_FILE_NAME) - sizeof (CHAR16);
+      BooberPath        = AllocateZeroPool (BooberPathSize);
 
-      if (BooterPath != NULL) {
+      if (BooberPath != NULL) {
         //
         // FolderDevicePath->PathName may be unaligned, thus byte copying is needed.
         //
-        CopyMem (BooterPath, FolderDevicePath->PathName, BooterDirPathSize);
-        StrCatS (BooterPath, BooterPathSize, APPLE_BOOTER_ROOT_FILE_NAME);
+        CopyMem (BooberPath, FolderDevicePath->PathName, BooberDirPathSize);
+        StrCatS (BooberPath, BooberPathSize, APPLE_BOOBER_ROOT_FILE_NAME);
         Status = EFI_SUCCESS;
       } else {
         Status = EFI_OUT_OF_RESOURCES;
@@ -350,18 +350,18 @@ InternalGetBooterFromBlessedSystemFolderPath (
     return Status;
   }
 
-  Status = InternalFileExists (Root, BooterPath);
+  Status = InternalFileExists (Root, BooberPath);
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_BULK_INFO, "OCBP: Blessed folder %s is missing - %r\n", BooterPath, Status));
+    DEBUG ((DEBUG_BULK_INFO, "OCBP: Blessed folder %s is missing - %r\n", BooberPath, Status));
     return EFI_NOT_FOUND;
   }
 
-  *FilePath = FileDevicePath (Device, BooterPath);
+  *FilePath = FileDevicePath (Device, BooberPath);
   return EFI_SUCCESS;
 }
 
 EFI_STATUS
-OcGetBooterFromPredefinedPathList (
+OcGetBooberFromPredefinedPathList (
   IN  EFI_HANDLE                Device,
   IN  EFI_FILE_PROTOCOL         *Root,
   IN  CONST CHAR16              **PredefinedPaths,
@@ -494,7 +494,7 @@ InternalGetApfsVolumeInfo (
 
 STATIC
 EFI_STATUS
-InternalGetBooterFromApfsVolumePredefinedPathList (
+InternalGetBooberFromApfsVolumePredefinedPathList (
   IN     EFI_HANDLE                Device,
   IN     EFI_FILE_PROTOCOL         *PrebootRoot,
   IN     CHAR16                    *VolumeDirectoryName,
@@ -545,7 +545,7 @@ InternalGetBooterFromApfsVolumePredefinedPathList (
     ));
 
   if ((VolumeDirectoryInfo->Attribute & EFI_FILE_DIRECTORY) != 0) {
-    Status = OcGetBooterFromPredefinedPathList (
+    Status = OcGetBooberFromPredefinedPathList (
                Device,
                VolumeDirectoryHandle,
                PredefinedPaths,
@@ -564,12 +564,12 @@ InternalGetBooterFromApfsVolumePredefinedPathList (
 /**
   APFS boot happens from Preboot volume, which normally contains blessed file
   or folder. In case blessed path location fails, we iterate every volume
-  within the container, and try to locate a predefined booter path on Preboot
+  within the container, and try to locate a predefined boober path on Preboot
   volume (e.g. Preboot://{VolumeUuid}/System/Library/CoreServices/boot.efi).
 **/
 STATIC
 EFI_STATUS
-InternalGetBooterFromApfsPredefinedPathList (
+InternalGetBooberFromApfsPredefinedPathList (
   IN  EFI_HANDLE                Device,
   IN  EFI_FILE_PROTOCOL         *PrebootRoot,
   IN  CONST GUID                *ContainerUuid,
@@ -690,7 +690,7 @@ InternalGetBooterFromApfsPredefinedPathList (
       *VolumeHandle = HandleBuffer[Index];
     }
 
-    TmpStatus = InternalGetBooterFromApfsVolumePredefinedPathList (
+    TmpStatus = InternalGetBooberFromApfsVolumePredefinedPathList (
                   Device,
                   PrebootRoot,
                   VolumeDirectoryName,
@@ -702,7 +702,7 @@ InternalGetBooterFromApfsPredefinedPathList (
     if (EFI_ERROR (TmpStatus)) {
       DEBUG ((
         DEBUG_BULK_INFO,
-        "OCBP: No APFS booter %u of %u for %s - %r\n",
+        "OCBP: No APFS boober %u of %u for %s - %r\n",
         (UINT32)(Index + 1),
         (UINT32)NumberOfHandles,
         VolumeDirectoryName,
@@ -713,7 +713,7 @@ InternalGetBooterFromApfsPredefinedPathList (
 
       DEBUG ((
         DEBUG_BULK_INFO,
-        "OCBP: Found APFS booter %u of %u for %s (%p)\n",
+        "OCBP: Found APFS boober %u of %u for %s (%p)\n",
         (UINT32)(Index + 1),
         (UINT32)NumberOfHandles,
         VolumeDirectoryName,
@@ -853,7 +853,7 @@ InternalGetApfsVolumeHandle (
     //
     // FIXME: ApfsVolumeHandle is only returned when a predefined path exists
     //
-    Status = InternalGetBooterFromApfsPredefinedPathList (
+    Status = InternalGetBooberFromApfsPredefinedPathList (
                DeviceHandle,
                Root,
                &ContainerInfo->Uuid,
@@ -907,11 +907,11 @@ OcBootPolicyGetBootFile (
     return Status;
   }
 
-  Status = InternalGetBooterFromBlessedSystemFilePath (Root, FilePath);
+  Status = InternalGetBooberFromBlessedSystemFilePath (Root, FilePath);
   if (EFI_ERROR (Status)) {
-    Status = InternalGetBooterFromBlessedSystemFolderPath (Device, Root, FilePath);
+    Status = InternalGetBooberFromBlessedSystemFolderPath (Device, Root, FilePath);
     if (EFI_ERROR (Status)) {
-      Status = OcGetBooterFromPredefinedPathList (
+      Status = OcGetBooberFromPredefinedPathList (
                  Device,
                  Root,
                  PredefinedPaths,
@@ -988,15 +988,15 @@ OcBootPolicyGetBootFileEx (
   if (!EFI_ERROR (Status)) {
     Status = EFI_NOT_FOUND;
     if ((VolumeInfo->Role & APPLE_APFS_VOLUME_ROLE_PREBOOT) != 0) {
-      TmpStatus = InternalGetBooterFromBlessedSystemFilePath (Root, FilePath);
+      TmpStatus = InternalGetBooberFromBlessedSystemFilePath (Root, FilePath);
       if (EFI_ERROR (TmpStatus)) {
-        TmpStatus = InternalGetBooterFromBlessedSystemFolderPath (Device, Root, FilePath);
+        TmpStatus = InternalGetBooberFromBlessedSystemFolderPath (Device, Root, FilePath);
       }
 
       //
       // Blessed entry is always first, and subsequent entries are added with deduplication.
       //
-      Status = InternalGetBooterFromApfsPredefinedPathList (
+      Status = InternalGetBooberFromApfsPredefinedPathList (
                  Device,
                  Root,
                  &ContainerInfo->Uuid,
@@ -1014,11 +1014,11 @@ OcBootPolicyGetBootFileEx (
     FreePool (VolumeInfo);
     FreePool (ContainerInfo);
   } else {
-    Status = InternalGetBooterFromBlessedSystemFilePath (Root, FilePath);
+    Status = InternalGetBooberFromBlessedSystemFilePath (Root, FilePath);
     if (EFI_ERROR (Status)) {
-      Status = InternalGetBooterFromBlessedSystemFolderPath (Device, Root, FilePath);
+      Status = InternalGetBooberFromBlessedSystemFolderPath (Device, Root, FilePath);
       if (EFI_ERROR (Status)) {
-        Status = OcGetBooterFromPredefinedPathList (
+        Status = OcGetBooberFromPredefinedPathList (
                    Device,
                    Root,
                    PredefinedPaths,

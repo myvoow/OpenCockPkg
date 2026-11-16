@@ -292,7 +292,7 @@ typedef struct SERVICES_OVERRIDE_STATE_ {
   ///
   UINTN                        AppleBootNestedCount;
   ///
-  /// The loaded image structure of the last started Apple booter.
+  /// The loaded image structure of the last started Apple boober.
   ///
   EFI_LOADED_IMAGE_PROTOCOL    *LastAppleBootImage;
   ///
@@ -372,7 +372,7 @@ typedef struct KERNEL_SUPPORT_STATE_ {
 } KERNEL_SUPPORT_STATE;
 
 /**
-  Apple booter KASLR slide support internal state.
+  Apple boober KASLR slide support internal state.
 **/
 typedef struct SLIDE_SUPPORT_STATE_ {
   ///
@@ -447,7 +447,7 @@ typedef struct BOOT_COMPAT_CONTEXT_ {
   ///
   KERNEL_SUPPORT_STATE       KernelState;
   ///
-  /// Apple booter KASLR slide support internal state.
+  /// Apple boober KASLR slide support internal state.
   ///
   SLIDE_SUPPORT_STATE        SlideSupport;
   ///
@@ -496,7 +496,7 @@ AppleMapPrepareMemoryPool (
   @param[in]      GetMemoryMap  Unmodified GetMemoryMap pointer, optional.
 **/
 VOID
-AppleMapPrepareBooterState (
+AppleMapPrepareBooberState (
   IN OUT BOOT_COMPAT_CONTEXT  *BootCompat,
   IN OUT EFI_LOADED_IMAGE     *LoadedImage,
   IN     EFI_GET_MEMORY_MAP   GetMemoryMap  OPTIONAL
@@ -642,8 +642,8 @@ AppleMapPrepareKernelStateOld64 (
 /**
   Patch boot.efi to support random and passed slide values in safe mode.
 
-  @param[in,out]  ImageBase  Apple booter image base.
-  @param[in]      ImageSize  Apple booter image size.
+  @param[in,out]  ImageBase  Apple boober image base.
+  @param[in]      ImageSize  Apple boober image size.
 **/
 VOID
 AppleSlideUnlockForSafeMode (

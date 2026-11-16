@@ -19,9 +19,9 @@
 #include <Library/OcCpuLib.h>
 
 /**
-  Booter patch structure.
+  Boober patch structure.
 **/
-typedef struct OC_BOOTER_PATCH_ {
+typedef struct OC_BOOBER_PATCH_ {
   //
   // Comment from user.
   //
@@ -59,14 +59,14 @@ typedef struct OC_BOOTER_PATCH_ {
   //
   UINT32         Skip;
   //
-  // Limit replacement size to this value or 0, which assumes booter file size.
+  // Limit replacement size to this value or 0, which assumes boober file size.
   //
   UINT32         Limit;
   //
-  // Identifier for boobloader type. (e.g. Apple for boot.efi, or file name suffix for other possible booters)
+  // Identifier for boobloader type. (e.g. Apple for boot.efi, or file name suffix for other possible boobers)
   //
   CONST CHAR8    *Identifier;
-} OC_BOOTER_PATCH;
+} OC_BOOBER_PATCH;
 
 /**
   Apple Boot Compatibility layer configuration.
@@ -164,11 +164,11 @@ typedef struct OC_ABC_SETTINGS_ {
   /// checks that the hibernation signature matches the SHA-1 hash of the
   /// EFI image it launches prior to exposing the image key.
   ///
-  BOOLEAN    ForceBooterSignature;
+  BOOLEAN    ForceBooberSignature;
   ///
-  /// Booter signature for ForceBooterSignature.
+  /// Boober signature for ForceBooberSignature.
   ///
-  UINT8      BooterSignature[SHA1_DIGEST_SIZE];
+  UINT8      BooberSignature[SHA1_DIGEST_SIZE];
   ///
   /// CoreImage may update and restore GetMemoryMap during loading (see InsertImageRecord)
   /// as it needs this for segment splitting. Unfortunately it assumes nobody else
@@ -201,13 +201,13 @@ typedef struct OC_ABC_SETTINGS_ {
   ///
   UINTN                   MmioWhitelistSize;
   ///
-  /// List of booter patches.
+  /// List of boober patches.
   ///
-  OC_BOOTER_PATCH         *BooterPatches;
+  OC_BOOBER_PATCH         *BooberPatches;
   ///
-  /// Size of list of booter patches.
+  /// Size of list of boober patches.
   ///
-  UINT32                  BooterPatchesSize;
+  UINT32                  BooberPatchesSize;
   ///
   /// List of NULL-terminated handlers for TPL_APPLICATION execution within ExitBootServices.
   ///

@@ -30,9 +30,9 @@ Utility to validate whether a `config.plist` matches requirements and convention
 #### Add
 - Entry[N]->Path: Only `.aml` and `.bin` filename suffix are accepted.
 
-### Booter
+### Boober
 #### MmioWhitelist
-- Entry[N]->Enabled: When at least one entry is enabled, `DevirtualiseMmio` in `Booter->Quirks` should be enabled.
+- Entry[N]->Enabled: When at least one entry is enabled, `DevirtualiseMmio` in `Boober->Quirks` should be enabled.
 #### Patch
 - Entry[N]->Arch: Only `Any`, `i386`, or `x86_64` are accepted.
 - Entry[N]->Identifier: Only `Any`, `Apple`, or a specified boobloader with `.efi` sufffix, are accepted.

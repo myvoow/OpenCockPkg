@@ -12,8 +12,8 @@
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 **/
 
-#ifndef OC_BOOTSTRAP_PROTOCOL_H
-#define OC_BOOTSTRAP_PROTOCOL_H
+#ifndef OC_BOOBSTRAP_PROTOCOL_H
+#define OC_BOOBSTRAP_PROTOCOL_H
 
 #include <Library/OcCryptoLib.h>
 
@@ -22,20 +22,20 @@
 ///
 /// BA1EB455-B182-4F14-8521-E422C325DEF6
 ///
-#define OC_BOOTSTRAP_PROTOCOL_GUID                                                  \
+#define OC_BOOBSTRAP_PROTOCOL_GUID                                                  \
   {                                                                                 \
     0xBA1EB455, 0xB182, 0x4F14, { 0x85, 0x21, 0xE4, 0x22, 0xC3, 0x25, 0xDE, 0xF6 }  \
   }
 
 ///
-/// OC_BOOTSTRAP_PROTOCOL revision
+/// OC_BOOBSTRAP_PROTOCOL revision
 ///
-#define OC_BOOTSTRAP_PROTOCOL_REVISION  7
+#define OC_BOOBSTRAP_PROTOCOL_REVISION  7
 
 ///
-/// Forward declaration of OC_BOOTSTRAP_PROTOCOL structure.
+/// Forward declaration of OC_BOOBSTRAP_PROTOCOL structure.
 ///
-typedef struct OC_BOOTSTRAP_PROTOCOL_ OC_BOOTSTRAP_PROTOCOL;
+typedef struct OC_BOOBSTRAP_PROTOCOL_ OC_BOOBSTRAP_PROTOCOL;
 
 /**
   Obtain OpenCock load handle.
@@ -48,17 +48,17 @@ typedef struct OC_BOOTSTRAP_PROTOCOL_ OC_BOOTSTRAP_PROTOCOL;
 typedef
 EFI_HANDLE
 (EFIAPI *OC_GET_LOAD_HANDLE)(
-  IN OC_BOOTSTRAP_PROTOCOL            *This
+  IN OC_BOOBSTRAP_PROTOCOL            *This
   );
 
 ///
-/// The structure exposed by the OC_BOOTSTRAP_PROTOCOL.
+/// The structure exposed by the OC_BOOBSTRAP_PROTOCOL.
 ///
-struct OC_BOOTSTRAP_PROTOCOL_ {
+struct OC_BOOBSTRAP_PROTOCOL_ {
   UINTN                 Revision;
   OC_GET_LOAD_HANDLE    GetLoadHandle;
 };
 
-extern EFI_GUID  gOcBootstrapProtocolGuid;
+extern EFI_GUID  gOcBoobstrapProtocolGuid;
 
-#endif // OC_BOOTSTRAP_PROTOCOL_H
+#endif // OC_BOOBSTRAP_PROTOCOL_H

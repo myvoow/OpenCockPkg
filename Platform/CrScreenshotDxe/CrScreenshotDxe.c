@@ -37,7 +37,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <Protocol/AppleEvent.h>
 #include <Protocol/GraphicsOutput.h>
-#include <Protocol/OcBootstrap.h>
+#include <Protocol/OcBoobstrap.h>
 #include <Protocol/SimpleTextInEx.h>
 #include <Protocol/SimpleFileSystem.h>
 

@@ -80,7 +80,7 @@ extern EFI_GUID     gEfiBlockIoProtocolGuid;
 extern EFI_GUID     gEfiDriverBindingProtocolGuid;
 extern EFI_GUID     gEfiComponentNameProtocolGuid;
 
-extern EFI_GUID  gOcBootstrapProtocolGuid;
+extern EFI_GUID  gOcBoobstrapProtocolGuid;
 extern EFI_GUID  gOcVendorVariableGuid;
 extern EFI_GUID  gOcCustomSmbios3TableGuid;
 extern EFI_GUID  gOcCustomSmbiosTableGuid;

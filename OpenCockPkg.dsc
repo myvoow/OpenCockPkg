@@ -207,8 +207,8 @@
   MdeModulePkg/Bus/Isa/Ps2KeyboardDxe/Ps2KeyboardDxe.inf
   MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
   MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
-  OpenCockPkg/Application/BootKicker/BootKicker.inf
-  OpenCockPkg/Application/Bootstrap/Bootstrap.inf {
+  OpenCockPkg/Application/BootyKicker/BootyKicker.inf
+  OpenCockPkg/Application/Boobstrap/Boobstrap.inf {
     <LibraryClasses>
       !if $(TARGET) != RELEASE
         # Force onscreen visible logging in DEBUG/NOOPT builds.

@@ -1,5 +1,5 @@
 /** @file
-  Bootstrap OpenCock driver.
+  Boobstrap OpenCock driver.
 
 Copyright (c) 2018, vit9696. All rights reserved.<BR>
 This program and the accompanying materials
@@ -169,7 +169,7 @@ UefiMain (
     return EFI_NOT_FOUND;
   }
 
-  DebugPrintDevicePath (DEBUG_INFO, "BS: Booter path", LoadedImage->FilePath);
+  DebugPrintDevicePath (DEBUG_INFO, "BS: Boober path", LoadedImage->FilePath);
 
   //
   // Obtain the file system device path

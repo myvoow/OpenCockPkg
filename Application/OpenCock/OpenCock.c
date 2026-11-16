@@ -18,7 +18,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 
 #include <Protocol/DevicePath.h>
 #include <Protocol/LoadedImage.h>
-#include <Protocol/OcBootstrap.h>
+#include <Protocol/OcBoobstrap.h>
 #include <Protocol/SimpleFileSystem.h>
 #include <Protocol/VMwareDebug.h>
 
@@ -56,7 +56,7 @@ OC_CPU_INFO
 
 STATIC
 UINT8
-  mOpenCockBooterHash[SHA1_DIGEST_SIZE];
+  mOpenCockBooberHash[SHA1_DIGEST_SIZE];
 
 STATIC
 OC_RSA_PUBLIC_KEY *
@@ -143,10 +143,10 @@ OcMain (
     mStorageRoot,
     LoadPath,
     mStorageHandle,
-    mOpenCockConfiguration.Booter.Quirks.ForceBooterSignature ? mOpenCockBooterHash : NULL
+    mOpenCockConfiguration.Boober.Quirks.ForceBooberSignature ? mOpenCockBooberHash : NULL
     );
   DEBUG ((DEBUG_INFO, "OC: OcLoadUefiSupport...\n"));
-  OcLoadUefiSupport (Storage, &mOpenCockConfiguration, &mOpenCockCpuInfo, mOpenCockBooterHash);
+  OcLoadUefiSupport (Storage, &mOpenCockConfiguration, &mOpenCockCpuInfo, mOpenCockBooberHash);
   DEBUG_CODE_BEGIN ();
   DEBUG ((DEBUG_INFO, "OC: OcMiscLoadSystemReport...\n"));
   OcMiscLoadSystemReport (&mOpenCockConfiguration, mStorageHandle);
@@ -187,7 +187,7 @@ OcMain (
 
 STATIC
 EFI_STATUS
-OcBootstrap (
+OcBoobstrap (
   IN EFI_HANDLE                       DeviceHandle,
   IN EFI_SIMPLE_FILE_SYSTEM_PROTOCOL  *FileSystem,
   IN EFI_DEVICE_PATH_PROTOCOL         *LoadPath
@@ -208,7 +208,7 @@ OcBootstrap (
   //
   // Skipping this or later failing to call UnicodeGetParentDirectory means
   // we got valid path to the root of the partition. This happens when
-  // OpenCock.efi was loaded from e.g. firmware and then bootstrapped
+  // OpenCock.efi was loaded from e.g. firmware and then boobstrapped
   // on a different partition.
   //
   if (mStorageRoot == NULL) {
@@ -262,16 +262,16 @@ STATIC
 EFI_HANDLE
 EFIAPI
 OcGetLoadHandle (
-  IN OC_BOOTSTRAP_PROTOCOL  *This
+  IN OC_BOOBSTRAP_PROTOCOL  *This
   )
 {
   return mStorageHandle;
 }
 
 STATIC
-OC_BOOTSTRAP_PROTOCOL
-  mOpenCockBootStrap = {
-  .Revision      = OC_BOOTSTRAP_PROTOCOL_REVISION,
+OC_BOOBSTRAP_PROTOCOL
+  mOpenCockBoobStrap = {
+  .Revision      = OC_BOOBSTRAP_PROTOCOL_REVISION,
   .GetLoadHandle = OcGetLoadHandle,
 };
 
@@ -285,23 +285,23 @@ UefiMain (
   EFI_STATUS                       Status;
   EFI_LOADED_IMAGE_PROTOCOL        *LoadedImage;
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL  *FileSystem;
-  EFI_HANDLE                       BootstrapHandle;
-  OC_BOOTSTRAP_PROTOCOL            *Bootstrap;
+  EFI_HANDLE                       BoobstrapHandle;
+  OC_BOOBSTRAP_PROTOCOL            *Boobstrap;
   EFI_DEVICE_PATH_PROTOCOL         *AbsPath;
 
   DEBUG ((DEBUG_INFO, "OC: Starting OpenCock...\n"));
 
   //
-  // We have just started by bootstrap or manually at EFI/OC/OpenCock.efi.
-  // When bootstrap runs us, we only install the protocol.
+  // We have just started by boobstrap or manually at EFI/OC/OpenCock.efi.
+  // When boobstrap runs us, we only install the protocol.
   // Otherwise we do self start.
   //
 
-  Bootstrap = NULL;
+  Boobstrap = NULL;
   Status    = gBS->LocateProtocol (
-                     &gOcBootstrapProtocolGuid,
+                     &gOcBoobstrapProtocolGuid,
                      NULL,
-                     (VOID **)&Bootstrap
+                     (VOID **)&Boobstrap
                      );
 
   if (!EFI_ERROR (Status)) {
@@ -333,7 +333,7 @@ UefiMain (
     return EFI_INVALID_PARAMETER;
   }
 
-  DebugPrintDevicePath (DEBUG_INFO, "OC: Booter path", LoadedImage->FilePath);
+  DebugPrintDevicePath (DEBUG_INFO, "OC: Boober path", LoadedImage->FilePath);
 
   //
   // Obtain the file system device path
@@ -353,22 +353,22 @@ UefiMain (
     return EFI_OUT_OF_RESOURCES;
   }
 
-  DebugPrintDevicePath (DEBUG_INFO, "OC: Absolute booter path", LoadedImage->FilePath);
+  DebugPrintDevicePath (DEBUG_INFO, "OC: Absolute boober path", LoadedImage->FilePath);
 
-  BootstrapHandle = NULL;
+  BoobstrapHandle = NULL;
   Status          = gBS->InstallMultipleProtocolInterfaces (
-                           &BootstrapHandle,
-                           &gOcBootstrapProtocolGuid,
-                           &mOpenCockBootStrap,
+                           &BoobstrapHandle,
+                           &gOcBoobstrapProtocolGuid,
+                           &mOpenCockBoobStrap,
                            NULL
                            );
   if (EFI_ERROR (Status)) {
-    DEBUG ((DEBUG_ERROR, "OC: Failed to install bootstrap protocol - %r\n", Status));
+    DEBUG ((DEBUG_ERROR, "OC: Failed to install boobstrap protocol - %r\n", Status));
     FreePool (AbsPath);
     return Status;
   }
 
-  OcBootstrap (LoadedImage->DeviceHandle, FileSystem, AbsPath);
+  OcBoobstrap (LoadedImage->DeviceHandle, FileSystem, AbsPath);
   DEBUG ((DEBUG_ERROR, "OC: Failed to boot\n"));
   CpuDeadLoop ();
 

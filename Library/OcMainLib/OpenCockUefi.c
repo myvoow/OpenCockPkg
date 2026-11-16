@@ -584,17 +584,17 @@ OcLoadAppleSecureBoot (
     // Previously EfiBoot correctly removed the -s argument from command-line,
     // but for some reason it does not now.
     //
-    Config->Booter.Quirks.DisableSingleUser = TRUE;
+    Config->Boober.Quirks.DisableSingleUser = TRUE;
 
-    Status = OcAppleImg4BootstrapValues (RealSecureBootModel, Config->Misc.Security.ApECID);
+    Status = OcAppleImg4BoobstrapValues (RealSecureBootModel, Config->Misc.Security.ApECID);
     if (EFI_ERROR (Status)) {
-      DEBUG ((DEBUG_ERROR, "OC: Failed to bootstrap IMG4 NVRAM values - %r\n", Status));
+      DEBUG ((DEBUG_ERROR, "OC: Failed to boobstrap IMG4 NVRAM values - %r\n", Status));
       return;
     }
 
-    Status = OcAppleSecureBootBootstrapValues (RealSecureBootModel, Config->Misc.Security.ApECID);
+    Status = OcAppleSecureBootBoobstrapValues (RealSecureBootModel, Config->Misc.Security.ApECID);
     if (EFI_ERROR (Status)) {
-      DEBUG ((DEBUG_ERROR, "OC: Failed to bootstrap SB NVRAM values - %r\n", Status));
+      DEBUG ((DEBUG_ERROR, "OC: Failed to boobstrap SB NVRAM values - %r\n", Status));
       return;
     }
   }
@@ -687,7 +687,7 @@ OcInstallPermissiveSecurityPolicy (
 }
 
 VOID
-OcLoadBooterUefiSupport (
+OcLoadBooberUefiSupport (
   IN OC_GLOBAL_CONFIG  *Config,
   IN OC_CPU_INFO       *CpuInfo,
   IN UINT8             *Signature
@@ -696,48 +696,48 @@ OcLoadBooterUefiSupport (
   OC_ABC_SETTINGS        AbcSettings;
   UINT32                 Index;
   UINT32                 NextIndex;
-  OC_BOOTER_PATCH_ENTRY  *UserPatch;
-  OC_BOOTER_PATCH        *Patch;
+  OC_BOOBER_PATCH_ENTRY  *UserPatch;
+  OC_BOOBER_PATCH        *Patch;
 
   ZeroMem (&AbcSettings, sizeof (AbcSettings));
 
-  AbcSettings.AvoidRuntimeDefrag     = Config->Booter.Quirks.AvoidRuntimeDefrag;
-  AbcSettings.DevirtualiseMmio       = Config->Booter.Quirks.DevirtualiseMmio;
-  AbcSettings.DisableSingleUser      = Config->Booter.Quirks.DisableSingleUser;
-  AbcSettings.DisableVariableWrite   = Config->Booter.Quirks.DisableVariableWrite;
-  AbcSettings.ProtectSecureBoot      = Config->Booter.Quirks.ProtectSecureBoot;
-  AbcSettings.DiscardHibernateMap    = Config->Booter.Quirks.DiscardHibernateMap;
-  AbcSettings.AllowRelocationBlock   = Config->Booter.Quirks.AllowRelocationBlock;
-  AbcSettings.EnableSafeModeSlide    = Config->Booter.Quirks.EnableSafeModeSlide;
-  AbcSettings.EnableWriteUnprotector = Config->Booter.Quirks.EnableWriteUnprotector;
-  AbcSettings.ClearTaskSwitchBit     = Config->Booter.Quirks.ClearTaskSwitchBit;
-  AbcSettings.ForceExitBootServices  = Config->Booter.Quirks.ForceExitBootServices;
-  AbcSettings.ForceBooterSignature   = Config->Booter.Quirks.ForceBooterSignature;
-  CopyMem (AbcSettings.BooterSignature, Signature, sizeof (AbcSettings.BooterSignature));
-  AbcSettings.ProtectMemoryRegions   = Config->Booter.Quirks.ProtectMemoryRegions;
-  AbcSettings.ProvideCustomSlide     = Config->Booter.Quirks.ProvideCustomSlide;
-  AbcSettings.ProvideMaxSlide        = Config->Booter.Quirks.ProvideMaxSlide;
-  AbcSettings.ProtectUefiServices    = Config->Booter.Quirks.ProtectUefiServices;
-  AbcSettings.RebuildAppleMemoryMap  = Config->Booter.Quirks.RebuildAppleMemoryMap;
+  AbcSettings.AvoidRuntimeDefrag     = Config->Boober.Quirks.AvoidRuntimeDefrag;
+  AbcSettings.DevirtualiseMmio       = Config->Boober.Quirks.DevirtualiseMmio;
+  AbcSettings.DisableSingleUser      = Config->Boober.Quirks.DisableSingleUser;
+  AbcSettings.DisableVariableWrite   = Config->Boober.Quirks.DisableVariableWrite;
+  AbcSettings.ProtectSecureBoot      = Config->Boober.Quirks.ProtectSecureBoot;
+  AbcSettings.DiscardHibernateMap    = Config->Boober.Quirks.DiscardHibernateMap;
+  AbcSettings.AllowRelocationBlock   = Config->Boober.Quirks.AllowRelocationBlock;
+  AbcSettings.EnableSafeModeSlide    = Config->Boober.Quirks.EnableSafeModeSlide;
+  AbcSettings.EnableWriteUnprotector = Config->Boober.Quirks.EnableWriteUnprotector;
+  AbcSettings.ClearTaskSwitchBit     = Config->Boober.Quirks.ClearTaskSwitchBit;
+  AbcSettings.ForceExitBootServices  = Config->Boober.Quirks.ForceExitBootServices;
+  AbcSettings.ForceBooberSignature   = Config->Boober.Quirks.ForceBooberSignature;
+  CopyMem (AbcSettings.BooberSignature, Signature, sizeof (AbcSettings.BooberSignature));
+  AbcSettings.ProtectMemoryRegions   = Config->Boober.Quirks.ProtectMemoryRegions;
+  AbcSettings.ProvideCustomSlide     = Config->Boober.Quirks.ProvideCustomSlide;
+  AbcSettings.ProvideMaxSlide        = Config->Boober.Quirks.ProvideMaxSlide;
+  AbcSettings.ProtectUefiServices    = Config->Boober.Quirks.ProtectUefiServices;
+  AbcSettings.RebuildAppleMemoryMap  = Config->Boober.Quirks.RebuildAppleMemoryMap;
   AbcSettings.ResizeUsePciRbIo       = Config->Uefi.Quirks.ResizeUsePciRbIo;
-  AbcSettings.ResizeAppleGpuBars     = Config->Booter.Quirks.ResizeAppleGpuBars;
-  AbcSettings.SetupVirtualMap        = Config->Booter.Quirks.SetupVirtualMap;
-  AbcSettings.SignalAppleOS          = Config->Booter.Quirks.SignalAppleOS;
-  AbcSettings.SyncRuntimePermissions = Config->Booter.Quirks.SyncRuntimePermissions;
+  AbcSettings.ResizeAppleGpuBars     = Config->Boober.Quirks.ResizeAppleGpuBars;
+  AbcSettings.SetupVirtualMap        = Config->Boober.Quirks.SetupVirtualMap;
+  AbcSettings.SignalAppleOS          = Config->Boober.Quirks.SignalAppleOS;
+  AbcSettings.SyncRuntimePermissions = Config->Boober.Quirks.SyncRuntimePermissions;
 
   //
   // Handle MmioWhitelist patches.
   //
-  if (AbcSettings.DevirtualiseMmio && (Config->Booter.MmioWhitelist.Count > 0)) {
+  if (AbcSettings.DevirtualiseMmio && (Config->Boober.MmioWhitelist.Count > 0)) {
     AbcSettings.MmioWhitelist = AllocatePool (
-                                  Config->Booter.MmioWhitelist.Count * sizeof (AbcSettings.MmioWhitelist[0])
+                                  Config->Boober.MmioWhitelist.Count * sizeof (AbcSettings.MmioWhitelist[0])
                                   );
 
     if (AbcSettings.MmioWhitelist != NULL) {
       NextIndex = 0;
-      for (Index = 0; Index < Config->Booter.MmioWhitelist.Count; ++Index) {
-        if (Config->Booter.MmioWhitelist.Values[Index]->Enabled) {
-          AbcSettings.MmioWhitelist[NextIndex] = Config->Booter.MmioWhitelist.Values[Index]->Address;
+      for (Index = 0; Index < Config->Boober.MmioWhitelist.Count; ++Index) {
+        if (Config->Boober.MmioWhitelist.Values[Index]->Enabled) {
+          AbcSettings.MmioWhitelist[NextIndex] = Config->Boober.MmioWhitelist.Values[Index]->Address;
           ++NextIndex;
         }
       }
@@ -747,24 +747,24 @@ OcLoadBooterUefiSupport (
       DEBUG ((
         DEBUG_ERROR,
         "OC: Failed to allocate %u slots for mmio addresses\n",
-        (UINT32)Config->Booter.MmioWhitelist.Count
+        (UINT32)Config->Boober.MmioWhitelist.Count
         ));
     }
   }
 
   //
-  // Handle customised booter patches.
+  // Handle customised boober patches.
   //
-  if (Config->Booter.Patch.Count > 0) {
-    AbcSettings.BooterPatches = AllocateZeroPool (
-                                  Config->Booter.Patch.Count * sizeof (AbcSettings.BooterPatches[0])
+  if (Config->Boober.Patch.Count > 0) {
+    AbcSettings.BooberPatches = AllocateZeroPool (
+                                  Config->Boober.Patch.Count * sizeof (AbcSettings.BooberPatches[0])
                                   );
 
-    if (AbcSettings.BooterPatches != NULL) {
+    if (AbcSettings.BooberPatches != NULL) {
       NextIndex = 0;
-      for (Index = 0; Index < Config->Booter.Patch.Count; ++Index) {
-        Patch     = &AbcSettings.BooterPatches[NextIndex];
-        UserPatch = Config->Booter.Patch.Values[Index];
+      for (Index = 0; Index < Config->Boober.Patch.Count; ++Index) {
+        Patch     = &AbcSettings.BooberPatches[NextIndex];
+        UserPatch = Config->Boober.Patch.Values[Index];
 
         if (!UserPatch->Enabled) {
           continue;
@@ -781,7 +781,7 @@ OcLoadBooterUefiSupport (
            || ((UserPatch->Mask.Size > 0) && (UserPatch->Find.Size != UserPatch->Mask.Size))
            || ((UserPatch->ReplaceMask.Size > 0) && (UserPatch->Find.Size != UserPatch->ReplaceMask.Size)))
         {
-          DEBUG ((DEBUG_ERROR, "OC: Booter patch %u is borked\n", Index));
+          DEBUG ((DEBUG_ERROR, "OC: Boober patch %u is borked\n", Index));
           continue;
         }
 
@@ -832,12 +832,12 @@ OcLoadBooterUefiSupport (
         ++NextIndex;
       }
 
-      AbcSettings.BooterPatchesSize = NextIndex;
+      AbcSettings.BooberPatchesSize = NextIndex;
     } else {
       DEBUG ((
         DEBUG_ERROR,
-        "OC: Failed to allocate %u slots for user booter patches\n",
-        (UINT32)Config->Booter.Patch.Count
+        "OC: Failed to allocate %u slots for user boober patches\n",
+        (UINT32)Config->Boober.Patch.Count
         ));
     }
   }
@@ -915,7 +915,7 @@ OcLoadUefiSupport (
 
   OcReinstallProtocols (Config);
 
-  OcImageLoaderInit (Config->Booter.Quirks.ProtectUefiServices, Config->Booter.Quirks.FixupAppleEfiImages);
+  OcImageLoaderInit (Config->Boober.Quirks.ProtectUefiServices, Config->Boober.Quirks.FixupAppleEfiImages);
 
   OcLoadAppleSecureBoot (Config, CpuInfo);
 
@@ -924,7 +924,7 @@ OcLoadUefiSupport (
   //
   // Setup Apple boobloader specific UEFI features.
   //
-  OcLoadBooterUefiSupport (Config, CpuInfo, Signature);
+  OcLoadBooberUefiSupport (Config, CpuInfo, Signature);
 
   if (Config->Uefi.Quirks.ActivateHpetSupport) {
     ActivateHpetSupport ();

@@ -41,14 +41,14 @@ CheckACPI (
   );
 
 /**
-  Validate OpenCock Configuration Booter Section.
+  Validate OpenCock Configuration Boober Section.
 
   @param[in]  Config   Configuration structure.
 
-  @return     Number of errors detected in Booter Section.
+  @return     Number of errors detected in Boober Section.
 **/
 UINT32
-CheckBooter (
+CheckBoober (
   IN  OC_GLOBAL_CONFIG  *Config
   );
 

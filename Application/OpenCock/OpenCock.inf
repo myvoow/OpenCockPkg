@@ -43,7 +43,7 @@
   gEfiDevicePathProtocolGuid          ## CONSUMES
   gEfiLoadedImageProtocolGuid         ## CONSUMES
   gEfiSimpleFileSystemProtocolGuid    ## CONSUMES
-  gOcBootstrapProtocolGuid            ## CONSUMES
+  gOcBoobstrapProtocolGuid            ## CONSUMES
   gOcInterfaceProtocolGuid            ## SOMETIMES_CONSUMES
 
 [LibraryClasses]

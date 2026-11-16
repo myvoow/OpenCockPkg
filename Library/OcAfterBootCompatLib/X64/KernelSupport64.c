@@ -48,7 +48,7 @@ AppleMapPrepareKernelJump64 (
      && !BootCompat->Settings.DiscardHibernateMap
      && !BootCompat->Settings.AllowRelocationBlock
      && !BootCompat->Settings.DisableSingleUser
-     && !BootCompat->Settings.ForceBooterSignature)
+     && !BootCompat->Settings.ForceBooberSignature)
   {
     return;
   }

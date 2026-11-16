@@ -130,7 +130,7 @@ typedef enum {
 } APPLE_PICKER_ENTRY_REASON;
 
 ///
-/// BootPicker startup mode.
+/// BoobPicker startup mode.
 /// UINT32: APPLE_PICKER_ENTRY_REASON.
 /// gAppleVendorVariableGuid
 ///

@@ -424,7 +424,7 @@ GetPickerKeyInfo (
     //
     // boot.efi requires unrestricted NVRAM just for CMD+S+MINUS, and CMD+S
     // does not work at all on T2 macs. For CMD+S we simulate T2 behaviour with
-    // DisableSingleUser Booter quirk if necessary.
+    // DisableSingleUser Boober quirk if necessary.
     // Ref: https://support.apple.com/HT201573
     //
     if (HasCommand && HasKeyS) {

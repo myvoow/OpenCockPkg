@@ -23,12 +23,12 @@ OC_ARRAY_STRUCTORS (OC_ACPI_PATCH_ARRAY)
 OC_STRUCTORS (OC_ACPI_QUIRKS, ())
 OC_STRUCTORS (OC_ACPI_CONFIG, ())
 
-OC_STRUCTORS (OC_BOOTER_WL_ENTRY, ())
-OC_ARRAY_STRUCTORS (OC_BOOTER_WL_ARRAY)
-OC_STRUCTORS (OC_BOOTER_PATCH_ENTRY, ())
-OC_ARRAY_STRUCTORS (OC_BOOTER_PATCH_ARRAY)
-OC_STRUCTORS (OC_BOOTER_QUIRKS, ())
-OC_STRUCTORS (OC_BOOTER_CONFIG, ())
+OC_STRUCTORS (OC_BOOBER_WL_ENTRY, ())
+OC_ARRAY_STRUCTORS (OC_BOOBER_WL_ARRAY)
+OC_STRUCTORS (OC_BOOBER_PATCH_ENTRY, ())
+OC_ARRAY_STRUCTORS (OC_BOOBER_PATCH_ARRAY)
+OC_STRUCTORS (OC_BOOBER_QUIRKS, ())
+OC_STRUCTORS (OC_BOOBER_CONFIG, ())
 
 OC_MAP_STRUCTORS (OC_DEV_PROP_ADD_MAP)
 OC_STRUCTORS (OC_DEV_PROP_DELETE_ENTRY, ())
@@ -169,69 +169,69 @@ OC_SCHEMA
 
 STATIC
 OC_SCHEMA
-  mBooterWhitelistEntrySchema[] = {
-  OC_SCHEMA_INTEGER_IN ("Address", OC_BOOTER_WL_ENTRY, Address),
-  OC_SCHEMA_STRING_IN ("Comment",  OC_BOOTER_WL_ENTRY, Comment),
-  OC_SCHEMA_BOOLEAN_IN ("Enabled", OC_BOOTER_WL_ENTRY, Enabled)
+  mBooberWhitelistEntrySchema[] = {
+  OC_SCHEMA_INTEGER_IN ("Address", OC_BOOBER_WL_ENTRY, Address),
+  OC_SCHEMA_STRING_IN ("Comment",  OC_BOOBER_WL_ENTRY, Comment),
+  OC_SCHEMA_BOOLEAN_IN ("Enabled", OC_BOOBER_WL_ENTRY, Enabled)
 };
 
 STATIC
 OC_SCHEMA
-  mBooterWhitelistSchema = OC_SCHEMA_DICT (NULL, mBooterWhitelistEntrySchema);
+  mBooberWhitelistSchema = OC_SCHEMA_DICT (NULL, mBooberWhitelistEntrySchema);
 
 STATIC
 OC_SCHEMA
-  mBooterQuirksSchema[] = {
-  OC_SCHEMA_BOOLEAN_IN ("AllowRelocationBlock",   OC_GLOBAL_CONFIG, Booter.Quirks.AllowRelocationBlock),
-  OC_SCHEMA_BOOLEAN_IN ("AvoidRuntimeDefrag",     OC_GLOBAL_CONFIG, Booter.Quirks.AvoidRuntimeDefrag),
-  OC_SCHEMA_BOOLEAN_IN ("ClearTaskSwitchBit",     OC_GLOBAL_CONFIG, Booter.Quirks.ClearTaskSwitchBit),
-  OC_SCHEMA_BOOLEAN_IN ("DevirtualiseMmio",       OC_GLOBAL_CONFIG, Booter.Quirks.DevirtualiseMmio),
-  OC_SCHEMA_BOOLEAN_IN ("DisableSingleUser",      OC_GLOBAL_CONFIG, Booter.Quirks.DisableSingleUser),
-  OC_SCHEMA_BOOLEAN_IN ("DisableVariableWrite",   OC_GLOBAL_CONFIG, Booter.Quirks.DisableVariableWrite),
-  OC_SCHEMA_BOOLEAN_IN ("DiscardHibernateMap",    OC_GLOBAL_CONFIG, Booter.Quirks.DiscardHibernateMap),
-  OC_SCHEMA_BOOLEAN_IN ("EnableSafeModeSlide",    OC_GLOBAL_CONFIG, Booter.Quirks.EnableSafeModeSlide),
-  OC_SCHEMA_BOOLEAN_IN ("EnableWriteUnprotector", OC_GLOBAL_CONFIG, Booter.Quirks.EnableWriteUnprotector),
-  OC_SCHEMA_BOOLEAN_IN ("FixupAppleEfiImages",    OC_GLOBAL_CONFIG, Booter.Quirks.FixupAppleEfiImages),
-  OC_SCHEMA_BOOLEAN_IN ("ForceBooterSignature",   OC_GLOBAL_CONFIG, Booter.Quirks.ForceBooterSignature),
-  OC_SCHEMA_BOOLEAN_IN ("ForceExitBootServices",  OC_GLOBAL_CONFIG, Booter.Quirks.ForceExitBootServices),
-  OC_SCHEMA_BOOLEAN_IN ("ProtectMemoryRegions",   OC_GLOBAL_CONFIG, Booter.Quirks.ProtectMemoryRegions),
-  OC_SCHEMA_BOOLEAN_IN ("ProtectSecureBoot",      OC_GLOBAL_CONFIG, Booter.Quirks.ProtectSecureBoot),
-  OC_SCHEMA_BOOLEAN_IN ("ProtectUefiServices",    OC_GLOBAL_CONFIG, Booter.Quirks.ProtectUefiServices),
-  OC_SCHEMA_BOOLEAN_IN ("ProvideCustomSlide",     OC_GLOBAL_CONFIG, Booter.Quirks.ProvideCustomSlide),
-  OC_SCHEMA_INTEGER_IN ("ProvideMaxSlide",        OC_GLOBAL_CONFIG, Booter.Quirks.ProvideMaxSlide),
-  OC_SCHEMA_BOOLEAN_IN ("RebuildAppleMemoryMap",  OC_GLOBAL_CONFIG, Booter.Quirks.RebuildAppleMemoryMap),
-  OC_SCHEMA_INTEGER_IN ("ResizeAppleGpuBars",     OC_GLOBAL_CONFIG, Booter.Quirks.ResizeAppleGpuBars),
-  OC_SCHEMA_BOOLEAN_IN ("SetupVirtualMap",        OC_GLOBAL_CONFIG, Booter.Quirks.SetupVirtualMap),
-  OC_SCHEMA_BOOLEAN_IN ("SignalAppleOS",          OC_GLOBAL_CONFIG, Booter.Quirks.SignalAppleOS),
-  OC_SCHEMA_BOOLEAN_IN ("SyncRuntimePermissions", OC_GLOBAL_CONFIG, Booter.Quirks.SyncRuntimePermissions),
+  mBooberQuirksSchema[] = {
+  OC_SCHEMA_BOOLEAN_IN ("AllowRelocationBlock",   OC_GLOBAL_CONFIG, Boober.Quirks.AllowRelocationBlock),
+  OC_SCHEMA_BOOLEAN_IN ("AvoidRuntimeDefrag",     OC_GLOBAL_CONFIG, Boober.Quirks.AvoidRuntimeDefrag),
+  OC_SCHEMA_BOOLEAN_IN ("ClearTaskSwitchBit",     OC_GLOBAL_CONFIG, Boober.Quirks.ClearTaskSwitchBit),
+  OC_SCHEMA_BOOLEAN_IN ("DevirtualiseMmio",       OC_GLOBAL_CONFIG, Boober.Quirks.DevirtualiseMmio),
+  OC_SCHEMA_BOOLEAN_IN ("DisableSingleUser",      OC_GLOBAL_CONFIG, Boober.Quirks.DisableSingleUser),
+  OC_SCHEMA_BOOLEAN_IN ("DisableVariableWrite",   OC_GLOBAL_CONFIG, Boober.Quirks.DisableVariableWrite),
+  OC_SCHEMA_BOOLEAN_IN ("DiscardHibernateMap",    OC_GLOBAL_CONFIG, Boober.Quirks.DiscardHibernateMap),
+  OC_SCHEMA_BOOLEAN_IN ("EnableSafeModeSlide",    OC_GLOBAL_CONFIG, Boober.Quirks.EnableSafeModeSlide),
+  OC_SCHEMA_BOOLEAN_IN ("EnableWriteUnprotector", OC_GLOBAL_CONFIG, Boober.Quirks.EnableWriteUnprotector),
+  OC_SCHEMA_BOOLEAN_IN ("FixupAppleEfiImages",    OC_GLOBAL_CONFIG, Boober.Quirks.FixupAppleEfiImages),
+  OC_SCHEMA_BOOLEAN_IN ("ForceBooberSignature",   OC_GLOBAL_CONFIG, Boober.Quirks.ForceBooberSignature),
+  OC_SCHEMA_BOOLEAN_IN ("ForceExitBootServices",  OC_GLOBAL_CONFIG, Boober.Quirks.ForceExitBootServices),
+  OC_SCHEMA_BOOLEAN_IN ("ProtectMemoryRegions",   OC_GLOBAL_CONFIG, Boober.Quirks.ProtectMemoryRegions),
+  OC_SCHEMA_BOOLEAN_IN ("ProtectSecureBoot",      OC_GLOBAL_CONFIG, Boober.Quirks.ProtectSecureBoot),
+  OC_SCHEMA_BOOLEAN_IN ("ProtectUefiServices",    OC_GLOBAL_CONFIG, Boober.Quirks.ProtectUefiServices),
+  OC_SCHEMA_BOOLEAN_IN ("ProvideCustomSlide",     OC_GLOBAL_CONFIG, Boober.Quirks.ProvideCustomSlide),
+  OC_SCHEMA_INTEGER_IN ("ProvideMaxSlide",        OC_GLOBAL_CONFIG, Boober.Quirks.ProvideMaxSlide),
+  OC_SCHEMA_BOOLEAN_IN ("RebuildAppleMemoryMap",  OC_GLOBAL_CONFIG, Boober.Quirks.RebuildAppleMemoryMap),
+  OC_SCHEMA_INTEGER_IN ("ResizeAppleGpuBars",     OC_GLOBAL_CONFIG, Boober.Quirks.ResizeAppleGpuBars),
+  OC_SCHEMA_BOOLEAN_IN ("SetupVirtualMap",        OC_GLOBAL_CONFIG, Boober.Quirks.SetupVirtualMap),
+  OC_SCHEMA_BOOLEAN_IN ("SignalAppleOS",          OC_GLOBAL_CONFIG, Boober.Quirks.SignalAppleOS),
+  OC_SCHEMA_BOOLEAN_IN ("SyncRuntimePermissions", OC_GLOBAL_CONFIG, Boober.Quirks.SyncRuntimePermissions),
 };
 
 STATIC
 OC_SCHEMA
-  mBooterPatchSchemaEntry[] = {
-  OC_SCHEMA_STRING_IN ("Arch",       OC_BOOTER_PATCH_ENTRY, Arch),
-  OC_SCHEMA_STRING_IN ("Comment",    OC_BOOTER_PATCH_ENTRY, Comment),
-  OC_SCHEMA_INTEGER_IN ("Count",     OC_BOOTER_PATCH_ENTRY, Count),
-  OC_SCHEMA_BOOLEAN_IN ("Enabled",   OC_BOOTER_PATCH_ENTRY, Enabled),
-  OC_SCHEMA_DATA_IN ("Find",         OC_BOOTER_PATCH_ENTRY, Find),
-  OC_SCHEMA_STRING_IN ("Identifier", OC_BOOTER_PATCH_ENTRY, Identifier),
-  OC_SCHEMA_INTEGER_IN ("Limit",     OC_BOOTER_PATCH_ENTRY, Limit),
-  OC_SCHEMA_DATA_IN ("Mask",         OC_BOOTER_PATCH_ENTRY, Mask),
-  OC_SCHEMA_DATA_IN ("Replace",      OC_BOOTER_PATCH_ENTRY, Replace),
-  OC_SCHEMA_DATA_IN ("ReplaceMask",  OC_BOOTER_PATCH_ENTRY, ReplaceMask),
-  OC_SCHEMA_INTEGER_IN ("Skip",      OC_BOOTER_PATCH_ENTRY, Skip)
+  mBooberPatchSchemaEntry[] = {
+  OC_SCHEMA_STRING_IN ("Arch",       OC_BOOBER_PATCH_ENTRY, Arch),
+  OC_SCHEMA_STRING_IN ("Comment",    OC_BOOBER_PATCH_ENTRY, Comment),
+  OC_SCHEMA_INTEGER_IN ("Count",     OC_BOOBER_PATCH_ENTRY, Count),
+  OC_SCHEMA_BOOLEAN_IN ("Enabled",   OC_BOOBER_PATCH_ENTRY, Enabled),
+  OC_SCHEMA_DATA_IN ("Find",         OC_BOOBER_PATCH_ENTRY, Find),
+  OC_SCHEMA_STRING_IN ("Identifier", OC_BOOBER_PATCH_ENTRY, Identifier),
+  OC_SCHEMA_INTEGER_IN ("Limit",     OC_BOOBER_PATCH_ENTRY, Limit),
+  OC_SCHEMA_DATA_IN ("Mask",         OC_BOOBER_PATCH_ENTRY, Mask),
+  OC_SCHEMA_DATA_IN ("Replace",      OC_BOOBER_PATCH_ENTRY, Replace),
+  OC_SCHEMA_DATA_IN ("ReplaceMask",  OC_BOOBER_PATCH_ENTRY, ReplaceMask),
+  OC_SCHEMA_INTEGER_IN ("Skip",      OC_BOOBER_PATCH_ENTRY, Skip)
 };
 
 STATIC
 OC_SCHEMA
-  mBooterPatchSchema = OC_SCHEMA_DICT (NULL, mBooterPatchSchemaEntry);
+  mBooberPatchSchema = OC_SCHEMA_DICT (NULL, mBooberPatchSchemaEntry);
 
 STATIC
 OC_SCHEMA
-  mBooterConfigurationSchema[] = {
-  OC_SCHEMA_ARRAY_IN ("MmioWhitelist", OC_GLOBAL_CONFIG,     Booter.MmioWhitelist, &mBooterWhitelistSchema),
-  OC_SCHEMA_ARRAY_IN ("Patch",         OC_GLOBAL_CONFIG,     Booter.Patch,         &mBooterPatchSchema),
-  OC_SCHEMA_DICT ("Quirks",            mBooterQuirksSchema),
+  mBooberConfigurationSchema[] = {
+  OC_SCHEMA_ARRAY_IN ("MmioWhitelist", OC_GLOBAL_CONFIG,     Boober.MmioWhitelist, &mBooberWhitelistSchema),
+  OC_SCHEMA_ARRAY_IN ("Patch",         OC_GLOBAL_CONFIG,     Boober.Patch,         &mBooberPatchSchema),
+  OC_SCHEMA_DICT ("Quirks",            mBooberQuirksSchema),
 };
 
 //
@@ -883,7 +883,7 @@ STATIC
 OC_SCHEMA
   mRootConfigurationNodes[] = {
   OC_SCHEMA_DICT ("ACPI",             mAcpiConfigurationSchema),
-  OC_SCHEMA_DICT ("Booter",           mBooterConfigurationSchema),
+  OC_SCHEMA_DICT ("Boober",           mBooberConfigurationSchema),
   OC_SCHEMA_DICT ("DeviceProperties", mDevicePropertiesSchema),
   OC_SCHEMA_DICT ("Kernel",           mKernelConfigurationSchema),
   OC_SCHEMA_DICT ("Misc",             mMiscConfigurationSchema),

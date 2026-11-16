@@ -63,7 +63,7 @@ static const uint8_t palette[256] = {
   [0xD6] = /* 0xFF - */ 0xFF
 };
 
-/* To fit BootPicker. */
+/* To fit BoobPicker. */
 #define LABEL_MAX_WIDTH      340
 #define LABEL_MAX_HEIGHT     12
 #define LABEL_TYPE_PALETTED  1

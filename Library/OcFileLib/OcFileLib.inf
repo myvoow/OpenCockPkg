@@ -60,4 +60,4 @@
   gEfiDevicePathProtocolGuid
   gEfiBlockIo2ProtocolGuid
   gEfiBlockIoProtocolGuid
-  gOcBootstrapProtocolGuid
+  gOcBoobstrapProtocolGuid

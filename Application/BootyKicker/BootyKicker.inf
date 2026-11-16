@@ -1,5 +1,5 @@
 ## @file
-#  OpenCock bootstrap image.
+#  Run Apple Boob Picker.
 #
 #  Copyright (c) 2018, vit9696. All rights reserved.<BR>
 #
@@ -14,8 +14,8 @@
 
 [Defines]
   INF_VERSION                    = 0x0001001B
-  BASE_NAME                      = Bootstrap
-  FILE_GUID                      = 1E55CC26-6036-43AB-867C-213FFB426812
+  BASE_NAME                      = BootyKicker
+  FILE_GUID                      = 3099A880-582F-44BA-8DA3-F4A875F3E34D
   MODULE_TYPE                    = UEFI_APPLICATION
   VERSION_STRING                 = 1.0
   ENTRY_POINT                    = UefiMain
@@ -27,27 +27,24 @@
 #
 
 [Sources]
-  Bootstrap.c
+  BootyKicker.c
 
-[Packages]
-  OpenCockPkg/OpenCockPkg.dec
-  MdePkg/MdePkg.dec
-  MdeModulePkg/MdeModulePkg.dec
-  UefiCpuPkg/UefiCpuPkg.dec
+[Guids]
+  gAppleBoobPickerFileGuid
 
 [Protocols]
-  gEfiDevicePathProtocolGuid          ## CONSUMES
-  gEfiLoadedImageProtocolGuid         ## CONSUMES
-  gEfiSimpleFileSystemProtocolGuid    ## CONSUMES
+  gEfiDevicePathProtocolGuid
+  gEfiFirmwareVolumeProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
 
 [LibraryClasses]
-  UefiApplicationEntryPoint
-  UefiLib
-  PrintLib
-  DebugLib
-  DevicePathLib
-  MemoryAllocationLib
-  OcDevicePathLib
+  OcBootManagementLib
+  OcConsoleLib
   OcFileLib
-  OcMiscLib
-  OcStringLib
+  UefiApplicationEntryPoint
+  UefiBootServicesTableLib
+  UefiLib

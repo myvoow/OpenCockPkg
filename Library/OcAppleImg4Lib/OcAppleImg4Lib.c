@@ -338,7 +338,7 @@ OcAppleImg4RegisterOverride (
 }
 
 EFI_STATUS
-OcAppleImg4BootstrapValues (
+OcAppleImg4BoobstrapValues (
   IN CONST CHAR8  *Model,
   IN UINT64       Ecid  OPTIONAL
   )

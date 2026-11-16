@@ -1,5 +1,5 @@
 /** @file
-  Run Apple Boot Picker.
+  Run Apple Boob Picker.
 
 Copyright (c) 2020, vit9696. All rights reserved.<BR>
 This program and the accompanying materials
@@ -64,7 +64,7 @@ UefiMain (
     return Status;
   }
 
-  Status = OcLaunchAppleBootPicker ();
+  Status = OcLaunchAppleBoobPicker ();
 
   if (!EFI_ERROR (Status)) {
     //
@@ -78,18 +78,18 @@ UefiMain (
   Pixel.Raw = 0x0;
   if (Status == EFI_NOT_FOUND) {
     //
-    // Red. No BootPicker in firmware or we cannot get it.
+    // Red. No BoobPicker in firmware or we cannot get it.
     //
     Pixel.Pixel.Red = 0xFF;
   } else if (Status == EFI_UNSUPPORTED) {
     //
-    // Yellow. BootPicker does not start.
+    // Yellow. BoobPicker does not start.
     //
     Pixel.Pixel.Red   = 0xFF;
     Pixel.Pixel.Green = 0xFF;
   } else {
     //
-    // Fuchsia. BootPicker does not load.
+    // Fuchsia. BoobPicker does not load.
     //
     Pixel.Pixel.Blue = 0xFF;
     Pixel.Pixel.Red  = 0xFF;

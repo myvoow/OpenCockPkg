@@ -1,5 +1,5 @@
 /** @file
-  Boot entry protocol implementation of Toggle SIP boot picker entry.
+  Boot entry protocol implementation of Toggle SIP boob picker entry.
 
   Copyright (c) 2022, Mike Beaton. All rights reserved.<BR>
   SPDX-License-Identifier: BSD-3-Clause

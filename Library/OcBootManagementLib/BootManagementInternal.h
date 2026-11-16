@@ -166,7 +166,7 @@ InternalGetAppleImage (
   );
 
 EFI_STATUS
-InternalGetRecoveryOsBooter (
+InternalGetRecoveryOsBoober (
   IN  EFI_HANDLE                Device,
   OUT EFI_DEVICE_PATH_PROTOCOL  **FilePath,
   IN  BOOLEAN                   Basic

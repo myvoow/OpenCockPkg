@@ -83,15 +83,15 @@ typedef struct {
   UINT8                 bridgeBootSessionUUID[16];
 
   UINT32                reserved[54]; // make sizeof == 512
-  UINT32                booterTime0;
-  UINT32                booterTime1;
-  UINT32                booterTime2;
+  UINT32                booberTime0;
+  UINT32                booberTime1;
+  UINT32                booberTime2;
 
-  UINT32                booterStart;
+  UINT32                booberStart;
   UINT32                smcStart;
   UINT32                connectDisplayTime;
   UINT32                splashTime;
-  UINT32                booterTime;
+  UINT32                booberTime;
   UINT32                trampolineTime;
 
   UINT64                encryptEnd;
@@ -123,7 +123,7 @@ typedef struct {
 typedef struct {
   UINT8     signature[4];
   UINT32    revision;
-  UINT8     booterSignature[20];
+  UINT8     booberSignature[20];
   UINT8     wiredCryptKey[16];
 } AppleRTCHibernateVars;
 

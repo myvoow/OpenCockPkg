@@ -233,7 +233,7 @@ InternalExpandGrubVars (
       //
       // Blscfg always appends a space to each expanded token (and the var values
       // are often set up to end with a space, too), then later GRUB tokenization
-      // of the options as grub booter options (which we do not currently do - may
+      // of the options as grub boober options (which we do not currently do - may
       // be needed in some escaped cases?) cleans it up. Here, we try to combine
       // obvious doubled up spaces right away.
       //

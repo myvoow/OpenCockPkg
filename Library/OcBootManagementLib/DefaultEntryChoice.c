@@ -329,7 +329,7 @@ InternalMatchBootEntryByDevicePath (
     //
     // For non-BootNext boot, the File Paths must match for the entries to be
     // matched. Startup Disk however only stores the drive's Device Path
-    // excluding the booter path, which we treat as a match as well.
+    // excluding the boober path, which we treat as a match as well.
     //
     if (  !IsDevicePathEnd (UefiRemainingDevicePath)
        && !IsDevicePathEqual (UefiRemainingDevicePath, OcRemainingDevicePath)
@@ -1172,7 +1172,7 @@ OcSetDefaultBootEntry (
 }
 
 /*
-  Retrieves the Bootstrap Load Option data, matching it from BootOrder by
+  Retrieves the Boobstrap Load Option data, matching it from BootOrder by
   finding a path ending with MatchSuffix.
 
   @param[out] LoadOptionSize  The size, in bytes, of the Load Option data.
@@ -1201,7 +1201,7 @@ InternalGetBoostrapOptionData (
   BOOLEAN                   IsBooptstrap;
 
   //
-  // Check all boot options for trailing "\Bootstrap\Bootstrap.efi".
+  // Check all boot options for trailing "\Boobstrap\Boobstrap.efi".
   //
   for (BootOptionIndex = 0; BootOptionIndex < NumBootOptions; ++BootOptionIndex) {
     CurrLoadOption = OcGetBootOptionData (
@@ -1245,7 +1245,7 @@ InternalGetBoostrapOptionData (
 
 STATIC
 EFI_STATUS
-InternalRegisterBootstrapBootOption (
+InternalRegisterBoobstrapBootOption (
   IN CONST CHAR16  *OptionName,
   IN EFI_HANDLE    DeviceHandle,
   IN CONST CHAR16  *FilePath,
@@ -1372,7 +1372,7 @@ InternalRegisterBootstrapBootOption (
 
   if (!CurrOptionValid) {
     //
-    // Locate a free boot option index when no Bootstrap entry could be found.
+    // Locate a free boot option index when no Boobstrap entry could be found.
     //
     if (!CurrOptionExists) {
       //
@@ -1495,7 +1495,7 @@ InternalRegisterBootstrapBootOption (
 }
 
 EFI_STATUS
-OcRegisterBootstrapBootOption (
+OcRegisterBoobstrapBootOption (
   IN CONST CHAR16  *OptionName,
   IN EFI_HANDLE    DeviceHandle,
   IN CONST CHAR16  *FilePath,
@@ -1509,7 +1509,7 @@ OcRegisterBootstrapBootOption (
 
   FwRuntime = OcDisableNvramProtection ();
 
-  Status = InternalRegisterBootstrapBootOption (
+  Status = InternalRegisterBoobstrapBootOption (
              OptionName,
              DeviceHandle,
              FilePath,

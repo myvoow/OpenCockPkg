@@ -151,12 +151,12 @@ package() {
     if [ "${suffix}" = "X64" ]; then
       suffix="x64"
     fi
-    cp "${arch}/Bootstrap.efi" "${dstdir}/${arch}/EFI/BOOT/BOOT${suffix}.efi" || exit 1
+    cp "${arch}/Boobstrap.efi" "${dstdir}/${arch}/EFI/BOOT/BOOT${suffix}.efi" || exit 1
     printf "%s" "OpenCock" > "${dstdir}/${arch}/EFI/BOOT/.contentFlavour" || exit 1
     printf "%s" "Disabled" > "${dstdir}/${arch}/EFI/BOOT/.contentVisibility" || exit 1
 
     efiTools=(
-      "BootKicker.efi"
+      "BootyKicker.efi"
       "ChipTune.efi"
       "CleanNvram.efi"
       "CsrUtil.efi"
@@ -283,26 +283,26 @@ package() {
     cp "${selfdir}/Utilities/LogoutHook/${file}" "${dstdir}/Utilities/LogoutHook"/ || exit 1
   done
 
-  # Copy OpenDuetPkg booter.
+  # Copy OpenDuetPkg boober.
   for arch in "${ARCHS[@]}"; do
     local tgt
-    local booter
-    local booter_blockio
+    local boober
+    local boober_blockio
     tgt="$(basename "$(pwd)")"
-    booter="$(pwd)/../../OpenDuetPkg/${tgt}/${arch}/boot"
-    booter_blockio="$(pwd)/../../OpenDuetPkg/${tgt}/${arch}/boot-blockio"
+    boober="$(pwd)/../../OpenDuetPkg/${tgt}/${arch}/boot"
+    boober_blockio="$(pwd)/../../OpenDuetPkg/${tgt}/${arch}/boot-blockio"
 
-    if [ -f "${booter}" ]; then
-      echo "Copying OpenDuetPkg boot file from ${booter}..."
-      cp "${booter}" "${dstdir}/Utilities/LegacyBoot/boot${arch}" || exit 1
+    if [ -f "${boober}" ]; then
+      echo "Copying OpenDuetPkg boot file from ${boober}..."
+      cp "${boober}" "${dstdir}/Utilities/LegacyBoot/boot${arch}" || exit 1
     else
-      echo "Failed to find OpenDuetPkg at ${booter}!"
+      echo "Failed to find OpenDuetPkg at ${boober}!"
     fi
-    if [ -f "${booter_blockio}" ]; then
-      echo "Copying OpenDuetPkg BlockIO boot file from ${booter_blockio}..."
-      cp "${booter_blockio}" "${dstdir}/Utilities/LegacyBoot/boot${arch}-blockio" || exit 1
+    if [ -f "${boober_blockio}" ]; then
+      echo "Copying OpenDuetPkg BlockIO boot file from ${boober_blockio}..."
+      cp "${boober_blockio}" "${dstdir}/Utilities/LegacyBoot/boot${arch}-blockio" || exit 1
     else
-      echo "Failed to find OpenDuetPkg BlockIO at ${booter_blockio}!"
+      echo "Failed to find OpenDuetPkg BlockIO at ${boober_blockio}!"
     fi
   done
 

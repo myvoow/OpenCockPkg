@@ -33,7 +33,7 @@ extern EFI_GUID  gAppleSlingShotFileGuid;
   { 0xE1628C66, 0x2A2D, 0x4DC5,      \
     { 0xBD, 0x41, 0xB2, 0x0F, 0x35, 0x38, 0xAA, 0xF7 } }
 
-extern EFI_GUID  gAppleBootPickerFileGuid;
+extern EFI_GUID  gAppleBoobPickerFileGuid;
 
 #define APPLE_PASSWORD_UI_FILE_GUID  \
   { 0x9EBA2D25, 0xBBE3, 0x4AC2,      \

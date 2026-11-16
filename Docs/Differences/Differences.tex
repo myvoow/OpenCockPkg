@@ -341,7 +341,7 @@ with the full list available in
 \subsection{Configuration Processing}\label{configuration-processing}
 
 The \texttt{OC\ config} file is guaranteed to be processed at least once if found.
-Subject to the OpenCock bootstrapping mechanism, the presence of multiple
+Subject to the OpenCock boobstrapping mechanism, the presence of multiple
 \texttt{OC\ config} files may lead to the reading of any of them. It is
 permissible for no \texttt{OC\ Config} file to be present on disk. In such cases,
 if the implementation does not abort the boot process, all values shall follow the
@@ -440,7 +440,7 @@ Root configuration entries consist of the following:
 \item
   \hyperref[acpi]{\texttt{ACPI}}
 \item
-  \hyperref[booter]{\texttt{Booter}}
+  \hyperref[boober]{\texttt{Boober}}
 \item
   \hyperref[devprops]{\texttt{DeviceProperties}}
 \item
@@ -577,16 +577,16 @@ Available entries include:
 \tightlist
 \item
   \texttt{BOOTx64.efi} or \texttt{BOOTIa32.efi} \\
-  Initial bootstrap loaders, which load \texttt{OpenCock.efi}. \texttt{BOOTx64.efi}
+  Initial boobstrap loaders, which load \texttt{OpenCock.efi}. \texttt{BOOTx64.efi}
   is loaded by the firmware by default consistent with the UEFI specification. However,
   it may also be renamed and put in a custom location to allow OpenCock coexist alongside
   operating systems, such as Windows, that use \texttt{BOOTx64.efi} files as their loaders.
   Refer to the \texttt{LauncherOption} property for details.
 \item
   \texttt{boot} \\
-  Duet bootstrap loader, which initialises the UEFI environment on legacy BIOS firmware
-  and loads \texttt{OpenCock.efi} similarly to other bootstrap loaders. A modern Duet
-  bootstrap loader will default to \texttt{OpenCock.efi} on the same partition when
+  Duet boobstrap loader, which initialises the UEFI environment on legacy BIOS firmware
+  and loads \texttt{OpenCock.efi} similarly to other boobstrap loaders. A modern Duet
+  boobstrap loader will default to \texttt{OpenCock.efi} on the same partition when
   present.
 \item
   \texttt{ACPI} \\
@@ -611,7 +611,7 @@ Available entries include:
   Directory used for storing supplemental tools.
 \item
   \texttt{OpenCock.efi} \\
-  Main booter application responsible for operating system loading. The directory
+  Main boober application responsible for operating system loading. The directory
   \texttt{OpenCock.efi} resides in is called the \texttt{root directory}, which is
   set to \texttt{EFI\textbackslash OC} by default. When launching \texttt{OpenCock.efi}
   directly or through a custom launcher however, other directories containing
@@ -1318,9 +1318,9 @@ patching or the padding of \texttt{NOP} to the remaining area could be considere
 \end{enumerate}
 
 
-\section{Booter}\label{booter}
+\section{Boober}\label{boober}
 
-\subsection{Introduction}\label{booterintro}
+\subsection{Introduction}\label{booberintro}
 
 This section allows the application of different types of UEFI modifications to
 operating system boobloaders, primarily the Apple boobloader (\texttt{boot.efi}).
@@ -1330,7 +1330,7 @@ of \href{https://github.com/acidanthera/AptioFixPkg}{\text{AptioMemoryFix.efi}},
 which is no longer maintained. Refer to the \hyperref[troubleshootingtricks]{Tips and Tricks}
 section for instructions on migration.
 
-Booter changes apply with the following effective order:
+Boober changes apply with the following effective order:
 \begin{itemize}
 \tightlist
 \item \texttt{Quirks} are processed.
@@ -1388,7 +1388,7 @@ sudo pmset standby 0
 \emph{Note}: These settings may be reset by hardware changes and in certain other circumstances.
 To view their current state, use the \texttt{pmset -g} command in Terminal.
 
-\subsection{Properties}\label{booterprops}
+\subsection{Properties}\label{booberprops}
 
 \begin{enumerate}
 
@@ -1399,26 +1399,26 @@ To view their current state, use the \texttt{pmset -g} command in Terminal.
   \textbf{Description}: To be filled with \texttt{plist\ dict} values,
   describing addresses critical for particular firmware functioning when
   \texttt{DevirtualiseMmio} quirk is in use.
-  Refer to the \hyperref[booterpropsmmio]{MmioWhitelist Properties} section below for details.
+  Refer to the \hyperref[booberpropsmmio]{MmioWhitelist Properties} section below for details.
 
 \item
   \texttt{Patch}\\
   \textbf{Type}: \texttt{plist\ array}\\
   \textbf{Failsafe}: Empty\\
-  \textbf{Description}: Perform binary patches in booter.
+  \textbf{Description}: Perform binary patches in boober.
 
   To be filled with \texttt{plist\ dictionary} values, describing each
-  patch. Refer to the \hyperref[booterpropspatch]{Patch Properties} section below for details.
+  patch. Refer to the \hyperref[booberpropspatch]{Patch Properties} section below for details.
 
 \item
   \texttt{Quirks}\\
   \textbf{Type}: \texttt{plist\ dict}\\
-  \textbf{Description}: Apply individual booter quirks described
-  in the \hyperref[booterpropsquirks]{Quirks Properties} section below.
+  \textbf{Description}: Apply individual boober quirks described
+  in the \hyperref[booberpropsquirks]{Quirks Properties} section below.
 
 \end{enumerate}
 
-\subsection{MmioWhitelist Properties}\label{booterpropsmmio}
+\subsection{MmioWhitelist Properties}\label{booberpropsmmio}
 
 \begin{enumerate}
 
@@ -1450,7 +1450,7 @@ To view their current state, use the \texttt{pmset -g} command in Terminal.
 
 \end{enumerate}
 
-\subsection{Patch Properties}\label{booterpropspatch}
+\subsection{Patch Properties}\label{booberpropspatch}
 
 \begin{enumerate}
 
@@ -1458,7 +1458,7 @@ To view their current state, use the \texttt{pmset -g} command in Terminal.
   \texttt{Arch}\\
   \textbf{Type}: \texttt{plist\ string}\\
   \textbf{Failsafe}: \texttt{Any} (Apply to any supported architecture)\\
-  \textbf{Description}: Booter patch architecture (\texttt{i386}, \texttt{x86\_64}).
+  \textbf{Description}: Boober patch architecture (\texttt{i386}, \texttt{x86\_64}).
 
 \item
   \texttt{Comment}\\
@@ -1477,7 +1477,7 @@ To view their current state, use the \texttt{pmset -g} command in Terminal.
   \texttt{Enabled}\\
   \textbf{Type}: \texttt{plist\ boolean}\\
   \textbf{Failsafe}: \texttt{false}\\
-  \textbf{Description}: Set to \texttt{true} to activate this booter patch.
+  \textbf{Description}: Set to \texttt{true} to activate this boober patch.
 
 \item
   \texttt{Find}\\
@@ -1488,14 +1488,14 @@ To view their current state, use the \texttt{pmset -g} command in Terminal.
 \item
   \texttt{Identifier}\\
   \textbf{Type}: \texttt{plist\ string}\\
-  \textbf{Failsafe}:  \texttt{Any} (Match any booter)\\
-  \textbf{Description}: \texttt{Apple} for macOS booter (typically \texttt{boot.efi});
-  or a name with a suffix, such as \texttt{bootmgfw.efi}, for a specific booter.
+  \textbf{Failsafe}:  \texttt{Any} (Match any boober)\\
+  \textbf{Description}: \texttt{Apple} for macOS boober (typically \texttt{boot.efi});
+  or a name with a suffix, such as \texttt{bootmgfw.efi}, for a specific boober.
 
 \item
   \texttt{Limit}\\
   \textbf{Type}: \texttt{plist\ integer}\\
-  \textbf{Failsafe}: \texttt{0} (Search the entire booter)\\
+  \textbf{Failsafe}: \texttt{0} (Search the entire boober)\\
   \textbf{Description}: Maximum number of bytes to search for.
 
 \item
@@ -1529,7 +1529,7 @@ To view their current state, use the \texttt{pmset -g} command in Terminal.
 
 \end{enumerate}
 
-\subsection{Quirks Properties}\label{booterpropsquirks}
+\subsection{Quirks Properties}\label{booberpropsquirks}
 
 \begin{enumerate}
 
@@ -1738,14 +1738,14 @@ To view their current state, use the \texttt{pmset -g} command in Terminal.
   to want to start these early, insecure images with secure boot anyway.
 
 \item
-  \texttt{ForceBooterSignature}\\
+  \texttt{ForceBooberSignature}\\
   \textbf{Type}: \texttt{plist\ boolean}\\
   \textbf{Failsafe}: \texttt{false}\\
   \textbf{Description}: Set macOS \texttt{boot-signature} to OpenCock launcher.
 
-  Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI
+  Boober signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI
   to verify the authenticity of the boobloader when waking from hibernation. This
-  option forces macOS to use OpenCock launcher SHA-1 hash as a booter signature to let
+  option forces macOS to use OpenCock launcher SHA-1 hash as a boober signature to let
   OpenCock shim hibernation wake on Mac EFI firmware.
 
   \emph{Note}: OpenCock launcher path is determined from \texttt{LauncherPath} property.
@@ -3285,7 +3285,7 @@ The algorithm to determine boot options behaves as follows:
   \item Retrieve the device path of the boot option.
   % Scan policy restrictions are actually checked here as we want the function to be self-contained
   % for non-scan based startup.
-  \item Perform fixups (e.g. NVMe subtype correction) and expansion (e.g. for Boot Camp) of the device path.
+  \item Perform fixups (e.g. NVMe subtype correction) and expansion (e.g. for Boob Camp) of the device path.
   \item On failure, if it is an OpenCock custom entry device path, pre-construct the corresponding custom entry and succeed.
   \item Obtain the device handle by locating the device path of the resulting device path (ignore it on failure).
   \item Locate the device handle in the list of partition handles (ignore it if missing).
@@ -3308,7 +3308,7 @@ The algorithm to determine boot options behaves as follows:
   \begin{itemize}
   \item If the partition handle is marked as \textit{unused}, execute ``bless'' primary option list retrieval. \\
     In case a \texttt{BlessOverride} list is set, both standard and custom ``bless'' paths will be found.
-  \item On the OpenCock boot partition, exclude OpenCock bootstrap files using header checks.
+  \item On the OpenCock boot partition, exclude OpenCock boobstrap files using header checks.
   \item Register the resulting entries as primary options and determine their types if found. \\
   The option will become auxiliary for some types (e.g. Apple HFS recovery).
   % Looking up primary and alternate handles could be done per handle to make sure the list is ordered.
@@ -3617,7 +3617,7 @@ the default boot entry choice will remain changed until the next manual reconfig
   \item \texttt{System} --- create no boot option but assume specified custom option is blessed.
     \begin{itemize}
   \tightlist
-    \item This variant is useful when relying on \texttt{ForceBooterSignature} quirk and
+    \item This variant is useful when relying on \texttt{ForceBooberSignature} quirk and
     OpenCock launcher path management happens through \texttt{bless} utilities without
     involving OpenCock.
   \end{itemize} \medskip
@@ -3625,8 +3625,8 @@ the default boot entry choice will remain changed until the next manual reconfig
 
   This option allows integration with third-party operating system installation and upgrades
   (which may overwrite the \texttt{\textbackslash EFI\textbackslash BOOT\textbackslash BOOTx64.efi}
-  file). The BOOTx64.efi file is no longer used for bootstrapping OpenCock if a custom option is created.
-  The custom path used for bootstrapping can be specified by using the \texttt{LauncherPath} option.
+  file). The BOOTx64.efi file is no longer used for boobstrapping OpenCock if a custom option is created.
+  The custom path used for boobstrapping can be specified by using the \texttt{LauncherPath} option.
 
   \emph{Note 1}: Some types of firmware may have NVRAM implementation flaws, no boot option
   support, or other incompatibilities. While unlikely, the use of this option may result in
@@ -3635,9 +3635,9 @@ the default boot entry choice will remain changed until the next manual reconfig
   for some known issues affecting Haswell and other boards.
 
   \emph{Note 2}: While NVRAM resets executed from OpenCock would not typically erase the boot option
-  created in \texttt{Bootstrap}, executing NVRAM resets prior to loading OpenCock will erase the boot
+  created in \texttt{Boobstrap}, executing NVRAM resets prior to loading OpenCock will erase the boot
   option. Therefore, for significant implementation updates, such as was the case with OpenCock 0.6.4,
-  an NVRAM reset should be executed with \texttt{Bootstrap} disabled, after which it can be re-enabled.
+  an NVRAM reset should be executed with \texttt{Boobstrap} disabled, after which it can be re-enabled.
 
   \emph{Note 3}: Some versions of Intel Visual BIOS (e.g. on Intel NUC) have an unfortunate bug whereby if any boot
   option is added referring to a path on a USB drive, from then on that is the only boot option which will be shown
@@ -3748,7 +3748,7 @@ the default boot entry choice will remain changed until the next manual reconfig
   different content sets:
 
   When enabled, the entry icon in OpenCanopy and the audio assist entry sound in OpenCanopy
-  and builtin boot picker are chosen by something called content flavour. To determine
+  and builtin boob picker are chosen by something called content flavour. To determine
   content flavour the following algorithm is used:
 
     \begin{itemize}
@@ -3891,7 +3891,7 @@ the default boot entry choice will remain changed until the next manual reconfig
   enter the picker, multiple repeated keypresses may be tried instead.
 
   \emph{Note 3}: On Macs with problematic GOP, it may be difficult to re-bless OpenCock if its bless status
-  is lost. The \texttt{BootKicker} utility can be used to work around this problem, if set up as a Tool
+  is lost. The \texttt{BootyKicker} utility can be used to work around this problem, if set up as a Tool
   in OpenCock with \texttt{FullNvramAccess} enabled. It will launch the Apple picker,
   which allows selection of an item to boot next (with \texttt{Enter}), or next and from then on until
   the next change (with \texttt{CTRL+Enter}). Note that after the selection is made, the system
@@ -4201,7 +4201,7 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:boot-log |
   \begin{itemize}
   \tightlist
   \item \texttt{BMF} --- OpenCanopy, bitmap font
-  \item \texttt{BS} --- Bootstrap
+  \item \texttt{BS} --- Boobstrap
   \item \texttt{GSTT} --- GoptStop
   \item \texttt{HDA} --- AudioDxe
   \item \texttt{KKT} --- KeyTester
@@ -4523,19 +4523,19 @@ diskutil mount -mountpoint /var/tmp/OSPersonalizationTemp $disk
 
   \begin{itemize}
   \tightlist
-    \item \texttt{0x01} --- Expose the printable booter path as a UEFI variable.
+    \item \texttt{0x01} --- Expose the printable boober path as a UEFI variable.
     \item \texttt{0x02} --- Expose the OpenCock version as a UEFI variable.
     \item \texttt{0x04} --- Expose the OpenCock version in the OpenCock picker menu title.
     \item \texttt{0x08} --- Expose OEM information as a set of UEFI variables.
   \end{itemize}
 
-  The exposed booter path points to OpenCock.efi or its booter depending on the load order.
-  To obtain the booter path, use the following command in macOS:
+  The exposed boober path points to OpenCock.efi or its boober depending on the load order.
+  To obtain the boober path, use the following command in macOS:
 \begin{lstlisting}[label=nvrampath, style=ocbash]
 nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:boot-path
 \end{lstlisting}
 
-  To use a booter path to mount a booter volume, use the following command in macOS:
+  To use a boober path to mount a boober volume, use the following command in macOS:
 \begin{lstlisting}[label=nvrampathmount, style=ocbash]
 u=$(nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:boot-path | sed 's/.*GPT,\([^,]*\),.*/\1/'); \
   if [ "$u" != "" ]; then sudo diskutil mount $u ; fi
@@ -5303,11 +5303,11 @@ troubleshooting:
 \item
   \texttt{7C436110-AB2A-4BBB-A880-FE41995C9F82:bootercfg}
   \break
-  Booter arguments, similar to \texttt{boot-args} but for \texttt{boot.efi}. Accepts a set of
+  Boober arguments, similar to \texttt{boot-args} but for \texttt{boot.efi}. Accepts a set of
   arguments, which are hexadecimal 64-bit values with or without \texttt{0x}.
   At different stages \texttt{boot.efi} will request different debugging (logging)
   modes (e.g. after \texttt{ExitBootServices} it will only print to serial).
-  Several booter arguments control whether these requests will succeed. The
+  Several boober arguments control whether these requests will succeed. The
   list of known requests is covered below:
 
   \begin{itemize}
@@ -5391,12 +5391,12 @@ troubleshooting:
     \item \texttt{1} --- AppleLoggingConOutOrErrSet/AppleLoggingConOutOrErrPrint
     (classical ConOut/StdErr)
     \item \texttt{2} --- AppleLoggingStdErrSet/AppleLoggingStdErrPrint (StdErr or serial?)
-    \item \texttt{4} --- AppleLoggingFileSet/AppleLoggingFilePrint (BOOTER.LOG/BOOTER.OLD
+    \item \texttt{4} --- AppleLoggingFileSet/AppleLoggingFilePrint (BOOBER.LOG/BOOBER.OLD
     file on EFI partition)
     \end{itemize}
   \item \texttt{debug=VALUE} --- deprecated starting from 10.15.
   \begin{itemize}
-  \item \texttt{1} --- enables print something to BOOTER.LOG (stripped code implies there
+  \item \texttt{1} --- enables print something to BOOBER.LOG (stripped code implies there
   may be a crash)
   \item \texttt{2} --- enables perf logging to /efi/debug-log in the device three
   \item \texttt{4} --- enables timestamp printing for styled printf calls
@@ -5411,7 +5411,7 @@ troubleshooting:
   10.15.4, set \texttt{bootercfg} to \texttt{log=1}. This will print verbose output onscreen.
 \item \texttt{7C436110-AB2A-4BBB-A880-FE41995C9F82:bootercfg-once}
   \break
-  Booter arguments override removed after first launch. Otherwise equivalent to \texttt{bootercfg}.
+  Boober arguments override removed after first launch. Otherwise equivalent to \texttt{bootercfg}.
 \item \texttt{7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-data}
   \break
   Specify sources of kexts which will be approved regardless of SIP \texttt{CSR\_ALLOW\_UNAPPROVED\_KEXTS} value.\\
@@ -6636,7 +6636,7 @@ even cause permanent firmware damage. Some of the known drivers are listed below
   from the file system most commonly used with Linux. \\
 \href{https://github.com/acidanthera/OpenCorePkg}{\texttt{FirmwareSettings}}\textbf{*}
 & \hyperref[firmwaresettings]{OpenCock plugin} implementing \texttt{OC\_BOOT\_ENTRY\_PROTOCOL}
-  to add an entry to the boot picker menu which reboots into UEFI firmware settings,
+  to add an entry to the boob picker menu which reboots into UEFI firmware settings,
   when this is supported by the firmware. \\
 \href{https://github.com/acidanthera/OcBinaryData}{\texttt{HfsPlus}}
 & Recommended. Proprietary HFS file system driver with bless support commonly found in Apple
@@ -6703,10 +6703,10 @@ includes this driver. \\
   a security audit. \\
 \href{https://github.com/acidanthera/OpenCorePkg}{\texttt{ResetNvramEntry}}\textbf{*}
 & \hyperref[uefiresetnvram]{OpenCock plugin} implementing \texttt{OC\_BOOT\_ENTRY\_PROTOCOL}
-  to add a configurable \texttt{Reset NVRAM} entry to the boot picker menu. \\
+  to add a configurable \texttt{Reset NVRAM} entry to the boob picker menu. \\
 \href{https://github.com/acidanthera/OpenCorePkg}{\texttt{ToggleSipEntry}}\textbf{*}
 & \hyperref[uefitogglesip]{OpenCock plugin} implementing \texttt{OC\_BOOT\_ENTRY\_PROTOCOL}
-  to add a configurable \texttt{Toggle SIP} entry to the boot picker menu. \\
+  to add a configurable \texttt{Toggle SIP} entry to the boob picker menu. \\
 \href{https://github.com/acidanthera/audk}{\texttt{UsbMouseDxe}}\textbf{*}
 & USB mouse driver from \texttt{MdeModulePkg}. Some virtual machine firmware
   such as OVMF may not include this driver but it is necessary for the mouse to work
@@ -6759,8 +6759,8 @@ sudo bless --verbose --file /Volumes/VOLNAME/DIR/OpenShell.efi \
 Some of the known tools are listed below (builtin tools are marked with \textbf{*}):
 
 \begin{tabular}{p{1.3in}p{5.55in}}
-\href{https://github.com/acidanthera/OpenCorePkg}{\texttt{BootKicker}}\textbf{*}
-& Display Apple BootPicker menu (for Macs with compatible firmware). \\
+\href{https://github.com/acidanthera/OpenCorePkg}{\texttt{BootyKicker}}\textbf{*}
+& Display Apple BoobPicker menu (for Macs with compatible firmware). \\
 \href{https://github.com/acidanthera/OpenCorePkg}{\texttt{ChipTune}}\textbf{*}
 & Test BeepGen protocol and generate audio signals of different style and length. \\
 \href{https://github.com/acidanthera/OpenCorePkg}{\texttt{CleanNvram}}\textbf{*}
@@ -7375,7 +7375,7 @@ certificates are present after all certificate configuration options have been p
 
 In addition to the \hyperref[uefilinux]{OpenLinuxBoot} and \hyperref[uefinetboot]{OpenNetworkBoot} plugins,
 the following \texttt{OC\_BOOT\_ENTRY\_PROTOCOL}
-plugins are made available to add optional, configurable boot entries to the OpenCock boot picker.
+plugins are made available to add optional, configurable boot entries to the OpenCock boob picker.
 
 \subsubsection{ResetNvramEntry}\label{uefiresetnvram}
 
@@ -7416,7 +7416,7 @@ The following configuration options may be specified in the \texttt{Arguments} s
   option and will override it, therefore all BIOS boot entries will be removed. \medskip
 
   \emph{Note 2}: Due to using system NVRAM reset, the OpenCock boot option
-  cannot be preserved and OpenCock will have to either be reselected in the native boot picker or
+  cannot be preserved and OpenCock will have to either be reselected in the native boob picker or
   re-blessed. \medskip
 
   \emph{Note 3}: On non-Apple hardware, this option will still set this variable but the
@@ -7604,7 +7604,7 @@ protocol enabling the following:
   if it is present and \texttt{NVRAM/nvram.plist} is missing) on boot
   \item The Reset NVRAM option installed by the \texttt{ResetNvramEntry} driver removes the above files instead
   of affecting underlying NVRAM
-  \item \texttt{CTRL+Enter} in the OpenCock bootpicker updates or creates \texttt{NVRAM/nvram.plist}
+  \item \texttt{CTRL+Enter} in the OpenCock boobpicker updates or creates \texttt{NVRAM/nvram.plist}
 \end{itemize}
 
 Recommended configuration settings for this driver:
@@ -8013,7 +8013,7 @@ OpenCock is installed, in order for the \texttt{Launchd.command} script to work 
   newer Mac models than these, this option will typically use the OpenCock re-implementation instead.
   On older Macs, this is because the implementation available is too old to be used while on newer Macs,
   it is because of optimisations added by Apple which do not connect the Apple Event protocol
-  except when needed -- e.g. except when the Apple boot picker is explicitly started.
+  except when needed -- e.g. except when the Apple boob picker is explicitly started.
   Due to its somewhat unpredictable results, this option is not typically recommended.
   \item \texttt{Builtin} ---  Always use OpenCock's updated re-implementation of the Apple Event protocol.
   Use of this setting is recommended even on Apple hardware, due to
@@ -9443,7 +9443,7 @@ OpenCock is installed, in order for the \texttt{Launchd.command} script to work 
   \textbf{Failsafe}: \texttt{0}\\
   \textbf{Description}: Attempts to perform TSC synchronisation with a specified timeout.
 
-  The primary purpose of this quirk is to enable early bootstrap TSC synchronisation
+  The primary purpose of this quirk is to enable early boobstrap TSC synchronisation
   on some server and laptop models when running a debug XNU kernel. For the debug kernel
   the TSC needs to be kept in sync across the cores before any kext could kick in rendering
   all other solutions problematic. The timeout is specified in microseconds and depends on the
@@ -9762,7 +9762,7 @@ requires several steps and careful configuration of certain settings as explaine
   \textbf{Can I install Windows?}
 
   While no official Windows support is provided, 64-bit UEFI Windows installations (Windows 8 and
-  above) prepared with Boot Camp are supposed to work. Third-party UEFI installations
+  above) prepared with Boob Camp are supposed to work. Third-party UEFI installations
   as well as systems partially supporting UEFI boot, such as Windows 7, might work with
   some extra precautions. Things to consider:
 
@@ -9771,7 +9771,7 @@ requires several steps and careful configuration of certain settings as explaine
   with the OpenLegacyBoot driver on legacy systems.
   \item All the modifications applied (to ACPI, NVRAM, SMBIOS, etc.) are supposed
   to be operating system agnostic, i.e. apply equally regardless of the OS booted.
-  This enables Boot Camp software experience on Windows.
+  This enables Boob Camp software experience on Windows.
   \item macOS requires the first partition to be EFI System Partition, and does
   not support the default Windows layout. While OpenCock does have a
   \href{https://github.com/acidanthera/bugtracker/issues/327}{workaround}
@@ -9788,23 +9788,23 @@ requires several steps and careful configuration of certain settings as explaine
 
   To enable operating system switching and install relevant drivers in the majority of
   cases Windows support software from
-  \href{https://support.apple.com/boot-camp}{Boot Camp} is required. For simplicity of the download
+  \href{https://support.apple.com/boot-camp}{Boob Camp} is required. For simplicity of the download
   process or when configuring an already installed Windows version a third-party utility,
   \href{https://github.com/timsutton/brigadier}{Brigadier}, can be used successfully.
   Note, that \href{https://www.7-zip.org}{7-Zip} may be downloaded and installed
   prior to using Brigadier.
 
-  Remember to always use the latest version of Windows support software from Boot Camp,
+  Remember to always use the latest version of Windows support software from Boob Camp,
   as versions prior to 6.1 do not support APFS, and thus will not function correctly.
   To download newest software pass most recent Mac model to Brigadier, for example
-  \texttt{./brigadier.exe -m iMac19,1}. To install Boot Camp on an unsupported Mac model
+  \texttt{./brigadier.exe -m iMac19,1}. To install Boob Camp on an unsupported Mac model
   afterwards run PowerShell as Administrator and enter \texttt{msiexec /i BootCamp.msi}.
-  If there is a previous version of Boot Camp installed it should be
+  If there is a previous version of Boob Camp installed it should be
   removed first by running \texttt{msiexec /x BootCamp.msi} command. \texttt{BootCamp.msi}
   file is located in \texttt{BootCamp/Drivers/Apple} directory and can be reached through
   Windows Explorer.
 
-  While Windows support software from Boot Camp solves most of compatibility problems,
+  While Windows support software from Boob Camp solves most of compatibility problems,
   the rest may still have to be addressed manually:
 
   \begin{itemize}
@@ -9822,9 +9822,9 @@ requires several steps and careful configuration of certain settings as explaine
   from Windows as this often leads to irrecoverable data loss.
   \end{itemize}
 
-  \textbf{Why do I see \texttt{Basic data partition} in the Boot Camp Startup Disk control panel?}
+  \textbf{Why do I see \texttt{Basic data partition} in the Boob Camp Startup Disk control panel?}
 
-  The Boot Camp control panel uses the GPT partition table to obtain each boot option name.
+  The Boob Camp control panel uses the GPT partition table to obtain each boot option name.
   After installing Windows separately, the partition has to be relabelled manually.
   This can be done with many utilities including the open-source
   \href{https://sourceforge.net/projects/gptfdisk}{gdisk} utility. Reference example:
@@ -9932,7 +9932,7 @@ than 1 meter to avoid output corruption. To additionally enable XNU kernel seria
   \item Watch Dog is disabled to prevent automatic reboot:
   \texttt{Misc} $\rightarrow$ \texttt{Debug} $\rightarrow$
   \texttt{DisableWatchDog} $=$ \texttt{true}.
-  \item Boot Picker (entry selector) is enabled: \texttt{Misc}
+  \item Boob Picker (entry selector) is enabled: \texttt{Misc}
   $\rightarrow$ \texttt{Boot} $\rightarrow$ \texttt{ShowPicker} $=$ \texttt{true}.
   \end{itemize}
 
@@ -9951,7 +9951,7 @@ than 1 meter to avoid output corruption. To additionally enable XNU kernel seria
   \item Do not forget about \texttt{AppleDebug} and \texttt{ApplePanic} properties.
   \item For macOS to correctly recognise and set up serial ports, the \texttt{CustomPciSerialDevice} quirk
     may be enabled when a PCI serial port card is installed.
-  \item Take care of \texttt{Booter}, \texttt{Kernel}, and \texttt{UEFI} quirks.
+  \item Take care of \texttt{Boober}, \texttt{Kernel}, and \texttt{UEFI} quirks.
   \item Consider using serial port to inspect early kernel boot failures. For this
     \texttt{debug=0x108}, \texttt{serial=5}, and \texttt{msgbuf=1048576} boot arguments are needed.
     Refer to the patches in Sample.plist when dying before serial init.
@@ -9963,7 +9963,7 @@ than 1 meter to avoid output corruption. To additionally enable XNU kernel seria
 
   OpenCock follows standard Apple Bless model and extracts the entry name
   from \texttt{.contentDetails} and \texttt{.disk\_label.contentDetails} files in the
-  booter directory if present. These files contain an ASCII string with an entry title,
+  boober directory if present. These files contain an ASCII string with an entry title,
   which may then be customised by the user.
 
 \item
@@ -10021,7 +10021,7 @@ than 1 meter to avoid output corruption. To additionally enable XNU kernel seria
   \href{https://applelife.ru/posts/819790}{AppleLife.ru} or in the ACPI section of this document.
 
 \item
-  \textbf{How can I decide which \texttt{Booter} quirks to use?}
+  \textbf{How can I decide which \texttt{Boober} quirks to use?}
 
   These quirks originate from \texttt{AptioMemoryFix} driver but provide a wider
   set of changes specific to modern systems. Note, that \texttt{OpenRuntime}

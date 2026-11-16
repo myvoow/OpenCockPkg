@@ -247,4 +247,4 @@ These icons are not directly related to boot entry flavours, but they are includ
  - **SetDefault** - show selected entry in 'set default' mode
  - **ShutDown** - additional button: shut down
 
-In addition, **Background** (`Background.icns`) is used as the background image for the OpenCanopy boot picker if provided.
+In addition, **Background** (`Background.icns`) is used as the background image for the OpenCanopy boob picker if provided.

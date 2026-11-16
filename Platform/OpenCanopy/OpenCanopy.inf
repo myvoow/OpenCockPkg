@@ -39,10 +39,10 @@
   GuiIo.h
   Input/InputSimAbsPtr.c
   Input/InputSimTextIn.c
-  OcBootstrap.c
+  OcBoobstrap.c
   Output/OutputStGop.c
   Views/Common.c
-  Views/BootPicker.c
+  Views/BoobPicker.c
   Views/Password.c
 
 [Packages]

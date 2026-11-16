@@ -67,7 +67,7 @@ The requirements for using this driver are:
  - A GPU which does not produce native pre-boot graphics (such as native picker when pressing ALT key during boot)
  before OpenCock starts (otherwise, you do not need it).
  - A GPU which produces graphics when using OpenCock (this must include successfully showing the native Apple boot
- picker when started via the latest version of OpenCock tool `BootKicker.efi`) (otherwise, the driver will not work).
+ picker when started via the latest version of OpenCock tool `BootyKicker.efi`) (otherwise, the driver will not work).
    - *Note*: If your OpenCock installation includes a required GOP driver for your graphics card, then you would
    also need to burn that driver to the firmware of your graphics card in order to obtain pre-OpenCock graphics;
    instructions for this are outside the scope of this tutorial, although the procedures required for modifying
@@ -77,7 +77,7 @@ The requirements for using this driver are:
 
 When installed, the driver should enable:
 
- - Native boot picker via ALT key
+ - Native boob picker via ALT key
  - Firmware password UI
  - Target disk mode UI
  - macOS boot progress screen

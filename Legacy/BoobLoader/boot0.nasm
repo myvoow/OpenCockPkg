@@ -24,7 +24,7 @@
 ;
 ; A small boot sector program written in x86 assembly whose only
 ; responsibility is to locate the active partition, load the
-; partition booter into memory, and jump to the booter's entry point.
+; partition boober into memory, and jump to the boober's entry point.
 ; It leaves the boot drive in DL and a pointer to the partition entry in SI.
 ; This version of boot0 implements hybrid GUID/MBR partition scheme support.
 ;
@@ -35,7 +35,7 @@
 ; restricted to 446 bytes (512 - 64 - 2). If boot0 did not have to
 ; live in the MBR, then we would have 510 bytes to work with.
 ;
-; boot0 is always loaded by the BIOS or another booter to 0:7C00h.
+; boot0 is always loaded by the BIOS or another boober to 0:7C00h.
 ;
 ; This code is written for the NASM assembler.
 ;   nasm boot0.s -o boot0
@@ -209,7 +209,7 @@ start:
     jc      error                   ; MBR load error
 
     ;
-    ; Look for the booter partition in the MBR partition table,
+    ; Look for the boober partition in the MBR partition table,
     ; which is at offset kMBRPartTable.
     ;
     mov     si, kMBRPartTable       ; pointer to partition table
@@ -224,7 +224,7 @@ hang:
 
 
 ;--------------------------------------------------------------------------
-; Find the active (boot) partition and load the booter from the partition.
+; Find the active (boot) partition and load the boober from the partition.
 ;
 ; Arguments:
 ;   DL = drive number (0x80 + unit number)
@@ -285,7 +285,7 @@ find_boot:
 
 
     ;
-    ; Jump to partition booter. The drive number is already in register DL.
+    ; Jump to partition boober. The drive number is already in register DL.
     ; SI is pointing to the modified partition entry.
     ;
 initBoobLoader:
@@ -669,10 +669,10 @@ done_str        db  'done', 0
 boot_error_str  db  'error', 0
 
 ;--------------------------------------------------------------------------
-; Pad the rest of the 512 byte sized booter with zeroes. The last
+; Pad the rest of the 512 byte sized boober with zeroes. The last
 ; two bytes is the mandatory boot sector signature.
 ;
-; If the booter code becomes too large, then nasm will complain
+; If the boober code becomes too large, then nasm will complain
 ; that the 'times' argument is negative.
 
 ;

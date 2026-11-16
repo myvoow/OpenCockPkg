@@ -68,7 +68,7 @@
 #define CSR_APPLE_SIP_NVRAM_NV_ATTR  (EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_NON_VOLATILE)
 
 ///
-/// CSR capabilities that a booter can give to the system.
+/// CSR capabilities that a boober can give to the system.
 ///
 #define CSR_CAPABILITY_UNLIMITED       BIT0
 #define CSR_CAPABILITY_CONFIG          BIT1

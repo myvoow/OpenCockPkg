@@ -5,6 +5,26 @@
 
 OpenCock boobloader with development SDK.
 
+## About this fork
+
+OpenCock is a parody fork of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) by Acidanthera. It is the same code with a few words changed. All credit for the actual boobloader goes to the original authors, and the original copyright and license notices are kept as they are (see [LICENSE.txt](LICENSE.txt)).
+
+Renamed across the code, docs and file names, with the original letter case kept:
+
+| Original      | OpenCock       |
+|---------------|----------------|
+| OpenCore      | OpenCock       |
+| bootloader    | boobloader     |
+| Bootstrap     | Boobstrap      |
+| BootKicker    | BootyKicker    |
+| Booter        | Boober         |
+| boot picker   | boob picker    |
+| Boot Camp     | Boob Camp (docs only) |
+
+Names defined by Apple or by the UEFI firmware are left alone so the code keeps working: the `BootCampHD` and `bootercfg` NVRAM variables, the `removeKextBootstrap` and `_xcpm_bootstrap` kernel symbols, `tmbootpicker.efi`, and the `EFI/BOOT/BOOTx64.efi` fallback path. Links to external sites still point to the original pages.
+
+This is a joke. It is not affiliated with or endorsed by Acidanthera. For a real Hackintosh, use upstream OpenCorePkg.
+
 ## Libraries
 
 This repository also contains additional UEFI support common libraries shared by other projects in [Acidanthera](https://github.com/acidanthera). The primary purpose of the library set is to provide supplemental functionality for Apple-specific UEFI drivers. Key features:

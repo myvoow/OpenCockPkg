@@ -323,18 +323,18 @@ DevirtualiseMmio (
 }
 
 /**
-  Apply single booter patch.
+  Apply single boober patch.
 
-  @param[in,out]  ImageBase      Booter image to be patched.
-  @param[in]      ImageSize      Size of booter image.
-  @param[in]      Patch          Single patch to be applied to booter.
+  @param[in,out]  ImageBase      Boober image to be patched.
+  @param[in]      ImageSize      Size of boober image.
+  @param[in]      Patch          Single patch to be applied to boober.
 **/
 STATIC
 VOID
-ApplyBooterPatch (
+ApplyBooberPatch (
   IN OUT UINT8            *ImageBase,
   IN     UINTN            ImageSize,
-  IN     OC_BOOTER_PATCH  *Patch
+  IN     OC_BOOBER_PATCH  *Patch
   )
 {
   UINT32  ReplaceCount;
@@ -363,7 +363,7 @@ ApplyBooterPatch (
   if ((ReplaceCount > 0) && (Patch->Count > 0) && (ReplaceCount != Patch->Count)) {
     DEBUG ((
       DEBUG_INFO,
-      "OCABC: Booter patch (%a) performed only %u replacements out of %u\n",
+      "OCABC: Boober patch (%a) performed only %u replacements out of %u\n",
       Patch->Comment,
       ReplaceCount,
       Patch->Count
@@ -371,28 +371,28 @@ ApplyBooterPatch (
   } else if (ReplaceCount == 0) {
     DEBUG ((
       DEBUG_INFO,
-      "OCABC: Failed to apply Booter patch (%a) - not found\n",
+      "OCABC: Failed to apply Boober patch (%a) - not found\n",
       Patch->Comment
       ));
   } else {
-    DEBUG ((DEBUG_INFO, "OCABC: Booter patch (%a) replace count - %u\n", Patch->Comment, ReplaceCount));
+    DEBUG ((DEBUG_INFO, "OCABC: Boober patch (%a) replace count - %u\n", Patch->Comment, ReplaceCount));
   }
 }
 
 /**
-  Iterate through user booter patches and apply them.
+  Iterate through user boober patches and apply them.
 
   @param[in]      ImageHandle      Loaded image handle to patch.
-  @param[in]      IsApple          Whether the booter is Apple-made.
+  @param[in]      IsApple          Whether the boober is Apple-made.
   @param[in]      Patches          Array of patches to be applied.
   @param[in]      PatchesCount     Size of patches to be applied.
 **/
 STATIC
 VOID
-ApplyBooterPatches (
+ApplyBooberPatches (
   IN  EFI_HANDLE       ImageHandle,
   IN  BOOLEAN          IsApple,
-  IN  OC_BOOTER_PATCH  *Patches,
+  IN  OC_BOOBER_PATCH  *Patches,
   IN  UINT32           PatchCount
   )
 {
@@ -423,7 +423,7 @@ ApplyBooterPatches (
     } else {
       UserIdentifierUnicode = AsciiStrCopyToUnicode (UserIdentifier, 0);
       if (UserIdentifierUnicode == NULL) {
-        DEBUG ((DEBUG_INFO, "OCABC: Booter patch (%a) for %a is out of memory\n", Patches[Index].Comment, UserIdentifier));
+        DEBUG ((DEBUG_INFO, "OCABC: Boober patch (%a) for %a is out of memory\n", Patches[Index].Comment, UserIdentifier));
         continue;
       }
 
@@ -432,7 +432,7 @@ ApplyBooterPatches (
     }
 
     if (UsePatch) {
-      ApplyBooterPatch (
+      ApplyBooberPatch (
         (UINT8 *)LoadedImage->ImageBase,
         (UINTN)LoadedImage->ImageSize,
         &Patches[Index]
@@ -1206,7 +1206,7 @@ OcStartImage (
     //
     ++BootCompat->ServiceState.AppleBootNestedCount;
     //
-    // Remember the last started Apple booter to match its EfiBootRt instance.
+    // Remember the last started Apple boober to match its EfiBootRt instance.
     //
     LastAppleBootImageTmp                       = BootCompat->ServiceState.LastAppleBootImage;
     BootCompat->ServiceState.LastAppleBootImage = AppleLoadedImage;
@@ -1246,7 +1246,7 @@ OcStartImage (
         );
     }
 
-    AppleMapPrepareBooterState (
+    AppleMapPrepareBooberState (
       BootCompat,
       AppleLoadedImage,
       BootCompat->ServicePtrs.GetMemoryMap
@@ -1326,13 +1326,13 @@ OcStartImage (
   }
 
   //
-  // Apply customised booter patches.
+  // Apply customised boober patches.
   //
-  ApplyBooterPatches (
+  ApplyBooberPatches (
     ImageHandle,
     AppleLoadedImage != NULL,
-    BootCompat->Settings.BooterPatches,
-    BootCompat->Settings.BooterPatchesSize
+    BootCompat->Settings.BooberPatches,
+    BootCompat->Settings.BooberPatchesSize
     );
 
   Status = BootCompat->ServicePtrs.StartImage (
@@ -1343,7 +1343,7 @@ OcStartImage (
 
   if (AppleLoadedImage != NULL) {
     //
-    // On exit, restore the previous last started Apple booter.
+    // On exit, restore the previous last started Apple boober.
     //
     BootCompat->ServiceState.LastAppleBootImage = LastAppleBootImageTmp;
     //

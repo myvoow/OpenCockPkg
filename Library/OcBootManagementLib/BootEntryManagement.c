@@ -963,7 +963,7 @@ AddBootEntryFromBless (
     if (!EFI_ERROR (Status)) {
       Status = SimpleFs->OpenVolume (SimpleFs, &Root);
       if (!EFI_ERROR (Status)) {
-        Status = OcGetBooterFromPredefinedPathList (
+        Status = OcGetBooberFromPredefinedPathList (
                    FileSystem->Handle,
                    Root,
                    (CONST CHAR16 **)BootContext->PickerContext->CustomBootPaths,
@@ -1174,7 +1174,7 @@ AddBootEntryFromSelfRecovery (
     return EFI_UNSUPPORTED;
   }
 
-  Status = InternalGetRecoveryOsBooter (
+  Status = InternalGetRecoveryOsBoober (
              FileSystem->Handle,
              &DevicePath,
              FALSE
@@ -1688,8 +1688,8 @@ AddBootEntryFromBootOption (
   // - Recovery for this macOS.
   // - Another macOS installation.
   // We can only detect them with bless, so we invoke bless in deduplication mode.
-  // We also detect only the Core Apple Boot Policy predefined booter paths to
-  // avoid detection of e.g. generic booters (such as BOOTx64) to avoid
+  // We also detect only the Core Apple Boot Policy predefined boober paths to
+  // avoid detection of e.g. generic boobers (such as BOOTx64) to avoid
   // duplicates.
   //
   // The amount of paths depends on the kind of the entry.

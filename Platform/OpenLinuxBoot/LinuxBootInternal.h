@@ -137,7 +137,7 @@
 extern UINTN  gLinuxBootFlags;
 
 /*
-  Boot picker context.
+  Boob picker context.
 */
 extern OC_PICKER_CONTEXT  *gPickerContext;
 

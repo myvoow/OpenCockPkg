@@ -589,7 +589,7 @@ OcMiscEarlyInit (
 }
 
 /**
-  Generates bootstrap path according to the BootProtect mode.
+  Generates boobstrap path according to the BootProtect mode.
 
   @param[in]  RootPath      Root load path.
   @param[in]  LauncherPath  Launcher path to write, optional.
@@ -605,8 +605,8 @@ BuildLauncherPath (
   OUT  CONST CHAR16  **MatchSuffix
   )
 {
-  CHAR16  *BootstrapPath;
-  UINTN   BootstrapSize;
+  CHAR16  *BoobstrapPath;
+  UINTN   BoobstrapSize;
 
   //
   // MatchSuffix allows us to reduce option duplication when switching between
@@ -615,24 +615,24 @@ BuildLauncherPath (
   // For custom paths no deduplication happens.
   //
   if (AsciiStrCmp (LauncherPath, "Default") == 0) {
-    BootstrapSize = StrSize (RootPath) + L_STR_SIZE (OPEN_CORE_APP_PATH);
-    BootstrapPath = AllocatePool (BootstrapSize);
-    if (BootstrapPath == NULL) {
+    BoobstrapSize = StrSize (RootPath) + L_STR_SIZE (OPEN_CORE_APP_PATH);
+    BoobstrapPath = AllocatePool (BoobstrapSize);
+    if (BoobstrapPath == NULL) {
       return NULL;
     }
 
-    UnicodeSPrint (BootstrapPath, BootstrapSize, L"%s\\%s", RootPath, OPEN_CORE_APP_PATH);
+    UnicodeSPrint (BoobstrapPath, BoobstrapSize, L"%s\\%s", RootPath, OPEN_CORE_APP_PATH);
     *MatchSuffix = OPEN_CORE_APP_PATH;
   } else {
-    BootstrapPath = AsciiStrCopyToUnicode (LauncherPath, 0);
-    if (BootstrapPath == NULL) {
+    BoobstrapPath = AsciiStrCopyToUnicode (LauncherPath, 0);
+    if (BoobstrapPath == NULL) {
       return NULL;
     }
 
-    *MatchSuffix = BootstrapPath;
+    *MatchSuffix = BoobstrapPath;
   }
 
-  return BootstrapPath;
+  return BoobstrapPath;
 }
 
 VOID
@@ -686,7 +686,7 @@ OcMiscMiddleInit (
   FullLauncherPath = BuildLauncherPath (RootPath, LauncherPath, &MatchSuffix);
   if (FullLauncherPath != NULL) {
     if (HasFullLauncher || HasShortLauncher) {
-      OcRegisterBootstrapBootOption (
+      OcRegisterBoobstrapBootOption (
         L"OpenCock",
         StorageHandle,
         FullLauncherPath,
@@ -694,7 +694,7 @@ OcMiscMiddleInit (
         MatchSuffix,
         StrLen (MatchSuffix)
         );
-      BootProtectFlag = OC_BOOT_PROTECT_VARIABLE_BOOTSTRAP;
+      BootProtectFlag = OC_BOOT_PROTECT_VARIABLE_BOOBSTRAP;
     }
 
     //
@@ -849,7 +849,7 @@ OcMiscBoot (
   }
 
   //
-  // Do not use our boot picker unless asked.
+  // Do not use our boob picker unless asked.
   //
   if (PickerMode == OcPickerModeExternal) {
     DEBUG ((DEBUG_INFO, "OC: Handing off to external boot controller\n"));
@@ -894,7 +894,7 @@ OcMiscBoot (
   }
 
   if (Context == NULL) {
-    DEBUG ((DEBUG_ERROR, "OC: Failed to allocate boot picker context!\n"));
+    DEBUG ((DEBUG_ERROR, "OC: Failed to allocate boob picker context!\n"));
     return;
   }
 
@@ -1042,7 +1042,7 @@ OcMiscBoot (
     }
   }
 
-  Status = OcRunBootPicker (Context);
+  Status = OcRunBoobPicker (Context);
 
   if (EFI_ERROR (Status)) {
     DEBUG ((DEBUG_ERROR, "OC: Failed to show boot menu!\n"));

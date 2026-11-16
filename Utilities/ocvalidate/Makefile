@@ -10,7 +10,7 @@ OBJS    = $(PROJECT).o \
           KextInfo.o \
           NvramKeyInfo.o \
           ValidateAcpi.o \
-          ValidateBooter.o \
+          ValidateBoober.o \
           ValidateDeviceProperties.o \
           ValidateKernel.o \
           ValidateMisc.o \

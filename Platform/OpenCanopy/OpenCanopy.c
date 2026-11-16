@@ -27,7 +27,7 @@
 #include "OpenCanopy.h"
 #include "GuiIo.h"
 #include "GuiApp.h"
-#include "Views/BootPicker.h"
+#include "Views/BoobPicker.h"
 #include "Blending.h"
 
 typedef struct {

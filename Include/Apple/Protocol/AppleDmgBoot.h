@@ -103,8 +103,8 @@ VOID
   @param[in]  This               Instance of this protocol.
   @param[in]  ParentImageHandle  Parent handle to boot from (local filesystem handle).
   @param[in]  BaseDmgPath        Path to dmg file without dmg suffix (e.g. L"\\BaseSystem.").
-  @param[in]  PreStartCallback   Callback invoked prior to starting booter.
-  @param[in]  PostStartCallback  Callback invoked after starting booter.
+  @param[in]  PreStartCallback   Callback invoked prior to starting boober.
+  @param[in]  PostStartCallback  Callback invoked after starting boober.
   @param[in]  CallbackContext    Callback context for PreStartCallback and PostStartCallback.
   @param[in]  DebugPrintFunction Debug printing function, builtin is used if NULL.
 
@@ -134,8 +134,8 @@ EFI_STATUS
   @param[in]  This               Instance of this protocol.
   @param[in]  ParentImageHandle  Parent handle to boot from.
   @param[in]  DevicePath         Path to dmg file.
-  @param[in]  PreStartCallback   Callback invoked prior to starting booter.
-  @param[in]  PostStartCallback  Callback invoked after starting booter.
+  @param[in]  PreStartCallback   Callback invoked prior to starting boober.
+  @param[in]  PostStartCallback  Callback invoked after starting boober.
   @param[in]  CallbackContext    Callback context for PreStartCallback and PostStartCallback.
   @param[in]  DebugPrintFunction Debug printing function, builtin is used if NULL.
 

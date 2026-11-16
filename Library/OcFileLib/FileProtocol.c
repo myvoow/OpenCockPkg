@@ -5,7 +5,7 @@
 
 #include <Uefi.h>
 #include <Guid/FileInfo.h>
-#include <Protocol/OcBootstrap.h>
+#include <Protocol/OcBoobstrap.h>
 #include <Protocol/SimpleFileSystem.h>
 
 #include <Library/BaseLib.h>
@@ -279,18 +279,18 @@ OcFindWritableOcFileSystem (
   )
 {
   EFI_STATUS             Status;
-  OC_BOOTSTRAP_PROTOCOL  *Bootstrap;
+  OC_BOOBSTRAP_PROTOCOL  *Boobstrap;
   EFI_HANDLE             PreferedHandle;
 
   PreferedHandle = NULL;
 
   Status = gBS->LocateProtocol (
-                  &gOcBootstrapProtocolGuid,
+                  &gOcBoobstrapProtocolGuid,
                   NULL,
-                  (VOID **)&Bootstrap
+                  (VOID **)&Boobstrap
                   );
-  if (!EFI_ERROR (Status) && (Bootstrap->Revision == OC_BOOTSTRAP_PROTOCOL_REVISION)) {
-    PreferedHandle = Bootstrap->GetLoadHandle (Bootstrap);
+  if (!EFI_ERROR (Status) && (Boobstrap->Revision == OC_BOOBSTRAP_PROTOCOL_REVISION)) {
+    PreferedHandle = Boobstrap->GetLoadHandle (Boobstrap);
   }
 
   if (PreferedHandle != NULL) {

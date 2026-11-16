@@ -401,7 +401,7 @@ struct OC_BOOT_ENTRY_ {
   //
   LIST_ENTRY                        Link;
   //
-  // Device path to booter or its directory.
+  // Device path to boober or its directory.
   // Can be NULL, for example, for custom or system entries.
   //
   EFI_DEVICE_PATH_PROTOCOL          *DevicePath;
@@ -464,7 +464,7 @@ struct OC_BOOT_ENTRY_ {
   //
   BOOLEAN                           IsFolder;
   //
-  // Set when this entry refers to a generic booter (e.g. BOOTx64.EFI).
+  // Set when this entry refers to a generic boober (e.g. BOOTx64.EFI).
   //
   BOOLEAN                           IsGeneric;
   //
@@ -931,7 +931,7 @@ BOOLEAN
   );
 
 /**
-  Boot picker context describing picker behaviour.
+  Boob picker context describing picker behaviour.
 **/
 struct OC_PICKER_CONTEXT_ {
   //
@@ -1129,7 +1129,7 @@ struct OC_PICKER_CONTEXT_ {
 };
 
 /**
-  Boot picker keyboard handling context.
+  Boob picker keyboard handling context.
 **/
 struct OC_HOTKEY_CONTEXT_ {
   //
@@ -1411,7 +1411,7 @@ OcIsAppleHibernateWake (
   );
 
 /**
-  Check pressed hotkeys and update booter context based on this.
+  Check pressed hotkeys and update boober context based on this.
 
   @param[in,out]  Context       Picker context.
 **/
@@ -1467,7 +1467,7 @@ OcLoadPickerHotKeys (
 
 /**
   Initialise picker keyboard handling.
-  Initialises necessary handlers and updates booter context based on this.
+  Initialises necessary handlers and updates boober context based on this.
   Call before looped calls to OcWaitForPickerKeyInfo or OcGetPickerKeyInfo.
 
   @param[in,out]  Context       Picker context.
@@ -1499,7 +1499,7 @@ OcFreeHotKeys (
   @retval does not return unless a fatal error happened.
 **/
 EFI_STATUS
-OcRunBootPicker (
+OcRunBoobPicker (
   IN  OC_PICKER_CONTEXT  *Context
   );
 
@@ -1534,7 +1534,7 @@ OcGetFileSystemPolicyType (
 
   @param[in]   DevicePath        Device path.
   @param[out]  IsFolder          Device path represents directory, optional.
-  @param[out]  IsGeneric         Device path represents generic booter, optional.
+  @param[out]  IsGeneric         Device path represents generic boober, optional.
 
   @retval entry type for potentially known boobloaders.
   @retval OC_BOOT_UNKNOWN for unknown boobloaders.
@@ -1717,7 +1717,7 @@ OcAppendArgumentsToLoadedImage (
   Launch firmware application.
 
   @param[in] ApplicationGuid  Application GUID identifier in the firmware.
-  @param[in] SetReason        Pass enter reason (specific to Apple BootPicker).
+  @param[in] SetReason        Pass enter reason (specific to Apple BoobPicker).
 
   @retval error code, should not return.
 **/
@@ -1849,7 +1849,7 @@ OcGetBootOrder (
   @retval EFI_SUCCESS on success.
 **/
 EFI_STATUS
-OcRegisterBootstrapBootOption (
+OcRegisterBoobstrapBootOption (
   IN CONST CHAR16  *OptionName,
   IN EFI_HANDLE    DeviceHandle,
   IN CONST CHAR16  *FilePath,
@@ -2201,13 +2201,13 @@ OcUnlockAppleFirmwareUI (
   );
 
 /**
-  Launch Apple boot picker firmware application.
+  Launch Apple boob picker firmware application.
 
   @retval EFI_SUCCESS   Picker was successfully executed, implies boot selection was returned in BootNext.
   @retval other         Picker could not be launched, or error within picker application.
 **/
 EFI_STATUS
-OcLaunchAppleBootPicker (
+OcLaunchAppleBoobPicker (
   VOID
   );
 

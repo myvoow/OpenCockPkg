@@ -890,13 +890,13 @@ InternalEfiLoadImage (
                      &FilePath
                      );
           if (!EFI_ERROR (Status)) {
-            AppleBootPath = (StrCmp (FilePath, APPLE_BOOTER_DEFAULT_FILE_NAME) == 0);
+            AppleBootPath = (StrCmp (FilePath, APPLE_BOOBER_DEFAULT_FILE_NAME) == 0);
             FreePool (FilePath);
           }
         }
 
         if (AppleBootPath) {
-          DEBUG ((DEBUG_INFO, "OCB: Apple booter path, fixup efi...\n"));
+          DEBUG ((DEBUG_INFO, "OCB: Apple boober path, fixup efi...\n"));
           FixupRequired = TRUE;
         } else {
           //

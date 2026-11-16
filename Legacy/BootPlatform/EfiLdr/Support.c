@@ -287,7 +287,7 @@ GenMemoryMap (
     );
 
   //
-  // Reserve our bootstrap code as we may access this memory later.
+  // Reserve our boobstrap code as we may access this memory later.
   //
   EfiAddMemoryDescriptor (
     NumberOfMemoryMapEntries,

@@ -152,7 +152,7 @@ PasswordViewDeinitialize (
   );
 
 EFI_STATUS
-BootPickerViewInitialize (
+BoobPickerViewInitialize (
   OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN  BOOT_PICKER_GUI_CONTEXT  *GuiContext,
   IN  GUI_CURSOR_GET_IMAGE     GetCursorImage,
@@ -160,14 +160,14 @@ BootPickerViewInitialize (
   );
 
 VOID
-BootPickerViewLateInitialize (
+BoobPickerViewLateInitialize (
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *GuiContext,
   IN     UINT8                    DefaultIndex
   );
 
 EFI_STATUS
-BootPickerEntriesSet (
+BoobPickerEntriesSet (
   IN OC_PICKER_CONTEXT        *Context,
   IN BOOT_PICKER_GUI_CONTEXT  *GuiContext,
   IN OC_BOOT_ENTRY            *Entry,
@@ -175,7 +175,7 @@ BootPickerEntriesSet (
   );
 
 VOID
-BootPickerViewDeinitialize (
+BoobPickerViewDeinitialize (
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN OUT BOOT_PICKER_GUI_CONTEXT  *GuiContext
   );

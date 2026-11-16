@@ -198,8 +198,8 @@ OcActivateHibernateWake (
            L"boot-signature",
            &gAppleBootVariableGuid,
            EFI_VARIABLE_BOOTSERVICE_ACCESS,
-           sizeof (RtcVars.booterSignature),
-           RtcVars.booterSignature
+           sizeof (RtcVars.booberSignature),
+           RtcVars.booberSignature
            );
   }
 

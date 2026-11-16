@@ -18,7 +18,7 @@
 
 STATIC
 UINT32
-CheckBooterMmioWhitelist (
+CheckBooberMmioWhitelist (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
@@ -30,13 +30,13 @@ CheckBooterMmioWhitelist (
   BOOLEAN      IsDevirtualiseMmioEnabled;
 
   ErrorCount                = 0;
-  IsDevirtualiseMmioEnabled = Config->Booter.Quirks.DevirtualiseMmio;
+  IsDevirtualiseMmioEnabled = Config->Boober.Quirks.DevirtualiseMmio;
 
   IsMmioWhitelistEnabled       = FALSE;
   ShouldEnableDevirtualiseMmio = FALSE;
-  for (Index = 0; Index < Config->Booter.MmioWhitelist.Count; ++Index) {
-    Comment                = OC_BLOB_GET (&Config->Booter.MmioWhitelist.Values[Index]->Comment);
-    IsMmioWhitelistEnabled = Config->Booter.MmioWhitelist.Values[Index]->Enabled;
+  for (Index = 0; Index < Config->Boober.MmioWhitelist.Count; ++Index) {
+    Comment                = OC_BLOB_GET (&Config->Boober.MmioWhitelist.Values[Index]->Comment);
+    IsMmioWhitelistEnabled = Config->Boober.MmioWhitelist.Values[Index]->Enabled;
     //
     // DevirtualiseMmio should be enabled if at least one entry is enabled.
     //
@@ -46,13 +46,13 @@ CheckBooterMmioWhitelist (
     // Sanitise strings.
     //
     if (!AsciiCommentIsLegal (Comment)) {
-      DEBUG ((DEBUG_WARN, "Booter->MmioWhitelist[%u]->Comment contains illegal character!\n", Index));
+      DEBUG ((DEBUG_WARN, "Boober->MmioWhitelist[%u]->Comment contains illegal character!\n", Index));
       ++ErrorCount;
     }
   }
 
   if (ShouldEnableDevirtualiseMmio && !IsDevirtualiseMmioEnabled) {
-    DEBUG ((DEBUG_WARN, "There are enabled entries under Booter->MmioWhitelist, but DevirtualiseMmio is not enabled!\n"));
+    DEBUG ((DEBUG_WARN, "There are enabled entries under Boober->MmioWhitelist, but DevirtualiseMmio is not enabled!\n"));
     ++ErrorCount;
   }
 
@@ -60,7 +60,7 @@ CheckBooterMmioWhitelist (
 }
 
 UINT32
-CheckBooterPatch (
+CheckBooberPatch (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
@@ -80,34 +80,34 @@ CheckBooterPatch (
 
   ErrorCount = 0;
 
-  for (Index = 0; Index < Config->Booter.Patch.Count; ++Index) {
-    Comment         = OC_BLOB_GET (&Config->Booter.Patch.Values[Index]->Comment);
-    Arch            = OC_BLOB_GET (&Config->Booter.Patch.Values[Index]->Arch);
-    Identifier      = OC_BLOB_GET (&Config->Booter.Patch.Values[Index]->Identifier);
-    Find            = OC_BLOB_GET (&Config->Booter.Patch.Values[Index]->Find);
-    FindSize        = Config->Booter.Patch.Values[Index]->Find.Size;
-    Replace         = OC_BLOB_GET (&Config->Booter.Patch.Values[Index]->Replace);
-    ReplaceSize     = Config->Booter.Patch.Values[Index]->Replace.Size;
-    Mask            = OC_BLOB_GET (&Config->Booter.Patch.Values[Index]->Mask);
-    MaskSize        = Config->Booter.Patch.Values[Index]->Mask.Size;
-    ReplaceMask     = OC_BLOB_GET (&Config->Booter.Patch.Values[Index]->ReplaceMask);
-    ReplaceMaskSize = Config->Booter.Patch.Values[Index]->ReplaceMask.Size;
+  for (Index = 0; Index < Config->Boober.Patch.Count; ++Index) {
+    Comment         = OC_BLOB_GET (&Config->Boober.Patch.Values[Index]->Comment);
+    Arch            = OC_BLOB_GET (&Config->Boober.Patch.Values[Index]->Arch);
+    Identifier      = OC_BLOB_GET (&Config->Boober.Patch.Values[Index]->Identifier);
+    Find            = OC_BLOB_GET (&Config->Boober.Patch.Values[Index]->Find);
+    FindSize        = Config->Boober.Patch.Values[Index]->Find.Size;
+    Replace         = OC_BLOB_GET (&Config->Boober.Patch.Values[Index]->Replace);
+    ReplaceSize     = Config->Boober.Patch.Values[Index]->Replace.Size;
+    Mask            = OC_BLOB_GET (&Config->Boober.Patch.Values[Index]->Mask);
+    MaskSize        = Config->Boober.Patch.Values[Index]->Mask.Size;
+    ReplaceMask     = OC_BLOB_GET (&Config->Boober.Patch.Values[Index]->ReplaceMask);
+    ReplaceMaskSize = Config->Boober.Patch.Values[Index]->ReplaceMask.Size;
 
     //
     // Sanitise strings.
     //
     if (!AsciiCommentIsLegal (Comment)) {
-      DEBUG ((DEBUG_WARN, "Booter->Patch[%u]->Comment contains illegal character!\n", Index));
+      DEBUG ((DEBUG_WARN, "Boober->Patch[%u]->Comment contains illegal character!\n", Index));
       ++ErrorCount;
     }
 
     if (!AsciiArchIsLegal (Arch, FALSE)) {
-      DEBUG ((DEBUG_WARN, "Booter->Patch[%u]->Arch is borked (Can only be Any, i386, and x86_64)!\n", Index));
+      DEBUG ((DEBUG_WARN, "Boober->Patch[%u]->Arch is borked (Can only be Any, i386, and x86_64)!\n", Index));
       ++ErrorCount;
     }
 
     if (!AsciiIdentifierIsLegal (Identifier, FALSE)) {
-      DEBUG ((DEBUG_WARN, "Booter->Patch[%u]->Identifier contains illegal character!\n", Index));
+      DEBUG ((DEBUG_WARN, "Boober->Patch[%u]->Identifier contains illegal character!\n", Index));
       ++ErrorCount;
     }
 
@@ -115,7 +115,7 @@ CheckBooterPatch (
     // Checks for size.
     //
     ErrorCount += ValidatePatch (
-                    "Booter->Patch",
+                    "Boober->Patch",
                     Index,
                     FALSE,
                     Find,
@@ -134,7 +134,7 @@ CheckBooterPatch (
 
 STATIC
 UINT32
-CheckBooterQuirks (
+CheckBooberQuirks (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
@@ -153,15 +153,15 @@ CheckBooterQuirks (
   INT8                  ResizeAppleGpuBars;
 
   ErrorCount                      = 0;
-  IsAllowRelocationBlockEnabled   = Config->Booter.Quirks.AllowRelocationBlock;
-  IsProvideCustomSlideEnabled     = Config->Booter.Quirks.ProvideCustomSlide;
-  IsEnableSafeModeSlideEnabled    = Config->Booter.Quirks.EnableSafeModeSlide;
-  IsDisableVariableWriteEnabled   = Config->Booter.Quirks.DisableVariableWrite;
-  IsEnableWriteUnprotectorEnabled = Config->Booter.Quirks.EnableWriteUnprotector;
-  IsClearTaskSwitchBitEnabled     = Config->Booter.Quirks.ClearTaskSwitchBit;
+  IsAllowRelocationBlockEnabled   = Config->Boober.Quirks.AllowRelocationBlock;
+  IsProvideCustomSlideEnabled     = Config->Boober.Quirks.ProvideCustomSlide;
+  IsEnableSafeModeSlideEnabled    = Config->Boober.Quirks.EnableSafeModeSlide;
+  IsDisableVariableWriteEnabled   = Config->Boober.Quirks.DisableVariableWrite;
+  IsEnableWriteUnprotectorEnabled = Config->Boober.Quirks.EnableWriteUnprotector;
+  IsClearTaskSwitchBitEnabled     = Config->Boober.Quirks.ClearTaskSwitchBit;
   HasOpenRuntimeEfiDriver         = FALSE;
-  MaxSlide                        = Config->Booter.Quirks.ProvideMaxSlide;
-  ResizeAppleGpuBars              = Config->Booter.Quirks.ResizeAppleGpuBars;
+  MaxSlide                        = Config->Boober.Quirks.ProvideMaxSlide;
+  ResizeAppleGpuBars              = Config->Boober.Quirks.ResizeAppleGpuBars;
 
   for (Index = 0; Index < Config->Uefi.Drivers.Count; ++Index) {
     DriverEntry = Config->Uefi.Drivers.Values[Index];
@@ -177,51 +177,51 @@ CheckBooterQuirks (
 
   if (!HasOpenRuntimeEfiDriver) {
     if (IsProvideCustomSlideEnabled) {
-      DEBUG ((DEBUG_WARN, "Booter->Quirks->ProvideCustomSlide is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Quirks->ProvideCustomSlide is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
 
     if (IsDisableVariableWriteEnabled) {
-      DEBUG ((DEBUG_WARN, "Booter->Quirks->DisableVariableWrite is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Quirks->DisableVariableWrite is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
 
     if (IsEnableWriteUnprotectorEnabled) {
-      DEBUG ((DEBUG_WARN, "Booter->Quirks->EnableWriteUnprotector is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Quirks->EnableWriteUnprotector is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
 
     if (IsClearTaskSwitchBitEnabled) {
-      DEBUG ((DEBUG_WARN, "Booter->Quirks->ClearTaskSwitchBit is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Quirks->ClearTaskSwitchBit is enabled, but OpenRuntime.efi is not loaded at UEFI->Drivers!\n"));
       ++ErrorCount;
     }
   }
 
   if (!IsProvideCustomSlideEnabled) {
     if (IsAllowRelocationBlockEnabled) {
-      DEBUG ((DEBUG_WARN, "Booter->Quirks->AllowRelocationBlock is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Quirks->AllowRelocationBlock is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
       ++ErrorCount;
     }
 
     if (IsEnableSafeModeSlideEnabled) {
-      DEBUG ((DEBUG_WARN, "Booter->Quirks->EnableSafeModeSlide is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
+      DEBUG ((DEBUG_WARN, "Boober->Quirks->EnableSafeModeSlide is enabled, but ProvideCustomSlide is not enabled altogether!\n"));
       ++ErrorCount;
     }
 
     if (MaxSlide > 0) {
-      DEBUG ((DEBUG_WARN, "Booter->Quirks->ProvideMaxSlide is set to %u, but ProvideCustomSlide is not enabled altogether!\n", MaxSlide));
+      DEBUG ((DEBUG_WARN, "Boober->Quirks->ProvideMaxSlide is set to %u, but ProvideCustomSlide is not enabled altogether!\n", MaxSlide));
       ++ErrorCount;
     }
   }
 
   if (ResizeAppleGpuBars > 10) {
-    DEBUG ((DEBUG_WARN, "Booter->Quirks->ResizeAppleGpuBars is set to %d, which is unsupported by macOS!\n", Config->Booter.Quirks.ResizeAppleGpuBars));
+    DEBUG ((DEBUG_WARN, "Boober->Quirks->ResizeAppleGpuBars is set to %d, which is unsupported by macOS!\n", Config->Boober.Quirks.ResizeAppleGpuBars));
     ++ErrorCount;
   } else if (ResizeAppleGpuBars > 8) {
-    DEBUG ((DEBUG_WARN, "Booter->Quirks->ResizeAppleGpuBars is set to %d, which is unstable with macOS sleep-wake!\n", Config->Booter.Quirks.ResizeAppleGpuBars));
+    DEBUG ((DEBUG_WARN, "Boober->Quirks->ResizeAppleGpuBars is set to %d, which is unstable with macOS sleep-wake!\n", Config->Boober.Quirks.ResizeAppleGpuBars));
     ++ErrorCount;
   } else if (ResizeAppleGpuBars > 0) {
-    DEBUG ((DEBUG_WARN, "Booter->Quirks->ResizeAppleGpuBars is set to %d, which is not useful for macOS!\n", Config->Booter.Quirks.ResizeAppleGpuBars));
+    DEBUG ((DEBUG_WARN, "Boober->Quirks->ResizeAppleGpuBars is set to %d, which is not useful for macOS!\n", Config->Boober.Quirks.ResizeAppleGpuBars));
     ++ErrorCount;
   }
 
@@ -229,24 +229,24 @@ CheckBooterQuirks (
 }
 
 UINT32
-CheckBooter (
+CheckBoober (
   IN  OC_GLOBAL_CONFIG  *Config
   )
 {
   UINT32               ErrorCount;
   UINTN                Index;
-  STATIC CONFIG_CHECK  BooterCheckers[] = {
-    &CheckBooterMmioWhitelist,
-    &CheckBooterPatch,
-    &CheckBooterQuirks
+  STATIC CONFIG_CHECK  BooberCheckers[] = {
+    &CheckBooberMmioWhitelist,
+    &CheckBooberPatch,
+    &CheckBooberQuirks
   };
 
   DEBUG ((DEBUG_VERBOSE, "config loaded into %a!\n", __func__));
 
   ErrorCount = 0;
 
-  for (Index = 0; Index < ARRAY_SIZE (BooterCheckers); ++Index) {
-    ErrorCount += BooterCheckers[Index](Config);
+  for (Index = 0; Index < ARRAY_SIZE (BooberCheckers); ++Index) {
+    ErrorCount += BooberCheckers[Index](Config);
   }
 
   return ReportError (__func__, ErrorCount);

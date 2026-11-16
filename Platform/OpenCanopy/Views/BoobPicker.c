@@ -27,7 +27,7 @@
 #include "../BmfLib.h"
 #include "../GuiApp.h"
 #include "../GuiIo.h"
-#include "BootPicker.h"
+#include "BoobPicker.h"
 
 #include "Common.h"
 #include "../Blending.h"
@@ -42,36 +42,36 @@
 
 extern GUI_KEY_CONTEXT  *mKeyContext;
 
-extern GUI_VOLUME_PICKER  mBootPicker;
-extern GUI_OBJ_CHILD      mBootPickerContainer;
-extern GUI_OBJ_CHILD      mBootPickerSelectorContainer;
-extern GUI_OBJ_CHILD      mBootPickerSelectorBackground;
-extern GUI_OBJ_CLICKABLE  mBootPickerSelectorButton;
-extern GUI_OBJ_CLICKABLE  mBootPickerRightScroll;
-extern GUI_OBJ_CLICKABLE  mBootPickerLeftScroll;
+extern GUI_VOLUME_PICKER  mBoobPicker;
+extern GUI_OBJ_CHILD      mBoobPickerContainer;
+extern GUI_OBJ_CHILD      mBoobPickerSelectorContainer;
+extern GUI_OBJ_CHILD      mBoobPickerSelectorBackground;
+extern GUI_OBJ_CLICKABLE  mBoobPickerSelectorButton;
+extern GUI_OBJ_CLICKABLE  mBoobPickerRightScroll;
+extern GUI_OBJ_CLICKABLE  mBoobPickerLeftScroll;
 extern CONST GUI_IMAGE    mBackgroundImage;
 
-// STATIC UINT8 mBootPickerImageIndex = 0;
+// STATIC UINT8 mBoobPickerImageIndex = 0;
 
 extern INT64  mBackgroundImageOffsetX;
 extern INT64  mBackgroundImageOffsetY;
 
-STATIC UINT32  mBootPickerLabelScrollHoldTime = 0;
+STATIC UINT32  mBoobPickerLabelScrollHoldTime = 0;
 
-STATIC GUI_OBJ  *mBootPickerFocusList[] = {
-  &mBootPicker.Hdr.Obj,
+STATIC GUI_OBJ  *mBoobPickerFocusList[] = {
+  &mBoobPicker.Hdr.Obj,
   &mCommonShutDown.Hdr.Obj,
   &mCommonRestart.Hdr.Obj
 };
 
-STATIC GUI_OBJ  *mBootPickerFocusListReversed[] = {
-  &mBootPicker.Hdr.Obj,
+STATIC GUI_OBJ  *mBoobPickerFocusListReversed[] = {
+  &mBoobPicker.Hdr.Obj,
   &mCommonRestart.Hdr.Obj,
   &mCommonShutDown.Hdr.Obj
 };
 
-STATIC GUI_OBJ  *mBootPickerFocusListMinimal[] = {
-  &mBootPicker.Hdr.Obj
+STATIC GUI_OBJ  *mBoobPickerFocusListMinimal[] = {
+  &mBoobPicker.Hdr.Obj
 };
 
 STATIC
@@ -80,9 +80,9 @@ InternalGetVolumeEntry (
   IN UINT32  Index
   )
 {
-  ASSERT (Index < mBootPicker.Hdr.Obj.NumChildren);
+  ASSERT (Index < mBoobPicker.Hdr.Obj.NumChildren);
   return (GUI_VOLUME_ENTRY *)(
-                              mBootPicker.Hdr.Obj.Children[Index]
+                              mBoobPicker.Hdr.Obj.Children[Index]
                               );
 }
 
@@ -95,15 +95,15 @@ InternalRedrawVolumeLabel (
 {
   GuiRequestDrawCrop (
     DrawContext,
-    mBootPickerContainer.Obj.OffsetX + mBootPicker.Hdr.Obj.OffsetX + Entry->Hdr.Obj.OffsetX,
-    (mBootPickerContainer.Obj.OffsetY + mBootPicker.Hdr.Obj.OffsetY + Entry->Hdr.Obj.OffsetY + Entry->Hdr.Obj.Height - Entry->Label.Height),
+    mBoobPickerContainer.Obj.OffsetX + mBoobPicker.Hdr.Obj.OffsetX + Entry->Hdr.Obj.OffsetX,
+    (mBoobPickerContainer.Obj.OffsetY + mBoobPicker.Hdr.Obj.OffsetY + Entry->Hdr.Obj.OffsetY + Entry->Hdr.Obj.Height - Entry->Label.Height),
     Entry->Hdr.Obj.Width,
     Entry->Label.Height
     );
 }
 
 BOOLEAN
-InternalBootPickerAnimateLabel (
+InternalBoobPickerAnimateLabel (
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     UINT64                   CurrentTime
@@ -113,12 +113,12 @@ InternalBootPickerAnimateLabel (
 
   ASSERT (DrawContext != NULL);
 
-  if (mBootPickerLabelScrollHoldTime < BOOT_LABEL_SCROLLING_HOLD_TIME) {
-    ++mBootPickerLabelScrollHoldTime;
+  if (mBoobPickerLabelScrollHoldTime < BOOT_LABEL_SCROLLING_HOLD_TIME) {
+    ++mBoobPickerLabelScrollHoldTime;
     return FALSE;
   }
 
-  Entry = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
+  Entry = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
   if (Entry->Label.Width <= Entry->Hdr.Obj.Width) {
     return FALSE;
   }
@@ -136,7 +136,7 @@ InternalBootPickerAnimateLabel (
     //
     if (Entry->LabelOffset <= -(INT16)(Entry->Label.Width + BOOT_LABEL_WRAPAROUND_PADDING * DrawContext->Scale)) {
       Entry->LabelOffset             = 0;
-      mBootPickerLabelScrollHoldTime = 0;
+      mBoobPickerLabelScrollHoldTime = 0;
     }
   }
 
@@ -145,10 +145,10 @@ InternalBootPickerAnimateLabel (
   return FALSE;
 }
 
-STATIC GUI_ANIMATION  mBootPickerLabelAnimation = {
+STATIC GUI_ANIMATION  mBoobPickerLabelAnimation = {
   { NULL, NULL },
   NULL,
-  InternalBootPickerAnimateLabel
+  InternalBoobPickerAnimateLabel
 };
 
 VOID
@@ -157,17 +157,17 @@ InternalStartAnimateLabel (
   IN     CONST GUI_VOLUME_ENTRY  *Entry
   )
 {
-  ASSERT (!IsNodeInList (&DrawContext->Animations, &mBootPickerLabelAnimation.Link));
+  ASSERT (!IsNodeInList (&DrawContext->Animations, &mBoobPickerLabelAnimation.Link));
   //
   // Reset the boot entry label scrolling timer.
   //
-  mBootPickerLabelScrollHoldTime = 0;
+  mBoobPickerLabelScrollHoldTime = 0;
 
   if (Entry->Label.Width > Entry->Hdr.Obj.Width) {
     //
     // Add the animation if the next entry needs scrolling.
     //
-    InsertHeadList (&DrawContext->Animations, &mBootPickerLabelAnimation.Link);
+    InsertHeadList (&DrawContext->Animations, &mBoobPickerLabelAnimation.Link);
   }
 }
 
@@ -187,13 +187,13 @@ InternalStopAnimateLabel (
       InternalRedrawVolumeLabel (DrawContext, Entry);
     }
 
-    RemoveEntryList (&mBootPickerLabelAnimation.Link);
-    InitializeListHead (&mBootPickerLabelAnimation.Link);
+    RemoveEntryList (&mBoobPickerLabelAnimation.Link);
+    InitializeListHead (&mBoobPickerLabelAnimation.Link);
   }
 }
 
 VOID
-InternalBootPickerSelectEntry (
+InternalBoobPickerSelectEntry (
   IN OUT GUI_VOLUME_PICKER    *This,
   IN OUT GUI_DRAWING_CONTEXT  *DrawContext,
   IN     UINT32               NewIndex
@@ -203,20 +203,20 @@ InternalBootPickerSelectEntry (
   CONST GUI_VOLUME_ENTRY  *NewEntry;
 
   ASSERT (This != NULL);
-  ASSERT (NewIndex < mBootPicker.Hdr.Obj.NumChildren);
+  ASSERT (NewIndex < mBoobPicker.Hdr.Obj.NumChildren);
 
   OldEntry            = InternalGetVolumeEntry (This->SelectedIndex);
   This->SelectedIndex = NewIndex;
   NewEntry            = InternalGetVolumeEntry (NewIndex);
 
-  ASSERT (NewEntry->Hdr.Obj.Width <= mBootPickerSelectorContainer.Obj.Width);
-  ASSERT_EQUALS (This->Hdr.Obj.Height, mBootPickerSelectorContainer.Obj.OffsetY + mBootPickerSelectorContainer.Obj.Height);
+  ASSERT (NewEntry->Hdr.Obj.Width <= mBoobPickerSelectorContainer.Obj.Width);
+  ASSERT_EQUALS (This->Hdr.Obj.Height, mBoobPickerSelectorContainer.Obj.OffsetY + mBoobPickerSelectorContainer.Obj.Height);
 
-  mBootPickerSelectorContainer.Obj.OffsetX = mBootPicker.Hdr.Obj.OffsetX + NewEntry->Hdr.Obj.OffsetX - (mBootPickerSelectorContainer.Obj.Width - NewEntry->Hdr.Obj.Width) / 2;
+  mBoobPickerSelectorContainer.Obj.OffsetX = mBoobPicker.Hdr.Obj.OffsetX + NewEntry->Hdr.Obj.OffsetX - (mBoobPickerSelectorContainer.Obj.Width - NewEntry->Hdr.Obj.Width) / 2;
 
   if (DrawContext != NULL) {
     if (OldEntry->Label.Width > OldEntry->Hdr.Obj.Width) {
-      ASSERT (IsNodeInList (&DrawContext->Animations, &mBootPickerLabelAnimation.Link));
+      ASSERT (IsNodeInList (&DrawContext->Animations, &mBoobPickerLabelAnimation.Link));
     }
 
     InternalStopAnimateLabel (DrawContext, OldEntry);
@@ -231,7 +231,7 @@ InternalBootPickerSelectEntry (
 }
 
 INT64
-InternelBootPickerScrollSelected (
+InternelBoobPickerScrollSelected (
   VOID
   )
 {
@@ -239,28 +239,28 @@ InternelBootPickerScrollSelected (
   INT64                   EntryOffsetX;
   UINT32                  EntryWidth;
 
-  ASSERT (mBootPicker.SelectedIndex < mBootPicker.Hdr.Obj.NumChildren);
+  ASSERT (mBoobPicker.SelectedIndex < mBoobPicker.Hdr.Obj.NumChildren);
 
   //
   // No scroll required if nothing off screen
   //
-  if (mBootPicker.Hdr.Obj.Width <= mBootPickerContainer.Obj.Width) {
+  if (mBoobPicker.Hdr.Obj.Width <= mBoobPickerContainer.Obj.Width) {
     return 0;
   }
 
   //
   // If the selected entry is outside of the view, scroll it accordingly.
   //
-  SelectedEntry = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
-  EntryOffsetX  = mBootPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX - (mBootPickerSelectorContainer.Obj.Width - SelectedEntry->Hdr.Obj.Width) / 2;
-  EntryWidth    = SelectedEntry->Hdr.Obj.Width + (mBootPickerSelectorContainer.Obj.Width - SelectedEntry->Hdr.Obj.Width);
+  SelectedEntry = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
+  EntryOffsetX  = mBoobPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX - (mBoobPickerSelectorContainer.Obj.Width - SelectedEntry->Hdr.Obj.Width) / 2;
+  EntryWidth    = SelectedEntry->Hdr.Obj.Width + (mBoobPickerSelectorContainer.Obj.Width - SelectedEntry->Hdr.Obj.Width);
 
   if (EntryOffsetX < 0) {
     return -EntryOffsetX;
   }
 
-  if (EntryOffsetX + EntryWidth > mBootPickerContainer.Obj.Width) {
-    return -((EntryOffsetX + EntryWidth) - mBootPickerContainer.Obj.Width);
+  if (EntryOffsetX + EntryWidth > mBoobPickerContainer.Obj.Width) {
+    return -((EntryOffsetX + EntryWidth) - mBoobPickerContainer.Obj.Width);
   }
 
   return 0;
@@ -271,21 +271,21 @@ InternalUpdateScrollButtons (
   VOID
   )
 {
-  if (mBootPicker.Hdr.Obj.OffsetX < 0) {
-    mBootPickerLeftScroll.Hdr.Obj.Opacity = 0xFF;
+  if (mBoobPicker.Hdr.Obj.OffsetX < 0) {
+    mBoobPickerLeftScroll.Hdr.Obj.Opacity = 0xFF;
   } else {
-    mBootPickerLeftScroll.Hdr.Obj.Opacity = 0;
+    mBoobPickerLeftScroll.Hdr.Obj.Opacity = 0;
   }
 
-  if (mBootPicker.Hdr.Obj.OffsetX + mBootPicker.Hdr.Obj.Width > mBootPickerContainer.Obj.Width) {
-    mBootPickerRightScroll.Hdr.Obj.Opacity = 0xFF;
+  if (mBoobPicker.Hdr.Obj.OffsetX + mBoobPicker.Hdr.Obj.Width > mBoobPickerContainer.Obj.Width) {
+    mBoobPickerRightScroll.Hdr.Obj.Opacity = 0xFF;
   } else {
-    mBootPickerRightScroll.Hdr.Obj.Opacity = 0;
+    mBoobPickerRightScroll.Hdr.Obj.Opacity = 0;
   }
 }
 
 VOID
-InternalBootPickerScroll (
+InternalBoobPickerScroll (
   IN OUT GUI_VOLUME_PICKER    *This,
   IN OUT GUI_DRAWING_CONTEXT  *DrawContext,
   IN     INT64                BaseX,
@@ -296,8 +296,8 @@ InternalBootPickerScroll (
   INT64  ScrollX;
   INT64  ScrollY;
 
-  mBootPicker.Hdr.Obj.OffsetX              += ScrollOffset;
-  mBootPickerSelectorContainer.Obj.OffsetX += ScrollOffset;
+  mBoobPicker.Hdr.Obj.OffsetX              += ScrollOffset;
+  mBoobPickerSelectorContainer.Obj.OffsetX += ScrollOffset;
   InternalUpdateScrollButtons ();
   //
   // The entry list has been scrolled, the entire horizontal space to also cover
@@ -305,27 +305,27 @@ InternalBootPickerScroll (
   //
   DEBUG_CODE_BEGIN ();
   GuiGetBaseCoords (
-    &mBootPickerLeftScroll.Hdr.Obj,
+    &mBoobPickerLeftScroll.Hdr.Obj,
     DrawContext,
     &ScrollX,
     &ScrollY
     );
   ASSERT (ScrollY >= BaseY);
-  ASSERT (ScrollY + mBootPickerLeftScroll.Hdr.Obj.Height <= BaseY + This->Hdr.Obj.Height);
+  ASSERT (ScrollY + mBoobPickerLeftScroll.Hdr.Obj.Height <= BaseY + This->Hdr.Obj.Height);
 
   GuiGetBaseCoords (
-    &mBootPickerRightScroll.Hdr.Obj,
+    &mBoobPickerRightScroll.Hdr.Obj,
     DrawContext,
     &ScrollX,
     &ScrollY
     );
   ASSERT (ScrollY >= BaseY);
-  ASSERT (ScrollY + mBootPickerRightScroll.Hdr.Obj.Height <= BaseY + This->Hdr.Obj.Height);
+  ASSERT (ScrollY + mBoobPickerRightScroll.Hdr.Obj.Height <= BaseY + This->Hdr.Obj.Height);
   DEBUG_CODE_END ();
   //
   // The container is constructed such that it is always fully visible.
   //
-  ASSERT (This->Hdr.Obj.Height <= mBootPickerContainer.Obj.Height);
+  ASSERT (This->Hdr.Obj.Height <= mBoobPickerContainer.Obj.Height);
   ASSERT (BaseY + This->Hdr.Obj.Height <= DrawContext->Screen.Height);
 
   GuiRequestDraw (
@@ -337,7 +337,7 @@ InternalBootPickerScroll (
 }
 
 VOID
-InternalBootPickerChangeEntry (
+InternalBoobPickerChangeEntry (
   IN OUT GUI_VOLUME_PICKER    *This,
   IN OUT GUI_DRAWING_CONTEXT  *DrawContext,
   IN     INT64                BaseX,
@@ -357,28 +357,28 @@ InternalBootPickerChangeEntry (
   //
   ASSERT (This->SelectedIndex != NewIndex);
 
-  OldSelectorOffsetX = mBootPickerSelectorContainer.Obj.OffsetX;
-  InternalBootPickerSelectEntry (This, DrawContext, NewIndex);
+  OldSelectorOffsetX = mBoobPickerSelectorContainer.Obj.OffsetX;
+  InternalBoobPickerSelectEntry (This, DrawContext, NewIndex);
 
-  ScrollOffset = InternelBootPickerScrollSelected ();
+  ScrollOffset = InternelBoobPickerScrollSelected ();
   if (ScrollOffset == 0) {
     GuiRequestDrawCrop (
       DrawContext,
-      mBootPickerContainer.Obj.OffsetX + OldSelectorOffsetX,
-      mBootPickerContainer.Obj.OffsetY + mBootPickerSelectorContainer.Obj.OffsetY,
-      mBootPickerSelectorContainer.Obj.Width,
-      mBootPickerSelectorContainer.Obj.Height
+      mBoobPickerContainer.Obj.OffsetX + OldSelectorOffsetX,
+      mBoobPickerContainer.Obj.OffsetY + mBoobPickerSelectorContainer.Obj.OffsetY,
+      mBoobPickerSelectorContainer.Obj.Width,
+      mBoobPickerSelectorContainer.Obj.Height
       );
 
     GuiRequestDrawCrop (
       DrawContext,
-      mBootPickerContainer.Obj.OffsetX + mBootPickerSelectorContainer.Obj.OffsetX,
-      mBootPickerContainer.Obj.OffsetY + mBootPickerSelectorContainer.Obj.OffsetY,
-      mBootPickerSelectorContainer.Obj.Width,
-      mBootPickerSelectorContainer.Obj.Height
+      mBoobPickerContainer.Obj.OffsetX + mBoobPickerSelectorContainer.Obj.OffsetX,
+      mBoobPickerContainer.Obj.OffsetY + mBoobPickerSelectorContainer.Obj.OffsetY,
+      mBoobPickerSelectorContainer.Obj.Width,
+      mBoobPickerSelectorContainer.Obj.Height
       );
   } else {
-    InternalBootPickerScroll (
+    InternalBoobPickerScroll (
       This,
       DrawContext,
       BaseX,
@@ -389,7 +389,7 @@ InternalBootPickerChangeEntry (
 }
 
 VOID
-InternalBootPickerKeyEvent (
+InternalBoobPickerKeyEvent (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *GuiContext,
@@ -412,72 +412,72 @@ InternalBootPickerKeyEvent (
     ImageId = ICON_SET_DEFAULT;
   }
 
-  if (mBootPickerSelectorButton.ImageId != ImageId) {
-    mBootPickerSelectorButton.ImageId = ImageId;
+  if (mBoobPickerSelectorButton.ImageId != ImageId) {
+    mBoobPickerSelectorButton.ImageId = ImageId;
     GuiRequestDraw (
-      (UINT32)(mBootPickerContainer.Obj.OffsetX + mBootPickerSelectorContainer.Obj.OffsetX + mBootPickerSelectorButton.Hdr.Obj.OffsetX),
-      (UINT32)(mBootPickerContainer.Obj.OffsetY + mBootPickerSelectorContainer.Obj.OffsetY + mBootPickerSelectorButton.Hdr.Obj.OffsetY),
-      mBootPickerSelectorButton.Hdr.Obj.Width,
-      mBootPickerSelectorButton.Hdr.Obj.Height
+      (UINT32)(mBoobPickerContainer.Obj.OffsetX + mBoobPickerSelectorContainer.Obj.OffsetX + mBoobPickerSelectorButton.Hdr.Obj.OffsetX),
+      (UINT32)(mBoobPickerContainer.Obj.OffsetY + mBoobPickerSelectorContainer.Obj.OffsetY + mBoobPickerSelectorButton.Hdr.Obj.OffsetY),
+      mBoobPickerSelectorButton.Hdr.Obj.Width,
+      mBoobPickerSelectorButton.Hdr.Obj.Height
       );
   }
 
   Picker = BASE_CR (This, GUI_VOLUME_PICKER, Hdr.Obj);
 
-  BaseX = mBootPickerContainer.Obj.OffsetX + mBootPicker.Hdr.Obj.OffsetX;
-  BaseY = mBootPickerContainer.Obj.OffsetY + mBootPicker.Hdr.Obj.OffsetY;
+  BaseX = mBoobPickerContainer.Obj.OffsetX + mBoobPicker.Hdr.Obj.OffsetX;
+  BaseY = mBoobPickerContainer.Obj.OffsetY + mBoobPicker.Hdr.Obj.OffsetY;
 
   if (KeyEvent->OcKeyCode == OC_INPUT_RIGHT) {
-    if (mBootPicker.Hdr.Obj.NumChildren > 1) {
-      InternalBootPickerChangeEntry (
+    if (mBoobPicker.Hdr.Obj.NumChildren > 1) {
+      InternalBoobPickerChangeEntry (
         Picker,
         DrawContext,
         BaseX,
         BaseY,
-        mBootPicker.SelectedIndex + 1 < mBootPicker.Hdr.Obj.NumChildren
-          ? mBootPicker.SelectedIndex + 1
+        mBoobPicker.SelectedIndex + 1 < mBoobPicker.Hdr.Obj.NumChildren
+          ? mBoobPicker.SelectedIndex + 1
           : 0
         );
     }
   } else if (KeyEvent->OcKeyCode == OC_INPUT_LEFT) {
-    ASSERT (mBootPicker.Hdr.Obj.NumChildren > 0);
-    if (mBootPicker.Hdr.Obj.NumChildren > 1) {
-      InternalBootPickerChangeEntry (
+    ASSERT (mBoobPicker.Hdr.Obj.NumChildren > 0);
+    if (mBoobPicker.Hdr.Obj.NumChildren > 1) {
+      InternalBoobPickerChangeEntry (
         Picker,
         DrawContext,
         BaseX,
         BaseY,
-        mBootPicker.SelectedIndex > 0
-          ? mBootPicker.SelectedIndex - 1
-          : mBootPicker.Hdr.Obj.NumChildren - 1
+        mBoobPicker.SelectedIndex > 0
+          ? mBoobPicker.SelectedIndex - 1
+          : mBoobPicker.Hdr.Obj.NumChildren - 1
         );
     }
   } else if (KeyEvent->OcKeyCode == OC_INPUT_CONTINUE) {
-    if (mBootPicker.Hdr.Obj.NumChildren > 0) {
-      SelectedEntry                      = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
+    if (mBoobPicker.Hdr.Obj.NumChildren > 0) {
+      SelectedEntry                      = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
       SelectedEntry->Context->SetDefault = (KeyEvent->OcModifiers & OC_MODIFIERS_SET_DEFAULT) != 0;
       GuiContext->ReadyToBoot            = TRUE;
       ASSERT (GuiContext->BootEntry == SelectedEntry->Context);
     }
   } else if (  GuiContext->PickerContext->PickerAudioAssist
             && (KeyEvent->OcKeyCode >= 0)
-            && ((UINTN)KeyEvent->OcKeyCode < mBootPicker.Hdr.Obj.NumChildren)
+            && ((UINTN)KeyEvent->OcKeyCode < mBoobPicker.Hdr.Obj.NumChildren)
                )
   {
-    InternalBootPickerChangeEntry (
+    InternalBoobPickerChangeEntry (
       Picker,
       DrawContext,
       BaseX,
       BaseY,
       (UINT32)KeyEvent->OcKeyCode
       );
-    SelectedEntry                      = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
+    SelectedEntry                      = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
     SelectedEntry->Context->SetDefault = (KeyEvent->OcModifiers & OC_MODIFIERS_SET_DEFAULT) != 0;
     GuiContext->ReadyToBoot            = TRUE;
     ASSERT (GuiContext->BootEntry == SelectedEntry->Context);
-  } else if (mBootPickerContainer.Obj.Opacity != 0xFF) {
+  } else if (mBoobPickerContainer.Obj.Opacity != 0xFF) {
     //
-    // FIXME: Other keys are not allowed when boot picker is partially transparent.
+    // FIXME: Other keys are not allowed when boob picker is partially transparent.
     //
     return;
   }
@@ -509,7 +509,7 @@ InternalBootPickerKeyEvent (
 
 STATIC
 VOID
-InternalBootPickerEntryDraw (
+InternalBoobPickerEntryDraw (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
@@ -543,8 +543,8 @@ InternalBootPickerEntryDraw (
 
   Entry = BASE_CR (This, GUI_VOLUME_ENTRY, Hdr.Obj);
 
-  /*if (mBootPickerImageIndex < 5) {
-    EntryIcon = &((BOOT_PICKER_GUI_CONTEXT *) DrawContext->GuiContext)->Poof[mBootPickerImageIndex];
+  /*if (mBoobPickerImageIndex < 5) {
+    EntryIcon = &((BOOT_PICKER_GUI_CONTEXT *) DrawContext->GuiContext)->Poof[mBoobPickerImageIndex];
   } else */{
     EntryIcon = Entry->IsHeld ? &Entry->DarkIcon : &Entry->EntryIcon;
   }
@@ -751,7 +751,7 @@ InternalBootPickerEntryDraw (
 
 STATIC
 GUI_OBJ *
-InternalBootPickerEntryPtrEvent (
+InternalBoobPickerEntryPtrEvent (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
@@ -788,11 +788,11 @@ InternalBootPickerEntryPtrEvent (
   if (Event->Type == GuiPointerPrimaryUp) {
     Entry->PressStartTsc = 0;
   } else if
-  (IsHit && (Event->Type == GuiPointerPrimaryDown) && !WasPressed && (mBootPicker.SelectedIndex != Entry->Index)) {
+  (IsHit && (Event->Type == GuiPointerPrimaryDown) && !WasPressed && (mBoobPicker.SelectedIndex != Entry->Index)) {
     Entry->PressStartTsc = AsmReadTsc ();
   }
 
-  IsHeld = IsHit && (Event->Type == GuiPointerPrimaryDown) && (Entry->PressStartTsc != 0) && (mBootPicker.SelectedIndex != Entry->Index) && (GetTimeInNanoSecond (AsmReadTsc () - Entry->PressStartTsc) >= BOOT_PRESSED_ENTRY_DELAY_NS);
+  IsHeld = IsHit && (Event->Type == GuiPointerPrimaryDown) && (Entry->PressStartTsc != 0) && (mBoobPicker.SelectedIndex != Entry->Index) && (GetTimeInNanoSecond (AsmReadTsc () - Entry->PressStartTsc) >= BOOT_PRESSED_ENTRY_DELAY_NS);
 
   if (Entry->IsHeld != IsHeld) {
     if (IsHeld && (Entry->DarkIcon.Buffer == NULL)) {
@@ -819,10 +819,10 @@ InternalBootPickerEntryPtrEvent (
   }
 
   if (Event->Type == GuiPointerPrimaryUp) {
-    if (WasPressed && (mBootPicker.SelectedIndex != Entry->Index)) {
-      ASSERT (Entry->Hdr.Parent == &mBootPicker.Hdr.Obj);
-      InternalBootPickerChangeEntry (
-        &mBootPicker,
+    if (WasPressed && (mBoobPicker.SelectedIndex != Entry->Index)) {
+      ASSERT (Entry->Hdr.Parent == &mBoobPicker.Hdr.Obj);
+      InternalBoobPickerChangeEntry (
+        &mBoobPicker,
         DrawContext,
         BaseX - This->OffsetX,
         BaseY - This->OffsetY,
@@ -830,10 +830,10 @@ InternalBootPickerEntryPtrEvent (
         );
     }
   } else if (Event->Type == GuiPointerPrimaryDoubleClick) {
-    if (mBootPicker.SelectedIndex != Entry->Index) {
-      ASSERT (Entry->Hdr.Parent == &mBootPicker.Hdr.Obj);
-      InternalBootPickerChangeEntry (
-        &mBootPicker,
+    if (mBoobPicker.SelectedIndex != Entry->Index) {
+      ASSERT (Entry->Hdr.Parent == &mBoobPicker.Hdr.Obj);
+      InternalBoobPickerChangeEntry (
+        &mBoobPicker,
         DrawContext,
         BaseX - This->OffsetX,
         BaseY - This->OffsetY,
@@ -852,7 +852,7 @@ InternalBootPickerEntryPtrEvent (
 }
 
 VOID
-InternalBootPickerSelectorBackgroundDraw (
+InternalBoobPickerSelectorBackgroundDraw (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
@@ -894,7 +894,7 @@ InternalBootPickerSelectorBackgroundDraw (
 }
 
 GUI_OBJ *
-InternalBootPickerSelectorPtrEvent (
+InternalBoobPickerSelectorPtrEvent (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
@@ -937,7 +937,7 @@ InternalBootPickerSelectorPtrEvent (
 }
 
 GUI_OBJ *
-InternalBootPickerLeftScrollPtrEvent (
+InternalBoobPickerLeftScrollPtrEvent (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
@@ -948,8 +948,8 @@ InternalBootPickerLeftScrollPtrEvent (
 {
   UINT8  Result;
 
-  INT64                   BootPickerX;
-  INT64                   BootPickerY;
+  INT64                   BoobPickerX;
+  INT64                   BoobPickerY;
   CONST GUI_VOLUME_ENTRY  *SelectedEntry;
 
   if (This->Opacity == 0) {
@@ -976,41 +976,41 @@ InternalBootPickerLeftScrollPtrEvent (
       // The view can only be scrolled when there are off-screen entries.
       //
       GuiGetBaseCoords (
-        &mBootPicker.Hdr.Obj,
+        &mBoobPicker.Hdr.Obj,
         DrawContext,
-        &BootPickerX,
-        &BootPickerY
+        &BoobPickerX,
+        &BoobPickerY
         );
       //
       // Scroll the boot entry view by one spot.
       //
-      InternalBootPickerScroll (
-        &mBootPicker,
+      InternalBoobPickerScroll (
+        &mBoobPicker,
         DrawContext,
-        BootPickerX,
-        BootPickerY,
+        BoobPickerX,
+        BoobPickerY,
         (BOOT_ENTRY_WIDTH + BOOT_ENTRY_SPACE) * Context->Scale
         );
       //
       // If the selected entry is pushed off-screen by scrolling, select the
       // appropriate neighbour entry.
       //
-      SelectedEntry = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
-      if (mBootPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.Width > mBootPickerContainer.Obj.Width) {
+      SelectedEntry = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
+      if (mBoobPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.Width > mBoobPickerContainer.Obj.Width) {
         //
         // The internal design ensures a selected entry cannot be off-screen,
         // scrolling offsets it by at most one spot.
         //
-        InternalBootPickerSelectEntry (
-          &mBootPicker,
+        InternalBoobPickerSelectEntry (
+          &mBoobPicker,
           DrawContext,
-          mBootPicker.SelectedIndex > 0
-            ? mBootPicker.SelectedIndex - 1
-            : mBootPicker.Hdr.Obj.NumChildren - 1
+          mBoobPicker.SelectedIndex > 0
+            ? mBoobPicker.SelectedIndex - 1
+            : mBoobPicker.Hdr.Obj.NumChildren - 1
           );
 
-        SelectedEntry = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
-        ASSERT (!(mBootPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.Width > mBootPickerContainer.Obj.Width));
+        SelectedEntry = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
+        ASSERT (!(mBoobPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.Width > mBoobPickerContainer.Obj.Width));
       }
 
       //
@@ -1028,7 +1028,7 @@ InternalBootPickerLeftScrollPtrEvent (
 }
 
 GUI_OBJ *
-InternalBootPickerRightScrollPtrEvent (
+InternalBoobPickerRightScrollPtrEvent (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
@@ -1039,8 +1039,8 @@ InternalBootPickerRightScrollPtrEvent (
 {
   UINT8  Result;
 
-  INT64             BootPickerX;
-  INT64             BootPickerY;
+  INT64             BoobPickerX;
+  INT64             BoobPickerY;
   GUI_VOLUME_ENTRY  *SelectedEntry;
 
   if (This->Opacity == 0) {
@@ -1067,41 +1067,41 @@ InternalBootPickerRightScrollPtrEvent (
       // The view can only be scrolled when there are off-screen entries.
       //
       GuiGetBaseCoords (
-        &mBootPicker.Hdr.Obj,
+        &mBoobPicker.Hdr.Obj,
         DrawContext,
-        &BootPickerX,
-        &BootPickerY
+        &BoobPickerX,
+        &BoobPickerY
         );
       //
       // Scroll the boot entry view by one spot.
       //
-      InternalBootPickerScroll (
-        &mBootPicker,
+      InternalBoobPickerScroll (
+        &mBoobPicker,
         DrawContext,
-        BootPickerX,
-        BootPickerY,
+        BoobPickerX,
+        BoobPickerY,
         -(INT64)(BOOT_ENTRY_WIDTH + BOOT_ENTRY_SPACE) * Context->Scale
         );
       //
       // If the selected entry is pushed off-screen by scrolling, select the
       // appropriate neighbour entry.
       //
-      SelectedEntry = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
-      if (mBootPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX < 0) {
+      SelectedEntry = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
+      if (mBoobPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX < 0) {
         //
         // The internal design ensures a selected entry cannot be off-screen,
         // scrolling offsets it by at most one spot.
         //
-        InternalBootPickerSelectEntry (
-          &mBootPicker,
+        InternalBoobPickerSelectEntry (
+          &mBoobPicker,
           DrawContext,
-          mBootPicker.SelectedIndex + 1 < mBootPicker.Hdr.Obj.NumChildren
-            ? mBootPicker.SelectedIndex + 1
+          mBoobPicker.SelectedIndex + 1 < mBoobPicker.Hdr.Obj.NumChildren
+            ? mBoobPicker.SelectedIndex + 1
             : 0
           );
 
-        SelectedEntry = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
-        ASSERT (!(mBootPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX < 0));
+        SelectedEntry = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
+        ASSERT (!(mBoobPicker.Hdr.Obj.OffsetX + SelectedEntry->Hdr.Obj.OffsetX < 0));
       }
 
       //
@@ -1150,7 +1150,7 @@ InternalVersionLabelDraw (
 }
 
 VOID
-InternalBootPickerViewKeyEvent (
+InternalBoobPickerViewKeyEvent (
   IN OUT GUI_OBJ                  *This,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
@@ -1172,48 +1172,48 @@ InternalBootPickerViewKeyEvent (
     return;
   }
 
-  Entry = InternalGetVolumeEntry (mBootPicker.SelectedIndex);
+  Entry = InternalGetVolumeEntry (mBoobPicker.SelectedIndex);
 
   FocusChangedObj = InternalFocusKeyHandler (
                       DrawContext,
                       Context,
                       KeyEvent
                       );
-  if (FocusChangedObj == &mBootPicker.Hdr.Obj) {
+  if (FocusChangedObj == &mBoobPicker.Hdr.Obj) {
     InternalStartAnimateLabel (DrawContext, Entry);
   } else if (FocusChangedObj != NULL) {
-    if (!IsListEmpty (&mBootPickerLabelAnimation.Link)) {
+    if (!IsListEmpty (&mBoobPickerLabelAnimation.Link)) {
       InternalStopAnimateLabel (DrawContext, Entry);
     }
   }
 }
 
 VOID
-InternalBootPickerFocus (
+InternalBoobPickerFocus (
   IN     CONST GUI_OBJ        *This,
   IN OUT GUI_DRAWING_CONTEXT  *DrawContext,
   IN     BOOLEAN              Focus
   )
 {
   if (!Focus) {
-    mBootPickerSelectorContainer.Obj.Opacity = 0;
+    mBoobPickerSelectorContainer.Obj.Opacity = 0;
   } else {
-    mBootPickerSelectorContainer.Obj.Opacity = 0xFF;
+    mBoobPickerSelectorContainer.Obj.Opacity = 0xFF;
 
     DrawContext->GuiContext->AudioPlaybackTimeout = 0;
     DrawContext->GuiContext->VoAction             = CanopyVoSelectedEntry;
   }
 
   GuiRequestDraw (
-    (UINT32)(mBootPickerContainer.Obj.OffsetX + mBootPickerSelectorContainer.Obj.OffsetX),
-    (UINT32)(mBootPickerContainer.Obj.OffsetY + mBootPickerSelectorContainer.Obj.OffsetY),
-    mBootPickerSelectorContainer.Obj.Width,
-    mBootPickerSelectorContainer.Obj.Height
+    (UINT32)(mBoobPickerContainer.Obj.OffsetX + mBoobPickerSelectorContainer.Obj.OffsetX),
+    (UINT32)(mBoobPickerContainer.Obj.OffsetY + mBoobPickerSelectorContainer.Obj.OffsetY),
+    mBoobPickerSelectorContainer.Obj.Width,
+    mBoobPickerSelectorContainer.Obj.Height
     );
 }
 
 BOOLEAN
-InternalBootPickerExitLoop (
+InternalBoobPickerExitLoop (
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *Context
   )
@@ -1221,101 +1221,101 @@ InternalBootPickerExitLoop (
   ASSERT (Context != NULL);
 
   if (Context->ReadyToBoot) {
-    ASSERT (Context->BootEntry == InternalGetVolumeEntry (mBootPicker.SelectedIndex)->Context);
+    ASSERT (Context->BootEntry == InternalGetVolumeEntry (mBoobPicker.SelectedIndex)->Context);
   }
 
   return Context->ReadyToBoot || Context->Refresh;
 }
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBootPickerSelectorBackground = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBoobPickerSelectorBackground = {
   {
     0, 0, 0, 0, 0xFF,
-    InternalBootPickerSelectorBackgroundDraw,
+    InternalBoobPickerSelectorBackgroundDraw,
     NULL,
     GuiObjDelegatePtrEvent,
     NULL,
     0,
     NULL
   },
-  &mBootPickerSelectorContainer.Obj
+  &mBoobPickerSelectorContainer.Obj
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBootPickerSelectorButton = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBoobPickerSelectorButton = {
   {
     {
       0, 0, 0, 0, 0xFF,
       InternalCommonSimpleButtonDraw,
       NULL,
-      InternalBootPickerSelectorPtrEvent,
+      InternalBoobPickerSelectorPtrEvent,
       NULL,
       0,
       NULL
     },
-    &mBootPickerSelectorContainer.Obj
+    &mBoobPickerSelectorContainer.Obj
   },
   0,
   0
 };
 
-STATIC GUI_OBJ_CHILD  *mBootPickerSelectorContainerChildren[] = {
-  &mBootPickerSelectorBackground,
-  &mBootPickerSelectorButton.Hdr
+STATIC GUI_OBJ_CHILD  *mBoobPickerSelectorContainerChildren[] = {
+  &mBoobPickerSelectorBackground,
+  &mBoobPickerSelectorButton.Hdr
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBootPickerSelectorContainer = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBoobPickerSelectorContainer = {
   {
     0, 0, 0, 0, 0xFF,
     GuiObjDrawDelegate,
     NULL,
     GuiObjDelegatePtrEvent,
     NULL,
-    ARRAY_SIZE (mBootPickerSelectorContainerChildren),
-    mBootPickerSelectorContainerChildren
+    ARRAY_SIZE (mBoobPickerSelectorContainerChildren),
+    mBoobPickerSelectorContainerChildren
   },
-  &mBootPickerContainer.Obj
+  &mBoobPickerContainer.Obj
 };
 
-STATIC GUI_OBJ_CHILD  *mBootPickerContainerChildren[] = {
-  &mBootPickerSelectorContainer,
-  &mBootPicker.Hdr
+STATIC GUI_OBJ_CHILD  *mBoobPickerContainerChildren[] = {
+  &mBoobPickerSelectorContainer,
+  &mBoobPicker.Hdr
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBootPickerContainer = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBoobPickerContainer = {
   {
     0, 0, 0, 0, 0xFF,
     GuiObjDrawDelegate,
     NULL,
     GuiObjDelegatePtrEvent,
     NULL,
-    ARRAY_SIZE (mBootPickerContainerChildren),
-    mBootPickerContainerChildren
+    ARRAY_SIZE (mBoobPickerContainerChildren),
+    mBoobPickerContainerChildren
   },
   NULL
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_VOLUME_PICKER  mBootPicker = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_VOLUME_PICKER  mBoobPicker = {
   {
     {
       0, 0, 0, 0, 0xFF,
       GuiObjDrawDelegate,
-      InternalBootPickerKeyEvent,
+      InternalBoobPickerKeyEvent,
       GuiObjDelegatePtrEvent,
-      InternalBootPickerFocus,
+      InternalBoobPickerFocus,
       0,
       NULL
     },
-    &mBootPickerContainer.Obj
+    &mBoobPickerContainer.Obj
   },
   1
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBootPickerLeftScroll = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBoobPickerLeftScroll = {
   {
     {
       0, 0, 0, 0, 0xFF,
       InternalCommonSimpleButtonDraw,
       NULL,
-      InternalBootPickerLeftScrollPtrEvent,
+      InternalBoobPickerLeftScrollPtrEvent,
       NULL,
       0,
       NULL
@@ -1326,13 +1326,13 @@ GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBootPickerLeftScroll = {
   0
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBootPickerRightScroll = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBoobPickerRightScroll = {
   {
     {
       0, 0, 0, 0, 0xFF,
       InternalCommonSimpleButtonDraw,
       NULL,
-      InternalBootPickerRightScrollPtrEvent,
+      InternalBoobPickerRightScrollPtrEvent,
       NULL,
       0,
       NULL
@@ -1343,7 +1343,7 @@ GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CLICKABLE  mBootPickerRightScroll = {
   0
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBootPickerVersionLabel = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBoobPickerVersionLabel = {
   {
     0, 0, 0, 0, 0xFF,
     InternalVersionLabelDraw,
@@ -1356,55 +1356,55 @@ GLOBAL_REMOVE_IF_UNREFERENCED GUI_OBJ_CHILD  mBootPickerVersionLabel = {
   NULL
 };
 
-STATIC GUI_OBJ_CHILD  *mBootPickerViewChildren[] = {
-  &mBootPickerContainer,
+STATIC GUI_OBJ_CHILD  *mBoobPickerViewChildren[] = {
+  &mBoobPickerContainer,
   &mCommonActionButtonsContainer,
-  &mBootPickerLeftScroll.Hdr,
-  &mBootPickerRightScroll.Hdr,
-  &mBootPickerVersionLabel
+  &mBoobPickerLeftScroll.Hdr,
+  &mBoobPickerRightScroll.Hdr,
+  &mBoobPickerVersionLabel
 };
 
-STATIC GUI_OBJ_CHILD  *mBootPickerViewChildrenMinimal[] = {
-  &mBootPickerContainer,
-  &mBootPickerLeftScroll.Hdr,
-  &mBootPickerRightScroll.Hdr,
-  &mBootPickerVersionLabel
+STATIC GUI_OBJ_CHILD  *mBoobPickerViewChildrenMinimal[] = {
+  &mBoobPickerContainer,
+  &mBoobPickerLeftScroll.Hdr,
+  &mBoobPickerRightScroll.Hdr,
+  &mBoobPickerVersionLabel
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_VIEW_CONTEXT  mBootPickerViewContext = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_VIEW_CONTEXT  mBoobPickerViewContext = {
   InternalCommonViewDraw,
   InternalCommonViewPtrEvent,
-  ARRAY_SIZE (mBootPickerViewChildren),
-  mBootPickerViewChildren,
-  InternalBootPickerViewKeyEvent,
+  ARRAY_SIZE (mBoobPickerViewChildren),
+  mBoobPickerViewChildren,
+  InternalBoobPickerViewKeyEvent,
   InternalGetCursorImage,
-  InternalBootPickerExitLoop,
-  mBootPickerFocusList,
-  ARRAY_SIZE (mBootPickerFocusList)
+  InternalBoobPickerExitLoop,
+  mBoobPickerFocusList,
+  ARRAY_SIZE (mBoobPickerFocusList)
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_VIEW_CONTEXT  mBootPickerViewContextReversed = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_VIEW_CONTEXT  mBoobPickerViewContextReversed = {
   InternalCommonViewDraw,
   InternalCommonViewPtrEvent,
-  ARRAY_SIZE (mBootPickerViewChildren),
-  mBootPickerViewChildren,
-  InternalBootPickerViewKeyEvent,
+  ARRAY_SIZE (mBoobPickerViewChildren),
+  mBoobPickerViewChildren,
+  InternalBoobPickerViewKeyEvent,
   InternalGetCursorImage,
-  InternalBootPickerExitLoop,
-  mBootPickerFocusListReversed,
-  ARRAY_SIZE (mBootPickerFocusListReversed)
+  InternalBoobPickerExitLoop,
+  mBoobPickerFocusListReversed,
+  ARRAY_SIZE (mBoobPickerFocusListReversed)
 };
 
-GLOBAL_REMOVE_IF_UNREFERENCED GUI_VIEW_CONTEXT  mBootPickerViewContextMinimal = {
+GLOBAL_REMOVE_IF_UNREFERENCED GUI_VIEW_CONTEXT  mBoobPickerViewContextMinimal = {
   InternalCommonViewDraw,
   InternalCommonViewPtrEvent,
-  ARRAY_SIZE (mBootPickerViewChildrenMinimal),
-  mBootPickerViewChildrenMinimal,
-  InternalBootPickerViewKeyEvent,
+  ARRAY_SIZE (mBoobPickerViewChildrenMinimal),
+  mBoobPickerViewChildrenMinimal,
+  InternalBoobPickerViewKeyEvent,
   InternalGetCursorImage,
-  InternalBootPickerExitLoop,
-  mBootPickerFocusListMinimal,
-  ARRAY_SIZE (mBootPickerFocusListMinimal)
+  InternalBoobPickerExitLoop,
+  mBoobPickerFocusListMinimal,
+  ARRAY_SIZE (mBoobPickerFocusListMinimal)
 };
 
 STATIC
@@ -1434,7 +1434,7 @@ CopyLabel (
 }
 
 EFI_STATUS
-BootPickerEntriesSet (
+BoobPickerEntriesSet (
   IN OC_PICKER_CONTEXT        *Context,
   IN BOOT_PICKER_GUI_CONTEXT  *GuiContext,
   IN OC_BOOT_ENTRY            *Entry,
@@ -1460,7 +1460,7 @@ BootPickerEntriesSet (
 
   ASSERT (GuiContext != NULL);
   ASSERT (Entry != NULL);
-  ASSERT (EntryIndex < mBootPicker.Hdr.Obj.NumChildren);
+  ASSERT (EntryIndex < mBoobPicker.Hdr.Obj.NumChildren);
 
   DEBUG ((DEBUG_INFO, "OCUI: Console attributes: %d\n", Context->ConsoleAttributes));
 
@@ -1675,12 +1675,12 @@ BootPickerEntriesSet (
     }
   }
 
-  VolumeEntry->Hdr.Parent          = &mBootPicker.Hdr.Obj;
+  VolumeEntry->Hdr.Parent          = &mBoobPicker.Hdr.Obj;
   VolumeEntry->Hdr.Obj.Width       = BOOT_ENTRY_ICON_DIMENSION * GuiContext->Scale;
   VolumeEntry->Hdr.Obj.Height      = (BOOT_ENTRY_HEIGHT - BOOT_ENTRY_ICON_SPACE) * GuiContext->Scale;
   VolumeEntry->Hdr.Obj.Opacity     = 0xFF;
-  VolumeEntry->Hdr.Obj.Draw        = InternalBootPickerEntryDraw;
-  VolumeEntry->Hdr.Obj.PtrEvent    = InternalBootPickerEntryPtrEvent;
+  VolumeEntry->Hdr.Obj.Draw        = InternalBoobPickerEntryDraw;
+  VolumeEntry->Hdr.Obj.PtrEvent    = InternalBoobPickerEntryPtrEvent;
   VolumeEntry->Hdr.Obj.NumChildren = 0;
   VolumeEntry->Hdr.Obj.Children    = NULL;
   if (VolumeEntry->Hdr.Obj.Width > VolumeEntry->Label.Width) {
@@ -1699,16 +1699,16 @@ BootPickerEntriesSet (
 
   VolumeEntry->Hdr.Obj.OffsetY = BOOT_ENTRY_ICON_SPACE * GuiContext->Scale;
 
-  mBootPicker.Hdr.Obj.Children[EntryIndex] = &VolumeEntry->Hdr;
+  mBoobPicker.Hdr.Obj.Children[EntryIndex] = &VolumeEntry->Hdr;
   VolumeEntry->Index                       = EntryIndex;
-  mBootPicker.Hdr.Obj.Width               += (BOOT_ENTRY_WIDTH + BOOT_ENTRY_SPACE) * GuiContext->Scale;
-  mBootPicker.Hdr.Obj.OffsetX             -= (BOOT_ENTRY_WIDTH + BOOT_ENTRY_SPACE) * GuiContext->Scale / 2;
+  mBoobPicker.Hdr.Obj.Width               += (BOOT_ENTRY_WIDTH + BOOT_ENTRY_SPACE) * GuiContext->Scale;
+  mBoobPicker.Hdr.Obj.OffsetX             -= (BOOT_ENTRY_WIDTH + BOOT_ENTRY_SPACE) * GuiContext->Scale / 2;
 
   return EFI_SUCCESS;
 }
 
 VOID
-InternalBootPickerEntryDestruct (
+InternalBoobPickerEntryDestruct (
   IN GUI_VOLUME_ENTRY  *Entry
   )
 {
@@ -1744,7 +1744,7 @@ InitBpAnimImageList (
 }
 
 BOOLEAN
-InternalBootPickerAnimateImageList (
+InternalBoobPickerAnimateImageList (
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     UINT64                   CurrentTime
@@ -1754,20 +1754,20 @@ InternalBootPickerAnimateImageList (
   GUI_VOLUME_ENTRY  *Entry;
   CONST GUI_IMAGE   *EntryIcon;
 
-  Entry     = BASE_CR (&mBootPicker.Hdr.Obj, GUI_VOLUME_ENTRY, Hdr.Obj);
+  Entry     = BASE_CR (&mBoobPicker.Hdr.Obj, GUI_VOLUME_ENTRY, Hdr.Obj);
   EntryIcon = &Entry->EntryIcon;
 
-  mBootPickerImageIndex++;
-  mBootPickerImageIndex = (UINT8)GuiGetInterpolatedValue (&mBpAnimInfoImageList, CurrentTime);
-  Entry->EntryIcon      = &((GUI_IMAGE *)Context)[mBootPickerImageIndex];
+  mBoobPickerImageIndex++;
+  mBoobPickerImageIndex = (UINT8)GuiGetInterpolatedValue (&mBpAnimInfoImageList, CurrentTime);
+  Entry->EntryIcon      = &((GUI_IMAGE *)Context)[mBoobPickerImageIndex];
   GuiRedrawObject (
-    &mBootPicker.Hdr.Obj,
+    &mBoobPicker.Hdr.Obj,
     DrawContext,
-    mBootPicker.Hdr.Obj.OffsetX,
-    mBootPicker.Hdr.Obj.OffsetY
+    mBoobPicker.Hdr.Obj.OffsetX,
+    mBoobPicker.Hdr.Obj.OffsetY
     );
 
-  if (mBootPickerImageIndex == mBpAnimInfoImageList.EndValue) {
+  if (mBoobPickerImageIndex == mBpAnimInfoImageList.EndValue) {
     return TRUE;
   }
 
@@ -1794,15 +1794,15 @@ InitBpAnimIntro (
   mBpAnimInfoSinMove.EndValue = 35 * DrawContext->Scale;
   //
   // FIXME: This assumes that only relative changes of X are performed on
-  //        mBootPickerContainer between animation initialisation and start.
+  //        mBoobPickerContainer between animation initialisation and start.
   //
-  mBootPickerContainer.Obj.OffsetX += 35 * DrawContext->Scale;
+  mBoobPickerContainer.Obj.OffsetX += 35 * DrawContext->Scale;
 
   mPrevSine = 0;
 }
 
 BOOLEAN
-InternalBootPickerAnimateIntro (
+InternalBoobPickerAnimateIntro (
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     UINT64                   CurrentTime
@@ -1818,16 +1818,16 @@ InternalBootPickerAnimateIntro (
                      &mCommonIntroOpacityInterpol,
                      CurrentTime
                      );
-  mBootPickerContainer.Obj.Opacity = Opacity;
+  mBoobPickerContainer.Obj.Opacity = Opacity;
   //
   // Animate the scroll buttons based on their active state.
   //
-  if (mBootPicker.Hdr.Obj.OffsetX < 0) {
-    mBootPickerLeftScroll.Hdr.Obj.Opacity = Opacity;
+  if (mBoobPicker.Hdr.Obj.OffsetX < 0) {
+    mBoobPickerLeftScroll.Hdr.Obj.Opacity = Opacity;
   }
 
-  if (mBootPicker.Hdr.Obj.OffsetX + mBootPicker.Hdr.Obj.Width > mBootPickerContainer.Obj.Width) {
-    mBootPickerRightScroll.Hdr.Obj.Opacity = Opacity;
+  if (mBoobPicker.Hdr.Obj.OffsetX + mBoobPicker.Hdr.Obj.Width > mBoobPickerContainer.Obj.Width) {
+    mBoobPickerRightScroll.Hdr.Obj.Opacity = Opacity;
   }
 
   //
@@ -1853,7 +1853,7 @@ InternalBootPickerAnimateIntro (
 
   InterpolVal                       = GuiGetInterpolatedValue (&mBpAnimInfoSinMove, CurrentTime);
   DeltaSine                         = InterpolVal - mPrevSine;
-  mBootPickerContainer.Obj.OffsetX -= DeltaSine;
+  mBoobPickerContainer.Obj.OffsetX -= DeltaSine;
   mPrevSine                         = InterpolVal;
   //
   // Draw the full dimension of the inner container to implicitly cover the
@@ -1861,17 +1861,17 @@ InternalBootPickerAnimateIntro (
   //
   GuiRequestDrawCrop (
     DrawContext,
-    mBootPickerContainer.Obj.OffsetX + mBootPicker.Hdr.Obj.OffsetX,
-    mBootPickerContainer.Obj.OffsetY + mBootPicker.Hdr.Obj.OffsetY,
-    mBootPicker.Hdr.Obj.Width + DeltaSine,
-    mBootPicker.Hdr.Obj.Height
+    mBoobPickerContainer.Obj.OffsetX + mBoobPicker.Hdr.Obj.OffsetX,
+    mBoobPickerContainer.Obj.OffsetY + mBoobPicker.Hdr.Obj.OffsetY,
+    mBoobPicker.Hdr.Obj.Width + DeltaSine,
+    mBoobPicker.Hdr.Obj.Height
     );
 
   ASSERT (mBpAnimInfoSinMove.Duration == mCommonIntroOpacityInterpol.Duration);
   return CurrentTime - mBpAnimInfoSinMove.StartTime >= mBpAnimInfoSinMove.Duration;
 }
 
-STATIC GUI_INTERPOLATION  mBootPickerTimeoutOpacityInterpolDown = {
+STATIC GUI_INTERPOLATION  mBoobPickerTimeoutOpacityInterpolDown = {
   GuiInterpolTypeLinear,
   0,
   125,
@@ -1880,7 +1880,7 @@ STATIC GUI_INTERPOLATION  mBootPickerTimeoutOpacityInterpolDown = {
   0
 };
 
-STATIC GUI_INTERPOLATION  mBootPickerTimeoutOpacityInterpolUp = {
+STATIC GUI_INTERPOLATION  mBoobPickerTimeoutOpacityInterpolUp = {
   GuiInterpolTypeLinear,
   0,
   125,
@@ -1890,24 +1890,24 @@ STATIC GUI_INTERPOLATION  mBootPickerTimeoutOpacityInterpolUp = {
 };
 
 BOOLEAN
-InternalBootPickerAnimateTimeout (
+InternalBoobPickerAnimateTimeout (
   IN     BOOT_PICKER_GUI_CONTEXT  *Context,
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     UINT64                   CurrentTime
   )
 {
-  STATIC GUI_INTERPOLATION  *CurInterpol  = &mBootPickerTimeoutOpacityInterpolDown;
-  STATIC GUI_INTERPOLATION  *NextInterpol = &mBootPickerTimeoutOpacityInterpolUp;
+  STATIC GUI_INTERPOLATION  *CurInterpol  = &mBoobPickerTimeoutOpacityInterpolDown;
+  STATIC GUI_INTERPOLATION  *NextInterpol = &mBoobPickerTimeoutOpacityInterpolUp;
 
   GUI_INTERPOLATION  *Temp;
 
   if (DrawContext->TimeOutSeconds > 0) {
-    mBootPickerSelectorButton.Hdr.Obj.Opacity = (UINT8)GuiGetInterpolatedValue (
+    mBoobPickerSelectorButton.Hdr.Obj.Opacity = (UINT8)GuiGetInterpolatedValue (
                                                          CurInterpol,
                                                          CurrentTime
                                                          );
   } else {
-    mBootPickerSelectorButton.Hdr.Obj.Opacity = 0xFF;
+    mBoobPickerSelectorButton.Hdr.Obj.Opacity = 0xFF;
   }
 
   //
@@ -1915,10 +1915,10 @@ InternalBootPickerAnimateTimeout (
   // visible.
   //
   GuiRequestDraw (
-    (UINT32)(mBootPickerContainer.Obj.OffsetX + mBootPickerSelectorContainer.Obj.OffsetX + mBootPickerSelectorButton.Hdr.Obj.OffsetX),
-    (UINT32)(mBootPickerContainer.Obj.OffsetY + mBootPickerSelectorContainer.Obj.OffsetY + mBootPickerSelectorButton.Hdr.Obj.OffsetY),
-    mBootPickerSelectorButton.Hdr.Obj.Width,
-    mBootPickerSelectorButton.Hdr.Obj.Height
+    (UINT32)(mBoobPickerContainer.Obj.OffsetX + mBoobPickerSelectorContainer.Obj.OffsetX + mBoobPickerSelectorButton.Hdr.Obj.OffsetX),
+    (UINT32)(mBoobPickerContainer.Obj.OffsetY + mBoobPickerSelectorContainer.Obj.OffsetY + mBoobPickerSelectorButton.Hdr.Obj.OffsetY),
+    mBoobPickerSelectorButton.Hdr.Obj.Width,
+    mBoobPickerSelectorButton.Hdr.Obj.Height
     );
 
   if (DrawContext->TimeOutSeconds == 0) {
@@ -1935,14 +1935,14 @@ InternalBootPickerAnimateTimeout (
   return FALSE;
 }
 
-STATIC GUI_ANIMATION  mBootPickerIntroAnimation = {
+STATIC GUI_ANIMATION  mBoobPickerIntroAnimation = {
   { NULL, NULL },
   NULL,
-  InternalBootPickerAnimateIntro
+  InternalBoobPickerAnimateIntro
 };
 
 EFI_STATUS
-BootPickerViewInitialize (
+BoobPickerViewInitialize (
   OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN  BOOT_PICKER_GUI_CONTEXT  *GuiContext,
   IN  GUI_CURSOR_GET_IMAGE     GetCursorImage,
@@ -1968,10 +1968,10 @@ BootPickerViewInitialize (
     GuiContext,
     (GuiContext->PickerContext->PickerAttributes & OC_ATTR_USE_MINIMAL_UI) == 0
       ? ((GuiContext->PickerContext->PickerAttributes & OC_ATTR_USE_REVERSED_UI) == 0
-        ? &mBootPickerViewContext
-        : &mBootPickerViewContextReversed
+        ? &mBoobPickerViewContext
+        : &mBoobPickerViewContextReversed
          )
-      : &mBootPickerViewContextMinimal
+      : &mBoobPickerViewContextMinimal
     );
 
   mBackgroundImageOffsetX = DivS64x64Remainder (
@@ -1988,82 +1988,82 @@ BootPickerViewInitialize (
   SelectorBackgroundImage = &GuiContext->Icons[ICON_SELECTED][ICON_TYPE_BASE];
   SelectorButtonImage     = &GuiContext->Icons[ICON_SELECTOR][ICON_TYPE_BASE];
 
-  mBootPickerSelectorBackground.Obj.OffsetX = 0;
-  mBootPickerSelectorBackground.Obj.OffsetY = 0;
-  mBootPickerSelectorBackground.Obj.Width   = SelectorBackgroundImage->Width;
-  mBootPickerSelectorBackground.Obj.Height  = SelectorBackgroundImage->Height;
+  mBoobPickerSelectorBackground.Obj.OffsetX = 0;
+  mBoobPickerSelectorBackground.Obj.OffsetY = 0;
+  mBoobPickerSelectorBackground.Obj.Width   = SelectorBackgroundImage->Width;
+  mBoobPickerSelectorBackground.Obj.Height  = SelectorBackgroundImage->Height;
 
   ASSERT (SelectorBackgroundImage->Width >= SelectorButtonImage->Width);
-  mBootPickerSelectorButton.Hdr.Obj.OffsetX = (SelectorBackgroundImage->Width - SelectorButtonImage->Width) / 2;
-  mBootPickerSelectorButton.Hdr.Obj.OffsetY = SelectorBackgroundImage->Height + BOOT_SELECTOR_BUTTON_SPACE * DrawContext->Scale;
-  mBootPickerSelectorButton.Hdr.Obj.Width   = SelectorButtonImage->Width;
-  mBootPickerSelectorButton.Hdr.Obj.Height  = SelectorButtonImage->Height;
-  mBootPickerSelectorButton.ImageId         = ICON_SELECTOR;
-  mBootPickerSelectorButton.ImageState      = ICON_TYPE_BASE;
+  mBoobPickerSelectorButton.Hdr.Obj.OffsetX = (SelectorBackgroundImage->Width - SelectorButtonImage->Width) / 2;
+  mBoobPickerSelectorButton.Hdr.Obj.OffsetY = SelectorBackgroundImage->Height + BOOT_SELECTOR_BUTTON_SPACE * DrawContext->Scale;
+  mBoobPickerSelectorButton.Hdr.Obj.Width   = SelectorButtonImage->Width;
+  mBoobPickerSelectorButton.Hdr.Obj.Height  = SelectorButtonImage->Height;
+  mBoobPickerSelectorButton.ImageId         = ICON_SELECTOR;
+  mBoobPickerSelectorButton.ImageState      = ICON_TYPE_BASE;
 
-  mBootPickerSelectorContainer.Obj.OffsetX = 0;
-  mBootPickerSelectorContainer.Obj.OffsetY = 0;
-  mBootPickerSelectorContainer.Obj.Width   = SelectorBackgroundImage->Width;
-  mBootPickerSelectorContainer.Obj.Height  = (UINT32)(mBootPickerSelectorButton.Hdr.Obj.OffsetY + mBootPickerSelectorButton.Hdr.Obj.Height);
+  mBoobPickerSelectorContainer.Obj.OffsetX = 0;
+  mBoobPickerSelectorContainer.Obj.OffsetY = 0;
+  mBoobPickerSelectorContainer.Obj.Width   = SelectorBackgroundImage->Width;
+  mBoobPickerSelectorContainer.Obj.Height  = (UINT32)(mBoobPickerSelectorButton.Hdr.Obj.OffsetY + mBoobPickerSelectorButton.Hdr.Obj.Height);
 
-  mBootPickerLeftScroll.Hdr.Obj.Height  = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
-  mBootPickerLeftScroll.Hdr.Obj.Width   = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
-  mBootPickerLeftScroll.Hdr.Obj.OffsetX = BOOT_SCROLL_BUTTON_SPACE;
-  mBootPickerLeftScroll.Hdr.Obj.OffsetY = (DrawContext->Screen.Height - mBootPickerLeftScroll.Hdr.Obj.Height) / 2;
-  mBootPickerLeftScroll.ImageId         = ICON_LEFT;
-  mBootPickerLeftScroll.ImageState      = ICON_TYPE_BASE;
+  mBoobPickerLeftScroll.Hdr.Obj.Height  = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
+  mBoobPickerLeftScroll.Hdr.Obj.Width   = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
+  mBoobPickerLeftScroll.Hdr.Obj.OffsetX = BOOT_SCROLL_BUTTON_SPACE;
+  mBoobPickerLeftScroll.Hdr.Obj.OffsetY = (DrawContext->Screen.Height - mBoobPickerLeftScroll.Hdr.Obj.Height) / 2;
+  mBoobPickerLeftScroll.ImageId         = ICON_LEFT;
+  mBoobPickerLeftScroll.ImageState      = ICON_TYPE_BASE;
 
-  mBootPickerRightScroll.Hdr.Obj.Height  = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
-  mBootPickerRightScroll.Hdr.Obj.Width   = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
-  mBootPickerRightScroll.Hdr.Obj.OffsetX = DrawContext->Screen.Width - mBootPickerRightScroll.Hdr.Obj.Width - BOOT_SCROLL_BUTTON_SPACE;
-  mBootPickerRightScroll.Hdr.Obj.OffsetY = (DrawContext->Screen.Height - mBootPickerRightScroll.Hdr.Obj.Height) / 2;
-  mBootPickerRightScroll.ImageId         = ICON_RIGHT;
-  mBootPickerRightScroll.ImageState      = ICON_TYPE_BASE;
+  mBoobPickerRightScroll.Hdr.Obj.Height  = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
+  mBoobPickerRightScroll.Hdr.Obj.Width   = BOOT_SCROLL_BUTTON_DIMENSION * GuiContext->Scale;
+  mBoobPickerRightScroll.Hdr.Obj.OffsetX = DrawContext->Screen.Width - mBoobPickerRightScroll.Hdr.Obj.Width - BOOT_SCROLL_BUTTON_SPACE;
+  mBoobPickerRightScroll.Hdr.Obj.OffsetY = (DrawContext->Screen.Height - mBoobPickerRightScroll.Hdr.Obj.Height) / 2;
+  mBoobPickerRightScroll.ImageId         = ICON_RIGHT;
+  mBoobPickerRightScroll.ImageState      = ICON_TYPE_BASE;
   //
   // The boot entry container must precisely show a set of boot entries, i.e.
   // there may not be partial entries or extra padding.
   //
-  ContainerMaxWidth   = DrawContext->Screen.Width - mBootPickerLeftScroll.Hdr.Obj.Width - 2 * BOOT_SCROLL_BUTTON_SPACE - mBootPickerRightScroll.Hdr.Obj.Width - 2 * BOOT_SCROLL_BUTTON_SPACE;
+  ContainerMaxWidth   = DrawContext->Screen.Width - mBoobPickerLeftScroll.Hdr.Obj.Width - 2 * BOOT_SCROLL_BUTTON_SPACE - mBoobPickerRightScroll.Hdr.Obj.Width - 2 * BOOT_SCROLL_BUTTON_SPACE;
   ContainerWidthDelta = (ContainerMaxWidth + BOOT_ENTRY_SPACE * GuiContext->Scale) % ((BOOT_ENTRY_WIDTH + BOOT_ENTRY_SPACE) * GuiContext->Scale);
 
-  mBootPickerContainer.Obj.Height  = BOOT_SELECTOR_HEIGHT * GuiContext->Scale;
-  mBootPickerContainer.Obj.Width   = ContainerMaxWidth - ContainerWidthDelta;
-  mBootPickerContainer.Obj.OffsetX = (DrawContext->Screen.Width - mBootPickerContainer.Obj.Width) / 2;
+  mBoobPickerContainer.Obj.Height  = BOOT_SELECTOR_HEIGHT * GuiContext->Scale;
+  mBoobPickerContainer.Obj.Width   = ContainerMaxWidth - ContainerWidthDelta;
+  mBoobPickerContainer.Obj.OffsetX = (DrawContext->Screen.Width - mBoobPickerContainer.Obj.Width) / 2;
   //
   // Center the icons and labels excluding the selector images vertically.
   //
   ASSERT ((DrawContext->Screen.Height - (BOOT_ENTRY_HEIGHT - BOOT_ENTRY_ICON_SPACE) * GuiContext->Scale) / 2 - (BOOT_ENTRY_ICON_SPACE * GuiContext->Scale) == (DrawContext->Screen.Height - (BOOT_ENTRY_HEIGHT + BOOT_ENTRY_ICON_SPACE) * GuiContext->Scale) / 2);
-  mBootPickerContainer.Obj.OffsetY = (DrawContext->Screen.Height - (BOOT_ENTRY_HEIGHT + BOOT_ENTRY_ICON_SPACE) * GuiContext->Scale) / 2;
+  mBoobPickerContainer.Obj.OffsetY = (DrawContext->Screen.Height - (BOOT_ENTRY_HEIGHT + BOOT_ENTRY_ICON_SPACE) * GuiContext->Scale) / 2;
 
-  mBootPicker.Hdr.Obj.Height = BOOT_SELECTOR_HEIGHT * GuiContext->Scale;
+  mBoobPicker.Hdr.Obj.Height = BOOT_SELECTOR_HEIGHT * GuiContext->Scale;
   //
   // Adding an entry will wrap around Width such that the first entry has no
   // padding.
   //
-  mBootPicker.Hdr.Obj.Width = 0U - (UINT32)(BOOT_ENTRY_SPACE * GuiContext->Scale);
+  mBoobPicker.Hdr.Obj.Width = 0U - (UINT32)(BOOT_ENTRY_SPACE * GuiContext->Scale);
   //
   // Adding an entry will also shift OffsetX considering the added boot entry
   // space. This is not needed for the first, so initialise accordingly.
   //
-  mBootPicker.Hdr.Obj.OffsetX = mBootPickerContainer.Obj.Width / 2 + (UINT32)(BOOT_ENTRY_SPACE * GuiContext->Scale) / 2;
-  mBootPicker.Hdr.Obj.OffsetY = 0;
+  mBoobPicker.Hdr.Obj.OffsetX = mBoobPickerContainer.Obj.Width / 2 + (UINT32)(BOOT_ENTRY_SPACE * GuiContext->Scale) / 2;
+  mBoobPicker.Hdr.Obj.OffsetY = 0;
 
-  mBootPicker.SelectedIndex = 0;
+  mBoobPicker.SelectedIndex = 0;
 
-  mBootPicker.Hdr.Obj.Children = AllocateZeroPool (NumBootEntries * sizeof (*mBootPicker.Hdr.Obj.Children));
-  if (mBootPicker.Hdr.Obj.Children == NULL) {
+  mBoobPicker.Hdr.Obj.Children = AllocateZeroPool (NumBootEntries * sizeof (*mBoobPicker.Hdr.Obj.Children));
+  if (mBoobPicker.Hdr.Obj.Children == NULL) {
     return EFI_OUT_OF_RESOURCES;
   }
 
-  mBootPicker.Hdr.Obj.NumChildren = NumBootEntries;
+  mBoobPicker.Hdr.Obj.NumChildren = NumBootEntries;
 
   if (GuiContext->PickerContext->TitleSuffix == NULL) {
     mVersionLabelImage.Buffer = NULL;
 
-    mBootPickerVersionLabel.Obj.Width   = 0;
-    mBootPickerVersionLabel.Obj.Height  = 0;
-    mBootPickerVersionLabel.Obj.OffsetX = 0;
-    mBootPickerVersionLabel.Obj.OffsetY = 0;
+    mBoobPickerVersionLabel.Obj.Width   = 0;
+    mBoobPickerVersionLabel.Obj.Height  = 0;
+    mBoobPickerVersionLabel.Obj.OffsetX = 0;
+    mBoobPickerVersionLabel.Obj.OffsetY = 0;
   } else {
     DestLen = AsciiStrLen (GuiContext->PickerContext->TitleSuffix);
     UString = AsciiStrCopyToUnicode (GuiContext->PickerContext->TitleSuffix, DestLen);
@@ -2083,10 +2083,10 @@ BootPickerViewInitialize (
       return Result;
     }
 
-    mBootPickerVersionLabel.Obj.Width   = mVersionLabelImage.Width;
-    mBootPickerVersionLabel.Obj.Height  = mVersionLabelImage.Height;
-    mBootPickerVersionLabel.Obj.OffsetX = DrawContext->Screen.Width  - ((3 * mBootPickerVersionLabel.Obj.Width) / 2);
-    mBootPickerVersionLabel.Obj.OffsetY = DrawContext->Screen.Height - ((5 * mBootPickerVersionLabel.Obj.Height) / 2);
+    mBoobPickerVersionLabel.Obj.Width   = mVersionLabelImage.Width;
+    mBoobPickerVersionLabel.Obj.Height  = mVersionLabelImage.Height;
+    mBoobPickerVersionLabel.Obj.OffsetX = DrawContext->Screen.Width  - ((3 * mBoobPickerVersionLabel.Obj.Width) / 2);
+    mBoobPickerVersionLabel.Obj.OffsetY = DrawContext->Screen.Height - ((5 * mBoobPickerVersionLabel.Obj.Height) / 2);
   }
 
   // TODO: animations should be tied to UI objects, not global
@@ -2098,23 +2098,23 @@ BootPickerViewInitialize (
   // Conditions for delta function:
   //
 
-  InitializeListHead (&mBootPickerLabelAnimation.Link);
+  InitializeListHead (&mBoobPickerLabelAnimation.Link);
 
   if (GuiContext->UseMenuEaseIn) {
     InitBpAnimIntro (DrawContext);
-    InsertHeadList (&DrawContext->Animations, &mBootPickerIntroAnimation.Link);
+    InsertHeadList (&DrawContext->Animations, &mBoobPickerIntroAnimation.Link);
     //
     // Fade-in picker, scroll buttons, and action buttons.
     //
-    mBootPickerContainer.Obj.Opacity       = 0;
-    mBootPickerLeftScroll.Hdr.Obj.Opacity  = 0;
-    mBootPickerRightScroll.Hdr.Obj.Opacity = 0;
+    mBoobPickerContainer.Obj.Opacity       = 0;
+    mBoobPickerLeftScroll.Hdr.Obj.Opacity  = 0;
+    mBoobPickerRightScroll.Hdr.Obj.Opacity = 0;
   } else {
     //
     // The late code assumes the scroll buttons are visible by default.
     //
-    mBootPickerLeftScroll.Hdr.Obj.Opacity  = 0xFF;
-    mBootPickerRightScroll.Hdr.Obj.Opacity = 0xFF;
+    mBoobPickerLeftScroll.Hdr.Obj.Opacity  = 0xFF;
+    mBoobPickerRightScroll.Hdr.Obj.Opacity = 0xFF;
     //
     // Unhide action buttons immediately if they are not animated.
     //
@@ -2126,7 +2126,7 @@ BootPickerViewInitialize (
   {
     STATIC GUI_ANIMATION  PickerAnim2;
     PickerAnim2.Context = NULL;
-    PickerAnim2.Animate = InternalBootPickerAnimateTimeout;
+    PickerAnim2.Animate = InternalBoobPickerAnimateTimeout;
     InsertHeadList (&DrawContext->Animations, &PickerAnim2.Link);
   }
 
@@ -2134,7 +2134,7 @@ BootPickerViewInitialize (
   InitBpAnimImageList(GuiInterpolTypeLinear, 25, 25);
   STATIC GUI_ANIMATION PoofAnim;
   PoofAnim.Context = GuiContext->Poof;
-  PoofAnim.Animate = InternalBootPickerAnimateImageList;
+  PoofAnim.Animate = InternalBoobPickerAnimateImageList;
   InsertHeadList(&DrawContext->Animations, &PoofAnim.Link);
   */
 
@@ -2142,7 +2142,7 @@ BootPickerViewInitialize (
 }
 
 VOID
-BootPickerViewLateInitialize (
+BoobPickerViewLateInitialize (
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN     BOOT_PICKER_GUI_CONTEXT  *GuiContext,
   IN     UINT8                    DefaultIndex
@@ -2150,35 +2150,35 @@ BootPickerViewLateInitialize (
 {
   CONST GUI_VOLUME_ENTRY  *BootEntry;
 
-  ASSERT (DefaultIndex < mBootPicker.Hdr.Obj.NumChildren);
+  ASSERT (DefaultIndex < mBoobPicker.Hdr.Obj.NumChildren);
 
-  mBootPicker.SelectedIndex = DefaultIndex;
+  mBoobPicker.SelectedIndex = DefaultIndex;
 
   //
   // If more entries than screen width, firstly align left-most entry
   // then scroll from there as needed to bring default entry on screen
   //
-  if (mBootPicker.Hdr.Obj.OffsetX < 0) {
-    mBootPicker.Hdr.Obj.OffsetX = 0;
-    mBootPicker.Hdr.Obj.OffsetX = InternelBootPickerScrollSelected ();
+  if (mBoobPicker.Hdr.Obj.OffsetX < 0) {
+    mBoobPicker.Hdr.Obj.OffsetX = 0;
+    mBoobPicker.Hdr.Obj.OffsetX = InternelBoobPickerScrollSelected ();
   }
 
   //
   // If the scroll buttons are hidden, the intro animation will update them
   // implicitly.
   //
-  if (mBootPickerLeftScroll.Hdr.Obj.Opacity == 0xFF) {
+  if (mBoobPickerLeftScroll.Hdr.Obj.Opacity == 0xFF) {
     InternalUpdateScrollButtons ();
   }
 
-  InternalBootPickerSelectEntry (&mBootPicker, NULL, DefaultIndex);
+  InternalBoobPickerSelectEntry (&mBoobPicker, NULL, DefaultIndex);
   BootEntry = InternalGetVolumeEntry (DefaultIndex);
   InternalStartAnimateLabel (DrawContext, BootEntry);
   GuiContext->BootEntry = BootEntry->Context;
 }
 
 VOID
-BootPickerViewDeinitialize (
+BoobPickerViewDeinitialize (
   IN OUT GUI_DRAWING_CONTEXT      *DrawContext,
   IN OUT BOOT_PICKER_GUI_CONTEXT  *GuiContext
   )
@@ -2190,15 +2190,15 @@ BootPickerViewDeinitialize (
     mVersionLabelImage.Buffer = NULL;
   }
 
-  for (Index = 0; Index < mBootPicker.Hdr.Obj.NumChildren; ++Index) {
-    InternalBootPickerEntryDestruct (InternalGetVolumeEntry (Index));
+  for (Index = 0; Index < mBoobPicker.Hdr.Obj.NumChildren; ++Index) {
+    InternalBoobPickerEntryDestruct (InternalGetVolumeEntry (Index));
   }
 
-  if (mBootPicker.Hdr.Obj.Children != NULL) {
-    FreePool (mBootPicker.Hdr.Obj.Children);
+  if (mBoobPicker.Hdr.Obj.Children != NULL) {
+    FreePool (mBoobPicker.Hdr.Obj.Children);
   }
 
-  mBootPicker.Hdr.Obj.NumChildren = 0;
+  mBoobPicker.Hdr.Obj.NumChildren = 0;
 
   GuiViewDeinitialize (DrawContext, GuiContext);
 }

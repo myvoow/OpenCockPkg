@@ -354,7 +354,7 @@ AppleMapPrepareForBooting (
   }
 
   if (  BootCompat->Settings.DisableSingleUser
-     || BootCompat->Settings.ForceBooterSignature)
+     || BootCompat->Settings.ForceBooberSignature)
   {
     DTInit ((VOID *)(UINTN)*BA.DeviceTreeP, BA.DeviceTreeLength);
     Status = DTLookupEntry (NULL, "/chosen", &Chosen);
@@ -369,10 +369,10 @@ AppleMapPrepareForBooting (
         }
       }
 
-      if (BootCompat->Settings.ForceBooterSignature) {
+      if (BootCompat->Settings.ForceBooberSignature) {
         Status = DTGetProperty (Chosen, "boot-signature", (VOID **)&ArgsStr, &ArgsSize);
         if (!EFI_ERROR (Status) && (ArgsSize == SHA1_DIGEST_SIZE)) {
-          CopyMem (ArgsStr, BootCompat->Settings.BooterSignature, ArgsSize);
+          CopyMem (ArgsStr, BootCompat->Settings.BooberSignature, ArgsSize);
         }
       }
     }
@@ -540,7 +540,7 @@ AppleMapPrepareMemoryPool (
 }
 
 VOID
-AppleMapPrepareBooterState (
+AppleMapPrepareBooberState (
   IN OUT BOOT_COMPAT_CONTEXT  *BootCompat,
   IN OUT EFI_LOADED_IMAGE     *LoadedImage,
   IN     EFI_GET_MEMORY_MAP   GetMemoryMap  OPTIONAL

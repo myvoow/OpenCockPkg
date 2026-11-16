@@ -10,7 +10,7 @@
 
 #include <Protocol/DevicePath.h>
 #include <Protocol/LoadedImage.h>
-#include <Protocol/OcBootstrap.h>
+#include <Protocol/OcBoobstrap.h>
 #include <Protocol/OcInterface.h>
 
 #include <Library/UefiLib.h>
@@ -126,7 +126,7 @@ OcShowMenuByOc (
 
   mDrawContext.TimeOutSeconds = BootContext->PickerContext->TimeoutSeconds;
 
-  Status = BootPickerViewInitialize (
+  Status = BoobPickerViewInitialize (
              &mDrawContext,
              &mGuiContext,
              InternalGetCursorImage,
@@ -138,7 +138,7 @@ OcShowMenuByOc (
   }
 
   for (Index = 0; Index < BootContext->BootEntryCount; ++Index) {
-    Status = BootPickerEntriesSet (
+    Status = BoobPickerEntriesSet (
                BootContext->PickerContext,
                &mGuiContext,
                BootEntries[Index],
@@ -150,7 +150,7 @@ OcShowMenuByOc (
     }
   }
 
-  BootPickerViewLateInitialize (
+  BoobPickerViewLateInitialize (
     &mDrawContext,
     &mGuiContext,
     (UINT8)BootContext->DefaultEntry->EntryIndex - 1
@@ -196,7 +196,7 @@ OcShowMenuByOc (
   //  - If starting macOS, boot.efi performs the same screen clear to the same UI theme colour
   //    immediately afterwards anyway
   //  - The native Apple picker does not clear its graphics before exit (i.e. does not do this)
-  //  - Most OS booters in most circumstance perform their own screen clear
+  //  - Most OS boobers in most circumstance perform their own screen clear
   //  - Each screen clear on a slow GOP (such as direct GOP rendering) is a noticeable slowdown
   // However:
   //  - Windows without ACPI->Quirks->ResetLogoStatus does not clear any pre-existing graphics
@@ -216,7 +216,7 @@ OcShowMenuByOc (
   // Note, it is important to destruct GUI here, as we must ensure
   // that keyboard/mouse polling does not conflict with FV2 ui.
   //
-  BootPickerViewDeinitialize (&mDrawContext, &mGuiContext);
+  BoobPickerViewDeinitialize (&mDrawContext, &mGuiContext);
   OcShowMenuByOcLeave ();
 
   *ChosenBootEntry                          = mGuiContext.BootEntry;
@@ -276,7 +276,7 @@ OcShowPasswordByOc (
   //
   if (Context->PickerCommand != OcPickerShowPicker) {
     //
-    // Clear the screen only if we will not show BootPicker afterwards.
+    // Clear the screen only if we will not show BoobPicker afterwards.
     //
     GuiClearScreen (&mDrawContext, &mGuiContext.BackgroundColor.Pixel);
   }
