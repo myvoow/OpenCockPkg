@@ -53,7 +53,7 @@ Doxy
 BootKernelExtensions.kc
 Legacy/BinDrivers/X64
 Legacy/BinDrivers/IA32
-Legacy/BootLoader/bin
+Legacy/BoobLoader/bin
 Legacy/BootSector/bin
 Utilities/AppleEfiSignTool/AppleEfiSignTool
 Utilities/ACPIe/ACPIe
@@ -93,7 +93,7 @@ Utilities/TestExt4Dxe/TestExt4Dxe
 Utilities/TestFatDxe/TestFatDxe
 Utilities/TestEvent/TestEvent
 Utilities/LegacyBoot/ROOT*
-Utilities/LegacyBoot/OpenCore*
+Utilities/LegacyBoot/OpenCock*
 Utilities/LegacyBoot/boot*
 Utilities/LegacyBoot/newbs
 Utilities/LegacyBoot/origbs

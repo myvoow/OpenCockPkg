@@ -37,10 +37,10 @@ OBJS    = $(PROJECT).o \
 #
 OBJS   += OcConfigurationLib.o
 #
-# OpenCoreKernel targets.
+# OpenCockKernel targets.
 #
-OBJS   += OpenCoreKernel.o
-OBJS   += OpenCoreKernelPatch.o
+OBJS   += OpenCockKernel.o
+OBJS   += OpenCockKernelPatch.o
 
 VPATH   = ../../Library/OcConfigurationLib:$\
   ../../Library/OcAppleKernelLib:$\

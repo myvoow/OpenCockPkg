@@ -126,7 +126,7 @@
   See AppleRTCHibernateVars type in AppleHibernate.h for the definition.
   - Valid hibernation image encryption data starts with "AAPL" magic.
   - Erased hibernation image encryption data starts with "DEAD" magic.
-  Normally handled by AppleBds prior to transfering control to the bootloader.
+  Normally handled by AppleBds prior to transfering control to the boobloader.
 **/
 #define APPLE_RTC_HIBERNATION_KEY_ADDR  0x80
 
@@ -316,7 +316,7 @@
 
   0x00 - The key is either present or not.
   0x41 - The key is not present, and should be copied to RTC from HBKP
-         SMC key prior to transfering control to the bootloader. After the
+         SMC key prior to transfering control to the boobloader. After the
          copying succeeds this value is overwritten with 0x00. Normally
          this is done by AppleBds.
 **/

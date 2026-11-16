@@ -22,7 +22,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   OvmfPkg/OvmfPkg.dec
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
 
 [LibraryClasses]
   UefiBootServicesTableLib
@@ -36,8 +36,8 @@
   gEfiPciIoProtocolGuid                         ## SOMETIMES_CONSUMES
 
 [Pcd]
-  gOpenCorePkgTokenSpaceGuid.Pcd8259LegacyModeMask      ## CONSUMES
-  gOpenCorePkgTokenSpaceGuid.Pcd8259LegacyModeEdgeLevel ## CONSUMES
+  gOpenCockPkgTokenSpaceGuid.Pcd8259LegacyModeMask      ## CONSUMES
+  gOpenCockPkgTokenSpaceGuid.Pcd8259LegacyModeEdgeLevel ## CONSUMES
 
 [Depex]
   TRUE

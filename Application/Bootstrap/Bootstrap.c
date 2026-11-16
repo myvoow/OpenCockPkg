@@ -1,5 +1,5 @@
 /** @file
-  Bootstrap OpenCore driver.
+  Bootstrap OpenCock driver.
 
 Copyright (c) 2018, vit9696. All rights reserved.<BR>
 This program and the accompanying materials
@@ -32,7 +32,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 
 STATIC
 EFI_STATUS
-LoadOpenCore (
+LoadOpenCock (
   IN  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL  *FileSystem,
   IN  EFI_HANDLE                       DeviceHandle,
   IN  EFI_DEVICE_PATH_PROTOCOL         *LoaderDevicePath
@@ -57,7 +57,7 @@ LoadOpenCore (
   ImagePath = NULL;
 
   //
-  // Try relative path: EFI\\XXX\\Subdir\\Launcher.efi -> EFI\\XXX\\OpenCore.efi
+  // Try relative path: EFI\\XXX\\Subdir\\Launcher.efi -> EFI\\XXX\\OpenCock.efi
   //
   if (LoaderPath != NULL) {
     LoaderPathSize = StrSize (LoaderPath);
@@ -88,7 +88,7 @@ LoadOpenCore (
   }
 
   //
-  // Try absolute path: EFI\\BOOT\\BOOTx64.efi -> EFI\\OC\\OpenCore.efi
+  // Try absolute path: EFI\\BOOT\\BOOTx64.efi -> EFI\\OC\\OpenCock.efi
   //
   if (Buffer == NULL) {
     DEBUG ((
@@ -114,14 +114,14 @@ LoadOpenCore (
 
   if (Buffer == NULL) {
     ASSERT (ImagePath == NULL);
-    DEBUG ((DEBUG_ERROR, "BS: Failed to locate valid OpenCore image - %p!\n", Buffer));
+    DEBUG ((DEBUG_ERROR, "BS: Failed to locate valid OpenCock image - %p!\n", Buffer));
     return EFI_NOT_FOUND;
   }
 
-  DEBUG ((DEBUG_INFO, "BS: Read OpenCore image of %Lu bytes\n", (UINT64)BufferSize));
+  DEBUG ((DEBUG_INFO, "BS: Read OpenCock image of %Lu bytes\n", (UINT64)BufferSize));
 
   //
-  // Run OpenCore image
+  // Run OpenCock image
   //
   Status = OcLoadAndRunImage (
              ImagePath,
@@ -131,7 +131,7 @@ LoadOpenCore (
              NULL
              );
 
-  DEBUG ((DEBUG_ERROR, "BS: Failed to start OpenCore image - %r\n", Status));
+  DEBUG ((DEBUG_ERROR, "BS: Failed to start OpenCock image - %r\n", Status));
   FreePool (Buffer);
   FreePool (ImagePath);
 
@@ -149,11 +149,11 @@ UefiMain (
   EFI_LOADED_IMAGE_PROTOCOL        *LoadedImage;
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL  *FileSystem;
 
-  DEBUG ((DEBUG_INFO, "BS: Starting OpenCore application...\n"));
+  DEBUG ((DEBUG_INFO, "BS: Starting OpenCock application...\n"));
 
   //
   // We have just started at EFI/BOOT/BOOTx64.efi.
-  // We need to run OpenCore on this partition as it failed automatically.
+  // We need to run OpenCock on this partition as it failed automatically.
   // The image is optionally located at OPEN_CORE_APP_PATH file.
   //
 
@@ -184,8 +184,8 @@ UefiMain (
     return EFI_NOT_FOUND;
   }
 
-  DEBUG ((DEBUG_INFO, "BS: Trying to load OpenCore image...\n"));
-  Status = LoadOpenCore (FileSystem, LoadedImage->DeviceHandle, LoadedImage->FilePath);
-  DEBUG ((DEBUG_WARN, "BS: Failed to load OpenCore from disk - %r\n", Status));
+  DEBUG ((DEBUG_INFO, "BS: Trying to load OpenCock image...\n"));
+  Status = LoadOpenCock (FileSystem, LoadedImage->DeviceHandle, LoadedImage->FilePath);
+  DEBUG ((DEBUG_WARN, "BS: Failed to load OpenCock from disk - %r\n", Status));
   return Status;
 }

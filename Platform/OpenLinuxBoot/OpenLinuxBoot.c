@@ -1,5 +1,5 @@
 /** @file
-  Linux boot driver, supporting Boot Loader Specification, GRUB2 blscfg, and autodetect.
+  Linux boot driver, supporting Boob Loader Specification, GRUB2 blscfg, and autodetect.
 
   Copyright (c) 2021, Mike Beaton. All rights reserved.<BR>
   SPDX-License-Identifier: BSD-3-Clause
@@ -229,7 +229,7 @@ OcGetLinuxBootEntries (
     ));
 
   //
-  // Scan for boot loader spec & blscfg entries (Fedora-like).
+  // Scan for boob loader spec & blscfg entries (Fedora-like).
   //
   Status = InternalScanLoaderEntries (
              RootDirectory,

@@ -1,5 +1,5 @@
 ## @file
-#  UEFI runtime services driver support for OpenCore and others.
+#  UEFI runtime services driver support for OpenCock and others.
 #
 #  Copyright (c) 2019, vit9696. All rights reserved.<BR>
 #
@@ -21,7 +21,7 @@
   ENTRY_POINT                    = UefiEntrypoint
 
 [Packages]
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
   UefiCpuPkg/UefiCpuPkg.dec

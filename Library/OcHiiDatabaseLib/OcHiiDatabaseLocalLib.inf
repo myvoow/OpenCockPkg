@@ -39,7 +39,7 @@
   ConfigKeywordHandler.c
 
 [Packages]
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
 

@@ -33,7 +33,7 @@
 #include <Library/UefiRuntimeServicesTableLib.h>
 
 ///
-/// Template for OpenCore custom boot entry DevicePath.
+/// Template for OpenCock custom boot entry DevicePath.
 ///
 STATIC CONST OC_CUSTOM_BOOT_DEVICE_PATH_DECL  mOcCustomBootDevPathTemplate = {
   {

@@ -533,7 +533,7 @@ PatchProcessorInformation (
 
     SMBIOS_OVERRIDE_S (Table, Standard.Type4->SerialNumber, Original, NULL, &StringIndex, NULL);
     //
-    // Most bootloaders set this to ProcessorVersion, yet Apple does not care and has UNKNOWN.
+    // Most boobloaders set this to ProcessorVersion, yet Apple does not care and has UNKNOWN.
     //
     SMBIOS_OVERRIDE_S (Table, Standard.Type4->AssetTag, Original, NULL, &StringIndex, NULL);
     SMBIOS_OVERRIDE_S (Table, Standard.Type4->PartNumber, Original, NULL, &StringIndex, NULL);

@@ -39,7 +39,7 @@
   OcApfsLib.c
 
 [Packages]
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
   MdePkg/MdePkg.dec
 
 [Guids]

@@ -1,5 +1,5 @@
 /** @file
-  OpenCore driver.
+  OpenCock driver.
 
 Copyright (c) 2019, vit9696. All rights reserved.<BR>
 This program and the accompanying materials
@@ -388,7 +388,7 @@ OcMiscGetVersionString (
     "OPEN_CORE_TARGET must follow XYZ format, where XYZ is build target."
     );
 
-  STATIC CHAR8  mOpenCoreVersion[] = {
+  STATIC CHAR8  mOpenCockVersion[] = {
     /* [2]:[0]    = */ OPEN_CORE_TARGET
     /* [3]        = */ "-"
     /* [6]:[4]    = */ "XXX"
@@ -398,17 +398,17 @@ OcMiscGetVersionString (
     /* [17]:[16]  = */ "DD"
   };
 
-  STATIC BOOLEAN  mOpenCoreVersionReady;
+  STATIC BOOLEAN  mOpenCockVersionReady;
 
-  if (!mOpenCoreVersionReady) {
-    mOpenCoreVersion[4] = OPEN_CORE_VERSION[0];
-    mOpenCoreVersion[5] = OPEN_CORE_VERSION[2];
-    mOpenCoreVersion[6] = OPEN_CORE_VERSION[4];
+  if (!mOpenCockVersionReady) {
+    mOpenCockVersion[4] = OPEN_CORE_VERSION[0];
+    mOpenCockVersion[5] = OPEN_CORE_VERSION[2];
+    mOpenCockVersion[6] = OPEN_CORE_VERSION[4];
 
-    mOpenCoreVersion[8]  = __DATE__[7];
-    mOpenCoreVersion[9]  = __DATE__[8];
-    mOpenCoreVersion[10] = __DATE__[9];
-    mOpenCoreVersion[11] = __DATE__[10];
+    mOpenCockVersion[8]  = __DATE__[7];
+    mOpenCockVersion[9]  = __DATE__[8];
+    mOpenCockVersion[10] = __DATE__[9];
+    mOpenCockVersion[11] = __DATE__[10];
 
     Month =
       (__DATE__[0] == 'J' && __DATE__[1] == 'a' && __DATE__[2] == 'n') ?  1 :
@@ -424,15 +424,15 @@ OcMiscGetVersionString (
       (__DATE__[0] == 'N' && __DATE__[1] == 'o' && __DATE__[2] == 'v') ? 11 :
       (__DATE__[0] == 'D' && __DATE__[1] == 'e' && __DATE__[2] == 'c') ? 12 : 0;
 
-    mOpenCoreVersion[13] = Month < 10 ? '0' : '1';
-    mOpenCoreVersion[14] = '0' + (Month % 10);
-    mOpenCoreVersion[16] = __DATE__[4] >= '0' ? __DATE__[4] : '0';
-    mOpenCoreVersion[17] = __DATE__[5];
+    mOpenCockVersion[13] = Month < 10 ? '0' : '1';
+    mOpenCockVersion[14] = '0' + (Month % 10);
+    mOpenCockVersion[16] = __DATE__[4] >= '0' ? __DATE__[4] : '0';
+    mOpenCockVersion[17] = __DATE__[5];
 
-    mOpenCoreVersionReady = TRUE;
+    mOpenCockVersionReady = TRUE;
   }
 
-  return mOpenCoreVersion;
+  return mOpenCockVersion;
 }
 
 EFI_STATUS
@@ -558,7 +558,7 @@ OcMiscEarlyInit (
 
   DEBUG ((
     DEBUG_INFO,
-    "OC: OpenCore %a is loading in %a mode (%d/%d)...\n",
+    "OC: OpenCock %a is loading in %a mode (%d/%d)...\n",
     OcMiscGetVersionString (),
     AsciiVault,
     Storage->HasVault,
@@ -610,8 +610,8 @@ BuildLauncherPath (
 
   //
   // MatchSuffix allows us to reduce option duplication when switching between
-  // OpenCore versions. Using OpenCore.efi (OPEN_CORE_APP_PATH) will overwrite
-  // any option with this path (e.g. OC\OpenCore.efi and OC2\OpenCore.efi).
+  // OpenCock versions. Using OpenCock.efi (OPEN_CORE_APP_PATH) will overwrite
+  // any option with this path (e.g. OC\OpenCock.efi and OC2\OpenCock.efi).
   // For custom paths no deduplication happens.
   //
   if (AsciiStrCmp (LauncherPath, "Default") == 0) {
@@ -687,7 +687,7 @@ OcMiscMiddleInit (
   if (FullLauncherPath != NULL) {
     if (HasFullLauncher || HasShortLauncher) {
       OcRegisterBootstrapBootOption (
-        L"OpenCore",
+        L"OpenCock",
         StorageHandle,
         FullLauncherPath,
         HasShortLauncher,

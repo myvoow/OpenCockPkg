@@ -236,7 +236,7 @@ EFI_GUID  mLinuxFileSystemPartitionTypeGuid = {
 };
 
 /**
-  Extended Boot Loader Partition (XBOOTLDR).
+  Extended Boob Loader Partition (XBOOTLDR).
   https://systemd.io/BOOT_LOADER_SPECIFICATION/
 **/
 EFI_GUID  mXBootLdrPartitionTypeGuid = {
@@ -373,7 +373,7 @@ OcGetBootDevicePathType (
   }
 
   //
-  // Detect macOS recovery by com.apple.recovery.boot in the bootloader path.
+  // Detect macOS recovery by com.apple.recovery.boot in the boobloader path.
   //
   if (OcStrStrLength (Path, PathLen, L"com.apple.recovery.boot", L_STR_LEN (L"com.apple.recovery.boot")) != NULL) {
     FreePool (Path);
@@ -386,48 +386,48 @@ OcGetBootDevicePathType (
   }
 
   //
-  // Detect macOS by boot.efi in the bootloader name.
-  // Detect macOS Time Machine by tmbootpicker.efi in the bootloader name.
+  // Detect macOS by boot.efi in the boobloader name.
+  // Detect macOS Time Machine by tmbootpicker.efi in the boobloader name.
   //
-  STATIC CONST CHAR16  *Bootloaders[] = {
+  STATIC CONST CHAR16  *Boobloaders[] = {
     L"boot.efi",
     L"tmbootpicker.efi",
     L"bootmgfw.efi"
   };
 
-  STATIC CONST UINTN  BootloaderLengths[] = {
+  STATIC CONST UINTN  BoobloaderLengths[] = {
     L_STR_LEN (L"boot.efi"),
     L_STR_LEN (L"tmbootpicker.efi"),
     L_STR_LEN (L"bootmgfw.efi")
   };
 
-  STATIC CONST OC_BOOT_ENTRY_TYPE  BootloaderTypes[] = {
+  STATIC CONST OC_BOOT_ENTRY_TYPE  BoobloaderTypes[] = {
     OC_BOOT_APPLE_OS,
     OC_BOOT_APPLE_TIME_MACHINE,
     OC_BOOT_WINDOWS
   };
 
-  for (Index = 0; Index < ARRAY_SIZE (Bootloaders); ++Index) {
-    if (PathLen < BootloaderLengths[Index]) {
+  for (Index = 0; Index < ARRAY_SIZE (Boobloaders); ++Index) {
+    if (PathLen < BoobloaderLengths[Index]) {
       continue;
     }
 
-    RestLen = PathLen - BootloaderLengths[Index];
+    RestLen = PathLen - BoobloaderLengths[Index];
     if (  ((RestLen == 0) || (Path[RestLen - 1] == L'\\'))
-       && (OcStrniCmp (&Path[RestLen], Bootloaders[Index], BootloaderLengths[Index]) == 0))
+       && (OcStrniCmp (&Path[RestLen], Boobloaders[Index], BoobloaderLengths[Index]) == 0))
     {
       FreePool (Path);
-      return BootloaderTypes[Index];
+      return BoobloaderTypes[Index];
     }
   }
 
-  CONST CHAR16  *GenericBootloader      = &EFI_REMOVABLE_MEDIA_FILE_NAME[L_STR_LEN (L"\\EFI\\BOOT\\")];
-  CONST UINTN   GenericBootloaderLength = L_STR_LEN (EFI_REMOVABLE_MEDIA_FILE_NAME) - L_STR_LEN (L"\\EFI\\BOOT\\");
+  CONST CHAR16  *GenericBoobloader      = &EFI_REMOVABLE_MEDIA_FILE_NAME[L_STR_LEN (L"\\EFI\\BOOT\\")];
+  CONST UINTN   GenericBoobloaderLength = L_STR_LEN (EFI_REMOVABLE_MEDIA_FILE_NAME) - L_STR_LEN (L"\\EFI\\BOOT\\");
 
-  if ((IsGeneric != NULL) && (PathLen >= GenericBootloaderLength)) {
-    RestLen = PathLen - GenericBootloaderLength;
+  if ((IsGeneric != NULL) && (PathLen >= GenericBoobloaderLength)) {
+    RestLen = PathLen - GenericBoobloaderLength;
     if (  ((RestLen == 0) || (Path[RestLen - 1] == L'\\'))
-       && (OcStrniCmp (&Path[RestLen], GenericBootloader, GenericBootloaderLength) == 0))
+       && (OcStrniCmp (&Path[RestLen], GenericBoobloader, GenericBoobloaderLength) == 0))
     {
       *IsGeneric = TRUE;
     }

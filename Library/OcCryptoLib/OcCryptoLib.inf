@@ -53,12 +53,12 @@
   X64/Sha512Avx.nasm
 
 [FixedPcd]
-  gOpenCorePkgTokenSpaceGuid.PcdOcCryptoAllowedRsaModuli
-  gOpenCorePkgTokenSpaceGuid.PcdOcCryptoAllowedSigHashTypes
+  gOpenCockPkgTokenSpaceGuid.PcdOcCryptoAllowedRsaModuli
+  gOpenCockPkgTokenSpaceGuid.PcdOcCryptoAllowedSigHashTypes
 
 [Packages]
   MdePkg/MdePkg.dec
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
 
 [LibraryClasses]
   UefiRuntimeServicesTableLib

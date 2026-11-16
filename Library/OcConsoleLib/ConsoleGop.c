@@ -294,7 +294,7 @@ RotateMode (
     // logo will not show.
     // REF: https://github.com/acidanthera/bugtracker/issues/1498#issuecomment-782822654
     //
-    // Windows and Linux bootloaders only draw directly to the framebuffer.
+    // Windows and Linux boobloaders only draw directly to the framebuffer.
     //
     This->Mode->FrameBufferBase = 0;
     This->Mode->FrameBufferSize = 0;
@@ -501,7 +501,7 @@ OcReconnectConsole (
   // is legit.
   //
   // Note: this block of code may result in black screens on APTIO IV boards when
-  // launching OpenCore from the Shell. Hence it is optional.
+  // launching OpenCock from the Shell. Hence it is optional.
   //
 
   Status = gBS->LocateHandleBuffer (

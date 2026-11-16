@@ -46,7 +46,7 @@
   Partition.h
 
 [Packages]
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
   MdePkg/MdePkg.dec
 
 [LibraryClasses]

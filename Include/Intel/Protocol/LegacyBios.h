@@ -661,13 +661,13 @@ typedef struct {
   BBS_STATUS_FLAGS    StatusFlags;
 
   ///
-  /// Segment:Offset address of boot loader for IPL devices or install INT13 handler for
+  /// Segment:Offset address of boob loader for IPL devices or install INT13 handler for
   /// BCV devices.
   ///
   UINT16              BootHandlerOffset;
 
   ///
-  /// Segment:Offset address of boot loader for IPL devices or install INT13 handler for
+  /// Segment:Offset address of boob loader for IPL devices or install INT13 handler for
   /// BCV devices.
   ///
   UINT16              BootHandlerSegment;

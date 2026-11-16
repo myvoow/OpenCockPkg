@@ -1,5 +1,5 @@
 /** @file
-  OpenCore primary application.
+  OpenCock primary application.
 
 Copyright (c) 2019, vit9696. All rights reserved.<BR>
 This program and the accompanying materials
@@ -44,27 +44,27 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 
 STATIC
 OC_GLOBAL_CONFIG
-  mOpenCoreConfiguration;
+  mOpenCockConfiguration;
 
 STATIC
 OC_STORAGE_CONTEXT
-  mOpenCoreStorage;
+  mOpenCockStorage;
 
 STATIC
 OC_CPU_INFO
-  mOpenCoreCpuInfo;
+  mOpenCockCpuInfo;
 
 STATIC
 UINT8
-  mOpenCoreBooterHash[SHA1_DIGEST_SIZE];
+  mOpenCockBooterHash[SHA1_DIGEST_SIZE];
 
 STATIC
 OC_RSA_PUBLIC_KEY *
-  mOpenCoreVaultKey;
+  mOpenCockVaultKey;
 
 STATIC
 OC_PRIVILEGE_CONTEXT
-  mOpenCorePrivilege;
+  mOpenCockPrivilege;
 
 STATIC
 EFI_HANDLE
@@ -124,51 +124,51 @@ OcMain (
   DEBUG ((DEBUG_INFO, "OC: OcMiscEarlyInit...\n"));
   Status = OcMiscEarlyInit (
              Storage,
-             &mOpenCoreConfiguration,
-             mOpenCoreVaultKey
+             &mOpenCockConfiguration,
+             mOpenCockVaultKey
              );
 
   if (EFI_ERROR (Status)) {
     return;
   }
 
-  OcCpuScanProcessor (&mOpenCoreCpuInfo);
+  OcCpuScanProcessor (&mOpenCockCpuInfo);
 
   DEBUG ((DEBUG_INFO, "OC: OcLoadNvramSupport...\n"));
-  OcLoadNvramSupport (Storage, &mOpenCoreConfiguration);
+  OcLoadNvramSupport (Storage, &mOpenCockConfiguration);
   DEBUG ((DEBUG_INFO, "OC: OcMiscMiddleInit...\n"));
   OcMiscMiddleInit (
     Storage,
-    &mOpenCoreConfiguration,
+    &mOpenCockConfiguration,
     mStorageRoot,
     LoadPath,
     mStorageHandle,
-    mOpenCoreConfiguration.Booter.Quirks.ForceBooterSignature ? mOpenCoreBooterHash : NULL
+    mOpenCockConfiguration.Booter.Quirks.ForceBooterSignature ? mOpenCockBooterHash : NULL
     );
   DEBUG ((DEBUG_INFO, "OC: OcLoadUefiSupport...\n"));
-  OcLoadUefiSupport (Storage, &mOpenCoreConfiguration, &mOpenCoreCpuInfo, mOpenCoreBooterHash);
+  OcLoadUefiSupport (Storage, &mOpenCockConfiguration, &mOpenCockCpuInfo, mOpenCockBooterHash);
   DEBUG_CODE_BEGIN ();
   DEBUG ((DEBUG_INFO, "OC: OcMiscLoadSystemReport...\n"));
-  OcMiscLoadSystemReport (&mOpenCoreConfiguration, mStorageHandle);
+  OcMiscLoadSystemReport (&mOpenCockConfiguration, mStorageHandle);
   DEBUG_CODE_END ();
   DEBUG ((DEBUG_INFO, "OC: OcLoadAcpiSupport...\n"));
-  OcLoadAcpiSupport (&mOpenCoreStorage, &mOpenCoreConfiguration);
+  OcLoadAcpiSupport (&mOpenCockStorage, &mOpenCockConfiguration);
   DEBUG ((DEBUG_INFO, "OC: OcLoadPlatformSupport...\n"));
-  OcLoadPlatformSupport (&mOpenCoreConfiguration, &mOpenCoreCpuInfo);
+  OcLoadPlatformSupport (&mOpenCockConfiguration, &mOpenCockCpuInfo);
   DEBUG ((DEBUG_INFO, "OC: OcLoadDevPropsSupport...\n"));
-  OcLoadDevPropsSupport (&mOpenCoreConfiguration);
+  OcLoadDevPropsSupport (&mOpenCockConfiguration);
   DEBUG ((DEBUG_INFO, "OC: OcMiscLateInit...\n"));
-  OcMiscLateInit (Storage, &mOpenCoreConfiguration);
+  OcMiscLateInit (Storage, &mOpenCockConfiguration);
   DEBUG ((DEBUG_INFO, "OC: OcLoadKernelSupport...\n"));
-  OcLoadKernelSupport (&mOpenCoreStorage, &mOpenCoreConfiguration, &mOpenCoreCpuInfo);
+  OcLoadKernelSupport (&mOpenCockStorage, &mOpenCockConfiguration, &mOpenCockCpuInfo);
 
-  if (mOpenCoreConfiguration.Misc.Security.EnablePassword) {
-    mOpenCorePrivilege.CurrentLevel = OcPrivilegeUnauthorized;
-    mOpenCorePrivilege.Hash         = mOpenCoreConfiguration.Misc.Security.PasswordHash;
-    mOpenCorePrivilege.Salt         = OC_BLOB_GET (&mOpenCoreConfiguration.Misc.Security.PasswordSalt);
-    mOpenCorePrivilege.SaltSize     = mOpenCoreConfiguration.Misc.Security.PasswordSalt.Size;
+  if (mOpenCockConfiguration.Misc.Security.EnablePassword) {
+    mOpenCockPrivilege.CurrentLevel = OcPrivilegeUnauthorized;
+    mOpenCockPrivilege.Hash         = mOpenCockConfiguration.Misc.Security.PasswordHash;
+    mOpenCockPrivilege.Salt         = OC_BLOB_GET (&mOpenCockConfiguration.Misc.Security.PasswordSalt);
+    mOpenCockPrivilege.SaltSize     = mOpenCockConfiguration.Misc.Security.PasswordSalt.Size;
 
-    Privilege = &mOpenCorePrivilege;
+    Privilege = &mOpenCockPrivilege;
   } else {
     Privilege = NULL;
   }
@@ -176,11 +176,11 @@ OcMain (
   DEBUG ((DEBUG_INFO, "OC: All green, starting boot management...\n"));
 
   OcMiscBoot (
-    &mOpenCoreStorage,
-    &mOpenCoreConfiguration,
+    &mOpenCockStorage,
+    &mOpenCockConfiguration,
     Privilege,
     OcStartImage,
-    mOpenCoreConfiguration.Uefi.Quirks.RequestBootVarRouting,
+    mOpenCockConfiguration.Uefi.Quirks.RequestBootVarRouting,
     mStorageHandle
     );
 }
@@ -197,7 +197,7 @@ OcBootstrap (
   EFI_DEVICE_PATH_PROTOCOL  *RemainingPath;
   UINTN                     StoragePathSize;
 
-  mOpenCoreVaultKey = OcGetVaultKey ();
+  mOpenCockVaultKey = OcGetVaultKey ();
   mStorageHandle    = DeviceHandle;
 
   //
@@ -208,7 +208,7 @@ OcBootstrap (
   //
   // Skipping this or later failing to call UnicodeGetParentDirectory means
   // we got valid path to the root of the partition. This happens when
-  // OpenCore.efi was loaded from e.g. firmware and then bootstrapped
+  // OpenCock.efi was loaded from e.g. firmware and then bootstrapped
   // on a different partition.
   //
   if (mStorageRoot == NULL) {
@@ -237,17 +237,17 @@ OcBootstrap (
   SetDevicePathEndNode ((UINT8 *)mStoragePath + StoragePathSize);
 
   Status = OcStorageInitFromFs (
-             &mOpenCoreStorage,
+             &mOpenCockStorage,
              FileSystem,
              mStorageHandle,
              mStoragePath,
              mStorageRoot,
-             mOpenCoreVaultKey
+             mOpenCockVaultKey
              );
 
   if (!EFI_ERROR (Status)) {
-    OcMain (&mOpenCoreStorage, LoadPath);
-    OcStorageFree (&mOpenCoreStorage);
+    OcMain (&mOpenCockStorage, LoadPath);
+    OcStorageFree (&mOpenCockStorage);
   } else {
     DEBUG ((DEBUG_ERROR, "OC: Failed to open root FS - %r!\n", Status));
     if (Status == EFI_SECURITY_VIOLATION) {
@@ -270,7 +270,7 @@ OcGetLoadHandle (
 
 STATIC
 OC_BOOTSTRAP_PROTOCOL
-  mOpenCoreBootStrap = {
+  mOpenCockBootStrap = {
   .Revision      = OC_BOOTSTRAP_PROTOCOL_REVISION,
   .GetLoadHandle = OcGetLoadHandle,
 };
@@ -289,10 +289,10 @@ UefiMain (
   OC_BOOTSTRAP_PROTOCOL            *Bootstrap;
   EFI_DEVICE_PATH_PROTOCOL         *AbsPath;
 
-  DEBUG ((DEBUG_INFO, "OC: Starting OpenCore...\n"));
+  DEBUG ((DEBUG_INFO, "OC: Starting OpenCock...\n"));
 
   //
-  // We have just started by bootstrap or manually at EFI/OC/OpenCore.efi.
+  // We have just started by bootstrap or manually at EFI/OC/OpenCock.efi.
   // When bootstrap runs us, we only install the protocol.
   // Otherwise we do self start.
   //
@@ -359,7 +359,7 @@ UefiMain (
   Status          = gBS->InstallMultipleProtocolInterfaces (
                            &BootstrapHandle,
                            &gOcBootstrapProtocolGuid,
-                           &mOpenCoreBootStrap,
+                           &mOpenCockBootStrap,
                            NULL
                            );
   if (EFI_ERROR (Status)) {

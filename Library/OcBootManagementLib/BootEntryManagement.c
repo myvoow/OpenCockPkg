@@ -213,7 +213,7 @@ ReadEntryVisibility (
   //
   // Allow root location as well as leaf, because this is a non-Apple file which will
   // get deleted at update if placed next to boot.efi in macOS.
-  // Leaf (next to bootloader) is recommended location for non-macOS.
+  // Leaf (next to boobloader) is recommended location for non-macOS.
   //
   Status = OcGetBootEntryFileFromDevicePath (
              DevicePath,
@@ -479,7 +479,7 @@ AddBootEntryOnFileSystem (
   }
 
   //
-  // Skip disabled entries, like OpenCore bootloader.
+  // Skip disabled entries, like OpenCock boobloader.
   //
   Visibility = ReadEntryVisibility (BootContext->PickerContext, DevicePath);
   if (Visibility == BootEntryDisabled) {
@@ -1695,7 +1695,7 @@ AddBootEntryFromBootOption (
   // The amount of paths depends on the kind of the entry.
   // - If this is a root entry (i.e. it points to the partition)
   //   we invoke full bless, as it may be Windows entry created by legacy NVRAM script.
-  // - If this is a full entry (i.e. it points to the bootloader)
+  // - If this is a full entry (i.e. it points to the boobloader)
   //   we invoke partial bless, which ignores BOOTx64.efi.
   //   Ignoring BOOTx64.efi is important as we may already have bootmgfw.efi as our entry,
   //   and we do not want to see Windows added twice.

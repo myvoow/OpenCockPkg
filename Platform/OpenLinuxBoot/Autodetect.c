@@ -313,7 +313,7 @@ LoadDefaultGrub (
   //
   mEtcDefaultGrubFileContents = OcReadFileFromDirectory (RootDirectory, GRUB_DEFAULT_FILE, NULL, 0);
   if (mEtcDefaultGrubFileContents == NULL) {
-    DEBUG ((DEBUG_INFO, "LNX: %s not found (bootloader is not GRUB?)\n", GRUB_DEFAULT_FILE));
+    DEBUG ((DEBUG_INFO, "LNX: %s not found (boobloader is not GRUB?)\n", GRUB_DEFAULT_FILE));
   } else {
     DEBUG ((
       (gLinuxBootFlags & LINUX_BOOT_LOG_VERBOSE) == 0 ? DEBUG_VERBOSE : DEBUG_INFO,

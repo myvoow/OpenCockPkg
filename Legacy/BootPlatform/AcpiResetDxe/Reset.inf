@@ -22,7 +22,7 @@
 
 [Packages]
   MdePkg/MdePkg.dec
-  OpenCorePkg/OpenDuetPkg.dec
+  OpenCockPkg/OpenDuetPkg.dec
 
 [LibraryClasses]
   DebugLib

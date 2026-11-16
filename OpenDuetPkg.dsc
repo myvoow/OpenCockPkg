@@ -25,7 +25,7 @@
   SUPPORTED_ARCHITECTURES        = X64|IA32
   BUILD_TARGETS                  = RELEASE|DEBUG|NOOPT
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = OpenCorePkg/OpenDuetPkg.fdf
+  FLASH_DEFINITION               = OpenCockPkg/OpenDuetPkg.fdf
 
 !include MdePkg/MdeLibs.dsc.inc
 
@@ -33,9 +33,9 @@
   #
   # Entry point
   #
-  PeimEntryPoint|OpenCorePkg/Library/OcPeimEntryPoint/PeimEntryPoint.inf
-  DxeCoreEntryPoint|OpenCorePkg/Library/OcDxeCoreEntryPoint/DxeCoreEntryPoint.inf
-  UefiDriverEntryPoint|OpenCorePkg/Library/OcDriverEntryPoint/UefiDriverEntryPoint.inf
+  PeimEntryPoint|OpenCockPkg/Library/OcPeimEntryPoint/PeimEntryPoint.inf
+  DxeCoreEntryPoint|OpenCockPkg/Library/OcDxeCoreEntryPoint/DxeCoreEntryPoint.inf
+  UefiDriverEntryPoint|OpenCockPkg/Library/OcDriverEntryPoint/UefiDriverEntryPoint.inf
   #
   # Basic
   #
@@ -60,7 +60,7 @@
   UefiRuntimeServicesTableLib|MdePkg/Library/UefiRuntimeServicesTableLib/UefiRuntimeServicesTableLib.inf
   UefiRuntimeLib|MdePkg/Library/UefiRuntimeLib/UefiRuntimeLib.inf
   UefiLib|MdePkg/Library/UefiLib/UefiLib.inf
-  UefiHiiServicesLib|OpenCorePkg/Library/OcHiiServicesLib/OcHiiServicesLib.inf
+  UefiHiiServicesLib|OpenCockPkg/Library/OcHiiServicesLib/OcHiiServicesLib.inf
   HiiLib|MdeModulePkg/Library/UefiHiiLib/UefiHiiLib.inf
   DevicePathLib|MdePkg/Library/UefiDevicePathLibDevicePathProtocol/UefiDevicePathLibDevicePathProtocol.inf
   UefiDecompressLib|MdePkg/Library/BaseUefiDecompressLib/BaseUefiDecompressLib.inf
@@ -90,8 +90,8 @@
   # Platform
   #
   CpuLib|MdePkg/Library/BaseCpuLib/BaseCpuLib.inf
-  DuetBdsLib|OpenCorePkg/Library/DuetBdsLib/DuetBdsLib.inf
-  TimerLib|OpenCorePkg/Library/DuetTimerLib/DuetTimerLib.inf
+  DuetBdsLib|OpenCockPkg/Library/DuetBdsLib/DuetBdsLib.inf
+  TimerLib|OpenCockPkg/Library/DuetTimerLib/DuetTimerLib.inf
   #
   # Misc
   #
@@ -104,24 +104,24 @@
   HobLib|MdePkg/Library/DxeHobLib/DxeHobLib.inf
   CpuExceptionHandlerLib|MdeModulePkg/Library/CpuExceptionHandlerLibNull/CpuExceptionHandlerLibNull.inf
   ExtractGuidedSectionLib|MdePkg/Library/DxeExtractGuidedSectionLib/DxeExtractGuidedSectionLib.inf
-  OcDevicePathLib|OpenCorePkg/Library/OcDevicePathLib/OcDevicePathLib.inf
-  OcFileLib|OpenCorePkg/Library/OcFileLib/OcFileLib.inf
-  OcGuardLib|OpenCorePkg/Library/OcGuardLib/OcGuardLib.inf
-  OcLegacyThunkLib|OpenCorePkg/Library/OcLegacyThunkLib/OcLegacyThunkLib.inf
-  OcMemoryLib|OpenCorePkg/Library/OcMemoryLib/OcMemoryLib.inf
-  OcMiscLib|OpenCorePkg/Library/OcMiscLib/OcMiscLib.inf
-  OcStringLib|OpenCorePkg/Library/OcStringLib/OcStringLib.inf
+  OcDevicePathLib|OpenCockPkg/Library/OcDevicePathLib/OcDevicePathLib.inf
+  OcFileLib|OpenCockPkg/Library/OcFileLib/OcFileLib.inf
+  OcGuardLib|OpenCockPkg/Library/OcGuardLib/OcGuardLib.inf
+  OcLegacyThunkLib|OpenCockPkg/Library/OcLegacyThunkLib/OcLegacyThunkLib.inf
+  OcMemoryLib|OpenCockPkg/Library/OcMemoryLib/OcMemoryLib.inf
+  OcMiscLib|OpenCockPkg/Library/OcMiscLib/OcMiscLib.inf
+  OcStringLib|OpenCockPkg/Library/OcStringLib/OcStringLib.inf
   #
   # To save size, use NULL library for DebugLib and ReportStatusCodeLib.
   # If need status code output, do library instance override.
   #
 !if ($(TARGET) == RELEASE)
-  DebugLib|OpenCorePkg/Library/OcDebugLibNull/OcDebugLibNull.inf
+  DebugLib|OpenCockPkg/Library/OcDebugLibNull/OcDebugLibNull.inf
 !else
   #
   # Equivalent to DEBUG_ON_SERIAL_PORT in OvmfPkg.
   #
-  DebugLib|OpenCorePkg/Library/OcDebugLibSerial/OcDebugLibSerial.inf
+  DebugLib|OpenCockPkg/Library/OcDebugLibSerial/OcDebugLibSerial.inf
 !endif
   DebugPrintErrorLevelLib|MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
   ReportStatusCodeLib|MdePkg/Library/BaseReportStatusCodeLibNull/BaseReportStatusCodeLibNull.inf
@@ -140,7 +140,7 @@
   VariablePolicyLib|MdeModulePkg/Library/VariablePolicyLib/VariablePolicyLibRuntimeDxe.inf
 
 [Components]
-  OpenCorePkg/Legacy/BootPlatform/DxeIpl/DxeIpl.inf
+  OpenCockPkg/Legacy/BootPlatform/DxeIpl/DxeIpl.inf
   MdeModulePkg/Core/Dxe/DxeMain.inf {
     <LibraryClasses>
       DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
@@ -155,54 +155,54 @@
   MdeModulePkg/Universal/MonotonicCounterRuntimeDxe/MonotonicCounterRuntimeDxe.inf
   MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf {
     <LibraryClasses>
-      OcDirectResetLib|OpenCorePkg/Library/OcDirectResetLib/OcDirectResetLib.inf
-      OcFlexArrayLib|OpenCorePkg/Library/OcFlexArrayLib/OcFlexArrayLib.inf
-      OcSerializeLib|OpenCorePkg/Library/OcSerializeLib/OcSerializeLib.inf
-      OcTemplateLib|OpenCorePkg/Library/OcTemplateLib/OcTemplateLib.inf
-      OcVariableLib|OpenCorePkg/Library/OcVariableLib/OcVariableLib.inf
-      OcXmlLib|OpenCorePkg/Library/OcXmlLib/OcXmlLib.inf
-      NULL|OpenCorePkg/Library/OcVariableRuntimeLib/OcVariableRuntimeLib.inf
+      OcDirectResetLib|OpenCockPkg/Library/OcDirectResetLib/OcDirectResetLib.inf
+      OcFlexArrayLib|OpenCockPkg/Library/OcFlexArrayLib/OcFlexArrayLib.inf
+      OcSerializeLib|OpenCockPkg/Library/OcSerializeLib/OcSerializeLib.inf
+      OcTemplateLib|OpenCockPkg/Library/OcTemplateLib/OcTemplateLib.inf
+      OcVariableLib|OpenCockPkg/Library/OcVariableLib/OcVariableLib.inf
+      OcXmlLib|OpenCockPkg/Library/OcXmlLib/OcXmlLib.inf
+      NULL|OpenCockPkg/Library/OcVariableRuntimeLib/OcVariableRuntimeLib.inf
   }
 
   MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
   MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
-  OpenCorePkg/Legacy/BootPlatform/ConSplitterDxe/ConSplitterDxe.inf {
+  OpenCockPkg/Legacy/BootPlatform/ConSplitterDxe/ConSplitterDxe.inf {
     <LibraryClasses>
       PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
     <PcdsPatchableInModule>
       gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow|0
       gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn|0
   }
-  OpenCorePkg/Legacy/BootPlatform/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+  OpenCockPkg/Legacy/BootPlatform/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
   MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf {
     <LibraryClasses>
       DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
   }
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
-  OpenCorePkg/Legacy/BootPlatform/SmbiosGenDxe/SmbiosGen.inf
+  OpenCockPkg/Legacy/BootPlatform/SmbiosGenDxe/SmbiosGen.inf
 
 !if $(TARGET) != NOOPT
   # We will reuse DEBUG EfiLdr in NOOPT build to keep within allotted 0x10000-0x20000 space.
-  OpenCorePkg/Legacy/BootPlatform/EfiLdr/EfiLdr.inf
+  OpenCockPkg/Legacy/BootPlatform/EfiLdr/EfiLdr.inf
 !endif
-  OpenCorePkg/Legacy/BootPlatform/BdsDxe/BdsDxe.inf {
+  OpenCockPkg/Legacy/BootPlatform/BdsDxe/BdsDxe.inf {
     <LibraryClasses>
       PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
   }
   UefiCpuPkg/CpuIo2Dxe/CpuIo2Dxe.inf
-  OpenCorePkg/Legacy/BootPlatform/CpuDxe/CpuDxe.inf
-  OpenCorePkg/Legacy/BootPlatform/8259InterruptControllerDxe/8259.inf {
+  OpenCockPkg/Legacy/BootPlatform/CpuDxe/CpuDxe.inf
+  OpenCockPkg/Legacy/BootPlatform/8259InterruptControllerDxe/8259.inf {
     <PcdsFixedAtBuild>
-      gOpenCorePkgTokenSpaceGuid.Pcd8259LegacyModeMask|0xFFFC
+      gOpenCockPkgTokenSpaceGuid.Pcd8259LegacyModeMask|0xFFFC
   }
-  OpenCorePkg/Legacy/BootPlatform/AcpiResetDxe/Reset.inf
+  OpenCockPkg/Legacy/BootPlatform/AcpiResetDxe/Reset.inf
   MdeModulePkg/Universal/Metronome/Metronome.inf
 
   # Chipset
   PcAtChipsetPkg/PcatRealTimeClockRuntimeDxe/PcatRealTimeClockRuntimeDxe.inf
-  OpenCorePkg/Legacy/BootPlatform/8254TimerDxe/8254Timer.inf
-  OpenCorePkg/Legacy/BootPlatform/PciRootBridgeDxe/PciRootBridgeNoEnumeration.inf
-  OpenCorePkg/Legacy/BootPlatform/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
+  OpenCockPkg/Legacy/BootPlatform/8254TimerDxe/8254Timer.inf
+  OpenCockPkg/Legacy/BootPlatform/PciRootBridgeDxe/PciRootBridgeNoEnumeration.inf
+  OpenCockPkg/Legacy/BootPlatform/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
   MdeModulePkg/Bus/Pci/NvmExpressDxe/NvmExpressDxe.inf
 
   # Foreign file system support
@@ -224,7 +224,7 @@
   MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
 
   # BiosBootBlock Support
-  OpenCorePkg/Legacy/BootPlatform/BlockIoDxe/BlockIoDxe.inf
+  OpenCockPkg/Legacy/BootPlatform/BlockIoDxe/BlockIoDxe.inf
 
   # ISA Support
   OvmfPkg/SioBusDxe/SioBusDxe.inf
@@ -239,11 +239,11 @@
     <LibraryClasses>
       PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
   }
-  OpenCorePkg/Platform/OpenPartitionDxe/PartitionDxe.inf
+  OpenCockPkg/Platform/OpenPartitionDxe/PartitionDxe.inf
 
   # Bios Thunk
-  OpenCorePkg/Legacy/BootPlatform/LegacyRegion2Dxe/LegacyRegion2Dxe.inf
-  OpenCorePkg/Legacy/BootPlatform/BiosVideo/BiosVideo.inf
+  OpenCockPkg/Legacy/BootPlatform/LegacyRegion2Dxe/LegacyRegion2Dxe.inf
+  OpenCockPkg/Legacy/BootPlatform/BiosVideo/BiosVideo.inf
 
 [LibraryClasses]
   NULL|MdePkg/Library/IntrinsicLib/IntrinsicLib.inf
@@ -251,11 +251,11 @@
 [PcdsFeatureFlag]
   gEfiMdeModulePkgTokenSpaceGuid.PcdSupportHiiImageProtocol|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdHiiOsRuntimeSupport|FALSE
-  gOpenCorePkgTokenSpaceGuid.PcdConOutUgaSupport|FALSE
+  gOpenCockPkgTokenSpaceGuid.PcdConOutUgaSupport|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDevicePathSupportDevicePathFromText|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDevicePathSupportDevicePathToText|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdTurnOffUsbLegacySupport|TRUE
-  gOpenCorePkgTokenSpaceGuid.PcdUgaConsumeSupport|FALSE
+  gOpenCockPkgTokenSpaceGuid.PcdUgaConsumeSupport|FALSE
 
 [PcdsFixedAtBuild]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"Acidanthera"
@@ -275,7 +275,7 @@
   gEfiMdePkgTokenSpaceGuid.PcdFixedDebugPrintErrorLevel|0x80000042
 !endif
   gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x0
-  gOpenCorePkgTokenSpaceGuid.PcdCanaryAllowRdtscFallback|TRUE
+  gOpenCockPkgTokenSpaceGuid.PcdCanaryAllowRdtscFallback|TRUE
   gEfiMdePkgTokenSpaceGuid.PcdUefiImageFormatSupportFv|0x02
   #
   # Policy required to allow legacy, non-aligned, non-signed Apple images

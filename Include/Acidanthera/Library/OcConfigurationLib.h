@@ -96,7 +96,7 @@ OC_DECLARE (OC_ACPI_QUIRKS)
 OC_DECLARE (OC_ACPI_CONFIG)
 
 /**
-  Apple bootloader section
+  Apple boobloader section
 **/
 
 #define OC_BOOTER_WL_ENTRY_FIELDS(_, __) \
@@ -110,7 +110,7 @@ OC_DECLARE (OC_BOOTER_WL_ENTRY)
 OC_DECLARE (OC_BOOTER_WL_ARRAY)
 
 ///
-/// Bootloader patches.
+/// Boobloader patches.
 ///
 #define OC_BOOTER_PATCH_ENTRY_FIELDS(_, __) \
   _(OC_STRING                   , Arch             ,     , OC_STRING_CONSTR ("Any", _, __), OC_DESTR (OC_STRING) ) \
@@ -131,7 +131,7 @@ OC_DECLARE (OC_BOOTER_PATCH_ENTRY)
 OC_DECLARE (OC_BOOTER_PATCH_ARRAY)
 
 ///
-/// Apple bootloader quirks.
+/// Apple boobloader quirks.
 ///
 #define OC_BOOTER_QUIRKS_FIELDS(_, __) \
   _(BOOLEAN                     , AllowRelocationBlock      ,     , FALSE  , ()) \
@@ -159,7 +159,7 @@ OC_DECLARE (OC_BOOTER_PATCH_ARRAY)
 OC_DECLARE (OC_BOOTER_QUIRKS)
 
 ///
-/// Apple bootloader section.
+/// Apple boobloader section.
 ///
 #define OC_BOOTER_CONFIG_FIELDS(_, __) \
   _(OC_BOOTER_WL_ARRAY          , MmioWhitelist    ,     , OC_CONSTR2 (OC_BOOTER_WL_ARRAY, _, __)      , OC_DESTR (OC_BOOTER_WL_ARRAY)) \
@@ -643,7 +643,7 @@ OC_DECLARE (OC_UEFI_DRIVER_ARRAY)
 OC_DECLARE (OC_UEFI_APFS)
 
 ///
-/// AppleInput is a set of options to configure OpenCore's reverse engingeered then customised implementation of the AppleEvent protocol.
+/// AppleInput is a set of options to configure OpenCock's reverse engingeered then customised implementation of the AppleEvent protocol.
 ///
 #define OC_UEFI_APPLEINPUT_FIELDS(_, __) \
   _(OC_STRING                   , AppleEvent                    ,     , OC_STRING_CONSTR ("Auto", _, __)  , OC_DESTR (OC_STRING) ) \

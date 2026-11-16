@@ -1,5 +1,5 @@
 /** @file
-  Boot Loader Spec / Grub2 blscfg module loader entry parser.
+  Boob Loader Spec / Grub2 blscfg module loader entry parser.
 
   Copyright (c) 2021, Mike Beaton. All rights reserved.<BR>
   SPDX-License-Identifier: BSD-3-Clause

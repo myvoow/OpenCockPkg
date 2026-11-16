@@ -1,5 +1,5 @@
 /** @file
-  OpenCore driver.
+  OpenCock driver.
 
 Copyright (c) 2019, vit9696. All rights reserved.<BR>
 This program and the accompanying materials
@@ -922,7 +922,7 @@ OcLoadUefiSupport (
   OcLoadUefiInputSupport (Config);
 
   //
-  // Setup Apple bootloader specific UEFI features.
+  // Setup Apple boobloader specific UEFI features.
   //
   OcLoadBooterUefiSupport (Config, CpuInfo, Signature);
 

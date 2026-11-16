@@ -20,7 +20,7 @@
 ;
 ; @APPLE_LICENSE_HEADER_END@
 ;
-; Partition Boot Loader: boot1f32
+; Partition Boob Loader: boot1f32
 ;
 ; This program is designed to reside in sector 0 of a FAT32 partition.
 ; It expects that the MBR has left the drive number in DL

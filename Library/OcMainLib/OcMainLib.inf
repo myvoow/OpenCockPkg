@@ -1,5 +1,5 @@
 ## @file
-#  OpenCore primary coordination library
+#  OpenCock primary coordination library
 #
 #  Copyright (c) 2019, vit9696. All rights reserved.<BR>
 #
@@ -21,21 +21,21 @@
   LIBRARY_CLASS                       = OcMainLib|PEIM DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_DRIVER UEFI_APPLICATION DXE_SMM_DRIVER
 
 [Sources]
-  OpenCoreAcpi.c
-  OpenCoreDevProps.c
-  OpenCoreKernel.c
-  OpenCoreKernelPatch.c
-  OpenCoreMisc.c
-  OpenCoreNvram.c
-  OpenCorePlatform.c
-  OpenCoreUefi.c
-  OpenCoreUefiAudio.c
-  OpenCoreUefiInOut.c
-  OpenCoreUefiUnloadDrivers.c
-  OpenCoreVault.c
+  OpenCockAcpi.c
+  OpenCockDevProps.c
+  OpenCockKernel.c
+  OpenCockKernelPatch.c
+  OpenCockMisc.c
+  OpenCockNvram.c
+  OpenCockPlatform.c
+  OpenCockUefi.c
+  OpenCockUefiAudio.c
+  OpenCockUefiInOut.c
+  OpenCockUefiUnloadDrivers.c
+  OpenCockVault.c
 
 [Packages]
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   UefiCpuPkg/UefiCpuPkg.dec

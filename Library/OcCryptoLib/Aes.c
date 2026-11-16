@@ -91,7 +91,7 @@ typedef UINT8 AES_INTERNAL_STATE[4][4];
 //
 // The lookup-tables are marked CONST so they can be placed in read-only storage instead of RAM
 // The numbers below can be computed dynamically trading ROM for RAM -
-// This can be useful in (embedded) bootloader applications, where ROM is often limited.
+// This can be useful in (embedded) boobloader applications, where ROM is often limited.
 //
 STATIC CONST UINT8  Sbox[256] = {
   // 0     1    2      3     4    5     6     7      8    9     A      B    C     D     E     F

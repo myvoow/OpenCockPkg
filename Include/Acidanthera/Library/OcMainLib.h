@@ -27,13 +27,13 @@
 #include <Protocol/OcBootstrap.h>
 
 /**
-  OpenCore version reported to log and NVRAM.
+  OpenCock version reported to log and NVRAM.
   OPEN_CORE_VERSION must follow X.Y.Z format, where X.Y.Z are single digits.
 **/
 #define OPEN_CORE_VERSION  "1.0.9"
 
 /**
-  OpenCore build type reported to log and NVRAM.
+  OpenCock build type reported to log and NVRAM.
 **/
 #if defined (OC_TARGET_RELEASE)
 #define OPEN_CORE_TARGET  "REL"          ///< Release.
@@ -47,11 +47,11 @@
 
 #define OPEN_CORE_ROOT_PATH  L"EFI\\OC"
 
-#define OPEN_CORE_APP_PATH  L"OpenCore.efi"
+#define OPEN_CORE_APP_PATH  L"OpenCock.efi"
 
 #define OPEN_CORE_CONFIG_PATH  L"config.plist"
 
-#define OPEN_CORE_LOG_PREFIX_PATH  L"opencore"
+#define OPEN_CORE_LOG_PREFIX_PATH  L"opencock"
 
 #define OPEN_CORE_ACPI_PATH  L"ACPI\\"
 
@@ -76,8 +76,8 @@ OcGetVaultKey (
 /**
   Load ACPI compatibility support like custom tables.
 
-  @param[in]  Storage   OpenCore storage.
-  @param[in]  Config    OpenCore configuration.
+  @param[in]  Storage   OpenCock storage.
+  @param[in]  Config    OpenCock configuration.
 **/
 VOID
 OcLoadAcpiSupport (
@@ -88,7 +88,7 @@ OcLoadAcpiSupport (
 /**
   Load device properties compatibility support.
 
-  @param[in]  Config    OpenCore configuration.
+  @param[in]  Config    OpenCock configuration.
 **/
 VOID
 OcLoadDevPropsSupport (
@@ -98,8 +98,8 @@ OcLoadDevPropsSupport (
 /**
   Load drivers.
 
-  @param[in]  Storage             OpenCore storage.
-  @param[in]  Config              OpenCore configuration.
+  @param[in]  Storage             OpenCock storage.
+  @param[in]  Config              OpenCock configuration.
   @param[in]  DriversToConnect    Drivers which require later connection.
   @param[in]  LoadEarly           If TRUE load any early phase drivers, otherwise load normal phase.
 **/
@@ -114,8 +114,8 @@ OcLoadDrivers (
 /**
   Load Kernel compatibility support like kexts.
 
-  @param[in]  Storage   OpenCore storage.
-  @param[in]  Config    OpenCore configuration.
+  @param[in]  Storage   OpenCock storage.
+  @param[in]  Config    OpenCock configuration.
   @param[in]  CpuInfo   CPU information.
 **/
 VOID
@@ -204,8 +204,8 @@ OcUnloadKernelSupport (
 /**
   Load NVRAM compatibility support.
 
-  @param[in]  Storage   OpenCore storage.
-  @param[in]  Config    OpenCore configuration.
+  @param[in]  Storage   OpenCock storage.
+  @param[in]  Config    OpenCock configuration.
 **/
 VOID
 OcLoadNvramSupport (
@@ -241,7 +241,7 @@ OcGetDefaultSecureBootModel (
 /**
   Load platform compatibility support like DataHub or SMBIOS.
 
-  @param[in]  Config    OpenCore configuration.
+  @param[in]  Config    OpenCock configuration.
   @param[in]  CpuInfo   CPU information.
 **/
 VOID
@@ -253,10 +253,10 @@ OcLoadPlatformSupport (
 /**
   Load UEFI compatibility support like drivers.
 
-  @param[in]  Storage   OpenCore storage.
-  @param[in]  Config    OpenCore configuration.
+  @param[in]  Storage   OpenCock storage.
+  @param[in]  Config    OpenCock configuration.
   @param[in]  CpuInfo   CPU information.
-  @param[out] Signature OpenCore SHA-1 booter signature, all zero when unavailable.
+  @param[out] Signature OpenCock SHA-1 booter signature, all zero when unavailable.
 **/
 VOID
 OcLoadUefiSupport (
@@ -269,7 +269,7 @@ OcLoadUefiSupport (
 /**
   Load UEFI input compatibility support.
 
-  @param[out] Config    OpenCore configuration.
+  @param[out] Config    OpenCock configuration.
 **/
 VOID
 OcLoadUefiInputSupport (
@@ -279,8 +279,8 @@ OcLoadUefiInputSupport (
 /**
   Load UEFI output compatibility support.
 
-  @param[in]  Storage   OpenCore storage.
-  @param[out] Config    OpenCore configuration.
+  @param[in]  Storage   OpenCock storage.
+  @param[out] Config    OpenCock configuration.
 **/
 VOID
 OcLoadUefiOutputSupport (
@@ -291,8 +291,8 @@ OcLoadUefiOutputSupport (
 /**
   Load UEFI audio compatibility support.
 
-  @param[in]  Storage   OpenCore storage.
-  @param[out] Config    OpenCore configuration.
+  @param[in]  Storage   OpenCock storage.
+  @param[out] Config    OpenCock configuration.
 **/
 VOID
 OcLoadUefiAudioSupport (
@@ -325,8 +325,8 @@ OcMiscGetVersionString (
 /**
   Load early miscellaneous support like configuration.
 
-  @param[in]  Storage   OpenCore storage.
-  @param[out] Config    OpenCore configuration.
+  @param[in]  Storage   OpenCock storage.
+  @param[out] Config    OpenCock configuration.
   @param[in]  VaultKey  Vault key.
 
   @retval EFI_SUCCESS when allowed to continue.
@@ -341,12 +341,12 @@ OcMiscEarlyInit (
 /**
   Load middle miscellaneous support like device path.
 
-  @param[in]  Storage        OpenCore storage.
-  @param[in]  Config         OpenCore configuration.
+  @param[in]  Storage        OpenCock storage.
+  @param[in]  Config         OpenCock configuration.
   @param[in]  RootPath       Root load path (e.g. path to OC directory).
-  @param[in]  LoadPath       OpenCore loading device path (absolute).
-  @param[in]  StorageHandle  OpenCore storage loading handle (e.g. FS handle).
-  @param[out] Signature      OpenCore SHA-1 booter signature, optional.
+  @param[in]  LoadPath       OpenCock loading device path (absolute).
+  @param[in]  StorageHandle  OpenCock storage loading handle (e.g. FS handle).
+  @param[out] Signature      OpenCock SHA-1 booter signature, optional.
 
   @retval EFI_SUCCESS on success, informational.
 **/
@@ -363,8 +363,8 @@ OcMiscMiddleInit (
 /**
   Load late miscellaneous support like Apple hibernation or panic saving.
 
-  @param[in]  Storage    OpenCore storage.
-  @param[in]  Config     OpenCore configuration.
+  @param[in]  Storage    OpenCock storage.
+  @param[in]  Config     OpenCock configuration.
 
   @retval EFI_SUCCESS on success, informational.
 **/
@@ -377,7 +377,7 @@ OcMiscLateInit (
 /**
   Load system report.
 
-  @param[in]  LoadHandle OpenCore loading handle.
+  @param[in]  LoadHandle OpenCock loading handle.
 
   @retval EFI_SUCCESS on success, informational.
 **/
@@ -390,11 +390,11 @@ OcMiscLoadSystemReport (
 /**
   Load late miscellaneous support like boot screen config.
 
-  @param[in]  Storage         OpenCore storage.
-  @param[in]  Config          OpenCore configuration.
-  @param[in]  Privilege       OpenCore privilege context.
+  @param[in]  Storage         OpenCock storage.
+  @param[in]  Config          OpenCock configuration.
+  @param[in]  Privilege       OpenCock privilege context.
   @param[in]  StartImage      Image starting routine used.
-  @param[in]  LoadHandle      OpenCore loading handle.
+  @param[in]  LoadHandle      OpenCock loading handle.
   @param[in]  CustomBootGuid  Use custom (gOcVendorVariableGuid) for Boot#### variables.
 **/
 VOID
@@ -410,7 +410,7 @@ OcMiscBoot (
 /**
   Load miscellaneous support after UEFI quirks.
 
-  @param[in]  Config     OpenCore configuration.
+  @param[in]  Config     OpenCock configuration.
 **/
 VOID
 OcMiscUefiQuirksLoaded (
@@ -431,7 +431,7 @@ OcPlatformIs64BitSupported (
 /**
   Unload loaded images by name.
 
-  @param[in]  Config     OpenCore configuration.
+  @param[in]  Config     OpenCock configuration.
 **/
 VOID
 OcUnloadDrivers (

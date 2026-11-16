@@ -61,9 +61,9 @@ global _start
 _start:
         jmp     .SkipLabel
 %ifdef X64
-        db      'DUETX64   '    ; Bootloader Label
+        db      'DUETX64   '    ; Boobloader Label
 %else
-        db      'DUETIA32  '    ; Bootloader Label
+        db      'DUETIA32  '    ; Boobloader Label
 %endif
 .SkipLabel:
         mov     ax, cs

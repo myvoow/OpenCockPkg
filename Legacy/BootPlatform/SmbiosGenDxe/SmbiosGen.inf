@@ -28,7 +28,7 @@
   ENTRY_POINT                    = SmbiosGenEntrypoint
 
 [Packages]
-  OpenCorePkg/OpenDuetPkg.dec
+  OpenCockPkg/OpenDuetPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
 

@@ -1,5 +1,5 @@
 ## @file
-#  Component description file for OpenCanopy, OpenCore GUI.
+#  Component description file for OpenCanopy, OpenCock GUI.
 #
 #  Copyright (c) 2019, vit9696. All rights reserved.<BR>
 #
@@ -46,7 +46,7 @@
   Views/Password.c
 
 [Packages]
-  OpenCorePkg/OpenCorePkg.dec
+  OpenCockPkg/OpenCockPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   UefiCpuPkg/UefiCpuPkg.dec

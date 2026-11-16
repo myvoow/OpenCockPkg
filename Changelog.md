@@ -1,4 +1,4 @@
-OpenCore Changelog
+OpenCock Changelog
 ==================
 #### v1.0.9
 - Made pressed buttons darker instead of highlighting them in OpenCanopy, thx @ilikesn0w
@@ -43,7 +43,7 @@ OpenCore Changelog
 - Migrated to edk2-stable-202502 
 
 #### v1.0.4
-- Added support for booting from static IPv4 address in OpenCore-specific HttpBootDxe
+- Added support for booting from static IPv4 address in OpenCock-specific HttpBootDxe
 - Added static IPv4 configuration options to OpenNetworkBoot
 - Removed `--` prefix from OpenNetworkBoot arguments (modify driver arguments if using this driver)
 - Updated `Unload` option to unload drivers in reverse of the order in which they were loaded
@@ -87,7 +87,7 @@ OpenCore Changelog
 - Updated builtin firmware versions for SMBIOS and the rest
 - Switched to Apple silicon GitHub runner for CI, thx @Goooler
 - Added Apple Silicon support in all provided utilities
-- Utilities now require macOS 10.9+ (OpenCore itself still supports macOS 10.4+)
+- Utilities now require macOS 10.9+ (OpenCock itself still supports macOS 10.4+)
 - Added `AllowRelocationBlock` support for 32-bit version
 - Enabled additional serial logging in non-RELEASE builds of OpenDuet
 - Added missing DxeCore ImageContext HOB in OpenDuet
@@ -146,14 +146,14 @@ OpenCore Changelog
 - Fixed GUID formatting for legacy NVRAM saving
 - Fixed inability to open files in root directory on an NTFS filesystem
 - Fixed hang while unloading NTFS driver
-- Added UEFI quirk `ShimRetainProtocol`, allowing OpenCore chained from shim to verify Linux using shim's certificates
+- Added UEFI quirk `ShimRetainProtocol`, allowing OpenCock chained from shim to verify Linux using shim's certificates
 - Added `OpenLegacyBoot` driver for supporting legacy OS booting
 - Added `shim-make.tool` to download and build rhboot/shim, for Linux SBAT and MOK integration
 
 #### v0.9.4
 - Fixed kext blocker `Exclude` strategy for prelinked on 32-bit versions of macOS
 - Fixed `ForceAquantiaEthernet` quirk on macOS 14 beta 2, thx @Shikumo
-- Added `InstanceIdentifier` to OpenCore and option to target `.contentVisibility` to specific instances (thx @dakanji)
+- Added `InstanceIdentifier` to OpenCock and option to target `.contentVisibility` to specific instances (thx @dakanji)
 - Improved `LapicKernelPanic` quirk on legacy versions of macOS
 - Allowed `.contentVisibility` in same boot FS root locations as `.VolumeIcon.icns`, in order to survive macOS updates
 - Fixed incorrect core count on Silvermont Atom/Celeron processors
@@ -214,7 +214,7 @@ OpenCore Changelog
 - Added version number to EnableGop UI section, so tool builders can track it
 - Added `ProvideCurrentCpuInfo` support for macOS 13.3 DP
 - Added AMD support, GOP offset auto-detection and macOS 10.11+ support to EnableGop vBIOS insertion script
-- Included precompiled EDK-II `EfiRom` and `GenFfs` in `Utilities/BaseTools` with OpenCore releases
+- Included precompiled EDK-II `EfiRom` and `GenFfs` in `Utilities/BaseTools` with OpenCock releases
 
 #### v0.8.9
 - Improved debug logging when applying ACPI patches
@@ -223,7 +223,7 @@ OpenCore Changelog
 - Updated builtin firmware versions for SMBIOS and the rest
 - Fixed incomplete console mode initialisation when started in graphics mode
 - Provided additional UEFI forge mode, for use in firmware drivers
-- Implemented firmware driver enabling pre-OpenCore graphics on non-natively supported GPUs on EFI-era Macs
+- Implemented firmware driver enabling pre-OpenCock graphics on non-natively supported GPUs on EFI-era Macs
 - Added `ResizeUsePciRbIo` quirk to workaround broken PciIo on some UEFI firmwares, thx @xCuri0
 - Prevented unwanted clear screen to console background colour when in graphics mode
 - Fixed crash while using `SysReport` on older Atom systems
@@ -240,7 +240,7 @@ OpenCore Changelog
 - Updated ocvalidate to allow duplicate tool if FullNvramAccess is different
 - Fixed `Kernel` -> `Block` entries not being processed if one was skipped due to `Arch`
 - Fixed intermittent prelinking failures caused by XML corruption when kext blocking is enabled
-- Removed magic Acidanthera sequence from OpenCore files used for picker hiding
+- Removed magic Acidanthera sequence from OpenCock files used for picker hiding
 - Added `.contentVisibility` to hide and disable boot entries
 - Added Linux support to QemuBuild.command used for Duet debugging
 - Built in new secure PE/COFF loader
@@ -428,7 +428,7 @@ OpenCore Changelog
 - Added tool to extract vendor secure boot certificate from GRUB shim file
 - Added `BridgeOSHardwareModel` NVRAM variable to fix T2 SB AP models on macOS 12
 - Changed `Default` Apple Secure Boot model to match SMBIOS for macOS 12
-- Fixed `opencore-version` not being added to NVRAM variables
+- Fixed `opencock-version` not being added to NVRAM variables
 
 #### v0.7.3
 - Improved SSDT-PNLF compatibility with CFL+ graphics
@@ -453,7 +453,7 @@ OpenCore Changelog
 - Increased default APFS `MinDate` and `MinVersion` to macOS Big Sur for better security
 - Updated builtin firmware versions for SMBIOS and the rest
 - Improved SSDT-PNLF compatibility with Windows and newer graphics
-- Fixed CLANGPDB OpenCore builds by shortening OC magic
+- Fixed CLANGPDB OpenCock builds by shortening OC magic
 
 #### v0.7.1
 - Added `SyncTableIds` quirk to sync modified table OEM identifiers
@@ -497,7 +497,7 @@ OpenCore Changelog
 - Fixed DEBUG build crashes with `GopPassThrough` and `UgaPassThrough`
 - Added flavour for memory testing utilities
 - Updated recommended `memtest86` config in sample `.plist` files
-- Defined bootloader flavours
+- Defined boobloader flavours
 - Applied own flavour to OC build
 - Added CPU topology fixes to `ProvideCurrentCpuInfo` quirk
 - Updated OC default SIP disabled value
@@ -518,7 +518,7 @@ OpenCore Changelog
 - Added `ForgeUefiSupport` quirk to workaround legacy EFI 1.x firmwares compatibility
 - Added `ReloadOptionRoms` quirk to force-load Option ROMs on PCI devices
 - Added `OC_ATTR_USE_MINIMAL_UI` to allow running pickers with no Shutdown and Restart buttons
-- Added display of OpenCore version number to OpenCanopy as well as builtin picker, depending on existing ExposeSensitiveData bit
+- Added display of OpenCock version number to OpenCanopy as well as builtin picker, depending on existing ExposeSensitiveData bit
 - Added support for case-insensitive argument handling in the UEFI tools
 - Added vector acceleration of SHA-512 and SHA-384 hashing algorithms, thx @MikhailKrichanov
 - Fixed wraparound when using arrow keys in OpenCanopy
@@ -608,9 +608,9 @@ OpenCore Changelog
 - Fixed showing core count for some AMD CPUs
 - Added `ResetTrafficClass` to reset TCSEL to T0 on legacy HDA
 - Fixed default boot entry selection without timeout for builtin picker
-- Added ocpasswordgen utility to generate OpenCore password data
+- Added ocpasswordgen utility to generate OpenCock password data
 - Added `ActivateHpetSupport` quirk to activate HPET support
-- Fixed `opencore-version` reporting the incorrect version in rare cases
+- Fixed `opencock-version` reporting the incorrect version in rare cases
 
 #### v0.6.6
 - Added keyboard and pointer entry scroll support in OpenCanopy
@@ -625,7 +625,7 @@ OpenCore Changelog
 - Fixed crashes in OpenUsbKbDxe when handling unsupported devices
 - Removed `HdaCodecDump` application in favor of `SysReport`
 - Added `SetApfsTrimTimeout` to tune APFS trim command
-- Changed `OpenCore.efi` to application to improve FW compatibility
+- Changed `OpenCock.efi` to application to improve FW compatibility
 - Added `DisableSecurityPolicy` UEFI quirk to workaround driver loading
 - Added support for ranged widget connections in AudioDxe
 - Fixed supplying non-RT `SetVirtualAddressMap` for non-macOS systems
@@ -676,7 +676,7 @@ OpenCore Changelog
 - Added `BootstrapShort` to workaround buggy Insyde firmware
 - Changed `Bootstrap(Short)` to choose dynamic entry (requires NVRAM reset)
 - Avoided `Boot` prefix in `RequestBootVarRouting` to workaround AMI issues
-- Added bootloader patch support in `Booter` `Patch` section
+- Added boobloader patch support in `Booter` `Patch` section
 - Fixed startup hang on firmware that permit timer function re-entrance
 - Made pointer control optional for OpenCanopy via `PickerAttributes`
 - Added support for `StartupMute` variable in `PlayChime`
@@ -894,7 +894,7 @@ OpenCore Changelog
 - Added `boot.efi` performance logging for 10.15.4+
 - Added `ProtectUefiServices` quirk to fix `DevirtualiseMmio` on Z390
 - Replaced `BOOTCAMP Windows` with `Windows` to match the original
-- Added bundled `OpenShell` originally available as OpenCoreShell
+- Added bundled `OpenShell` originally available as OpenCockShell
 - Rework `readlabel` utility into `disklabel` with encoding support
 - Renamed `FwRuntimeServices` driver to `OpenRuntime`
 - Renamed `AppleUsbKbDxe` driver to `OpenUsbKbDxe`
@@ -941,13 +941,13 @@ OpenCore Changelog
 - Added `PickerAudioAssist` option for audio assistance in picker
 - Added `HdaCodecDump.efi` tool in default package
 - Added legacy AudioDxe and Microsoft namespaces to Reset NVRAM
-- Merged `OcSupportPkg` with `OpenCorePkg` for easier bisection
+- Merged `OcSupportPkg` with `OpenCockPkg` for easier bisection
 - Disabled warnings in release versions of NVMe and XHCI drivers
 
 #### v0.5.5
 - Fixed CPU bus ratio calculation for Nehalem and Westmere
 - Fixed CPU package calculation on MacPro5,1 and similar
-- Improved OpenCore rerun detection for new versions
+- Improved OpenCock rerun detection for new versions
 - Fixed loading picker on boot failure when it is hidden
 - Added PMC ACPI sample for 300-series chipsets
 - Improved driver connection performance on APTIO IV
@@ -966,7 +966,7 @@ OpenCore Changelog
 #### v0.5.4
 - Added Enter key handling in boot menu for quick proceed
 - Update builtin firmware versions
-- Bundled FwRuntimeServices driver with OpenCore
+- Bundled FwRuntimeServices driver with OpenCock
 - Allowed writing to non-volatile variables with disabled write
 - Fixed microcode reading on Intel CPUs
 - Fixed SMBIOS Type4 External Clock values
@@ -979,7 +979,7 @@ OpenCore Changelog
 - Fixed input protocol initialisation on VMware fusion
 - Added arrow key handling in boot menu
 - FileVault 2-like key input is now the only supported input in boot menu
-- Fixed 5 second delay when exiting Shell to OpenCore Picker
+- Fixed 5 second delay when exiting Shell to OpenCock Picker
 - Added default boot option update and `AllowSetDefault` `Security` option
 - Fixed CPU package detection on configurations with multiple CPUs
 - Bundled CleanNvram and VerifyMsrE2 tools for debugging
@@ -1012,7 +1012,7 @@ OpenCore Changelog
 - Added `PowerTimeoutKernelPanic` kernel quirk
 - Fixed erratic cursor appearing in release builds
 - Moved `ReconnectOnResChange` to a user-configurable quirk to avoid freezes
-- Added OpenCore version to picker ui, configured by `ExposeSensitiveData`
+- Added OpenCock version to picker ui, configured by `ExposeSensitiveData`
 - Added hypervisor CPUID support to work with virtualization (thx @Leoyzen)
 
 #### v0.5.1
@@ -1052,11 +1052,11 @@ OpenCore Changelog
 - Fixed multiple operating system support in APFS containers
 - Added `AvoidHighAlloc` UEFI quirk to avoid high memory allocs
 - Updated builtin firmware versions for 10.15 beta support
-- Added `Booter` section for Apple bootloader preferences
+- Added `Booter` section for Apple boobloader preferences
 - Dropped `AptioMemoryFix.efi` support for `Booter` and `FwRuntimeServices.efi`
 - Fixed hibernation issues in Windows with `RequestBootVarRouting`
 - Significantly improved boot stability on APTIO
-- Added support for Windows & OpenCore on the same drive through `BlessOverride`
+- Added support for Windows & OpenCock on the same drive through `BlessOverride`
 - Added advanced user-specified boot entries through `Misc` -> `Entries`
 - Added `DisableVariableWrite` quirk to disable hardware NVRAM write in macOS
 

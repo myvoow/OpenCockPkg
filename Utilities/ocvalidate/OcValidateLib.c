@@ -117,7 +117,7 @@ AsciiIdentifierIsLegal (
     }
 
     //
-    // For customised bootloader, it must have .efi suffix.
+    // For customised boobloader, it must have .efi suffix.
     //
     if (!OcAsciiEndsWith (Identifier, ".efi", TRUE)) {
       return FALSE;

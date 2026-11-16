@@ -20,7 +20,7 @@
 ;
 ; @APPLE_LICENSE_HEADER_END@
 ;
-; Boot Loader: boot0
+; Boob Loader: boot0
 ;
 ; A small boot sector program written in x86 assembly whose only
 ; responsibility is to locate the active partition, load the
@@ -28,7 +28,7 @@
 ; It leaves the boot drive in DL and a pointer to the partition entry in SI.
 ; This version of boot0 implements hybrid GUID/MBR partition scheme support.
 ;
-; This boot loader must be placed in the Master Boot Record.
+; This boob loader must be placed in the Master Boot Record.
 ;
 ; In order to coexist with a fdisk partition table (64 bytes), and
 ; leave room for a two byte signature (0xAA55) in the end, boot0 is
@@ -288,7 +288,7 @@ find_boot:
     ; Jump to partition booter. The drive number is already in register DL.
     ; SI is pointing to the modified partition entry.
     ;
-initBootLoader:
+initBoobLoader:
 
 DebugChar('J')
 
@@ -373,12 +373,12 @@ checkGPT:
     mov     [my_lba], eax
     mov     dh, 1                                   ; Argument for loadBootSector to check file system signature.
     call    loadBootSector
-    jne     .gpt_continue                           ; no boot loader signature
+    jne     .gpt_continue                           ; no boob loader signature
 
     mov     si, kMBRPartTable                       ; fake the current GUID Partition
     mov     [si + part.lba], eax                    ; as MBR style partition for boot1f32,
     mov     BYTE [si + part.type], kPartTypeFAT32   ; set filesystem type for cosmetic reasons
-    jmp     SHORT initBootLoader
+    jmp     SHORT initBoobLoader
 
 .gpt_continue:
 

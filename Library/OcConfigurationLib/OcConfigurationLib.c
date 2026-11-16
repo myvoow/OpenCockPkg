@@ -164,7 +164,7 @@ OC_SCHEMA
 };
 
 //
-// Apple bootloader configuration
+// Apple boobloader configuration
 //
 
 STATIC

@@ -489,7 +489,7 @@ AppleMapPrepareMemoryPool (
   );
 
 /**
-  Prepare environment for Apple UEFI bootloader. See more details inside.
+  Prepare environment for Apple UEFI boobloader. See more details inside.
 
   @param[in,out]  BootCompat    Boot compatibility context.
   @param[in,out]  LoadedImage   UEFI loaded image protocol instance.
@@ -579,7 +579,7 @@ AsmAppleMapPrepareKernelState32 (
   );
 
 /**
-  Prepare environment for Apple kernel bootloader in boot or wake cases.
+  Prepare environment for Apple kernel boobloader in boot or wake cases.
   This callback arrives when boot.efi jumps to kernel entry point.
   Should transfer control to restored kernel entry point with the same arguments.
 
@@ -594,7 +594,7 @@ AppleMapPrepareKernelState32 (
   );
 
 /**
-  Prepare environment for Apple kernel bootloader in boot or wake cases.
+  Prepare environment for Apple kernel boobloader in boot or wake cases.
   This callback arrives when boot.efi jumps to kernel call gate.
   Should transfer control to kernel call gate + CALL_GATE_JUMP_SIZE
   with the same arguments.
@@ -618,7 +618,7 @@ AppleMapPrepareKernelStateNew64 (
   );
 
 /**
-  Prepare environment for Apple kernel bootloader in boot or wake cases.
+  Prepare environment for Apple kernel boobloader in boot or wake cases.
   This callback arrives when boot.efi jumps to kernel call gate.
   Should transfer control to kernel call gate + CALL_GATE_JUMP_SIZE
   with the same arguments.

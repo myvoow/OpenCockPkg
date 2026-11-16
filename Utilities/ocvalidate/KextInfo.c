@@ -87,7 +87,7 @@ KEXT_INFO  mKextInfo[] = {
   { "BlueToolFixup.kext",                                                   "Contents/MacOS/BlueToolFixup",       "Contents/Info.plist" },
   { "BrcmFirmwareData.kext",                                                "Contents/MacOS/BrcmFirmwareData",    "Contents/Info.plist" },
   //
-  // NOTE: BrcmFirmwareRepo.kext cannot be injected by the bootloader; when it is present, an error should be prompted.
+  // NOTE: BrcmFirmwareRepo.kext cannot be injected by the boobloader; when it is present, an error should be prompted.
   //
   { "BrcmFirmwareRepo.kext",                                                "Contents/MacOS/BrcmFirmwareRepo",    "Contents/Info.plist" },
   { "BrcmNonPatchRAM.kext",                                                 "Contents/MacOS/BrcmNonPatchRAM",     "Contents/Info.plist" },

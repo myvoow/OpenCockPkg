@@ -1,5 +1,5 @@
 /** @file
-  OpenCore Variable library.
+  OpenCock Variable library.
 
   Copyright (c) 2021, Marvin Haeuser. All rights reserved.<BR>
   SPDX-License-Identifier: BSD-3-Clause

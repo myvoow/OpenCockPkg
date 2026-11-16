@@ -527,7 +527,7 @@ typedef struct {
    ____________________________________________________________________
    Offset | Size | Description
    --------------------------------------------------------------------
-   0x0000 | 3    | Jump to the boot loader routine
+   0x0000 | 3    | Jump to the boob loader routine
    0x0003 | 8    | System Id: "NTFS    "
    0x000B | 2    | Bytes per sector
    0x000D | 1    | Sectors per cluster
@@ -549,7 +549,7 @@ typedef struct {
    --------------------------------------------------------------------
 **/
 typedef struct {
-  UINT8     BootLoaderJump[3];
+  UINT8     BoobLoaderJump[3];
   UINT32    SystemId[2];
   UINT16    BytesPerSector;
   UINT8     SectorsPerCluster;

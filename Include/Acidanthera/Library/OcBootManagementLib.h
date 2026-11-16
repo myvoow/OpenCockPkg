@@ -55,7 +55,7 @@ typedef struct OC_HOTKEY_CONTEXT_ OC_HOTKEY_CONTEXT;
 /**
   Default strings for use in the interfaces.
 **/
-#define OC_MENU_BOOT_MENU             L"OpenCore Boot Menu"
+#define OC_MENU_BOOT_MENU             L"OpenCock Boot Menu"
 #define OC_MENU_UEFI_SHELL_ENTRY      L"UEFI Shell"
 #define OC_MENU_PASSWORD_REQUEST      L"Password: "
 #define OC_MENU_PASSWORD_PROCESSING   L"Verifying password..."
@@ -1029,7 +1029,7 @@ struct OC_PICKER_CONTEXT_ {
   UINT32                      ConsoleAttributes;
   //
   // Picker attribues:
-  // - BIT0~BIT15  are OpenCore reserved.
+  // - BIT0~BIT15  are OpenCock reserved.
   // - BIT16~BIT31 are OEM-specific.
   //
   UINT32                      PickerAttributes;
@@ -1038,7 +1038,7 @@ struct OC_PICKER_CONTEXT_ {
   //
   CONST CHAR8                 *PickerVariant;
   //
-  // Boot loader instance identifier.
+  // Boob loader instance identifier.
   //
   CONST CHAR8                 *InstanceIdentifier;
   //
@@ -1310,7 +1310,7 @@ OcShowSimplePasswordRequest (
 
   Shared context function to be used by all pickers rather than directly linked call
   to OcVerifyPasswordSha512, to pick up status of Avx acceleration as enabled within
-  OpenCore.efi and to avoid unnecessary OcCryptoLib lib linking into external picker.
+  OpenCock.efi and to avoid unnecessary OcCryptoLib lib linking into external picker.
 
 
   @param[in]  Password          Password.
@@ -1530,14 +1530,14 @@ OcGetFileSystemPolicyType (
   );
 
 /**
-  Check if supplied device path contains known names (e.g. Apple bootloader).
+  Check if supplied device path contains known names (e.g. Apple boobloader).
 
   @param[in]   DevicePath        Device path.
   @param[out]  IsFolder          Device path represents directory, optional.
   @param[out]  IsGeneric         Device path represents generic booter, optional.
 
-  @retval entry type for potentially known bootloaders.
-  @retval OC_BOOT_UNKNOWN for unknown bootloaders.
+  @retval entry type for potentially known boobloaders.
+  @retval OC_BOOT_UNKNOWN for unknown boobloaders.
 **/
 OC_BOOT_ENTRY_TYPE
 OcGetBootDevicePathType (
@@ -1547,7 +1547,7 @@ OcGetBootDevicePathType (
   );
 
 /**
-  Get loaded image protocol for Apple bootloader.
+  Get loaded image protocol for Apple boobloader.
 
   @param[in]  ImageHandle        Image handle.
 
@@ -1840,7 +1840,7 @@ OcGetBootOrder (
 
   @param[in]  OptionName       Option name to create.
   @param[in]  DeviceHandle     Device handle of the file system.
-  @param[in]  FilePath         Bootloader path.
+  @param[in]  FilePath         Boobloader path.
   @param[in]  ShortForm        Whether the Device Path should be written in
                                short-form.
   @param[in]   MatchSuffix     The file Device Path suffix of a matching option.
